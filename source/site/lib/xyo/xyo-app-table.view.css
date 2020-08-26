@@ -1,0 +1,48 @@
+/*
+//
+// Copyright (c) 2020 Grigore Stefan <g_stefan@yahoo.com>
+// Created by Grigore Stefan <g_stefan@yahoo.com>
+//
+// MIT License (MIT) <http://opensource.org/licenses/MIT>
+//
+*/
+
+.indicator-items-info {
+	display:none;
+}
+
+@media only screen and (min-width: 600px) {
+
+	.xyo-app-table > thead > tr > th.-field-id,
+	.xyo-app-table > thead > tr > th.-field-enabled,
+	.xyo-app-table > thead > tr > th.-field-default,
+	.xyo-app-table > thead > tr > th.-field-active,
+	.xyo-app-table > thead > tr > th.-field-principal {
+		width: 128px;
+	}
+
+	.xyo-app-table > thead > tr > th.-field-order {
+		width: 140px;
+	}
+
+	.indicator-items-info {
+		display: inline-block;
+	}
+}
+
+.xyo-app-table > tbody > tr > td._action > div {
+	margin-left: calc(50% - 12px);
+}
+
+
+.xui.component-table.-hide-secondary-top-toolbar > .xui.app-toolbar:nth-child(2) {
+	display: none;
+}
+
+.xui.component-table.-hide-secondary-top-toolbar .xui._table .xui.table > thead > tr > th:first-child {
+	border-top-left-radius: 6px;	 
+}
+
+.xui.component-table.-hide-secondary-top-toolbar .xui._table .xui.table > thead > tr > th:last-child {
+	border-top-right-radius: 6px;	 
+}

@@ -1,0 +1,13 @@
+{
+	"theme": {
+		"name":"XYO Dasboard Public 2",
+		"uri":"https://github.com/g-stefan/xyo-cloud"
+	},
+	"author": {
+		"name":"Grigore Stefan",
+		"uri":"https://github.com/g-stefan"
+	},
+	"version": "1.0.0",
+	"description": "XYO Cloud Theme",
+	"license":"MIT"
+}
