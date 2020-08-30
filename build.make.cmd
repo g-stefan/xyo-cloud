@@ -5,7 +5,7 @@ rem Created by Grigore Stefan <g_stefan@yahoo.com>
 
 if exist release\ rmdir /Q /S release
 
-set XUI_VERSION=1.0.0
+set XUI_VERSION=1.1.0
 7zr x vendor/xui-%XUI_VERSION%.7z
 xcopy /E /H /K /Y xui-%XUI_VERSION%\vendor release\site\lib\
 mkdir release\site\lib\xui

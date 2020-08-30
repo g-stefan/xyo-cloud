@@ -15,5 +15,3 @@ $this->setHtmlClass("xui");
 $this->setHtmlBodyClass("xui");
 $this->setHtmlTitle($this->getSetting("website_title","XYO Cloud"));
 $this->setHtmlIcon($this->site."lib/xyo/applications-internet.ico");
-$this->setHtmlCss($this->site."lib/xyo/xyo-tpl-dashboard.css");
-$this->setHtmlJs($this->site."lib/xyo/xyo-tpl-dashboard.js");
