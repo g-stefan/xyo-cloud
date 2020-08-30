@@ -9,7 +9,7 @@
 defined("XYO_CLOUD") or die("Access is denied");
 
 $this->eGenerateCallRequestJs(
-	array("action"=>"default"),
+	array("action"=>"table-view"),
 	"xyo-app-datasource-backup",
 	null,
 	"callDatasourceBackup",

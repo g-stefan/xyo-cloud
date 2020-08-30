@@ -1511,6 +1511,7 @@ class xyo_Cloud extends xyo_Config {
 		$this->setModule(null, $this->path."xyo/xyo-datasource/xyo-datasource-xyo", "xyo-datasource-xyo");
 		//
 		$this->setModule(null, $this->path."xyo/xyo-datasource/xyo-datasource-quantum", "xyo-datasource-quantum");
+		$this->setModule(null, $this->path."xyo/xyo-datasource/xyo-datasource-memory", "xyo-datasource-memory");
 	}
 
 	//

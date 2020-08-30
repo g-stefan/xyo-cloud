@@ -9,15 +9,14 @@
 defined("XYO_CLOUD") or die("Access is denied");
 
 $connection=$this->getElementValueString("connection","*");
-$datasource=$this->getElementValueString("datasource","*");
+$datasource=$this->getElementValueString("name","*");
 $option=$this->getElementValueString("option","*");
 
 if(strlen($datasource)>0){
 	if($datasource!="*"){
-		if(strlen($option)>0){		
+		if(strlen($option)>0){
 			if($option!="*"){
 				$ds=&$this->getDataSource($datasource);
-
 				if ($ds) {
 					if ($option == "create") {
 						$ds->createStorage();
@@ -36,5 +35,3 @@ if(strlen($datasource)>0){
 		};
 	};
 };
-
-$this->setElementValue("option","*");

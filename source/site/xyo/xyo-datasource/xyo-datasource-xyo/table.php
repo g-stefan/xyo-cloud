@@ -805,8 +805,7 @@ class xyo_datasource_xyo_Table extends xyo_Config {
 		$this->resultCol_ = array();
 		$this->resultRow_ = array();
 		$this->resultPrimaryKeyIndex_ = 0;
-		$this->writeDataSource_();
-		return true;
+		return $this->writeDataSource_();
 	}
 
 	function recreateStorage() {
@@ -902,9 +901,7 @@ class xyo_datasource_xyo_Table extends xyo_Config {
 			};
 		};
 
-		$this->writeDataSource_();
-
-		return true;
+		return $this->writeDataSource_();
 	}
 
 	function insertRow_() {
@@ -947,8 +944,7 @@ class xyo_datasource_xyo_Table extends xyo_Config {
 
 		$this->resultRow_[] = $data;
 
-		$this->writeDataSource_();
-		return true;
+		return $this->writeDataSource_();
 	}
 
 	function deleteRow_() {
@@ -968,9 +964,7 @@ class xyo_datasource_xyo_Table extends xyo_Config {
 		};
 
 
-		$this->writeDataSource_();
-
-		return true;
+		return $this->writeDataSource_();
 	}
 
 	function checkRow_($row) {
@@ -1423,8 +1417,8 @@ class xyo_datasource_xyo_Table extends xyo_Config {
 			$fp = fopen($this->fileName_, 'r');
 			if ($fp) {
 				$first = true;
-				fgets($fp, 4096);
-				while ($row = fgetcsv($fp, 4096, ',', '"')) {
+				fgets($fp, 16384);
+				while ($row = fgetcsv($fp, 16384, ',', '"')) {
 					if (count($row) == 1) {
 						if (is_null($row[0])) {
 							continue;
@@ -1450,8 +1444,10 @@ class xyo_datasource_xyo_Table extends xyo_Config {
 					}
 				};
 				fclose($fp);
+				return true;
 			};
 		};
+		return false;
 	}
 
 	function writeDataSource_() {
@@ -1461,7 +1457,9 @@ class xyo_datasource_xyo_Table extends xyo_Config {
 			$this->writeCol_($file_);
 			$this->writeRows_($file_);
 			fclose($file_);
+			return true;
 		};
+		return false;
 	}
 
 	function writeBegin_($file_) {

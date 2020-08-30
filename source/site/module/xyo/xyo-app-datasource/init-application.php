@@ -8,13 +8,21 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setApplicationIcon("<i class=\"material-icons\">storage</i>");
+$this->setApplicationIcon("<i class=\"material-icons\">flag</i>");
+$this->setApplicationDataSource("memory.table.xyo_datasource");
+$this->setPrimaryKey("id");
+
+$this->setDialogNew(true);
+$this->setDialogEdit(true);
 
 $this->requireComponent(array(
 	"xui.form-select",
+	"xui.form-text",
+	"xui.form-text-required",
+	"xui.form-textarea",
+	"xui.form-switch",
 	"xui.panel-begin",
 	"xui.panel-end",
 	"xui.box-1x1-begin",
-	"xui.box-1x1-end",
-	"xui.form-action-apply"
+	"xui.box-1x1-end"
 ));

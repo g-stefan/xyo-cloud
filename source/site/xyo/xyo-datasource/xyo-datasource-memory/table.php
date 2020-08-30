@@ -7,12 +7,9 @@
 //
 
 defined("XYO_CLOUD") or die("Access is denied");
-//
-// to do file lock/wait ..
-//
+
 // result compare
-//
-function xyo_datasource_csv_table__cmp($a, $b) {
+function xyo_datasource_memory_table__cmp($a, $b) {
 	foreach ($a["*"] as $key_ => $value_) {
 		if ($value_ == 1) { //asc
 			if ($a[$key_] > $b[$key_]) {
@@ -31,16 +28,15 @@ function xyo_datasource_csv_table__cmp($a, $b) {
 		};
 	};
 	return 0;
-}
+};
 
-
-class xyo_datasource_csv_Table extends xyo_Config {
+class xyo_datasource_memory_Table extends xyo_Config {
 
 	var $module_;
 	var $connection_;
 	var $name_;
 	var $datasource_;
-	var $realName_;	
+	var $realName_;
 	var $datasourceName_;
 	var $descriptor_;
 	//----
@@ -49,6 +45,7 @@ class xyo_datasource_csv_Table extends xyo_Config {
 	var $fieldExtra_;
 	var $fieldDefaultValue_;
 	var $fieldAttribute_;
+
 	var $tableLink_;
 	var $cloudDataSource_;
 	//----
@@ -74,13 +71,16 @@ class xyo_datasource_csv_Table extends xyo_Config {
 	var $resultInLoadIndex_;
 	var $resultInLoadCount_;
 	var $resultInLoad_;
-	var $fileName_;
 	var $storageHint_;
 
 	var $fieldSelect_;
 
 	var $fieldAutoIncrement_;
-	
+
+	//----
+	var $fnLoad_;
+	var $fnSave_;
+
 	function __construct(&$module, &$connection, $name, $datasource, $descriptor, $doInit=true) {
 		parent::__construct($module->getCloud());
 
@@ -88,10 +88,13 @@ class xyo_datasource_csv_Table extends xyo_Config {
 		$this->connection_ = &$connection;
 		$this->name_ = $name;
 		$this->datasource_ = $datasource;
-		$this->realName_ = $name;		
-		$this->descriptor_=$descriptor;		
+		$this->realName_ = $name;
+		$this->descriptor_=$descriptor;
 
 		$this->datasourceName_ = $datasource;
+
+		$this->fnLoad_ = null;
+		$this->fnSave_ = null;
 
 		if ($doInit) {
 			$this->includeFile($this->descriptor_);
@@ -99,7 +102,6 @@ class xyo_datasource_csv_Table extends xyo_Config {
 			$this->realName_ = $this->get("name", $name);
 
 			$this->storageHint_=$this->realName_;
-			$this->fileName_ = $this->connection_->databasePath . $this->realName_ . ".csv";
 
 			$this->primaryKey_ = $this->get("table_primary_key");
 
@@ -109,14 +111,16 @@ class xyo_datasource_csv_Table extends xyo_Config {
 			$this->fieldAttribute_ = $this->get("field_attribute", array());
 			$this->fieldAutoIncrement_=null;
 
-
 			$this->tableLink_=$this->get("table_link", array());
 			$this->cloudDataSource_=&$this->cloud->dataSource;
+
+			$this->fnLoad_=$this->get("memory_load", null);
+			$this->fnSave_=$this->get("memory_save", null);
 
 			//post-process
 			$item = $this->get("table_item", array());
 			foreach ($item as $k => &$v) {
-				$this->fieldType_[$k]=$v[0];			
+				$this->fieldType_[$k]=$v[0];				
 				$this->fieldDefaultValue_[$k]=$v[1];
 				if(count($v)>2) {
 					$this->fieldAttribute_[$k]=$v[2];
@@ -146,6 +150,7 @@ class xyo_datasource_csv_Table extends xyo_Config {
 			$this->fieldGroup_ = array();
 			$this->fieldOrder_ = array();
 
+
 			$this->fieldFunction_ = array();
 			$this->fieldFunctionAs_ = array();
 
@@ -159,7 +164,6 @@ class xyo_datasource_csv_Table extends xyo_Config {
 
 	function setStorageHint($hint) {
 		$this->storageHint_=$hint;
-		$this->fileName_ = $this->connection_->databasePath . $hint . ".csv";
 	}
 
 	function getStorageHint() {
@@ -190,7 +194,7 @@ class xyo_datasource_csv_Table extends xyo_Config {
 	}
 
 	function getPrimaryKey() {
-		return $this->primaryKey_;	
+		return $this->primaryKey_;
 	}
 
 	function setPrimaryKey($key) {
@@ -207,14 +211,12 @@ class xyo_datasource_csv_Table extends xyo_Config {
 
 	function &copyThis() {
 
-		$retV = new xyo_datasource_csv_Table($this->module_, $this->connection_, $this->name_, $this->datasource_, $this->descriptor_, false);
+		$retV = new xyo_datasource_memory_Table($this->module_, $this->connection_, $this->name_, $this->datasource_, $this->descriptor_, false);
 		if ($retV) {
 
 			$retV->realName_ =$this->realName_;
 
 			$retV->storageHint_=$this->storageHint_;
-
-			$retV->fileName_ = $this->fileName_;
 
 			$retV->primaryKey_ = &$this->primaryKey_;
 			$retV->fieldType_ = &$this->fieldType_;
@@ -223,7 +225,7 @@ class xyo_datasource_csv_Table extends xyo_Config {
 			$retV->fieldAttribute_ = &$this->fieldAttribute_;
 			$retV->fieldAutoIncrement_=&$this->fieldAutoIncrement_;
 			$retV->tableLink_ = &$this->tableLink_;
-			$retV->cloudDataSource_=&$this->cloudDataSource_;			
+			$retV->cloudDataSource_=&$this->cloudDataSource_;
 
 			$retV->fieldGroup_ = $this->fieldGroup_;
 			$retV->fieldOrder_ = $this->fieldOrder_;
@@ -232,7 +234,11 @@ class xyo_datasource_csv_Table extends xyo_Config {
 			$retV->fieldFunctionAs_ = $this->fieldFunctionAs_;
 
 			$retV->fieldOperator_ = $this->fieldOperator_;
+
 			$retV->fieldSelect_=$this->fieldSelect_;
+
+			$retV->fnLoad_=$this->fnLoad_;
+			$retV->fnSave_=$this->fnSave_;
 
 			foreach ($this->fieldType_ as $key_ => $value_) {
 				$retV->$key_ = $this->$key_;
@@ -276,7 +282,6 @@ class xyo_datasource_csv_Table extends xyo_Config {
 	}
 
 	function hasValue($name) {
-
 
 		if (!$this->isEmpty($this->$name)) {
 			return true;
@@ -381,7 +386,6 @@ class xyo_datasource_csv_Table extends xyo_Config {
 		return false;
 	}
 
-
 	function setIfNotEmpty($key_, $value_) {
 		if ($this->isEmpty($value_)) {
 			return;
@@ -407,6 +411,7 @@ class xyo_datasource_csv_Table extends xyo_Config {
 	function save() {
 
 		if($this->primaryKey_) {
+
 			$tablePrimaryKeyValue = $this-> {$this->primaryKey_};
 			if (is_array($tablePrimaryKeyValue)) {
 				$tablePrimaryKeyValue = null;
@@ -417,18 +422,17 @@ class xyo_datasource_csv_Table extends xyo_Config {
 			if ($this->isEmpty($tablePrimaryKeyValue)) {
 				$tablePrimaryKeyValue = null;
 			};
+
 		} else {
 			$tablePrimaryKeyValue = null;
 		};
 
 		//--- this
 		if ($tablePrimaryKeyValue) {
-
 			return $this->updateRowX_();
 		};
 
 		return $this->insert();
-
 	}
 
 	function insert() {
@@ -447,6 +451,7 @@ class xyo_datasource_csv_Table extends xyo_Config {
 
 	function delete() {
 		if ($this->isValid()) {
+
 			if(count($this->tableLink_)) {
 				foreach($this->tableLink_ as $key=>$value) {
 					$ds=&$this->cloudDataSource_->getDataSource($value[0]);
@@ -462,8 +467,9 @@ class xyo_datasource_csv_Table extends xyo_Config {
 				};
 			};
 
-			//--- this
+
 			$retV = $this->deleteRow_();
+
 
 			return $retV;
 		};
@@ -481,7 +487,6 @@ class xyo_datasource_csv_Table extends xyo_Config {
 			};
 		};
 
-
 		$this->resultLoadAll_ = false;
 		$this->resultLimitStart_ = $start;
 		$this->resultLimitLength_ = $length;
@@ -495,15 +500,20 @@ class xyo_datasource_csv_Table extends xyo_Config {
 		if ($this->resultInLoadCount_) {
 
 			if(empty($this->fieldSelect_)) {
+
 				foreach ($this->fieldType_ as $key_ => $value_) {
 					$this->$key_ = $this->resultInLoad_[$this->resultInLoadIndex_][$key_];
 				};
+
 			} else {
 				$this->setEmptyValue();
 				foreach ($this->fieldSelect_ as $key_) {
 					$this->$key_ = $this->resultInLoad_[$this->resultInLoadIndex_][$key_];
 				};
+
+
 			};
+
 			foreach ($this->fieldFunction_ as $k_ => $v_) {
 				$this-> {$this->fieldFunctionAs_[$k_]} = $this->resultInLoad_[$this->resultInLoadIndex_][$this->fieldFunctionAs_[$k_]];
 			};
@@ -518,8 +528,7 @@ class xyo_datasource_csv_Table extends xyo_Config {
 
 		if($this->primaryKey_) {
 			if (is_null($this-> {$this->primaryKey_})) {
-				if (($this->fieldType_[$this->primaryKey_] === "int")||
-				    ($this->fieldType_[$this->primaryKey_] === "bigint")) {
+				if (($this->fieldType_[$this->primaryKey_] === "int")||($this->fieldType_[$this->primaryKey_] === "bigint")) {
 					$this-> {$this->primaryKey_} = new xyo_datasource_EmptyField();
 				};
 			};
@@ -537,14 +546,17 @@ class xyo_datasource_csv_Table extends xyo_Config {
 		$this->resultInLoad_ = $this->resultRow_;
 		if ($this->resultInLoadCount_) {
 			if(empty($this->fieldSelect_)) {
+
 				foreach ($this->fieldType_ as $key_ => $value_) {
 					$this->$key_ = $this->resultInLoad_[$this->resultInLoadIndex_][$key_];
 				};
+
 			} else {
 				$this->setEmptyValue();
 				foreach ($this->fieldSelect_ as $key_) {
 					$this->$key_ = $this->resultInLoad_[$this->resultInLoadIndex_][$key_];
 				};
+
 			};
 			foreach ($this->fieldFunction_ as $k_ => $v_) {
 				$this-> {$this->fieldFunctionAs_[$k_]} = $this->resultInLoad_[$this->resultInLoadIndex_][$this->fieldFunctionAs_[$k_]];
@@ -677,7 +689,7 @@ class xyo_datasource_csv_Table extends xyo_Config {
 			for ($k = 0; $k < $this->resultCount_; ++$k) {
 				$this->resultRow_[$k]["*"] = &$this->fieldOrder_;
 			};
-			uasort($this->resultRow_, "xyo_datasource_csv_table__cmp");
+			uasort($this->resultRow_, "xyo_datasource_memory_table__cmp");
 			$this->resultRow_ = array_values($this->resultRow_);
 		};
 
@@ -752,7 +764,6 @@ class xyo_datasource_csv_Table extends xyo_Config {
 			$this->setEmptyValue();
 			$this->fieldGroup_ = array();
 			$this->fieldOrder_ = array();
-
 			$this->fieldFunction_ = array();
 			$this->fieldFunctionAs_ = array();
 
@@ -762,11 +773,7 @@ class xyo_datasource_csv_Table extends xyo_Config {
 		};
 	}
 
-	function select($what=null) {
-		$this->fieldSelect_=$what;
-	}
-
-	function clearNull_() {
+	function clearWithNull() {
 		foreach ($this->fieldType_ as $key_ => $value_) {
 			$this->$key_ = null;
 		};
@@ -774,22 +781,20 @@ class xyo_datasource_csv_Table extends xyo_Config {
 		$this->fieldOrder_ = array();
 		$this->fieldFunction_ = array();
 		$this->fieldFunctionAs_ = array();
-
 		$this->fieldOperator_ = array();
+		$this->fieldSelect_=null;
+	}
+
+
+	function select($what=null) {
+		$this->fieldSelect_=$what;
 	}
 
 	function destroyStorage() {
-		if (file_exists($this->fileName_)) {
-			return unlink($this->fileName_);
-		};
 		return true;
 	}
 
 	function createStorage() {
-		if (file_exists($this->fileName_)) {
-			return true;
-		}
-
 		$this->resultPrimaryKeyIndex_ = 0;
 		$this->resultCol_ = array();
 		$this->resultRow_ = array();
@@ -855,6 +860,13 @@ class xyo_datasource_csv_Table extends xyo_Config {
 							if ($this->isEmpty($this->$key_)) {
 								continue;
 							}
+
+							if (($this->fieldType_[$key_] === "int")||($this->fieldType_[$key_] === "bigint")) {
+								if (is_null($this->$key_)) {
+									$this->$key_ = 0;
+								};
+							};
+
 							$this->resultRow_[$key2_][$key_] = $this->$key_;
 						};
 					};
@@ -870,6 +882,13 @@ class xyo_datasource_csv_Table extends xyo_Config {
 						if ($this->isEmpty($this->$key_)) {
 							continue;
 						}
+
+						if (($this->fieldType_[$key_] === "int")||($this->fieldType_[$key_] === "bigint")) {
+							if (is_null($this->$key_)) {
+								$this->$key_ = 0;
+							};
+						};
+
 						$this->resultRow_[$key2_][$key_] = $this->$key_;
 					};
 				};
@@ -903,9 +922,15 @@ class xyo_datasource_csv_Table extends xyo_Config {
 			};
 		};
 
+
 		$data = array();
 		foreach ($this->resultCol_ as $key_) {
 			if (array_key_exists($key_, $this->fieldType_)) {
+				if (($this->fieldType_[$key_] === "int")||($this->fieldType_[$key_] === "bigint")) {
+					if (is_null($this->$key_)) {
+						$this->$key_ = 0;
+					};
+				};
 				$data[$key_] = $this->$key_;
 			};
 		};
@@ -1381,74 +1406,42 @@ class xyo_datasource_csv_Table extends xyo_Config {
 	}
 
 	function loadRecords_() {
-		if (file_exists($this->fileName_)) {
-			$fp = fopen($this->fileName_, 'r');
-			if ($fp) {
-				$first = true;
-				while ($row = fgetcsv($fp, 16384, ',', '"')) {
-					if (count($row) == 1) {
-						if (is_null($row[0])) {
-							continue;
-						}
-					};
-					if ($first) {
-						$first = false;
-						if ($this->primaryKey_) {
-							for ($k = 0; $k < count($row); ++$k) {
-								$x_ = explode(":", $row[$k]);
-								if (count($x_) == 2) {
-									if ($x_[0] === $this->primaryKey_) {
-										$this->setPrimaryKeyIndex($x_[1]);
-										$row[$k] = $x_[0];
-										break;
-									};
+		if($this->fnLoad_){
+			$rowList=($this->fnLoad_)($this);
+			for($m=0;$m<count($rowList);++$m){
+				if($m==0){
+
+					if ($this->primaryKey_) {
+						for ($k = 0; $k < count($rowList[$m]); ++$k) {
+							$x_ = explode(":", $rowList[$m][$k]);
+							if (count($x_) == 2) {
+								if ($x_[0] === $this->primaryKey_) {
+									$this->setPrimaryKeyIndex($x_[1]);
+									$rowList[$m][$k] = $x_[0];
+									break;
 								};
 							};
 						};
-						$this->setCol($row);
-					} else {
-						$this->setRow($row);
-					}
+					};
+
+					$this->setCol($rowList[$m]);
+					continue;
 				};
-				fclose($fp);
-				return true;
+				$this->setRow($rowList[$m]);
 			};
 		};
-		return false;
+		return true;
 	}
 
 	function writeDataSource_() {
-		$file_ = fopen($this->fileName_, "w");
-		if ($file_) {
-			$this->writeBegin_($file_);
-			$this->writeLastModified_($file_);
-			$this->writeCol_($file_);
-			$this->writePrimaryKeyIndex_($file_);
-			$this->writeRows_($file_);
-			$this->writeEnd_($file_);
-			fclose($file_);
-			return true;
+		if($this->fnSave_){
+			$rowList=array_merge(writeCol_(),writeRows_());
+			return ($this->fnSave_)($this,$rowList);
 		};
 		return false;
 	}
 
-	function writeBegin_($file_) {
-
-	}
-
-	function writeLastModified_($file_) {
-
-	}
-
-	function writeEnd_($file_) {
-
-	}
-
-	function writePrimaryKeyIndex_($file_) {
-
-	}
-
-	function writeCol_($file_) {
+	function writeCol_() {
 		if (count($this->resultCol_) > 0) {
 
 		} else {
@@ -1471,13 +1464,12 @@ class xyo_datasource_csv_Table extends xyo_Config {
 			};
 		}
 
-		fputcsv($file_, $x_, ',', '"');
+		return $x_;
 	}
 
-	function writeRows_($file_) {
-
+	function writeRows_() {
+		$retV=array();
 		foreach ($this->resultRow_ as $value_) {
-
 			if (is_null($value_)) {
 				continue;
 			}
@@ -1491,12 +1483,10 @@ class xyo_datasource_csv_Table extends xyo_Config {
 				};
 			};
 
-			fputcsv($file_, $value_, ',', '"');
+			$retV[] = $value_;
 		};
-	}
 
-	function setLastModified($x) {
-		return false;
+		return $retV;
 	}
 
 	function getDateNow_() {
@@ -1636,18 +1626,6 @@ class xyo_datasource_csv_Table extends xyo_Config {
 		return false;
 	}
 
-	function clearWithNull() {
-		foreach ($this->fieldType_ as $key_ => $value_) {
-			$this->$key_ = null;
-		};
-		$this->fieldGroup_ = array();
-		$this->fieldOrder_ = array();
-		$this->fieldFunction_ = array();
-		$this->fieldFunctionAs_ = array();
-		$this->fieldOperator_ = array();
-		$this->fieldSelect_=null;
-	}
-
 	function getStorageName(){
 		return $this->get("name", $this->name_);
 	}
@@ -1657,7 +1635,6 @@ class xyo_datasource_csv_Table extends xyo_Config {
 		$this->name_ = $name;
 		$this->realName_ = $name;
 		$this->storageHint_=$this->realName_;
-		$this->fileName_ = $this->connection_->databasePath . $this->realName_ . ".php";
 	}
 
 	function setKeyAtIndex($arrayInput,$key,$value,$index){
@@ -1690,8 +1667,11 @@ class xyo_datasource_csv_Table extends xyo_Config {
 	}
 
 	function setField($name,$type,$defaultValue,$attribute=null,$extra=null,$atIndex=null){
+
 		$this->$name = new xyo_datasource_EmptyField();
+		
 		$this->fieldType_=$this->setKeyAtIndex($this->fieldType_,$name,$type,$atIndex);		
+
 		$this->fieldAttribute_[$name]=$attribute;
 		$this->fieldDefaultValue_[$name]=$defaultValue;		
 		$this->fieldExtra_[$name]=$extra;
@@ -1731,4 +1711,3 @@ class xyo_datasource_csv_Table extends xyo_Config {
 	}
 
 }
-

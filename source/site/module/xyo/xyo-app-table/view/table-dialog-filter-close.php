@@ -8,6 +8,11 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
+$this->generateView("notify-alert");
+$this->generateView("notify-error");
+
+// ---
+
 echo "<div style=\"height:240px;\"></div>";
 $this->ejsBegin();
 echo "XUI.Modal.dezactivate();";

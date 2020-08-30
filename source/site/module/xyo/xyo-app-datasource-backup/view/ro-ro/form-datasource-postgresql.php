@@ -20,5 +20,5 @@ $this->generateComponent("xui.form-text-icon-left",array("element"=>"prefix","ic
 
 ?>
 <div class="xui alert -info">
-Nota: Baza de date trebuie sa existe pe server inainte de instalare.
+Nota: Baza de date trebuie sa existe pe server inainte de salvare.
 </div>

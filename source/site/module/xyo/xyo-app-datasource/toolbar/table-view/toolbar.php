@@ -8,11 +8,15 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->isNew = false;
+$this->removeItem("new");
+$this->removeItem("delete");
 
-$this->clearElementError();
-$this->processModel("form-edit-save");
-
-$this->setParameter("toolbar", "toolbar/form-edit");
-$this->processModel("form-edit");
-$this->setView("form-edit");
+$this->setItemBefore("edit",
+	"backup",
+	"item-js",
+	"<i class=\"material-icons\">storage</i>",
+	"backup",
+	"primary",
+	"#",
+	"callDatasourceBackup();"
+);

@@ -8,7 +8,6 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setElementValue("id",0);
-$this->setElementValue("name","");
-$this->setElementValue("connection","");
-                                                                          
+$this->setElementValue("id",$this->ds->id);
+$this->setElementValue("name",$this->ds->name);
+$this->setElementValue("connection",$this->ds->connection);

@@ -31,6 +31,9 @@ class xyo_DataSource extends xyo_Config {
 		$this->setDataSourceConnectionProvider("quantum",array(
 			"type"=>"xyo-datasource-quantum"
 		));
+		$this->setDataSourceConnectionProvider("memory",array(
+			"type"=>"xyo-datasource-memory"
+		));
 		$this->includeConfigWithPattern("datasource");
 	}
 

@@ -8,11 +8,16 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->generateComponent("xui.box-1x1-begin");
-$this->generateComponent("xui.panel-begin");
-$this->generateComponent("xui.form-select", array("element" => "connection","submit"=>true));
-$this->generateComponent("xui.form-select", array("element" => "datasource"));
+if(!$this->isDialog){
+	$this->generateComponent("xui.box-1x1-begin");
+	$this->generateComponent("xui.panel-begin");
+};
+
+$this->generateComponent("xui.form-text", array("element" => "connection", "readonly" => true));
+$this->generateComponent("xui.form-text", array("element" => "name", "readonly" => true));
 $this->generateComponent("xui.form-select", array("element" => "option"));
-$this->generateComponent("xui.form-action-apply", array("click" => $this->instanceV."doCommand('form-edit-apply');"));
-$this->generateComponent("xui.panel-end");
-$this->generateComponent("xui.box-1x1-end");
+
+if(!$this->isDialog){
+	$this->generateComponent("xui.panel-end");
+	$this->generateComponent("xui.box-1x1-end");
+};

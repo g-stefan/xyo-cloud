@@ -8,7 +8,4 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->isNew=false;
-$this->setParameter("toolbar", "toolbar/form-edit");
-$this->processModel("form-edit");
-$this->setView("form-edit");
+$this->setVersion($module, "1.0.0");

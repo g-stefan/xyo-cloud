@@ -8,7 +8,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$select=array("*"=>$this->getFromLanguage("select.connection_none"));
+$select=array("*"=>$this->getFromLanguage("select.connection_any"));
 $selectX=array_keys($this->cloud->dataSource->getDataSourceConnectionProviderList());
 foreach($selectX as $value){
 	$select[$value]=$value;

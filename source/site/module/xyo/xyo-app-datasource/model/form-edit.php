@@ -8,6 +8,4 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->processModel("select-connection");
-$this->processModel("select-datasource");
 $this->processModel("select-option");
