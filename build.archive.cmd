@@ -3,7 +3,7 @@ rem Public domain
 rem http://unlicense.org/
 rem Created by Grigore Stefan <g_stefan@yahoo.com>
 
-set PROJECT=xyo-cloud
+call build.config.cmd
 
 SETLOCAL ENABLEDELAYEDEXPANSION
 FOR /F "tokens=* USEBACKQ" %%F IN (`xyo-version --no-bump --get "--version-file=%PROJECT%.version.ini" %PROJECT%`) DO (
