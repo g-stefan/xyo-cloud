@@ -332,7 +332,7 @@ foreach ($this->viewData as $key => $value) {
 			}else
 			if($this->tableType[$key_][0]=="date"){
 				$format=null;
-				if(count($this->tableType[$key_])>0){
+				if(count($this->tableType[$key_])>1){
 					$format=$this->tableType[$key_][1];
 				};
 				echo $this->formatDate($value[$key_],$format);
