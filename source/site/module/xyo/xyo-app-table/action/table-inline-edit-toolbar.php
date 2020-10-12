@@ -10,6 +10,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 
 $this->setParameter("toolbar", "toolbar/table-edit");
 $this->isInline=true;
+$this->isNew=false;
 $this->setFormName($this->getFormName()."_edit");
 $this->setViewTemplate(null);
 $this->setView("toolbar");
