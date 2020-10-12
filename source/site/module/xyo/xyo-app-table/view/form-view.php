@@ -21,12 +21,12 @@ if($this->isNew){
 
 ?>
 <?php $this->ejsBegin(); ?>
-function <?php echo $this->instanceV; ?>doCommand(action){
+function <?php echo $this->instanceV; ?>doCommand(action){	
 	document.forms.<?php $this->eFormName(); ?>.elements.<?php echo $this->instanceV; ?>action.value=action;
 	document.forms.<?php $this->eFormName(); ?>.submit();
 	return false;
 };
-<?php $this->ejsEnd(); 
+<?php $this->ejsEnd();
 
 $this->generateComponent("xui.form-action-begin");
 $this->generateView("form");
@@ -38,4 +38,3 @@ $this->generateComponent("xui.form-action-end",array(
 ));
 $this->generateView("form-call");
 $this->generateComponent("xui.box-space");
-

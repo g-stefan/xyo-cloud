@@ -19,3 +19,11 @@ $this->setElementValue("xyo_language_id",$this->ds->xyo_language_id);
 $this->setElementValue("picture",$this->ds->picture);
 $this->setElementValue("description",$this->ds->description);
 $this->setElementValue("email",$this->ds->email);
+
+//
+
+$this->processModel("embedded-xyo-app-user-x-user-group",array(
+	"xyo_user_id"=>$this->ds->id
+));
+
+//

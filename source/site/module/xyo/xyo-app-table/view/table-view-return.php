@@ -15,7 +15,7 @@ if($this->hasRequestStack($request)){
 	$this->eFormBuildRequest($request);
 	echo "</form>";
 	$this->ejsBegin();
-	echo "function ".$this->instanceV."doReturn(){";
+	echo "window.".$this->instanceV."doReturn=function(){";
 		echo "document.forms.".$this->instanceV."fn_return.submit();";
 		echo "return false;";
 	echo "};";	

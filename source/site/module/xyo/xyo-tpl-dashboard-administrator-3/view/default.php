@@ -76,7 +76,7 @@ $xuiDashboard=&$this->getModule("xui-dashboard");
 					<div class="xui button -icon -transparent -left -effect-ripple" onclick="XUI.Dashboard.toogleAction();">
 						<i class="material-icons">menu</i>
 					</div>
-					<div class="xui text -size-h24x40 -left">
+					<div class="xui text -size-h24x40 -left" id="xyo-application-title">
 						<?php echo $title; ?>
 					</div>
 					<div class="xui -right">

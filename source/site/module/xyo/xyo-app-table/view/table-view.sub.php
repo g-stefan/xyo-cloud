@@ -111,8 +111,7 @@ if(count($this->viewData)==0){
 
 $recordId=0;
 foreach ($this->viewData as $key => $value) {
-
-       	echo "<tr>";
+       	echo "<tr id=\"".$this->instanceV."row_" . $value[$this->primaryKey] . "\" class=\"-visible\">";
 	foreach ($this->tableHead as $key_ => $value_) {
 
 		if ($key_ === "#") {
@@ -424,12 +423,14 @@ foreach ($this->viewData as $key => $value) {
 				$this->viewId=$key;
 				$this->viewPrimaryKey=$value[$this->primaryKey];
 				$this->viewValue=$value[$key_];
+				$this->viewRow=$value;
 				if(is_array($this->tableType[$key_][1])){
 					$parameters=array();
 					$parameters[0]=$this->viewKey;
 					$parameters[1]=$this->viewId;
 					$parameters[2]=$this->viewValue;
 					$parameters[3]=$this->tableType[$key_][1][1];
+					$parameters[4]=$value;
 					call_user_func_array($this->tableType[$key_][1][0],$parameters);
 				}else{
 					$this->generateView($this->tableType[$key_][1]);

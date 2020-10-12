@@ -236,11 +236,11 @@ class xyo_Module extends xyo_Config {
 		}
 	}
 
-	public function generateViewLanguage($name=null, $parameters=null) {
-		if ($this->generateView(strtolower($this->cloud->get("language")) . "/" . $name, $parameters)) {
+	public function generateViewLanguage($name=null, $arguments=null) {
+		if ($this->generateView(strtolower($this->cloud->get("language")) . "/" . $name, $arguments)) {
 			return true;
 		}
-		return $this->generateView($name, $parameters);
+		return $this->generateView($name, $arguments);
 	}
 
 	public function isLanguage($name) {
@@ -1829,6 +1829,12 @@ class xyo_Module extends xyo_Config {
 			$name="default";
 		};
 		return $this->callFromModule($module, "action/".$name, $arguments);
+	}
+
+	public function generateViewToString($name=null, $arguments=null) {
+		ob_start();			
+		$this->generateView($name, $arguments);
+		return ob_get_clean();
 	}
 
 	//

@@ -46,3 +46,65 @@
 .xui.component-table.-hide-secondary-top-toolbar .xui._table .xui.table > thead > tr > th:last-child {
 	border-top-right-radius: 6px;	 
 }
+
+.xyo-app-table.-is-inline-form._table {
+	position: relative;
+	display: block;
+	width: 320px;
+	height: 100%;
+	overflow: visible;
+	float: left;
+	left: 0;
+	right: auto;
+	font-family: "Roboto",sans-serif;
+	box-sizing: border-box;
+}
+
+.xyo-app-table.-is-inline-form._form {
+	position: relative;
+	display: block;
+	width: auto;
+	height: 100%;
+	overflow: auto;
+	font-family: "Roboto",sans-serif;
+	box-sizing: border-box;
+	border-radius: 0px 0px 0px 0px;
+	border-top: 0px solid #d3d7cf;
+	border-left: 1px solid #d3d7cf;
+	border-right: 0px solid #d3d7cf;
+	border-bottom: 0px solid #d3d7cf;
+}
+
+.xui.component-table.-hide-secondary-top-toolbar.-is-inline-form .xyo-app-table.xui.table > thead > tr > th {
+	border-top: 0px;
+}
+
+.xui.component-table.-hide-secondary-top-toolbar.-is-inline-form .xui._table .xui.table > thead > tr > th:first-child {
+	border-top-left-radius: 6px;
+}
+
+.xui.component-table.-hide-secondary-top-toolbar.-is-inline-form .xui._table .xui.table > thead > tr > th:last-child {
+	border-top-right-radius: 6px;
+}
+
+@media screen and (max-width: 920px) {
+
+	.xyo-app-table.-is-inline-form._table {
+		width: 100%;
+		height: auto;
+		float: none;
+		border-bottom: 1px solid #d3d7cf;
+	}
+
+	.xyo-app-table.-is-inline-form._form {
+		float: none;
+		height: auto;
+		border-left: 0px solid #d3d7cf;
+	}
+
+	.xui.component-table.-application > .xui.app-toolbar:last-child {
+		border-top: 0px solid #d3d7cf;
+	}
+
+}
+

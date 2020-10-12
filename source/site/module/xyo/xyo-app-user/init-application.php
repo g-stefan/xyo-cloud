@@ -12,8 +12,7 @@ $this->setApplicationIcon("<i class=\"material-icons\">person</i>");
 $this->setApplicationDataSource("db.query.xyo_user");
 $this->setPrimaryKey("id");
 
-$this->setDialogNew(false);
-$this->setDialogEdit(false);
+//$this->setInlineForm(true);
 
 $this->requireComponent(array(
 	"xui.form-action-begin",
@@ -42,6 +41,7 @@ $this->requireComponent(array(
 ));
 
 // ---
+
 $userId=1*$this->getPrimaryKeyValueOne($this->getRequestInstance("primary_key_value"));
 if($userId){
 	$dsUser = &$this->getDataSource("db.table.xyo_user");
@@ -52,9 +52,5 @@ if($userId){
 			$this->setApplicationTitle($this->getFromLanguage("application.title") . " - " . $dsUser->name);
 		};
 	};
-
-	$this->processModel("embedded-xyo-app-user-x-user-group",array(
-		"xyo_user_id"=>$userId
-	));
-
 };
+

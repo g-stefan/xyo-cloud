@@ -26,6 +26,7 @@ class xyo_mod_Application extends xyo_Module {
 	protected $applicationIcon;
 
         protected $isDialog;
+        protected $isInline;
 
 	function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
@@ -50,11 +51,13 @@ class xyo_mod_Application extends xyo_Module {
 			$this->applicationTitle = null;
 			
 			$this->isDialog = false;
+			$this->isInline = false;
 		};
 	}
 
 	public function moduleMain() {
-		$this->isDialog=$this->getParameterRequest("dialog",false);
+		$this->isDialog=$this->getParameterRequest("dialog",$this->isDialog);
+		$this->isInline=$this->getParameterRequest("inline",$this->isInline);
 		$this->setFormName($this->getParameter("form_name","fn"));
 		parent::moduleMain();
 	}
@@ -153,8 +156,16 @@ class xyo_mod_Application extends xyo_Module {
 		$this->isDialog=$value;
 	}
 
-	public function getIsDialog($value) {
+	public function getIsDialog() {
 		return $this->isDialog;
+	}
+
+	public function setIsInline($value) {
+		$this->isInline=$value;
+	}
+
+	public function getIsInline() {
+		return $this->isInline;
 	}
 
 	public function formatDateTime($value,$format=null) {

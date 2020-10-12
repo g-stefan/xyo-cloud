@@ -14,7 +14,7 @@ $this->generateView("notify-error");
 // ---
 
 $this->setParameter("form.title","form.title_filter");
-$this->generateComponent("xui.form-action-begin");
+$this->generateComponent("xui.form-action-begin",array("onsubmit"=>"XYO.Table.doUpdate('".$this->instance."','&".$this->instanceV."action=table-view');"));
 
 $this->generateView("table-dialog-filter-form");
 

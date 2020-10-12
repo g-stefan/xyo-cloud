@@ -15,6 +15,9 @@ class xyo_mod_Toolbar extends xyo_mod_Application {
 	protected $toolbar;
 	protected $config;
 	protected $type;
+	protected $isEmbedded;
+	protected $isDialog;
+	protected $isInline;
 
 	function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
@@ -26,6 +29,8 @@ class xyo_mod_Toolbar extends xyo_mod_Application {
 		$this->config = $this->getParameter("config", "toolbar");
 		$this->type = $this->getParameter("type", "");
 		$this->isEmbedded = $this->getParameter("embedded", false);
+		$this->isDialog = $this->getParameter("dialog", false);
+		$this->isInline = $this->getParameter("inline", false);
 
 		if(strlen($this->type)){
 			$this->type="-".$this->type;

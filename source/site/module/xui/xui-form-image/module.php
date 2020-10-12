@@ -60,7 +60,7 @@ class xui_FormImage extends xyo_Module {
 			return;
 		};
 
-		echo "/* ".$value." */\r\n";
+		//echo "/* ".$value." */\r\n";
 
 		$offsetX = 0;
 		$offsetY = 0;
@@ -84,11 +84,11 @@ class xui_FormImage extends xyo_Module {
 		if(1*$zoom==0){
 			$zoom=1;
 		};
-
-		// this will match http and https
-		if(substr($fileName, 0, strlen("http")) === "http"){
+		                                
+		if((substr($fileName, 0, 4) === "http")||
+		(substr($fileName, 0, 5) === "data:")){
 			echo "\tbackground-image: url(\"".$fileName."\");\r\n";
-		}else{
+		} else {
 			echo "\tbackground-image: url(\"".$this->site.$fileName."\");\r\n";
 		};
 		echo "\tbackground-size: ".number_format((100*$zoom*$imageWidth)/$viewX,2,".","")."% auto;\r\n";

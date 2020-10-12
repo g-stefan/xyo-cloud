@@ -9,32 +9,41 @@
 defined("XYO_CLOUD") or die("Access is denied");
 
 include("table-view.init.php");
-if($this->isAjax()){
-	require_once("table-view.sub.php");
-	include("table-view.instance.php");
-	$this->ejsBegin();
-	echo "document.getElementById(\"".$this->instanceV."page\").value=\"".$page."\";";
-	echo "document.getElementById(\"".$this->instanceV."page-count\").innerHTML=\"".$page_count."\";";
-	echo "document.getElementById(\"".$this->instanceV."item-count\").innerHTML=\"".$nr_items."\";";
-	$this->ejsEnd();
-	return;
+if(!$this->isInline){
+	if($this->isAjax()){
+		require_once("table-view.sub.php");
+		include("table-view.instance.php");
+		$this->ejsBegin();
+		echo "document.getElementById(\"".$this->instanceV."page\").value=\"".$page."\";";
+		echo "document.getElementById(\"".$this->instanceV."page-count\").innerHTML=\"".$page_count."\";";
+		echo "document.getElementById(\"".$this->instanceV."item-count\").innerHTML=\"".$nr_items."\";";
+		$this->ejsEnd();
+		return;
+	};
 };
 
-?>
+if(!$this->isEmbedded){ 
+	if($this->isInlineForm){ echo "<div class=\"xui xyo-app-table -is-inline-form _table\">"; }; ?>
+	<form id="<?php $this->eFormName(); ?>" name="<?php $this->eFormName(); ?>" method="POST" action="<?php $this->eFormAction(); ?>" 
+	 style="width:100%;height:100%;position:relative;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;overflow:hidden;"
+	 onsubmit="XYO.Table.doUpdate('');return false;" >
+<?php	};
 
-<?php if(!$this->isEmbedded){ ?>
-<form id="<?php $this->eFormName(); ?>" name="<?php $this->eFormName(); ?>" method="POST" action="<?php $this->eFormAction(); ?>" style="width:100%;height:100%;position:relative;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;overflow:hidden;">
-<?php }; ?>
-
-<?php 
+if($this->isInlineForm){
+	$this->generateView("table-inline-style-override");
+};
 
 $cssClass="-application";
 if($this->isEmbedded){
 	$cssClass="-no-top-toolbar -no-border-bottom-toolbar -table-border";
 };
-
-if($this->hideTopToolbar_){
+   
+if(($this->hideTopToolbar_)&&(!$this->isInlineForm)){
 	$cssClass.=" -hide-secondary-top-toolbar";
+};
+
+if($this->isInlineForm){
+	$cssClass.=" -is-inline-form";
 };
 
 ?>
@@ -43,17 +52,24 @@ if($this->hideTopToolbar_){
 	<div class="xui app-toolbar"></div>
 	<div class="xui app-toolbar -compact -wide">
 		<div class="xui _content">
+		<?php if($this->isInlineForm){ ?>
+			<div class="xui form-input-group" style="width:100%;">
+				<input type="text" name="<?php echo $this->instanceV; ?>search" value="<?php echo $search_value; ?>" size="32" style="width:calc(100% - 60px);" placeholder="<?php $this->eLanguage("search"); ?>" id="<?php echo $this->instanceV; ?>search"></input>
+				<button type="submit" name="<?php echo $this->instanceV; ?>submit_search" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>submit_search=1');return false;"><i class="material-icons">search</i></button>
+				<button type="button" name="<?php echo $this->instanceV; ?>search_reset" onclick="XYO.Table.clearSearch('<?php echo $this->instance; ?>',this,'<?php echo $this->instanceV; ?>search');"><i class="material-icons">close</i></button>
+			</div>
+		<?php } else { ?>
 			<div class="xui grid">
 				<div class="xui grid -row">
 					<div class="xui grid -col -x0">
-					<?php if($has_search){ ?>
+					<?php if($has_search){ ?>                                                                   
 						<div class="xui form-input-group">
 							<input type="text" name="<?php echo $this->instanceV; ?>search" value="<?php echo $search_value; ?>" size="32" style="width:196px" placeholder="<?php $this->eLanguage("search"); ?>" id="<?php echo $this->instanceV; ?>search"></input>
 							<button type="submit" name="<?php echo $this->instanceV; ?>submit_search" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>submit_search=1');return false;"><i class="material-icons">search</i></button>
 							<button type="button" name="<?php echo $this->instanceV; ?>search_reset" onclick="XYO.Table.clearSearch('<?php echo $this->instance; ?>',this,'<?php echo $this->instanceV; ?>search');"><i class="material-icons">close</i></button>
 						</div>
 				        <?php }; ?>
-					</div>
+					</div>  
 					<div class="xui grid -col -x0">
 					<?php if($this->dialogFilter_){ ?>
 						<div class="xui -right">
@@ -64,13 +80,13 @@ if($this->hideTopToolbar_){
 						</div>
 					<?php } else {
 
-	       				foreach (array_reverse($this->tableSelect,true) as $key => $value) {
+	       					foreach (array_reverse($this->tableSelect,true) as $key => $value) {
 							if ($value) { ?>
 							<div class="xui -right" style="margin-left: 4px;">
 							<select name="<?php echo $this->instanceV; ?>view_select_<?php echo $key; ?>"
 								size="1"
 								onChange="XYO.Table.doUpdate('<?php echo $this->instance; ?>');"
-								class="xui form-select" id="<?php echo $this->instanceV; ?>view_select_<?php echo $key; ?>" style="margin-left:6px;"
+							   	class="xui form-select" id="<?php echo $this->instanceV; ?>view_select_<?php echo $key; ?>" style="margin-left:6px;"
 								data-xui-select-theme="-default"><?php
 								foreach ($select_info[$key] as $key_ => $value_) {
 									$selected = "";
@@ -79,17 +95,18 @@ if($this->hideTopToolbar_){
 									};
 									echo "<option value=\"" . $key_ . "\" " . $selected . ">" . $value_ . "</option>";
 								};
-				                	?></select>
+			                		?></select>
 							</div>
-		                	<?php
+	                		<?php
 							};
 						};
-					};
+					    };
 					?>
 
 					</div>
 				</div>
 			</div>
+		<?php }; ?>
 		</div>
 	</div>
 	<div class="xui _table -overlay-scrollbars">
@@ -123,7 +140,7 @@ if($this->hideTopToolbar_){
 		&nbsp;
 
 		<div class="xui form-input-group<?php echo $cssClass; ?>">
-		        <select name="<?php echo $this->instanceV; ?>count"
+		        <select name="<?php echo $this->instanceV; ?>count" id="<?php echo $this->instanceV; ?>count"
                 		size="1"
 		                onChange="XYO.Table.doUpdate('<?php echo $this->instance; ?>');"
                 		class="xui form-select -default<?php echo $cssClass; ?>"
@@ -140,17 +157,30 @@ if($this->hideTopToolbar_){
 			};
 			?>
 		        </select>
+			<?php
+				if($this->isAjax()) {
+					$this->ejsBegin();
+					echo "XUI.FormSelect.initById(\"".$this->instanceV."count\");";
+					$this->ejsEnd();					
+				};
+			?>
 		</div>
 
-		<?php if(!$this->isEmbedded){ ?>
-		<span class="xui indicator-items-info" style="font-size: 16px;line-height: 20px;font-weight: normal;margin-left:4px;margin-top: 6px;">
-			<?php $this->eLanguage("info.items"); ?> <span style="color: #999;"> - </span> <span id="<?php echo $this->instanceV; ?>page-count"><?php echo $page_count; ?></span> <?php $this->eLanguage("info.pages"); ?> <span style="color: #999;"> - </span> <span id="<?php echo $this->instanceV; ?>item-count"><?php echo $nr_items; ?></span> <?php $this->eLanguage("info.total_items"); ?>
-		</span>
-		<?php }else{ ?>
-		<span class="xui indicator-items-info -fg-aluminium-5" style="font-size: 14px;line-height: 18px;font-weight: normal;margin-left: 6px;margin-top: 3px;">
-			<span id="<?php echo $this->instanceV; ?>page-count"><?php echo $page_count; ?></span> <?php $this->eLanguage("info.pages"); ?> <span style="color: #999;"> - </span> <span id="<?php echo $this->instanceV; ?>item-count"><?php echo $nr_items; ?></span> <?php $this->eLanguage("info.items"); ?>
-		</span>
-		<?php }; ?>	
+		<?php if(!$this->isInlineForm) { ?>
+			<?php if(!$this->isEmbedded){ ?>
+			<span class="xui indicator-items-info" style="font-size: 16px;line-height: 20px;font-weight: normal;margin-left:4px;margin-top: 6px;">
+				<?php $this->eLanguage("info.items"); ?> <span style="color: #999;"> - </span> <span id="<?php echo $this->instanceV; ?>page-count"><?php echo $page_count; ?></span> <?php $this->eLanguage("info.pages"); ?> <span style="color: #999;"> - </span> <span id="<?php echo $this->instanceV; ?>item-count"><?php echo $nr_items; ?></span> <?php $this->eLanguage("info.total_items"); ?>
+			</span>
+			<?php }else{ ?>
+			<span class="xui indicator-items-info -fg-aluminium-5" style="font-size: 14px;line-height: 18px;font-weight: normal;margin-left: 6px;margin-top: 3px;">
+				<span id="<?php echo $this->instanceV; ?>page-count"><?php echo $page_count; ?></span> <?php $this->eLanguage("info.pages"); ?> <span style="color: #999;"> - </span> <span id="<?php echo $this->instanceV; ?>item-count"><?php echo $nr_items; ?></span> <?php $this->eLanguage("info.items"); ?>
+			</span>
+			<?php }; ?>
+		<?php }else{ ?>	
+			<span class="xui indicator-items-info" style="font-size: 16px;line-height: 20px;font-weight: normal;margin-left:4px;margin-top: 6px;">
+				<span id="<?php echo $this->instanceV; ?>page-count"><?php echo $page_count; ?></span> / <span id="<?php echo $this->instanceV; ?>item-count"><?php echo $nr_items; ?></span>
+			</span>
+		<?php }; ?>
 
 		</div>
 	</div>
@@ -187,11 +217,30 @@ if($this->dialogFilter_){
 if(!$this->isEmbedded){
 	$this->eFormRequest();
 	echo "</form>";
+	if($this->isInlineForm) {
+		echo "</div>";
+		echo "<div class=\"xui xyo-app-table -is-inline-form _form\">";
+		echo "<div id=\"".$this->instanceV."xyo-app-table-inline\" class=\"xui -overlay-scrollbars\" style=\"display:none;height:100%;width:100%;overflow:auto;\">";
+			echo "<div id=\"".$this->instanceV."xyo-app-table-inline_content\" class=\"xui\">";
+			$this->generateView("table-inline-empty");                         
+			$this->setHtmlJsSourceOrAjax("\$(\"#xyo-app-table-inline\").show();","load");
+			echo "</div>";
+		echo "</div>";
+	};
 };
 //
 
 // #New
-
+if($this->isInlineForm){
+	$this->generateComponent("xui.inline", array_merge(array(
+		"id" => $this->instanceV."xyo-app-table-inline",
+		"jsFunction" => $this->instanceV."cmdDialogNew",
+		"formSuffix" => "new",
+		"action" => "table-inline-new",
+		"instance" => $this->instance,
+		"noHtml" => true
+	),$this->inlineEditParameters_));
+}else
 if($this->dialogNew_){
 	$this->generateComponent("xui.modal", array_merge(array(
 		"id" => $this->instanceV."xyo-app-table-modal-new",
@@ -201,16 +250,26 @@ if($this->dialogNew_){
 		"jsFunction" => $this->instanceV."cmdDialogNew",
 		"formSuffix" => "new",
 		"action" => "table-dialog-new",
-		"instance" => $this->instance
+		"instance" => $this->instance,
 	),$this->dialogNewParameters_));
 } else {
 	$this->ejsBegin();
-	echo "function ".$this->instanceV."cmdDialogNew(){".$this->instanceV."doCommand(\"form-new\");};";
+	echo "window.".$this->instanceV."cmdDialogNew=function(){".$this->instanceV."doCommand(\"form-new\");};";
 	$this->ejsEnd();		
 };
 
 // #Edit
 
+if($this->isInlineForm){
+	$this->generateComponent("xui.inline", array_merge(array(
+		"id" => $this->instanceV."xyo-app-table-inline",
+		"jsFunction" => $this->instanceV."cmdDialogEditAction",
+		"formSuffix" => "edit",
+		"action" => "table-inline-edit",
+		"instance" => $this->instance,
+		"noHtml" => true
+	),$this->inlineEditParameters_));
+}else
 if($this->dialogEdit_){
 	$this->generateComponent("xui.modal", array_merge(array(
 		"id" => $this->instanceV."xyo-app-table-modal-edit",
@@ -222,14 +281,21 @@ if($this->dialogEdit_){
 		"action" => "table-dialog-edit",
 		"instance" => $this->instance
 	),$this->dialogEditParameters_));
+} else {
+	$this->ejsBegin();
+	echo "window.".$this->instanceV."cmdDialogEdit=function(){".$this->instanceV."doCommand(\"form-edit\");};";
+	$this->ejsEnd();		
+};
 
-	$this->setHtmlJsSource(
-		"function ".$this->instanceV."cmdDialogEdit(pkv){".
+if(($this->isInlineForm)||($this->dialogEdit_)){
+	$this->setHtmlJsSourceOrAjax(
+		"window.".$this->instanceV."cmdDialogEdit=function(pkv){".
         		"var el;".
         		"var id;".
         		"var found=false;".
 			"if(typeof pkv != 'undefined'){".
 				"id=pkv;".
+				"XYO.Table.checkboxOnlyOneById('".$this->instance."',pkv);".
 			"}else{".			
 			        "id=\"\";".
 			        "for(k=1;k<=XYO.Table.instance['".$this->instance."'].id.length; ++k){".
@@ -248,11 +314,14 @@ if($this->dialogEdit_){
 			$this->instanceV."cmdDialogEditAction({".$this->instanceV."primary_key_value: id})".
 		"};".
 		"\r\n"
-	);
-} else {
-	$this->ejsBegin();
-	echo "function ".$this->instanceV."cmdDialogEdit(){".$this->instanceV."doCommand(\"form-edit\");};";
-	$this->ejsEnd();		
+	,"load");
+};
+
+
+if(!$this->isEmbedded){
+	if($this->isInlineForm){
+		echo "</div>";
+	};
 };
 
 // #Filter
@@ -304,8 +373,8 @@ $this->generateComponent("xui.modal", array(
 	"jsButtonCancel" => "XUI.Modal.dezactivate();"
 ));
 
-$this->setHtmlJsSource(
-	"function ".$this->instanceV."cmdDialogDelete(){".
+$this->setHtmlJsSourceOrAjax(
+	"window.".$this->instanceV."cmdDialogDelete=function(){".
        		"var el;".
        		"var id;".
 		"var found=false;".		       
@@ -324,7 +393,7 @@ $this->setHtmlJsSource(
 		$this->instanceV."cmdDialogDeleteAction({".$this->instanceV."primary_key_value: id})".
 	"};".
 	"\r\n"
-);
+,"load");
 
 //callActionLink1
 foreach($this->tableType as $key_=>$value_){
@@ -339,7 +408,7 @@ foreach($this->tableType as $key_=>$value_){
 			$this->eFormBuildRequest($request_);
 		echo "</form>";		
 		$this->ejsBegin();
-		echo "function ".$this->instanceV."callActionLink_".$key_."(request_){";
+		echo "window.".$this->instanceV."callActionLink_".$key_."=function(request_){";
 		echo " for(var k in request_){";
 		echo "  document.forms.".$this->instanceV."fn_action_".$key_.".elements[k].value=request_[k];";
 		echo " };";
@@ -361,7 +430,7 @@ foreach($this->tableAction as $key_=>$value_) {
 		$this->eFormBuildRequest($request_);
 	echo "</form>";		
 	$this->ejsBegin();
-	echo "function ".$this->instanceV."callActionLink_".$key_."(request_){";
+	echo "window.".$this->instanceV."callActionLink_".$key_."=function(request_){";
 	echo " for(var k in request_){";
 	echo "  document.forms.".$this->instanceV."fn_action_".$key_.".elements[k].value=request_[k];";
 	echo " };";
@@ -375,4 +444,33 @@ $this->generateView("table-view-call");
 
 include("table-view.instance.php");
 
-$this->setHtmlJsSource("function ".$this->instanceV."doCommand(action){ return XYO.Table.doCommand(\"".$this->instance."\",action); };");
+if($this->isInlineForm){
+	$this->setHtmlJsSourceOrAjax("window.".$this->instanceV."doCommand=function(action){".
+	"if(".
+	"action==\"form-new-apply\"||".
+	"action==\"form-edit-apply\"||".
+	"action==\"table-new-save\"||".
+	"action==\"table-edit-save\"){".
+		"return window.doCommandInlineForm(action);".
+	"};".
+	"if(action==\"table-view\"){".
+		$this->generateViewToString("table-inline-toolbar",array("action"=>"table-inline-view-toolbar")).
+		"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
+		"\$(\"#xyo-app-table-inline_content\").html(loader);".          
+		"document.getElementById(\"xyo-application-title\").innerHTML=\"".$this->getApplicationTitle()."\";".
+		"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-empty\", ajax: 1 })".
+	  	".done(function(result){".
+			"var jsAndHtml=XUI.extractScript(result);".
+			"\$(\"#xyo-app-table-inline_content\").html(jsAndHtml.html);".
+			"\$(\"#xyo-app-table-inline_content\").append(jsAndHtml.js);".
+		"});".
+		"return false;".
+	"};".
+	"return XYO.Table.doCommand(\"".$this->instance."\",action); };"
+	,"load");
+} else {
+	$this->setHtmlJsSourceOrAjax("window.".$this->instanceV."doCommand=function(action){ return XYO.Table.doCommand(\"".$this->instance."\",action); };","load");
+};
+
+
+

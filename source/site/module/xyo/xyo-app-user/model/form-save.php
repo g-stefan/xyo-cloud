@@ -79,8 +79,11 @@ if (1 * $this->ds->enabled == 0) {
 		$this->ds->enabled = 1;
 	};
 };
-
+            
 if ($this->ds->save()) {
+	if($this->isInlineForm) {
+		$this->setApplicationTitle($this->getFromLanguage("application.title") . " - " . $this->ds->name);
+	};
 
 	$this->processComponent("xui.form-image",array(
 	"element" => "picture",

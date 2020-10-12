@@ -41,19 +41,11 @@ if($this->isError()){
 						<div class="xui -fg-secondary-2 -left" style="height:32px;padding-top: 6px;font-size: 16px;line-height: 24px;font-weight: normal;display: inline-block;"><?php echo $this->applicationTitle; ?></div>
 					</div>
 					<div class="xui grid -col -x0" id="<?php echo $this->instanceV; ?>xui-app-toolbar_content">
-<?php }; ?>
-<?php
+<?php }; 
 
-	$this->runModule("xyo-mod-toolbar", array_merge(array(
-		"instance" => $this->instance,
-		"module" => $this->name,
-		"config" => $this->getParameter("toolbar", "toolbar/default"),
-		"type" => ($this->isEmbedded)?"small -toolbar":"",
-		"embedded" => $this->isEmbedded
-	), $this->toolbarParameter));
+$this->generateView("toolbar"); 
 
-?>	
-<?php if($this->isEmbedded){ ?>
+if($this->isEmbedded){ ?>
 					</div>
 				</div>
 			</div>

@@ -31,6 +31,7 @@ class xyo_app_Table extends xyo_app_Application {
 	protected $viewId;
 	protected $viewPrimaryKey;
 	protected $viewValue;
+	protected $viewRow;
 
 //---
 	protected $tableIsDelete;
@@ -51,6 +52,12 @@ class xyo_app_Table extends xyo_app_Application {
 	protected $filterToolbarButton_;
 //
 	protected $hasDynamicRow_;
+//
+	protected $inlineNew_;
+	protected $inlineNewParameters_;
+	protected $inlineEdit_;
+	protected $inlineEditParameters_;
+	protected $isInlineForm;
 
 	public function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
@@ -75,6 +82,7 @@ class xyo_app_Table extends xyo_app_Application {
 		$this->viewId=0;
 		$this->viewPrimaryKey=0;
 		$this->viewValue=null;
+		$this->viewRow=null;
 
 		$this->tableIsDelete=false;
 		$this->dialogNew_=false;
@@ -92,7 +100,21 @@ class xyo_app_Table extends xyo_app_Application {
 		$this->filterToolbarButton_=false;
 
 		$this->hasDynamicRow_=false;
+
+		$this->inlineNew_=false;
+		$this->inlineNewParameters_=array();
+		$this->inlineEdit_=false;
+		$this->inlineEditParameters_=array();
+		$this->isInlineForm=false;
+
 	}
+
+	public function applicationInit() {
+
+		$this->isInline=$this->getParameter("is_inline",$this->isInline);
+
+		parent::applicationInit();
+	}	
 
 	public function viewKeepRequest(){
 		$this->transferRequestInstance("page","view_page");
@@ -167,6 +189,18 @@ class xyo_app_Table extends xyo_app_Application {
 		$this->dialogFilterParameters_=$parameters;
 	}
 
+	public function setInlineNew($value, $parameters = array()){
+		$this->inlineNew_=$value;
+		$this->inlineNewParameters_=$parameters;
+		$this->isInlineForm=true;
+	}
+
+	public function setInlineEdit($value, $parameters = array()){
+		$this->inlineEdit_=$value;
+		$this->inlineEditParameters_=$parameters;
+		$this->isInlineForm=true;
+	}
+
 	public function allowEmbedding(){
 		$this->setInstance($this->getParameterRequest("instance", ""));
 		$this->setIsEmbedded($this->getParameterRequest("is_embedded", false));
@@ -179,7 +213,7 @@ class xyo_app_Table extends xyo_app_Application {
 
 		if($this->isDialog){
 			$this->setKeepRequest("is_dialog",$this->isDialog);
-		};		
+		};
 
 		if($this->isDialog){
 			$this->setDialogNew(true);
@@ -217,6 +251,11 @@ class xyo_app_Table extends xyo_app_Application {
 	public function hasDynamicRow($value){
 		$this->hasDynamicRow_=$value;
 	}
-
+	                                    
+	public function setInlineForm($value) {
+		$this->setInlineNew($value);
+		$this->setInlineEdit($value);
+		$this->hasFilterToolbar($value);
+	}
 
 }

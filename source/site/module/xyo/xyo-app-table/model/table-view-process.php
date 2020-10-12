@@ -223,17 +223,22 @@ $this->setParameterInstance("sortState", $sortState);
 
 $this->toolbarParameter=array_merge($this->toolbarParameter,array(
 	"dialog_new"=>$this->dialogNew_,
-	"dialog_edit"=>$this->dialogEdit_
+	"dialog_edit"=>$this->dialogEdit_,
+	"inline_new"=>$this->inlineNew_,
+	"inline_edit"=>$this->inlineEdit_
 ));
 
 foreach($this->tableType as $key_=>$value_){
 	if($value_[0]=="cmd-edit"){
 		if(!$this->dialogEdit_){
-			$this->tableType[$key_]=array_merge(array("action",array(
-				"action" => "form-edit",
-				"primary_key_value" => array($this->primaryKey)
-			)),array_slice($this->tableType[$key_],1));
+			if(!$this->inlineEdit_){
+				$this->tableType[$key_]=array_merge(array("action",array(
+					"action" => "form-edit",
+					"primary_key_value" => array($this->primaryKey)
+				)),array_slice($this->tableType[$key_],1));
+			};
 		};
 	};
 };
+
 

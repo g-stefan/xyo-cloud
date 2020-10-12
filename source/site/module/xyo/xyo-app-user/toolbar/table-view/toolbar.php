@@ -25,12 +25,3 @@ $this->setItemAfter("logout","user_group",
         "#",
         "callUserXUserGroup();"
 );
-
-$this->setItem("new",
-        "item-js",
-        "<i class=\"material-icons\">add</i>",
-        "new",
-        "primary",
-        "#",
-        $this->instanceV."doCommand('form-new');"
-);

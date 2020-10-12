@@ -69,3 +69,25 @@ $this->tableDelete = array(
 $this->tableImportant=array(
 	"name"=>true
 );
+
+if($this->isInlineForm){
+	$this->tableHead = array(
+		"#" => "#",
+		"name" => "head.name"
+	);
+
+	$this->tableType=array(	  
+		"name"=>array("custom","table-view-cell-name"),
+	);
+	
+	$this->tableData=array(
+		"picture" => "picture",
+		"logged_in" => "logged_in",
+		"logged_at" => "logged_at",
+		"created_at" => "created_at",
+		"invisible" => "invisible",
+		"enabled" => "enabled"
+	);
+};
+
+

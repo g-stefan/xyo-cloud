@@ -139,8 +139,6 @@ XYO.Table.doValueSave = function(i_,key){
 }
 
 XYO.Table.doSort = function(i_,field,mode){
-	var id;
-       	id=XYO.Table.selectId(i_);
 	var appForm=this.instance[i_].form;
 	if(this.parentInstance.hasOwnProperty(i_)){
 		appForm=this.parentInstance[i_].form;
@@ -180,5 +178,20 @@ XYO.Table.doUpdate = function(i_,request){
 		$("#"+instanceV+"table").append(jsAndHtml.js);
 		document.getElementById(instanceV+"table-loader").style.display="none";
 	});
+}
+
+XYO.Table.checkboxOnlyOneById = function (i_, id) {
+	var el;	
+	for(k=1; k<=this.instance[i_].id.length; ++k) {
+		el=document.getElementById(this.instance[i_].instanceV+"cbox_"+k);
+		if(el) {  
+			if(this.instance[i_].id[k-1]==id) {
+				el.checked=true;
+			}else{
+				el.checked=false;
+			};
+		};
+	};
+	return false;
 }
 
