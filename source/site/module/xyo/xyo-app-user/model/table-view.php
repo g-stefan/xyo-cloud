@@ -86,6 +86,7 @@ if($this->isInlineForm){
 		"logged_at" => "logged_at",
 		"created_at" => "created_at",
 		"invisible" => "invisible",
+		"description" => "description",
 		"enabled" => "enabled"
 	);
 };
