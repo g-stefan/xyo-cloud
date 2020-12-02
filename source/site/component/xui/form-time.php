@@ -16,6 +16,7 @@ if($maxlength==0){
 }else{
 	$maxlength=" maxlength=\"".$maxlength."\"";
 };
+$readonly = $this->getArgument("readonly","");
 
 $year=date("Y");
 $month=date("m")-1;
@@ -49,13 +50,21 @@ if($hasValue){
 	$this->setHtmlJsSourceOrAjax("\$(\"#".$this->getElementId($element)."\").datepicker({autoClose:true,onlyTimepicker:true});","load");
 };
 
+$classReadonly="";
+if(($readonly == 1) ||  ($readonly == "true")){
+	$readonly=" readonly=\"readonly\"";
+	$classReadonly=" -readonly";
+}else{
+	$readonly="";
+};
+
 ?>
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
-<input type="text"<?php echo $maxlength; ?> class="xui form-text<?php if($this->isElementError($element)){echo " -danger";}; ?>" placeholder="" autocomplete="off"
+<input type="text"<?php echo $maxlength; ?> class="xui form-text<?php if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>" placeholder="" autocomplete="off"
 	name="<?php $this->eElementName($element); ?>"
 	value="<?php $this->eElementValue($element, ""); ?>"
-	id="<?php $this->eElementId($element); ?>"
+	id="<?php $this->eElementId($element); ?>" <?php echo $readonly; ?>
 	data-date-format="<?php echo $format; ?>" data-timepicker="true" data-time-format="hh:ii" data-language="en"></input>
 <?php if(strlen($format)){ ?>
 	<input type="hidden" name="<?php $this->eElementName($element); ?>_format" value="<?php echo base64_encode($format); ?>"></input>
