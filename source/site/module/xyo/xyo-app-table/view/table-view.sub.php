@@ -449,5 +449,6 @@ foreach ($this->viewData as $key => $value) {
 		echo "</tr>";
 	};
 };
+$this->generateView("table-view.row.last");
 ?>
 </tbody>

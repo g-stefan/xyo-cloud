@@ -13,7 +13,7 @@ if (count($this->toolbar)) {
 	foreach ($this->toolbar as $item) {
 	
 		if($item["type"]=="item"){
-			echo "<a class=\"xui button -transparent -icon-left -".$item["mode"]." -effect-ripple ".$this->type."\" href=\"".$item["url"]."\">";
+			echo "<a class=\"xui button -transparent -icon-left -".$item["mode"]." -effect-ripple ".$this->type."\" href=\"".$item["module"]."\">";
 				echo $item["img"];
 				echo "<span>";
 				echo $item["title"];
@@ -43,7 +43,7 @@ if (count($this->toolbar)) {
 		};
 
 		if($item["type"]=="item.important"){
-			echo "<a class=\"xui button -transparent -icon-left -".$item["mode"]." -important -effect-ripple ".$this->type."\" href=\"".$item["url"]."\">";
+			echo "<a class=\"xui button -transparent -icon-left -".$item["mode"]." -important -effect-ripple ".$this->type."\" href=\"".$item["module"]."\">";
 				echo $item["img"];
 				echo "<span>";
 				echo $item["title"];
