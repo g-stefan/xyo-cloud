@@ -11,7 +11,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 $this->loadGroup("sidebar");
 $this->loadGroup("status");
 
-$this->setHtmlClass("xui");
+$this->setHtmlClass("xui -browser");
 $this->setHtmlBodyClass("xui");
 $this->setHtmlTitle($this->getSetting("website_title","XYO Cloud"));
 $this->setHtmlIcon($this->site."lib/xyo/applications-internet.ico");

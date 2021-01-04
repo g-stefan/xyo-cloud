@@ -41,7 +41,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 		$this->generateComponent("xui.panel2-footer");
 
 		?>
-		<span class="xui -right" style="color:#000000;font-size:11px;white-space: nowrap;"><?php echo $this->getFromLanguage("copyright"); ?> &copy; 2020 <a href="http://www.xyo.ro" style="text-decoration:none;"><span class="xui -fg-science-blue-3">Grigore Stefan</span></a></span>
+		<span class="xui -right" style="color:#000000;font-size:11px;white-space: nowrap;"><?php echo $this->getFromLanguage("copyright"); ?> &copy; 2020-2021 <a href="http://www.xyo.ro" style="text-decoration:none;"><span class="xui -fg-science-blue-3">Grigore Stefan</span></a></span>
 
 		<?php
 

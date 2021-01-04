@@ -64,7 +64,7 @@ if ($this->isError()) {
 
 $this->generateComponent("xui.form-action-begin",array("onsubmit"=>"return (xyoFormLoginAction(this,'".$salt."'));"));
 $this->generateComponent("xui.box-1x1-begin");
-$this->generateComponent("xui.panel-begin",array("title"=>"title.login"));
+$this->generateComponent("xui.panel-begin",array("title"=>"title.login","css-class"=>"-elevation-4"));
 
 $this->generateComponent("xui.form-username-required", array("element" => "username"));
 $this->generateComponent("xui.form-password-required", array("element" => "password"));

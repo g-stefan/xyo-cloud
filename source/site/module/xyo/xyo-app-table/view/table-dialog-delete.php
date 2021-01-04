@@ -40,7 +40,7 @@ foreach($this->viewData as $key=>$value){
 
 include("table-view.init.php");
 
-echo "<table class=\"xui table -danger xyo-app-table\" style=\"width:100%\">";
+echo "<table class=\"xui table xyo-app-table\" style=\"width:100%\">";
 include("table-view.sub.php");
 echo "</table>";
 
