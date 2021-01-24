@@ -15,6 +15,6 @@ $this->generateView("notify-error");
 
 echo "<div style=\"height:240px;\"></div>";
 $this->ejsBegin();
-echo "XUI.Modal.dezactivate();";
+echo "XUI.Modal.deactivate();";
 echo "XYO.Table.doUpdate(\"".$this->instance."\",\"&".$this->instanceV."action=table-view\");";
 $this->ejsEnd();

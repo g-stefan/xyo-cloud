@@ -173,7 +173,7 @@ XYO.Table.doUpdate = function(i_,request){
 		this.instance[i_].uri,
 		fSerialized+request+"&ajax=1"
 	).done(function(response){
-		var jsAndHtml=XUI.extractScript(response);
+		var jsAndHtml=XUI.Html.extractScript(response);
 		$("#"+instanceV+"table").html(jsAndHtml.html);			
 		$("#"+instanceV+"table").append(jsAndHtml.js);
 		document.getElementById(instanceV+"table-loader").style.display="none";

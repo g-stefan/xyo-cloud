@@ -33,7 +33,7 @@ if(strlen($jsButtonClick)==0){
 	$jsButtonClick=	"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 			"\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", success: function(response){".
 				"setTimeout(function(){".
-				"var jsAndHtml=XUI.extractScript(response);".
+				"var jsAndHtml=XUI.Html.extractScript(response);".
 				"\$(\"#".$id."_content\").html(jsAndHtml.html);".
 				"\$(\"#".$id."_content\").append(jsAndHtml.js);".
 				"},100)".
@@ -58,7 +58,7 @@ $this->setHtmlJsSourceOrAjax(
 		"\$(\"#".$id."\").show();".
 		"\$.post(\"".$this->requestUriThis()."\", jsAction)".
   		".done(function(result){".
-			"var jsAndHtml=XUI.extractScript(result);".
+			"var jsAndHtml=XUI.Html.extractScript(result);".
 			"\$(\"#".$id."_content\").html(jsAndHtml.html);".
 			"\$(\"#".$id."_content\").append(jsAndHtml.js);".
 		"});".

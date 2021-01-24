@@ -12,7 +12,7 @@ echo	"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%
 	"\$(\"#xui-app-toolbar_content\").html(loader);".
 	"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"".$this->getArgument("action","table-inline-view-toolbar")."\", ajax: 1 })".
   	".done(function(result){".
-		"var jsAndHtml=XUI.extractScript(result);".
+		"var jsAndHtml=XUI.Html.extractScript(result);".
 		"\$(\"#xui-app-toolbar_content\").html(jsAndHtml.html);".
 		"\$(\"#xui-app-toolbar_content\").append(jsAndHtml.js);".
 	"});";

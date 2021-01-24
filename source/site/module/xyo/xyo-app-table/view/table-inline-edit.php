@@ -34,7 +34,7 @@ echo "window.".$this->instanceV."doCommandInlineForm=function(action){".
 	"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 	"\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", success: function(response){".
 		"setTimeout(function(){".
-		"var jsAndHtml=XUI.extractScript(response);".
+		"var jsAndHtml=XUI.Html.extractScript(response);".
 		"\$(\"#xyo-app-table-inline_content\").html(jsAndHtml.html);".
 		"\$(\"#xyo-app-table-inline_content\").append(jsAndHtml.js);".
 		"},100)".

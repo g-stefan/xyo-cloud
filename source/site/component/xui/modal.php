@@ -48,7 +48,7 @@ if(strlen($jsButtonClick)==0){
 	$this->setFormName($originalFormName.$formSuffix);
 	$jsButtonClick="\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", success: function(response){".
 				"setTimeout(function(){".
-				"var jsAndHtml=XUI.extractScript(response);".
+				"var jsAndHtml=XUI.Html.extractScript(response);".
 				"\$(\"#".$id."_content\").html(jsAndHtml.html);".
 				"\$(\"#".$id."_content\").append(jsAndHtml.js);".
 				"},100)".
@@ -93,7 +93,7 @@ $this->setHtmlJsSourceOrAjax(
 				$jsButtonClick.
 			"});".
 			(($hasCancel)?"\$(\"#".$id."_cancel\").off(\"click\").on(\"click\",function(){".$jsButtonCancel."});":"").
-			"var jsAndHtml=XUI.extractScript(result);".
+			"var jsAndHtml=XUI.Html.extractScript(result);".
 			"\$(\"#".$id."_content\").html(jsAndHtml.html);".
 			"\$(\"#".$id."_content\").append(jsAndHtml.js);".
 		"});".
@@ -103,7 +103,7 @@ $this->setHtmlJsSourceOrAjax(
 $this->setHtmlJsSourceOrAjax("\$(\"body\").append(\$(\"#".$id."\").detach());","load");
 if($this->isAjax()){
 	$this->setHtmlJsSourceOrAjax(
-	"\$(\"#".$id." ._modal-close-button\").click(function(){XUI.Modal.dezactivate();});"
+	"\$(\"#".$id." ._modal-close-button\").click(function(){XUI.Modal.deactivate();});"
 	,"load");
 };
 

@@ -339,7 +339,7 @@ if($this->dialogFilter_){
 			$scriptX.="\$(\"#".$this->instanceV."view_select_".$key."\").val(filterVal);";
 		};
 	};
-	$scriptX.="XUI.Modal.dezactivate();";
+	$scriptX.="XUI.Modal.deactivate();";
 	$scriptX.="XYO.Table.doUpdate(\"".$this->instance."\");";
 
 	$this->generateComponent("xui.modal", array_merge(array(
@@ -369,8 +369,8 @@ $this->generateComponent("xui.modal", array(
 	"formSuffix" => "delete",
 	"action" => "table-dialog-delete",
 	"instance" => $this->instance,
-	"jsButtonClick" => "XUI.Modal.dezactivate();XYO.Table.doUpdate(\"".$this->instance."\",\"&".$this->instanceV."action=table-delete&".$this->instanceV."primary_key_value=\"+XYO.Table.selectId(\"".$this->instance."\"));",
-	"jsButtonCancel" => "XUI.Modal.dezactivate();"
+	"jsButtonClick" => "XUI.Modal.deactivate();XYO.Table.doUpdate(\"".$this->instance."\",\"&".$this->instanceV."action=table-delete&".$this->instanceV."primary_key_value=\"+XYO.Table.selectId(\"".$this->instance."\"));",
+	"jsButtonCancel" => "XUI.Modal.deactivate();"
 ));
 
 $this->setHtmlJsSourceOrAjax(
@@ -460,7 +460,7 @@ if($this->isInlineForm){
 		"document.getElementById(\"xyo-application-title\").innerHTML=\"".$this->getApplicationTitle()."\";".
 		"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-empty\", ajax: 1 })".
 	  	".done(function(result){".
-			"var jsAndHtml=XUI.extractScript(result);".
+			"var jsAndHtml=XUI.Html.extractScript(result);".
 			"\$(\"#xyo-app-table-inline_content\").html(jsAndHtml.html);".
 			"\$(\"#xyo-app-table-inline_content\").append(jsAndHtml.js);".
 		"});".
