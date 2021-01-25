@@ -3,7 +3,7 @@ rem Public domain
 rem http://unlicense.org/
 rem Created by Grigore Stefan <g_stefan@yahoo.com>
 
-call .\project\build.config.cmd
+call .\port\build.config.cmd
 
 SETLOCAL ENABLEDELAYEDEXPANSION
 
