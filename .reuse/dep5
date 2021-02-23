@@ -1,0 +1,149 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: XYO Cloud
+Upstream-Contact: Grigore Stefan <g_stefan@yahoo.com>
+Source: https://github.com/g-stefan/xyo-cloud
+License: MIT
+
+Files: .github/*
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: Unlicense
+
+Files: .github/CODE_OF_CONDUCT.md
+Copyright: 2014 Coraline Ada Ehmke <https://where.coraline.codes/>
+License: CC-BY-4.0
+
+Files: .gitignore
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: Unlicense
+
+Files: .vscode/*
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: Unlicense
+
+Files: mkdocs.yml
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: Unlicense
+
+Files: build/*
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: Unlicense
+
+Files: build.cmd
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: Unlicense
+
+Files: build.sh
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: Unlicense
+
+Files: README.md
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: MIT
+
+Files: util/*
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: MIT
+
+Files: output/*
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: MIT
+
+Files: output/site/xui-version-lib.txt
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: Unlicense
+
+Files: xyo-cloud.version.ini
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: Unlicense
+
+Files: source/*
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: MIT
+
+Files: docs/xyo-cloud-database-model.mwb
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: MIT
+
+Files: temp/*
+Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+License: MIT
+
+Files: vendor/xui-*
+Copyright: Copyright (c) 2016 Timofey Marochkin
+License: MIT
+
+Files: output/site/lib/air-datepicker/*
+Copyright: Copyright (c) 2016 Timofey Marochkin
+License: MIT
+
+Files: output/site/lib/cropit/*
+Copyright: Copyright (c) 2014 Scott Cheng
+License: MIT
+
+Files: output/site/lib/font-awesome/*
+Copyright: Font Awesome Free by @fontawesome - https://fontawesome.com
+License: OFL-1.1
+
+Files: output/site/lib/ionicons/*
+Copyright: Copyright (c) 2015-present Ionic (http://ionic.io/)
+License: MIT
+
+Files: output/site/lib/jquery/*
+Copyright: (c) JS Foundation and other contributors
+License: MIT
+
+Files: output/site/lib/jquery-autocompleter/*
+Copyright: (c) 2020 Artem Fitiskin
+License: MIT
+
+Files: output/site/lib/jquery-form/*
+Copyright: Copyright 2017 Kevin Morris, Copyright 2006 M. Alsup
+License: MIT
+
+Files: output/site/lib/js-cookie/*
+Copyright: Copyright (c) 2018 Copyright 2018 Klaus Hartl, Fagner Brack, GitHub Contributors
+License: MIT
+
+Files: output/site/lib/material-icons/*
+Copyright: Copyright (c) Google
+License: Apache-2.0
+
+Files: output/site/lib/maximize-select2-height/*
+Copyright: (c) Panorama Education 2020
+License: MIT
+
+Files: output/site/lib/md5/*
+Copyright: Copyright (C) Paul Johnston 1999 - 2009
+License: BSD-3-Clause
+
+Files: output/site/lib/normalize/*
+Copyright: Copyright (c) Nicolas Gallagher and Jonathan Neal
+License: MIT
+
+Files: output/site/lib/overlayscrollbars/*
+Copyright: Copyright KingSora | Rene Haas.
+License: MIT
+
+Files: output/site/lib/pickr/*
+Copyright: Copyright (c) 2018 - 2020 Simon Reinisch
+License: MIT
+
+Files: output/site/lib/rainbow/*
+Copyright: Copyright (c) Craig Campbell
+License: Apache-2.0
+
+Files: output/site/lib/roboto-regular/*
+Copyright: Copyright (c) Christian Robertson
+License: Apache-2.0
+
+Files: output/site/lib/select2/*
+Copyright: Copyright (c) 2012-2017 Kevin Brown, Igor Vaynberg, and Select2 contributors
+License: MIT
+
+Files: output/site/lib/sha512/*
+Copyright: Chen, Yi-Cyuan 2014-2018
+License: MIT
+
+Files: output/site/lib/tinymce/*
+Copyright: Copyright (c) Tiny Technologies, Inc. All rights reserved.
+License: LGPL-2.1-only
