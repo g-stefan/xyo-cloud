@@ -6,8 +6,8 @@ rem Created by Grigore Stefan <g_stefan@yahoo.com>
 call .\build\build.config.cmd
 
 if "%VERSION%" == "%VERSION_LAST%" goto :eof
-if not exist ../release/%PROJECT%-%VERSION_LAST%.7z goto :eof
-if not exist ../release/%PROJECT%-%VERSION%.7z goto :eof
+if not exist release/%PROJECT%-%VERSION_LAST%.7z goto :eof
+if not exist release/%PROJECT%-%VERSION%.7z goto :eof
 
 if exist temp\ rmdir /Q /S temp
 if not exist temp\ mkdir temp

@@ -39,6 +39,8 @@ $this->generateComponent("xui.form-select", array("element" =>"xyo_language_id")
 $this->generateComponent("xui.form-switch", array("element" =>"invisible"));
 $this->generateComponent("xui.form-switch", array("element" =>"enabled"));
 
+$this->generateView("tab-form-derived");
+
 if($this->isNew){
 	$this->generateComponent("xui.form-action-apply",array("click"=>$this->instanceV."doCommand('form-new-apply');"));
 }else{

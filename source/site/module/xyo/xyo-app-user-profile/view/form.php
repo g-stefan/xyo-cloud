@@ -25,6 +25,8 @@ $this->generateComponent("xui.form-password", array("element" => "password2","au
 $this->generateComponent("xui.form-email", array("element" => "email"));
 $this->generateComponent("xui.form-select", array("element" => "xyo_language_id"));
 
+$this->generateView("form-derived");
+
 $this->generateComponent("xui.form-action-apply",array("click"=>$this->instanceV."doCommand('form-edit-apply');"));
 
 $this->generateComponent("xui.panel-end");
