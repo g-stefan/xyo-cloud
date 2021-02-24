@@ -510,11 +510,8 @@ class xyo_datasource_xyo_Query extends xyo_Config {
 	function querySetOrderLoad_() {
 		$x_ = $this->querySetOrder_;
 		foreach ($x_ as $key_ => $value_) {
-
 			if (array_key_exists($key_, $this->querySecondTable_)) {
-
 				if ($this->fieldTable_[$this->queryFirstTable_[$key_]]->hasValue($this->queryFirstKey_[$key_])) {
-
 					$this->fieldTable_[$this->querySecondTable_[$key_]]->setIfNotEmpty($this->querySecondKey_[$key_], $this->fieldTable_[$this->queryFirstTable_[$key_]]-> {$this->queryFirstKey_[$key_]});
 				};
 			} else if (is_array($value_)) {
@@ -526,9 +523,7 @@ class xyo_datasource_xyo_Query extends xyo_Config {
 					};
 				};
 			} else if (array_key_exists($value_, $this->querySecondTable_)) {
-
 				if ($this->fieldTable_[$this->querySecondTable_[$value_]]->hasValue($this->querySecondKey_[$value_])) {
-
 					$this->fieldTable_[$this->queryFirstTable_[$value_]]->setIfNotEmpty($this->queryFirstKey_[$value_], $this->fieldTable_[$this->querySecondTable_[$value_]]-> {$this->querySecondKey_[$value_]});
 				};
 			};
@@ -620,7 +615,7 @@ class xyo_datasource_xyo_Query extends xyo_Config {
 	function save() {
 		if (count($this->querySave_) == 0) {
 			return true;
-		}
+		};
 
 		$oldV = array();
 		foreach ($this->queryField_ as $keyX_ => $valueX_) {
@@ -629,22 +624,38 @@ class xyo_datasource_xyo_Query extends xyo_Config {
 
 		$this->queryTableSet_();
 
-
 		foreach ($this->queryField_ as $keyX_ => $valueX_) {
-			if ($this->isEmpty($oldV[$keyX_])) {
-
-			} else {
+			if (!$this->isEmpty($oldV[$keyX_])) {
 				$this->fieldTable_[$this->queryField_[$keyX_]]-> {$this->queryKey_[$keyX_]} = $oldV[$keyX_];
 				$this->$keyX_ = $oldV[$keyX_];
-			}
+			};
 		};
-
 
 		$ok = true;
 		foreach ($this->querySave_ as $key_ => $value_) {
+
+			if(is_bool($value_)){
+				if(!$value_){
+					continue;
+				};
+			};
+			if(is_string($value_)){
+				if($value_=="key"){
+
+					$this->fieldTable_[$key_]->clear();
+                                        $this->querySetOrderLoad_();
+					$this->fieldTable_[$key_]->tryLoad(0,1);
+					foreach ($this->queryField_ as $keyF_ => $valueF_) {
+						if($valueF_==$key_) {
+							$this->fieldTable_[$valueF_]-> {$this->queryKey_[$keyF_]} = $this->{$keyF_};
+						};
+					};
+
+				};
+			};
+			
 			if ($this->fieldTable_[$key_]->save()) {
 				$this->querySetOrderLoad_();
-
 				foreach ($this->queryField_ as $key2_ => $value2_) {
 					if ($value2_ == $key_) {
 						$this->$key2_ = $this->fieldTable_[$key_]-> {$this->queryKey_[$key2_]};

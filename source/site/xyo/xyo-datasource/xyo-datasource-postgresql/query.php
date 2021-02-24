@@ -696,6 +696,27 @@ class xyo_datasource_postgresql_Query extends xyo_Config {
 
 		$ok = true;
 		foreach ($this->querySave_ as $key_ => $value_) {
+
+			if(is_bool($value_)){
+				if(!$value_){
+					continue;
+				};
+			};
+			if(is_string($value_)){
+				if($value_=="key"){
+
+					$this->fieldTable_[$key_]->clear();
+                                        $this->querySetOrderLoad_();
+					$this->fieldTable_[$key_]->tryLoad(0,1);
+					foreach ($this->queryField_ as $keyF_ => $valueF_) {
+						if($valueF_==$key_) {
+							$this->fieldTable_[$valueF_]-> {$this->queryKey_[$keyF_]} = $this->{$keyF_};
+						};
+					};
+
+				};
+			};
+
 			if ($this->fieldTable_[$key_]->save()) {
 				$this->querySetOrderLoad_();
 
