@@ -17,7 +17,7 @@ if exist release\%PROJECT%-update-%VERSION_LAST%-to-%VERSION%.7z del /Q /F relea
 pushd temp
 7zr x ../release/%PROJECT%-%VERSION_LAST%.7z
 7zr x ../release/%PROJECT%-%VERSION%.7z
-php ../util/update.php %PROJECT% %VERSION_LAST% %VERSION%
+php ../build/update.php %PROJECT% %VERSION_LAST% %VERSION%
 7zr a -mx9 -mmt4 -r- -sse -w. -y -t7z ../release/%PROJECT%-update-%VERSION_LAST%-to-%VERSION%.7z %PROJECT%-update-%VERSION_LAST%-to-%VERSION%
 popd
 
