@@ -20,5 +20,5 @@ copy /y xui-%VENDOR_XUI_VERSION%\xui-version-lib.txt output\site\xui-version-lib
 rmdir /Q /S xui-%VENDOR_XUI_VERSION%
 
 xcopy /E /H /K /Y source output
-xyo-version --no-bump --version-file=xyo-cloud.version.ini --file-in=output/site/config/xyo-cloud.80.php --file-out=output/site/config/xyo-cloud.80.php.version xyo-cloud
+xyo-version --no-bump --version-file=version.ini --file-in=output/site/config/xyo-cloud.80.php --file-out=output/site/config/xyo-cloud.80.php.version xyo-cloud
 move /Y output\site\config\xyo-cloud.80.php.version output\site\config\xyo-cloud.80.php

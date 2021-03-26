@@ -17,6 +17,7 @@ $this->set("head.logged_at", "Logged at");
 $this->set("head.enabled", "Enabled");
 $this->set("head.logged_in", "Logged in");
 $this->set("head.created_at", "Created at");
+$this->set("head.action_at", "Action at");
 $this->set("head.invisible","Invisible");
 
 $this->set("select.xyo_user_group_any", "- user group -");

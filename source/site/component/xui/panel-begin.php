@@ -20,6 +20,7 @@ $title=$this->getArgument("title-text",$title);
 $noTitle=$this->getArgument("no-title",0);
 $cssClass=$this->getArgument("css-class","");
 $id=$this->getArgument("id","");
+$noTopSpace=$this->getArgument("no-top-space",0);
 
 if(strlen($title)==0){
 	$noTitle=1;
@@ -33,8 +34,11 @@ if(strlen($id)>0){
 	$id=" id=\"".$id."\"";
 };
 
+if(!$noTopSpace){
+	echo "<div class=\"xui box -space\"></div>";
+};
+
 ?>
-<div class="xui box -space"></div>
 <div class="xui panel<?php echo $cssClass; ?>"<?php echo $id; ?>>
 <?php if(!$noTitle) {?>
 	<div class="xui _title"><?php echo $title; ?></div>

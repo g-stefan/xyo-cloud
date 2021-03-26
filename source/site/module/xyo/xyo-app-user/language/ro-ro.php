@@ -17,6 +17,7 @@ $this->set("head.logged_at", "Ultimul login");
 $this->set("head.enabled", "Activat");
 $this->set("head.logged_in", "Este logat");
 $this->set("head.created_at", "Creat");
+$this->set("head.action_at", "Actiune");
 $this->set("head.invisible","Invizibil");
 
 $this->set("select.xyo_user_group_any", "- grup utilizator -");

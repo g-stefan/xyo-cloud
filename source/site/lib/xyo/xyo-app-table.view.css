@@ -34,7 +34,6 @@
 	margin-left: calc(50% - 12px);
 }
 
-
 .xui.component-table.-hide-secondary-top-toolbar > .xui.app-toolbar:nth-child(2) {
 	display: none;
 }
@@ -102,9 +101,45 @@
 		border-left: 0px solid #d3d7cf;
 	}
 
-	.xui.component-table.-application > .xui.app-toolbar:last-child {
+	.xyo-app-table.-is-inline-form .xui.component-table.-application > .xui.app-toolbar:last-child {
 		border-top: 0px solid #d3d7cf;
 	}
 
+}
+
+
+@media only screen and (max-width: 600px) {
+	.xui.component-table.-application .xui.app-toolbar:nth-child(2) .xui.grid.-col.-x0:nth-child(2) {
+		display: none !important;		
+	}
+
+	.xui.component-table.-application .xui.app-toolbar:nth-child(2) .xui.grid.-col.-x0:nth-child(1) {
+		flex: 1 1 0 !important;		
+	}
+
+	.xui.component-table.-application .xui.app-toolbar:nth-child(2) .xui.grid.-col.-x0:nth-child(1) .xui.form-input-group {
+		width: 100% !important;		
+	}
+	
+	.xui.component-table.-application .xui.app-toolbar:nth-child(2) .xui.grid.-col.-x0:nth-child(1) .xui.form-input-group input[type=text] {
+		width: calc(100% - 60px) !important;
+	}
+}
+
+.xyo-app-table_form {
+	width:100%;
+	height:100%;
+	position:relative;
+	margin:0px 0px 0px 0px;
+	padding:0px 0px 0px 0px;
+	overflow:hidden;
+}
+
+.xyo-app-table_search {
+	width: 196px;
+}
+
+.xyo-app-table_search.-inline-form {
+	width:calc(100% - 60px);
 }
 

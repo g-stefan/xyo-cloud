@@ -17,6 +17,7 @@ $this->set("lang_default","- Implicita -");
 
 $this->set("password_empty", "introduce o parola");
 $this->set("error.invalid_login","Acces interzis!");
+$this->set("element.is_empty","este gol");
 
 $this->set("alt_error","Eroare");
 $this->set("error.unknown","Eroare necunoscuta");

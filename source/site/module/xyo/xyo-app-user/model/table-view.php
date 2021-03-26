@@ -14,6 +14,7 @@ $this->tableHead = array(
 	"username" => "head.username",
 	"logged_in" => "head.logged_in",
 	"logged_at" => "head.logged_at",
+	"action_at" => "head.action_at",
 	"created_at" => "head.created_at",
 	"invisible" => "head.invisible",
 	"enabled" => "head.enabled"

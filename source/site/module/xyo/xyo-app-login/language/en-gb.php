@@ -19,6 +19,7 @@ $this->set("password_empty","provide password");
 $this->set("error.invalid_login","Acces denied!");
 $this->set("alt_error","Error");
 $this->set("error.unknown","Unknown error");
+$this->set("element.is_empty","is empty");
 
 $this->set("label.captcha","Captcha");
 

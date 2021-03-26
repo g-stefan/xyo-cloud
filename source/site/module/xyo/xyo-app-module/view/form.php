@@ -39,9 +39,9 @@ if(!$this->isDialog){
 
 
 if($this->isNew){
-	$this->generateComponent("xui.box-1x2-separator");
+	$this->generateComponent("xui.box-1x2-separator",array("css-class"=>"-border-left"));
 
-	$this->generateComponent("xui.panel-begin", array("title"=>"title.default_acl"));
+	$this->generateComponent("xui.panel-begin", array("title"=>"title.default_acl","css-class"=>"-nested -form -no-border","no-top-space"=>true));
 	$this->generateComponent("xui.form-select", array("element" =>"xyo_module_group_id"));
 	$this->generateComponent("xui.form-order", array("element" =>"order"));
 	$this->generateComponent("xui.form-select", array("element" =>"xyo_core_id"));

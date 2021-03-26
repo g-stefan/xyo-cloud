@@ -17,7 +17,7 @@ foreach ($this->tableHead as $key => $value) {
 	$hasSort=false;
 
 	if ($key === "#") {
-		echo "<th class=\"xui _select\">";
+		echo "<th class=\"xui _select -important\">";
 	}else{
 		$cssClass="xui";
 					
@@ -103,7 +103,7 @@ foreach ($this->tableHead as $key => $value) {
 
 if(count($this->viewData)==0){
 	echo "<tr>";
-	echo "<td class=\"xui -align-center -fg-aluminium-3\" colspan=\"".count($this->tableHead)."\">";
+	echo "<td class=\"xui -align-center -fg-aluminium-3 -important\" colspan=\"".count($this->tableHead)."\">";
 		$this->eLanguage("info.no_records");
 	echo "</td>";
 	echo "</tr>";
@@ -115,7 +115,7 @@ foreach ($this->viewData as $key => $value) {
 	foreach ($this->tableHead as $key_ => $value_) {
 
 		if ($key_ === "#") {
-			echo "<td class=\"xui _select\">";
+			echo "<td class=\"xui _select -important\">";
 		}else{
 			$isImportant=false;
 			if(count($this->tableImportant)==0){

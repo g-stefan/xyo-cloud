@@ -30,6 +30,7 @@ $this->set("query_item", array(
 	"created_at" => array("user"=>"created_at"),
 	"logged_at" => array("user"=>"logged_at"),
 	"logged_in" => array("user"=>"logged_in"),
+	"action_at" => array("user"=>"action_at"),
 	"user_group" => array("user_group"=>"name"),
 	"language" => array("language"=>"name"),
 	"xyo_user_group_id" => array("user_group"=>"id"),
