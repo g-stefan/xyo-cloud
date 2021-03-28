@@ -40,10 +40,6 @@ Files: README.md
 Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
 License: MIT
 
-Files: util/*
-Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
-License: MIT
-
 Files: output/*
 Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
 License: MIT
@@ -52,7 +48,7 @@ Files: output/site/xui-version-lib.txt
 Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
 License: Unlicense
 
-Files: xyo-cloud.version.ini
+Files: version.ini
 Copyright: 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
 License: Unlicense
 
