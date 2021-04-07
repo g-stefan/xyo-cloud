@@ -26,8 +26,8 @@ class xyo_mod_Setup extends xyo_Module {
 		$this->options_ = array();
 	}
 
-	function setModule($parent, $path, $module, $enabled, $parameters=null,  $registered=false, $override=false) {
-		$this->cloud->setModule($parent, $path, $module, $enabled, $parameters, $registered, $override);
+	function setModule($parent, $path, $module, $enabled, $registered=false, $override=false) {
+		$this->cloud->setModule($parent, $path, $module, $enabled, $registered, $override);
 	}
 
 	function registerModule($parent, $path, $module, $enabled=true, $description=null) {

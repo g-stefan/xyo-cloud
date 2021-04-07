@@ -56,26 +56,17 @@ class xyo_mod_ds_Loader extends xyo_Module {
 
 			if($dsAclModule->load(0,1)) {
 
-				$parameter = array();
-				if ($dsModule->parameter) {
-					$this->dsModuleParameter->clear();
-					$this->dsModuleParameter->xyo_module_id=$dsModule->id;
-					for($this->dsModuleParameter->load(); $this->dsModuleParameter->isValid(); $this->dsModuleParameter->loadNext()) {
-						$parameter[$this->dsModuleParameter->name]=$this->dsModuleParameter->value;
-					};
-				};
-
-				$this->cloud->setModule($dsModule->parent, $dsModule->path, $dsModule->name, true, $parameter, true, false);
+				$this->cloud->setModule($dsModule->parent, $dsModule->path, $dsModule->name);
 
 				return true;
 			};
 
-			$this->cloud->setModule($dsModule->parent, $dsModule->path, $name, false, null, true, false);
+			$this->cloud->setModule($dsModule->parent, $dsModule->path, $name, false, true, false);
 
 			return true;
 		};
 
-		$this->cloud->setModule(null, null, $name, false, null, false, true, false);
+		$this->cloud->setModule(null, null, $name, false, false, true);
 		return true;
 	}
 

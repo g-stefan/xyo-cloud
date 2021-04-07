@@ -80,7 +80,7 @@ if ($modSetup && $dsModule) {
 			};
 
 			if ($modSetup->registerModule($ret["parent"], null, $ret["module"])) {
-				$modSetup->setModule($ret["parent"], null, $ret["module"], true,null,false,true);
+				$modSetup->setModule($ret["parent"], null, $ret["module"], true,false,true);
 
 				if ($doUpdate) {
 					if ($modSetup->runModuleUpdate($ret["module"])) {

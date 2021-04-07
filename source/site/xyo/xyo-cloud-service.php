@@ -57,7 +57,7 @@ if (!isset($xyoCloudServiceModuleName)) {
 
 $run=$xyoCloud->getRequest("run", $xyoCloudServiceModuleName);
 if($run==$xyoCloudServiceModuleName) {
-	$xyoCloud->setModule(null, getcwd(), $xyoCloudServiceModuleName, true, null, false, true);
+	$xyoCloud->setModule(null, getcwd(), $xyoCloudServiceModuleName, true, false, true);
 	$xyoCloud->setModuleCheck($xyoCloudServiceModuleName, false);
 	$xyoCloud->setRequest("run", $xyoCloudServiceModuleName);
 };

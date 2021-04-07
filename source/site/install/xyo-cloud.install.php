@@ -25,8 +25,8 @@ $this->includeConfig("config.website");
 $this->setModule(null, null, "xyo");
 $this->setModule("xyo", null, "xyo-mod-ds-settings");
 /* --- */
-$this->setModule(null, "install", "xyo-app-install", true, null, true,false);
-$this->setModule("xyo-app-install", null, "xyo-tpl-install", true,null,true,false);
+$this->setModule(null, "install", "xyo-app-install");
+$this->setModule("xyo-app-install", null, "xyo-tpl-install");
 $this->setModuleGroup("xyo-tpl-install", "system-run");
 $this->setModuleAsApplication("xyo-app-install");
 $this->setApplication("xyo-app-install");

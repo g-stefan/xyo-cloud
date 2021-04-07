@@ -32,8 +32,7 @@ class xyo_ModuleObject {
 	public  $path;
 	public  $init;
 	public  $loaded;
-	public  $check;
-	public  $parameters;
+	public  $check;	
 	public  $application;
 	public  $baseClass;
 	public  $pathBase;
@@ -274,7 +273,7 @@ class xyo_Cloud extends xyo_Config {
 		};
 	}	
 
-	public function setModule($moduleParent=null, $path=null, $module, $enabled=true, $parameters=null, $registered=true, $override=false) {
+	public function setModule($moduleParent=null, $path=null, $module, $enabled=true, $registered=true, $override=false) {
 		if (!$override) {
 			if (array_key_exists($module, $this->moduleList)) {
 				$this->moduleList[$module]->enabled = $enabled;
@@ -305,11 +304,7 @@ class xyo_Cloud extends xyo_Config {
 			$pathModule = $path . "/";
 		} else {
 			$pathModule = $this->path . "module/" . $module . "/";
-		};
-
-		if (!$parameters) {
-			$parameters = array();
-		};
+		};		
 
 		$this->moduleList[$module] = new xyo_ModuleObject();
 		$this->moduleList[$module]->parent = $moduleParent;
@@ -319,8 +314,7 @@ class xyo_Cloud extends xyo_Config {
 		$this->moduleList[$module]->path = $pathModule;
 		$this->moduleList[$module]->init = false;
 		$this->moduleList[$module]->loaded = false;
-		$this->moduleList[$module]->check = false;
-		$this->moduleList[$module]->parameters = $parameters;
+		$this->moduleList[$module]->check = false;		
 		$this->moduleList[$module]->application = null;
 		$this->moduleList[$module]->baseClass = null;
 		$this->moduleList[$module]->pathBase = null;
@@ -335,15 +329,7 @@ class xyo_Cloud extends xyo_Config {
 		if (array_key_exists($module, $this->modulesList)) {
 			unset($this->modulesList[$module]);
 		};
-	}
-
-	public function getModuleParameters($name) {
-		$moduleObject = &$this->getModuleObject($name);
-		if ($moduleObject) {
-			return $moduleObject->parameters;
-		};
-		return null;
-	}
+	}	
 
 	public function getModuleRunPath($module) {
 		$moduleName = $module;
