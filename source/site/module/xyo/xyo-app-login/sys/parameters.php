@@ -8,8 +8,8 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->addItem("box-1x1-begin");
-$this->addItem("panel-begin");
-$this->addItem("form-switch", "no_language_selector",0);
-$this->addItem("panel-end");
-$this->addItem("box-1x1-end");
+$this->addItem("xui.box-1x1-begin");
+$this->addItem("xui.panel-begin");
+$this->addItem("xui.form-switch", "no_language_selector",0);
+$this->addItem("xui.panel-end");
+$this->addItem("xui.box-1x1-end");

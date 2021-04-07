@@ -22,6 +22,9 @@ if ($this->isRequest("website_language")) {
 /* --- */
 $this->includeConfig("config.website");
 /* --- */
+$this->setModule(null, null, "xyo");
+$this->setModule("xyo", null, "xyo-mod-ds-settings");
+/* --- */
 $this->setModule(null, "install", "xyo-app-install", true, null, true,false);
 $this->setModule("xyo-app-install", null, "xyo-tpl-install", true,null,true,false);
 $this->setModuleGroup("xyo-tpl-install", "system-run");

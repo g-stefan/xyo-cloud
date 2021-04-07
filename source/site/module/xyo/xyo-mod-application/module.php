@@ -33,9 +33,9 @@ class xyo_mod_Application extends xyo_Module {
 		parent::__construct($object, $cloud);
 		if ($this->isOk) {
 
-			$this->accessControlList = &$this->cloud->getModule("xyo-mod-ds-acl");
-			$this->user = &$this->cloud->getModule("xyo-mod-ds-user");		
 			$this->settings = &$this->cloud->getModule("xyo-mod-ds-settings");
+			$this->accessControlList = &$this->cloud->getModule("xyo-mod-ds-acl");
+			$this->user = &$this->cloud->getModule("xyo-mod-ds-user");
 
 			if (!($this->accessControlList && $this->user)) {
 				$this->moduleDisable();

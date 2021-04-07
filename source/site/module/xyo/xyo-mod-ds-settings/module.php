@@ -17,7 +17,7 @@ class xyo_mod_ds_Settings extends xyo_Module {
 	function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
 		
-		$this->dsSettings=&$this->dataSource->getDataSource("db.table.xyo_settings");
+		$this->dsSettings=&$this->getDataSource("db.table.xyo_settings");
 	}
 
 	public function getSetting($name, $default=null) {
