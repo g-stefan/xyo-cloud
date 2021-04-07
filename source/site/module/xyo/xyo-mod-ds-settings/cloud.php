@@ -8,7 +8,4 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setReferenceLink($module,"xyo-mod-ds-acl");
-$this->setReferenceLink($module,"xyo-mod-ds-user");
-$this->setReferenceLink($module,"xyo-mod-ds-settings");
 $this->setVersion($module, "1.0.0");

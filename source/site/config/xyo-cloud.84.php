@@ -23,20 +23,31 @@ if (!$this->get("configured",false)) {
 $this->set("language", $this->get("default_language", "en-GB"));
 
 //
+// modules
+//
+$this->setModule(null, null, "xyo");
+$this->setModule("xyo", null, "xyo-mod-ds-settings");
+$this->setModule("xyo", null, "xyo-mod-ds-acl");
+$this->setModule("xyo", null, "xyo-mod-ds-user");
+
 //
 // process settings
 //
-$dsSettings=&$this->dataSource->getDataSource("db.table.xyo_settings");
-$dsSettings->clear();
-for($dsSettings->load();$dsSettings->isValid();$dsSettings->loadNext()){
-	$this->set($dsSettings->name,$dsSettings->value);		
-};
+$modSettings = &$this->getModule("xyo-mod-ds-settings");
+$settings = array(
+	"website_title" => "XYO Cloud",
+	"user_logoff_after_idle_time" => 15,
+	"user_action" => 1,
+	"user_captcha" => 1,
+	"log_module" => 0,
+	"log_request" => 0,
+	"log_response" => 0,
+	"log_language" => 0,
+	"login_has_select_language" => 0 // mut be attached to module settings
+);
+$modSettings->getSettingsList($settings);
+$this->merge($settings);
 
-//
-//
-$this->setModule(null, null, "xyo");
-$this->setModule("xyo", null, "xyo-mod-ds-acl");
-$this->setModule("xyo", null, "xyo-mod-ds-user");
 //
 // check for user
 //
@@ -48,6 +59,7 @@ if ($modUser) {
         }
     }
 }
+
 //
 // language from cookie/override user/config
 //

@@ -14,6 +14,7 @@ class xyo_mod_Application extends xyo_Module {
 
 	protected $user;
 	protected $accessControlList;
+	protected $settings;
 
 	protected $applicationDataSource;
 
@@ -26,7 +27,7 @@ class xyo_mod_Application extends xyo_Module {
 	protected $applicationIcon;
 
         protected $isDialog;
-        protected $isInline;
+        protected $isInline;	
 
 	function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
@@ -34,6 +35,7 @@ class xyo_mod_Application extends xyo_Module {
 
 			$this->accessControlList = &$this->cloud->getModule("xyo-mod-ds-acl");
 			$this->user = &$this->cloud->getModule("xyo-mod-ds-user");		
+			$this->settings = &$this->cloud->getModule("xyo-mod-ds-settings");
 
 			if (!($this->accessControlList && $this->user)) {
 				$this->moduleDisable();

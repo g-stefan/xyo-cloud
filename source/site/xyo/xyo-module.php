@@ -1153,15 +1153,7 @@ class xyo_Module extends xyo_Config {
 
 	public function logMessage($type, $message) {
 		$this->cloud->logMessage($type, $message, $this->name);
-	}
-
-	public function setSetting($name,$value) {
-		return $this->cloud->set($name,$value);
-	}
-
-	public function getSetting($name,$default=null) {
-		return $this->cloud->get($name,$default);
-	}
+	}	
 
 	public function getCloudPath() {
 		return $this->cloud->getCloudPath();

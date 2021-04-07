@@ -1512,7 +1512,7 @@ class xyo_Cloud extends xyo_Config {
 		//
 		$this->setModule(null, $this->path."xyo/xyo-datasource/xyo-datasource-quantum", "xyo-datasource-quantum");
 		$this->setModule(null, $this->path."xyo/xyo-datasource/xyo-datasource-memory", "xyo-datasource-memory");
-	}
+	}	
 
 	//
 	// Main
@@ -1543,7 +1543,7 @@ class xyo_Cloud extends xyo_Config {
 		$this->initRequestManager();
 		$this->initHtmlManager();
 		$this->initTemplateManager();
-		$this->initDataSourceManager();
+		$this->initDataSourceManager();		
 	}
 
 	public function getClientIP() {
