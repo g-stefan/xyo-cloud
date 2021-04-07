@@ -67,11 +67,7 @@ class xyo_mod_setup_Version {
 
 	function setModuleCheck($module, $check) {
 
-	}
-
-	function setModuleParameters($module, $parameter) {
-
-	}
+	}	
 
 	function setModuleGroup($module, $group, $order=0) {
 

@@ -70,11 +70,7 @@ class xyo_mod_setup_Link {
 
 	function setModuleCheck($module, $check) {
 
-	}
-
-	function setModuleParameters($module, $parameters) {
-
-	}
+	}	
 
 	function setModuleGroup($module, $group, $order=0) {
 

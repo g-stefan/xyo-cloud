@@ -272,14 +272,7 @@ class xyo_Cloud extends xyo_Config {
 		if ($moduleObject) {
 			$moduleObject->check = $check;
 		};
-	}
-
-	public function setModuleParameters($module, $parameters) {
-		$moduleObject = &$this->getModuleObject($module);
-		if ($moduleObject) {
-			$moduleObject->parameters = $parameters;
-		};
-	}
+	}	
 
 	public function setModule($moduleParent=null, $path=null, $module, $enabled=true, $parameters=null, $registered=true, $override=false) {
 		if (!$override) {

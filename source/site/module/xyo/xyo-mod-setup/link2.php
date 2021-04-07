@@ -56,10 +56,6 @@ class xyo_mod_setup_Link2 {
 
 	}
 
-	function setModuleParameters($module, $parameter) {
-
-	}
-
 	function setModuleGroup($module, $group, $order=0) {
 
 	}
