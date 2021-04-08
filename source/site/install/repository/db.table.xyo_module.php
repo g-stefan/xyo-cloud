@@ -87,8 +87,8 @@ if ($setup) {
 	$setup->registerModule("xyo", null, "xyo-app-module-group");
 	$setup->registerModuleAcl("xyo-app-module-group","control-panel","administrator","wheel",150,true);
 
-	$setup->registerModule("xyo", null, "xyo-app-module-parameter");
-	$setup->registerModuleAcl("xyo-app-module-parameter","none","administrator","wheel",160,true);
+	$setup->registerModule("xyo", null, "xyo-app-module-settings");
+	$setup->registerModuleAcl("xyo-app-module-settings","none","administrator","wheel",160,true);
 
 	$setup->registerModule("xyo", null, "xyo-app-language");
 	$setup->registerModuleAcl("xyo-app-language","control-panel","administrator","wheel",170,true);

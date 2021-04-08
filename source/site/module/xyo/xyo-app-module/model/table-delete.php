@@ -9,7 +9,7 @@
 defined("XYO_CLOUD") or die("Access is denied");
 
 $dsAclModule = &$this->getDataSource("db.table.xyo_acl_module");
-$dsModuleParameter = &$this->getDataSource("db.table.xyo_module_parameter");
+$dsModuleSettings = &$this->getDataSource("db.table.xyo_module_settings");
 $dsModule = &$this->getDataSource("db.table.xyo_module");
 $dsFormElement = &$this->getDataSource("db.table.xyo_form_element");
 
@@ -26,10 +26,10 @@ for ($this->ds->load(); $this->ds->isValid(); $this->ds->loadNext()) {
 		$dsAclModule->xyo_module_id = $this->ds->id;
 		$dsAclModule->delete();
 	};
-	if ($dsModuleParameter) {
-		$dsModuleParameter->clear();
-		$dsModuleParameter->xyo_module_id = $this->ds->id;
-		$dsModuleParameter->delete();
+	if ($dsModuleSettings) {
+		$dsModuleSettings->clear();
+		$dsModuleSettings->xyo_module_id = $this->ds->id;
+		$dsModuleSettings->delete();
 	};
 	$this->ds->delete();
 };

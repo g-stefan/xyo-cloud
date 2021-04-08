@@ -18,7 +18,7 @@ $this->eGenerateCallRequest(
 
 $this->eGenerateCallRequest(
 	array("action"=>"table-view"),
-	"xyo-app-module-parameter",
+	"xyo-app-module-settings",
 	array("xyo_module_id"=>0),
 	"xyo_module_id",
 	"callModuleParameter"

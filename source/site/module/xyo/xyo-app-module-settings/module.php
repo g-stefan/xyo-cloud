@@ -8,9 +8,9 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$className = "xyo_app_ModuleParameter2";
+$className = "xyo_app_ModuleSettings";
 
-class xyo_app_ModuleParameter2 extends xyo_app_Application {
+class xyo_app_ModuleSettings extends xyo_app_Application {
 
 	protected $xyo_module_id;
 	protected $items; 
@@ -27,7 +27,7 @@ class xyo_app_ModuleParameter2 extends xyo_app_Application {
 		$path = $this->cloud->getModulePath($module);
 		if ($path) {
 			$this->loadLanguageFromPathDirect($path . "sys/language/", $this->getSystemLanguage());
-			$file = $path . "sys/parameters.php";
+			$file = $path . "sys/settings.php";
 			if (file_exists($file)) {
 				include($file);
             		};

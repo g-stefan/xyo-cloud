@@ -14,7 +14,9 @@ class xyo_mod_Application extends xyo_Module {
 
 	protected $user;
 	protected $accessControlList;
-	protected $settings;
+	protected $cloudSettings;
+	protected $moduleSettings;
+	protected $userSettings;
 
 	protected $applicationDataSource;
 
@@ -33,7 +35,9 @@ class xyo_mod_Application extends xyo_Module {
 		parent::__construct($object, $cloud);
 		if ($this->isOk) {
 
-			$this->settings = &$this->cloud->getModule("xyo-mod-ds-settings");
+			$this->cloudSettings = &$this->cloud->getModule("xyo-mod-ds-settings");
+			$this->moduleSettings = &$this->cloud->getModule("xyo-mod-ds-module-settings");
+			$this->userSettings = &$this->cloud->getModule("xyo-mod-ds-user-settings");
 			$this->accessControlList = &$this->cloud->getModule("xyo-mod-ds-acl");
 			$this->user = &$this->cloud->getModule("xyo-mod-ds-user");
 
@@ -300,6 +304,70 @@ class xyo_mod_Application extends xyo_Module {
 			};
 		};
 		return false;
+	}
+
+	public function getCloudSetting($name, $default=null) {
+		return $this->cloudSettings->getSetting($name, $default);
+	}
+
+	public function setCloudSetting($name, $value) {
+		return $this->cloudSettings->setSetting($name, $value);
+	}
+
+	public function getCloudSettingsList(&$settings) {
+		return $this->cloudSettings->getSettingsList($settings);
+	}
+
+	public function setCloudSettingsList(&$settings) {
+		return $this->cloudSettings->setSettingsList($settings);
+	}
+
+	public function getModuleSetting($name, $default=null) {
+		return $this->moduleSettings->getSetting($this->name, $name, $default);
+	}
+
+	public function setModuleSetting($name, $value) {
+		return $this->moduleSettings->setSetting($this->name, $name, $value);
+	}
+
+	public function getModuleSettingsList(&$settings) {
+		return $this->moduleSettings->getSettingsList($this->name, $settings);
+	}
+
+	public function setModuleSettingsList(&$settings) {
+		return $this->moduleSettings->setSettingsList($this->name, $settings);
+	}
+
+	public function getUserSetting($name, $default=null) {
+		return $this->userSettings->getSetting($name, $default);
+	}
+
+	public function setUserSetting($name, $value) {
+		return $this->userSettings->setSetting($name, $value);
+	}
+
+	public function getUserSettingsList(&$settings) {
+		return $this->userSettings->getSettingsList($settings);
+	}
+
+	public function setUserSettingsList(&$settings) {
+		return $this->userSettings->setSettingsList($settings);
+	}
+
+	public function getUserModuleSetting($name, $default=null) {
+		return $this->userSettings->getModuleSetting($this->name, $name, $default);
+	}
+
+	public function setUserModuleSetting($name, $value) {
+		return $this->userSettings->setModuleSetting($this->name, $name, $value);
+	}
+
+	public function getUserModuleSettingsList(&$settings) {
+		return $this->userSettings->getModuleSettingsList($this->name, $settings);
+	}
+
+	public function setUserModuleSettingsList(&$settings) {
+		return $this->userSettings->setModuleSettingsList($this->name, $settings);
 	}
 
 }

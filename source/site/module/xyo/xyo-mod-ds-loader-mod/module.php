@@ -26,8 +26,7 @@ class xyo_mod_ds_Loader extends xyo_Module {
 
 			$this->dsModule = &$this->getDataSource("db.table.xyo_module");
 			$this->dsModuleGroup = &$this->getDataSource("db.table.xyo_module_group");
-			$this->dsAclModule = &$this->getDataSource("db.table.xyo_acl_module");
-			$this->dsModuleParameter = &$this->getDataSource("db.table.xyo_module_parameter");
+			$this->dsAclModule = &$this->getDataSource("db.table.xyo_acl_module");			
 
 			if (!($this->dsModule && $this->dsModuleGroup && $this->dsAclModule)) {
 				$this->moduleDisable();

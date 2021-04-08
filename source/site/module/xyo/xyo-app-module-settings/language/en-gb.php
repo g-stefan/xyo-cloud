@@ -8,7 +8,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->set("application.title", "Parameters");
+$this->set("application.title", "Settings");
 
 $this->set("select.enabled_all", "- enabled -");
 $this->set("select.enabled_default_disabled", "- no -");

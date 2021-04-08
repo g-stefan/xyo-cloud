@@ -29,6 +29,8 @@ $this->setModule(null, null, "xyo");
 $this->setModule("xyo", null, "xyo-mod-ds-settings");
 $this->setModule("xyo", null, "xyo-mod-ds-acl");
 $this->setModule("xyo", null, "xyo-mod-ds-user");
+$this->setModule("xyo", null, "xyo-mod-ds-module-settings");
+$this->setModule("xyo", null, "xyo-mod-ds-user-settings");
 
 //
 // process settings

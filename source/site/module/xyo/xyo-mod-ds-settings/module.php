@@ -12,12 +12,12 @@ $className = "xyo_mod_ds_Settings";
 
 class xyo_mod_ds_Settings extends xyo_Module {
 	
-	var $dsSettings;
+	var $dsSettings;	
 	
 	function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
 		
-		$this->dsSettings=&$this->getDataSource("db.table.xyo_settings");
+		$this->dsSettings=&$this->getDataSource("db.table.xyo_settings");		
 	}
 
 	public function getSetting($name, $default=null) {
@@ -37,7 +37,7 @@ class xyo_mod_ds_Settings extends xyo_Module {
 		return $this->dsSettings->save();
 	}
 
-	public function getSettingsList(&$settings) {		
+	public function getSettingsList(&$settings) {
 		$this->dsSettings->clear();
 		$this->dsSettings->name=array_keys($settings);
 		for($this->dsSettings->load(0,count($settings));$this->dsSettings->isValid();$this->dsSettings->loadNext()) {
