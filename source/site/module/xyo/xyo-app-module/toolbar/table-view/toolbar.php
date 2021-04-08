@@ -35,16 +35,16 @@ $this->setItemBefore("package_link","package_new",
         $this->instanceV."doCommand('create-package');"
 );
 
-$this->setItemBefore("package_new","module_parameter",
+$this->setItemBefore("package_new","module_settings",
         "item-js",
         "<i class=\"material-icons\">list</i>",
-        "module_parameter",
+        "module_settings",
        	"primary",
         "#",
-        "callModuleParameter();"
+        "callModuleSettings();"
 );
 
-$this->setItemAfter("module_parameter","module_acl",
+$this->setItemAfter("module_settings","module_acl",
         "item-js",
         "<i class=\"material-icons\">lock</i>",
         "module_acl",

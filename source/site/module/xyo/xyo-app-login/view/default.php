@@ -10,7 +10,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 
 $languageSelector=$this->cloud->get("login_has_select_language",0);
 if($languageSelector==1){
-	$languageSelector=!$this->getParameter("no_language_selector",0);
+	$languageSelector=!$this->getModuleSetting("no_language_selector",0);
 };
 
 if($languageSelector){

@@ -13,5 +13,5 @@ $this->loadGroup("status");
 
 $this->setHtmlClass("xui -browser");
 $this->setHtmlBodyClass("xui");
-$this->setHtmlTitle($this->settings->getSetting("website_title","XYO Cloud"));
+$this->setHtmlTitle($this->cloud->get("website_title","XYO Cloud"));
 $this->setHtmlIcon($this->site."lib/xyo/applications-internet.ico");

@@ -18,10 +18,7 @@ class xyo_Module extends xyo_Config {
 	protected $parametersStack;
 
 	private function initParametersManager(&$moduleObject) {
-		$this->parameters=$moduleObject->parameters;
-		if(is_null($this->parameters)) {
-			$this->parameters=array();
-		};
+		$this->parameters=array();		
 		$parametersStack=array();
 	}
 
@@ -1336,19 +1333,19 @@ class xyo_Module extends xyo_Config {
 	protected $siteBase;
 	protected $moduleBaseClass;
 	protected $modulePathBase;
-	protected $isEmbedded;
+	protected $isEmbedded;	
 
 	private function initModuleCore(&$moduleObject) {
 		$this->path=$moduleObject->path;
 		$this->name=$moduleObject->module;
-		$this->instanceCount=0;
+		$this->instanceCount=0;		
 		$this->returnValue=null;
 		$this->isOk=true;
 		$this->site=$this->cloud->get("site","");
 		$this->siteBase=$this->cloud->get("site_base","");
 		$this->moduleBaseClass = $moduleObject->baseClass;
 		$this->modulePathBase = $moduleObject->pathBase;
-		$this->isEmbedded = false;
+		$this->isEmbedded = false;		
 	}
 
 	public function isBase($name) {

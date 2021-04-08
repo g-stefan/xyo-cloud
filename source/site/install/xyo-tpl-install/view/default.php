@@ -25,7 +25,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 
 		<?php
 		$this->generateComponent("xui.box-x-900-begin");
-		$this->generateComponent("xui.panel2-begin");
+		$this->generateComponent("xui.panel2-begin",array("css-class"=>"-elevation-4"));
 		?>
 	
 		<img src="<?php echo $this->site; ?>lib/xyo/xyo-32.png" style="width:32px;height:32px;border: 0px;vertical-align: middle;" alt="XYO" ></img>

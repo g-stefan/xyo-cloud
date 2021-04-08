@@ -21,7 +21,7 @@ $this->eGenerateCallRequest(
 	"xyo-app-module-settings",
 	array("xyo_module_id"=>0),
 	"xyo_module_id",
-	"callModuleParameter"
+	"callModuleSettings"
 );
 
 $this->eGenerateCallRequest(
