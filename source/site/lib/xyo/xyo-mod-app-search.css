@@ -1,0 +1,31 @@
+/*
+//
+// Copyright (c) 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+// Created by Grigore Stefan <g_stefan@yahoo.com>
+//
+// MIT License (MIT) <http://opensource.org/licenses/MIT>
+//
+*/
+
+#form_application_search > .xui.form-input-group {
+	margin-top: 5px;
+	min-width: 122px;
+	display: none;
+}
+
+#application_search {
+	width: 120px;
+}
+
+@media only screen and (min-width: 700px) {
+	#form_application_search > .xui.form-input-group {
+		display: inline-block;
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+	#application_search {
+		display: inline-block;
+		width: 240px;
+	}
+}

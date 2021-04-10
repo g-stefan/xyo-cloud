@@ -370,5 +370,9 @@ class xyo_mod_Application extends xyo_Module {
 		return $this->userSettings->setModuleSettingsList($this->name, $settings);
 	}
 
+	public function hasSearch() {
+		return false;
+	}
+
 }
 

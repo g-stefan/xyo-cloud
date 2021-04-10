@@ -14,7 +14,17 @@ $this->setItem("new", "item-js.important", "<i class=\"material-icons\">add</i>"
 
 $filterToolbarButton=$this->getParameter("filter_toolbar_button",false);
 if($filterToolbarButton){
-	$this->setItemBefore("delete","filter",
+
+	$this->setItem("separator-filter",
+	        "separator",
+	        null,
+	        null,
+        	null,
+	        null,
+        	null
+	);
+
+	$this->setItem("filter",
 	        "item-js",
 	        "<i class=\"material-icons\">filter_list</i>",
 	        "filter",

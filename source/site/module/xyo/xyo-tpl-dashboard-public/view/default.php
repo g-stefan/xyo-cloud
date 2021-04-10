@@ -88,6 +88,7 @@ $xuiDashboard=&$this->getModule("xui-dashboard");
 					</div>
 					<div class="xui -right">
 						<?php $this->runGroup("status"); ?>
+						<?php $this->runModule("xyo-mod-app-search"); ?>
 						<?php if($userMenu->hasMenu()) { ?>
 							<div style="display: inline-block;width:32px;overflow:visible;">
 								<div class="xui button -icon -size-x32 -circle -transparent -effect-ripple" id="popup-menu-user-action">

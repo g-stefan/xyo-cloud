@@ -12,6 +12,7 @@ $has_search=false;
 foreach ($this->tableSearch as $key => $value) {
 	if ($value) {
 		$has_search=true;
+		break;
 	};
 };
 

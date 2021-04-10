@@ -62,6 +62,11 @@ if (count($this->toolbar)) {
 			continue;
 		};
 
+		if($item["type"]=="separator"){
+			echo "<div class=\"xui _separator\"></div>";
+			continue;	
+		};
+
 	};
 
 };

@@ -143,3 +143,11 @@
 	width:calc(100% - 60px);
 }
 
+.xui.component-table.-application.-hide-secondary-top-toolbar.-hide-top-toolbar table.xyo-app-table > thead > tr:first-child > th {
+	border-top: 0px solid #d3d7cf;	
+}
+
+.xui.component-table.-application.-hide-secondary-top-toolbar.-hide-top-toolbar > .xui._table {
+	height: calc(100% - 40px);
+}
+

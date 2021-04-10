@@ -46,27 +46,31 @@ if($this->isInlineForm){
 	$cssClass.=" -is-inline-form";
 };
 
+if($this->hideTopToolbar_) {
+	$cssClass.=" -hide-top-toolbar";
+};
+
 ?>
 
 <div class="xui component-table <?php echo $cssClass;?>">
 	<div class="xui app-toolbar"></div>
 	<div class="xui app-toolbar -compact -wide">
 		<div class="xui _content">
-		<?php if($this->isInlineForm){ ?>
-			<div class="xui form-input-group" style="width:100%;">
+		<?php if($this->isInlineForm && $has_search){ ?>
+			<div class="xui form-input-group" style="width:100%;<?php if($this->tableUseApplicationSearch){echo "display:none;";}; ?>">
 				<input type="text" name="<?php echo $this->instanceV; ?>search" value="<?php echo $search_value; ?>" size="32" placeholder="<?php $this->eLanguage("search"); ?>" id="<?php echo $this->instanceV; ?>search" class="xyo-app-table_search -inline-form"></input>
 				<button type="submit" name="<?php echo $this->instanceV; ?>submit_search" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>submit_search=1');return false;"><i class="material-icons">search</i></button>
-				<button type="button" name="<?php echo $this->instanceV; ?>search_reset" onclick="XYO.Table.clearSearch('<?php echo $this->instance; ?>',this,'<?php echo $this->instanceV; ?>search');"><i class="material-icons">close</i></button>
+				<button type="button" name="<?php echo $this->instanceV; ?>search_reset" onclick="XYO.Table.resetSearch('<?php echo $this->instance; ?>',this,'<?php echo $this->instanceV; ?>search');"><i class="material-icons">close</i></button>
 			</div>
 		<?php } else { ?>
 			<div class="xui grid">
 				<div class="xui grid -row">
 					<div class="xui grid -col -x0">
-					<?php if($has_search){ ?>                                                                   
-						<div class="xui form-input-group">
+					<?php if($has_search){ ?>
+						<div class="xui form-input-group" <?php if($this->tableUseApplicationSearch){echo "style=\"display:none;\"";}; ?>>
 							<input type="text" name="<?php echo $this->instanceV; ?>search" value="<?php echo $search_value; ?>" size="32" placeholder="<?php $this->eLanguage("search"); ?>" id="<?php echo $this->instanceV; ?>search" class="xyo-app-table_search"></input>
 							<button type="submit" name="<?php echo $this->instanceV; ?>submit_search" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>submit_search=1');return false;"><i class="material-icons">search</i></button>
-							<button type="button" name="<?php echo $this->instanceV; ?>search_reset" onclick="XYO.Table.clearSearch('<?php echo $this->instance; ?>',this,'<?php echo $this->instanceV; ?>search');"><i class="material-icons">close</i></button>
+							<button type="button" name="<?php echo $this->instanceV; ?>search_reset" onclick="XYO.Table.resetSearch('<?php echo $this->instance; ?>',this,'<?php echo $this->instanceV; ?>search');"><i class="material-icons">close</i></button>
 						</div>
 				        <?php }; ?>
 					</div>  

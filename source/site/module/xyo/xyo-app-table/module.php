@@ -58,6 +58,9 @@ class xyo_app_Table extends xyo_app_Application {
 	protected $inlineEdit_;
 	protected $inlineEditParameters_;
 	protected $isInlineForm;
+//
+	protected $tableInView;
+	protected $tableUseApplicationSearch;
 
 	public function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
@@ -107,6 +110,11 @@ class xyo_app_Table extends xyo_app_Application {
 		$this->inlineEditParameters_=array();
 		$this->isInlineForm=false;
 
+		$this->tableInView=false;
+		if(!$this->isEmbedded) {
+			$this->tableUseApplicationSearch=true;
+			$this->hasFilterToolbar(true);
+		};
 	}
 
 	public function applicationInit() {
@@ -256,6 +264,19 @@ class xyo_app_Table extends xyo_app_Application {
 		$this->setInlineNew($value);
 		$this->setInlineEdit($value);
 		$this->hasFilterToolbar($value);
+	}
+
+	public function hasSearch() {
+		if($this->tableUseApplicationSearch) {
+			if($this->tableInView) {
+				return true;
+			};
+		};
+		return false;
+	}
+
+	public function useApplicationSearch($value){
+		$this->tableUseApplicationSearch = $value;
 	}
 
 }

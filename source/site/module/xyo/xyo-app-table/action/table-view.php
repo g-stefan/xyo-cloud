@@ -8,6 +8,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
+$this->tableInView = true;
 $this->setParameter("toolbar", "toolbar/table-view");
 $this->processModel("table-view");
 $this->processModel("table-view-process");

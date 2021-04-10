@@ -23,7 +23,7 @@ XYO.Table.setCheckboxState = function (i_, this_) {
 	return false;
 }
 
-XYO.Table.clearSearch = function (i_,this_,field) {
+XYO.Table.resetSearch = function (i_,this_,field) {
 	if(this_) {
 		this_.form.elements[field].value="";
 		XYO.Table.doUpdate(i_);
@@ -195,3 +195,17 @@ XYO.Table.checkboxOnlyOneById = function (i_, id) {
 	return false;
 }
 
+// Application Search
+
+XYO.Application = XYO.Application || {};
+
+XYO.Application.doSearch = function () {
+	document.getElementById("search").value=document.getElementById("application_search").value;
+	XYO.Table.doUpdate("","&submit_search=1");
+};
+
+XYO.Application.resetSearch = function () {
+	document.getElementById("application_search").value="";
+	document.getElementById("search").value="";
+	XYO.Table.doUpdate("");
+};

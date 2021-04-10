@@ -22,4 +22,5 @@ $this->setModule("xyo",null,"xyo-mod-thumbnail");
 $this->setModule("xyo",null,"xyo-mod-xui-sidebar");
 $this->setModule("xyo",null,"xyo-mod-xui-user");
 $this->setModule("xyo",null,"xyo-app-dashboard");
+$this->setModule("xyo",null,"xyo-mod-app-search");
 //

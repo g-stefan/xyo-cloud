@@ -88,6 +88,7 @@ $xuiDashboard=&$this->getModule("xui-dashboard");
 					</div>
 					<div class="xui -right">
 						<?php $this->runGroup("status"); ?>
+						<?php $this->runModule("xyo-mod-app-search"); ?>
 					</div>	
 				</div>
 				<div class="xui app-user-info">
