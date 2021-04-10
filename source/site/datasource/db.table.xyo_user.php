@@ -30,6 +30,12 @@ $this->set("table_item", array(
 	"invisible" => array("int",0,"unsigned")
 ));
 
+$this->set("table_index", array(
+	"xyo_user_id",
+	"username",
+	"name"
+));
+
 $this->set("table_link",array(
 	"xyo_user_x_user_group"=>array("db.table.xyo_user_x_user_group","xyo_user_id","id","delete"),
 	"xyo_user"=>array("db.table.xyo_user","xyo_user_id","id","set",0)

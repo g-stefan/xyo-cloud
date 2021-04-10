@@ -17,6 +17,10 @@ $this->set("table_item", array(
 	"enabled" => array("int",0,"unsigned")
 ));
 
+$this->set("table_index", array(	
+	"name"
+));
+
 $this->set("table_link",array(
 	"xyo_acl_module"=>array("db.table.xyo_acl_module","xyo_user_group_id","id","delete"),
 	"xyo_user_group_x_user_group_super"=>array("db.table.xyo_user_group_x_user_group","xyo_user_group_id_super","id","delete"),

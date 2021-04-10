@@ -18,6 +18,10 @@ $this->set("table_item", array(
 	"enabled" => array("int",0,"unsigned")
 ));
 
+$this->set("table_index", array(	
+	"name"
+));
+
 $this->set("table_link",array(
 	"xyo_user"=>array("db.table.xyo_user","xyo_language_id","id","set",0)
 ));

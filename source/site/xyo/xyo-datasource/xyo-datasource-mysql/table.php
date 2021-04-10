@@ -25,6 +25,7 @@ class xyo_datasource_mysql_Table extends xyo_Config {
 	var $fieldAttribute_;
 
 	var $tableLink_;
+	var $tableIndex_;
 	var $cloudDataSource_;
 	//----
 	var $result_;
@@ -69,6 +70,7 @@ class xyo_datasource_mysql_Table extends xyo_Config {
 			$this->fieldAutoIncrement_=null;
 
 			$this->tableLink_=$this->get("table_link", array());
+			$this->tableIndex_=$this->get("table_index", array());
 			$this->cloudDataSource_=&$this->cloud->dataSource;
 			//post-process
 			$item = $this->get("table_item", array());
@@ -170,6 +172,7 @@ class xyo_datasource_mysql_Table extends xyo_Config {
 			$retV->fieldAttribute_ = &$this->fieldAttribute_;
 			$retV->fieldAutoIncrement_=&$this->fieldAutoIncrement_;
 			$retV->tableLink_ = &$this->tableLink_;
+			$retV->tableIndex_ = &$this->tableIndex_;
 			$retV->cloudDataSource_=&$this->cloudDataSource_;		
 
 			$retV->fieldGroup_ = $this->fieldGroup_;
@@ -972,9 +975,24 @@ class xyo_datasource_mysql_Table extends xyo_Config {
 
 		$result = $this->connection_->queryDirect($query);
 		if ($result) {
-			return true;
+			return $this->createStorageIndex();
 		}
 		return false;
+	}
+
+	function createStorageIndex() {
+		if (count($this->tableIndex_)==0) {
+			return true;
+		};
+		foreach($this->tableIndex_ as $index) {
+			$query="CREATE INDEX `" . $index . "` ON `" . $this->realName_ . "` (`" . $index . "`)";
+			$result = $this->connection_->queryDirect($query);
+			if ($result) {
+				continue;
+			}
+			return false;
+		};
+		return true;
 	}
 
 	function recreateStorage() {

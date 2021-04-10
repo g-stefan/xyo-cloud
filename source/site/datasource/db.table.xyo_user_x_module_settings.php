@@ -17,3 +17,8 @@ $this->set("table_item", array(
 	"name" => array("varchar",null,128),
 	"value" => array("varchar",null,255)
 ));
+
+$this->set("table_index", array(
+	"xyo_module_id",
+	"xyo_user_id"	
+));

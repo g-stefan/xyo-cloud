@@ -20,3 +20,10 @@ $this->set("table_item", array(
 	"module" => array("varchar",null,128),
 	"order" => array("int",0,"unsigned")
 ));
+
+$this->set("table_index", array(	
+	"xyo_module_id",
+	"xyo_module_group_id",
+	"xyo_user_group_id",
+	"xyo_core_id"
+));

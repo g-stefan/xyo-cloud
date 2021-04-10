@@ -17,3 +17,8 @@ $this->set("table_item", array(
 	"principal" => array("int",0,"unsigned"),
 	"enabled" => array("int",0,"unsigned")
 ));
+
+$this->set("table_index", array(
+	"xyo_user_id",
+	"xyo_user_group_id"	
+));
