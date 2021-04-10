@@ -17,8 +17,7 @@ $this->setDialogEdit(true);
 
 $this->requireComponent(array(
 	"xui.form-select",
-	"xui.form-text",
-	"xui.form-text-required",
+	"xui.form-text",	
 	"xui.form-textarea",
 	"xui.form-switch",
 	"xui.form-text-icon-right",

@@ -16,13 +16,10 @@ $this->setDefaultAction($this->getRequest("action", "form-edit"));
 
 $this->requireComponent(array(
 	"xui.form-select",
-	"xui.form-text",
-	"xui.form-text-required",
+	"xui.form-text",	
 	"xui.form-textarea",
 	"xui.form-username",
-	"xui.form-password",
-	"xui.form-username-required",
-	"xui.form-password-required",
+	"xui.form-password",	
 	"xui.form-image",
 	"xui.form-email",
 	"xui.form-action-apply",

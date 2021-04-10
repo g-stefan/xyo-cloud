@@ -29,6 +29,7 @@ $this->setModule("lib",null,"lib-select2");
 $this->setModule("lib",null,"lib-sha512");
 $this->setModule("lib",null,"lib-tinymce");
 $this->setModule("lib",null,"lib-overlayscrollbars");
+$this->setModule("lib",null,"lib-jquery-tag-editor");
 //
 $this->setModule("lib",null,"lib-xui");
 //

@@ -18,12 +18,12 @@ $this->generateComponent("xui.panel-end");
 $this->generateComponent("xui.box-1x2-separator");
 
 $this->generateComponent("xui.panel-begin");
-$this->generateComponent("xui.form-text-required", array("element" =>"name"));
-$this->generateComponent("xui.form-username-required", array("element" =>"username","autocomplete"=>"off"));
+$this->generateComponent("xui.form-text", array("element" =>"name","required"=>true));
+$this->generateComponent("xui.form-username", array("element" =>"username","autocomplete"=>"off","required"=>true));
 
 if($this->isNew){
-	$this->generateComponent("xui.form-password-required", array("element" =>"password1","autocomplete"=>"new-password"));
-	$this->generateComponent("xui.form-password-required", array("element" =>"password2","autocomplete"=>"off"));
+	$this->generateComponent("xui.form-password", array("element" =>"password1","autocomplete"=>"new-password","required"=>true));
+	$this->generateComponent("xui.form-password", array("element" =>"password2","autocomplete"=>"off","required"=>true));
 } else {
 	$this->generateComponent("xui.form-password", array("element" =>"password1","autocomplete"=>"new-password"));
 	$this->generateComponent("xui.form-password", array("element" =>"password2","autocomplete"=>"off"));

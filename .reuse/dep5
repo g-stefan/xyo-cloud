@@ -143,3 +143,11 @@ License: MIT
 Files: output/site/lib/tinymce/*
 Copyright: Copyright (c) Tiny Technologies, Inc. All rights reserved.
 License: LGPL-2.1-only
+
+Files: output/site/lib/jquery-tag-editor/jquery.tag-editor.*
+Copyright: Copyright (c) 2014 Simon Steinberger / Pixabay
+License: MIT
+
+Files: output/site/lib/jquery-tag-editor/jquery.caret.*
+Copyright: Copyright (c) 2009, Gideon Sireling
+License: BSD-3-Clause

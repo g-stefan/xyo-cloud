@@ -66,8 +66,8 @@ $this->generateComponent("xui.form-action-begin",array("onsubmit"=>"return (xyoF
 $this->generateComponent("xui.box-1x1-begin");
 $this->generateComponent("xui.panel-begin",array("title"=>"title.login","css-class"=>"-elevation-4"));
 
-$this->generateComponent("xui.form-username-required", array("element" => "username"));
-$this->generateComponent("xui.form-password-required", array("element" => "password"));
+$this->generateComponent("xui.form-username", array("element" => "username","required"=>true));
+$this->generateComponent("xui.form-password", array("element" => "password","required"=>true));
 
 if($languageSelector){
 	$this->generateComponent("xui.form-select", array("element" => "language","on_change"=>"if(xyoFormLoginAction(this.form)){this.form.submit();};"));

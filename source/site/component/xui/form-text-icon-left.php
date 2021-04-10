@@ -9,6 +9,7 @@
 defined("XYO_CLOUD") or die("Access is denied");
 
 $element = $this->getArgument("element");
+$isRequired = $this->getArgument("required", false);
 $maxlength= 1*$this->getArgument("maxlength");
 $icon = $this->getArgument("icon","<i class=\"material-icons\">radio_button_unchecked</i>");
 $readonly = $this->getArgument("readonly","");
@@ -27,11 +28,16 @@ if(($readonly == 1) ||  ($readonly == "true")){
 	$readonly="";
 };
 
+$isRequiredClass = "";
+if($isRequired){
+	$isRequiredClass = " -required";
+};
+
 ?>
 
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
-<div class="xui form-text -icon-left<?php if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>" style="width:100%">
+<div class="xui form-text -icon-left<?php echo $isRequiredClass; if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>" style="width:100%">
 <input type="text"<?php echo $maxlength; ?> placeholder="" style="width:100%" <?php echo $readonly; ?>
 	name="<?php $this->eElementName($element); ?>"
 	value="<?php $this->eElementValue($element, ""); ?>"

@@ -9,6 +9,7 @@
 defined("XYO_CLOUD") or die("Access is denied");
 
 $element = $this->getArgument("element");
+$isRequired = $this->getArgument("required", false);
 $maxlength= 1*$this->getArgument("maxlength");
 $disabled = $this->getArgument("disabled","");
 $readonly = $this->getArgument("readonly","");
@@ -39,8 +40,17 @@ if(($readonly == 1) ||  ($readonly == "true")){
 
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
+<?php if($isRequired) { ?>
+<div class="xui form-text -required<?php if($this->isElementError($element)){echo " -danger";}; echo $classDisabled; echo $classReadonly; ?>" style="width:100%">
+<input type="text"<?php echo $maxlength; ?> placeholder="" style="width:100%" required="required" <?php echo $disabled; ?> <?php echo $readonly; ?>
+	name="<?php $this->eElementName($element); ?>"
+	value="<?php $this->eElementValue($element, ""); ?>"
+	id="<?php $this->eElementId($element); ?>" ></input>
+</div>
+<?php } else { ?>
 <input type="text"<?php echo $maxlength; ?> class="xui form-text<?php if($this->isElementError($element)){echo " -danger";}; echo $classDisabled; echo $classReadonly; ?>" placeholder="" <?php echo $disabled; ?> <?php echo $readonly; ?>
 	name="<?php $this->eElementName($element); ?>"
 	value="<?php $this->eElementValue($element, ""); ?>"
 	id="<?php $this->eElementId($element); ?>" ></input>
+<?php } ?>
 <br>

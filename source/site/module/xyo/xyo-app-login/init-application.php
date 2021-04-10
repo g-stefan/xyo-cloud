@@ -29,8 +29,8 @@ $this->setHtmlJs($this->site."lib/xyo/xyo-app-login.js");
 
 $this->requireComponent("xui.form-text");
 $this->requireComponent("xui.form-text-icon-left");
-$this->requireComponent("xui.form-username-required");
-$this->requireComponent("xui.form-password-required");
+$this->requireComponent("xui.form-username");
+$this->requireComponent("xui.form-password");
 $this->requireComponent("xui.form-select");
 $this->requireComponent("xui.form-captcha");
 $this->requireComponent("xui.form-hidden");
