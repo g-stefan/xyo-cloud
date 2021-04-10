@@ -8,5 +8,5 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->set("module_parameter","Parameters");
+$this->set("module_settings","Settings");
 $this->set("module_acl","ACL");

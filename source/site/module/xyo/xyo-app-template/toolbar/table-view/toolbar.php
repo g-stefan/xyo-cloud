@@ -10,13 +10,13 @@ defined("XYO_CLOUD") or die("Access is denied");
 
 $this->clearToolbar();
 
-$this->setItem("module_parameter",
+$this->setItem("module_settings",
         "item-js",
         "<i class=\"material-icons\">list</i>",
-        "module_parameter",
+        "module_settings",
         "primary",
         "#",
-        "callModuleParameter();"
+        "callModuleSettings();"
 );
 
 $this->setItem("module_acl",

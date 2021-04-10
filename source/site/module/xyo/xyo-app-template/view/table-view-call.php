@@ -13,7 +13,7 @@ $this->eGenerateCallRequest(
 	"xyo-app-module-settings",
 	array("xyo_acl_module_id"=>0),
 	"xyo_acl_module_id",
-	"callModuleParameter"
+	"callModuleSettings"
 );
 
 $this->eGenerateCallRequest(
