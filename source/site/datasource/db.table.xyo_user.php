@@ -38,5 +38,7 @@ $this->set("table_index", array(
 
 $this->set("table_link",array(
 	"xyo_user_x_user_group"=>array("db.table.xyo_user_x_user_group","xyo_user_id","id","delete"),
-	"xyo_user"=>array("db.table.xyo_user","xyo_user_id","id","set",0)
+	"xyo_user"=>array("db.table.xyo_user","xyo_user_id","id","set",0),
+	"xyo_user_settings"=>array("db.table.xyo_user_settings","xyo_user_id","id","delete"),
+	"xyo_user_x_moule_settings"=>array("db.table.xyo_user_settings","xyo_user_id","id","delete")
 ));

@@ -26,5 +26,6 @@ $this->set("table_index", array(
 
 $this->set("table_link",array(
 	"xyo_acl_module"=>array("db.table.xyo_acl_module","xyo_module_id","id","delete"),
-	"xyo_module_settings"=>array("db.table.xyo_module_settings","xyo_module_id","id","delete")
+	"xyo_module_settings"=>array("db.table.xyo_module_settings","xyo_module_id","id","delete"),
+	"xyo_user_x_module_settings"=>array("db.table.xyo_module_settings","xyo_module_id","id","delete")
 ));
