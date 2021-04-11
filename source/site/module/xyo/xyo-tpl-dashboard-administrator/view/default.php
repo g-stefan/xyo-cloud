@@ -40,7 +40,6 @@ if($dsUser->load(0,1)) {
 	};
 };
 //
-$modImage=&$this->getModule("xui-form-image");
 $modThumbnail=&$this->getModule("xyo-mod-thumbnail");
 
 $sidebar=&$this->getModule("xyo-mod-xui-sidebar");
@@ -63,6 +62,12 @@ if(strlen($settings["brand_logo"])==0) {
 	$settings["brand_logo"]=$this->site."lib/xyo/xyo-32.png";
 };
 
+$userImageCss = "";
+$userImageThumbnail = $modThumbnail->xuiMakeThumbnailSite($userImage,128,128);
+if(strlen($userImageThumbnail)>0) {
+	$userImageCss = "background-image:url(\"".$userImageThumbnail."\");";
+};
+
 ?><!DOCTYPE html>
 <html<?php $this->eHtmlLanguage(); $this->eHtmlClass();?>>
 	<head>
@@ -76,7 +81,7 @@ if(strlen($settings["brand_logo"])==0) {
 		<style>
 
 			.xui.app-user > .xui._content > .xui._image > .xui._image_img {
-				<?php $modImage->eImageCss($userImage); ?>
+				<?php echo $userImageCss; ?>
 			}
 			#navigation-drawer-content > .os-padding {
 				z-index: auto;

@@ -68,7 +68,10 @@ if ($this->ds->save()) {
 		"element" => "picture",
 		"filename"=>"repository/xyo-user/".$this->ds->id."-".$this->ds->username."-picture-".time(),
 		"extension"=>true,
-		"delete_before_save"=>true));
+		"delete_before_save"=>true,
+		"make_thumbnails" => array(
+			array(128,128)
+		)));
 	$this->ds->picture=$this->getElementValueString("picture");
 	$this->ds->save();
 
