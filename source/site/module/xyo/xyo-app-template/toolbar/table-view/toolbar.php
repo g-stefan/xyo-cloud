@@ -8,7 +8,11 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->clearToolbar();
+$this->removeItem("delete");
+$this->removeItem("edit");
+$this->removeItem("new");
+
+$this->toolbarPush();
 
 $this->setItem("module_settings",
         "item-js",
@@ -27,3 +31,5 @@ $this->setItem("module_acl",
         "#",
         "callModuleAcl();"
 );
+
+$this->toolbarPop();
