@@ -18,6 +18,8 @@ $this->setItem("backup",
 );
 
 if($this->isRequestCall()){
+	$this->setItem("separator-done","separator",null,null,null,null,null);
+
 	$this->setItem("done",
 		"item-js",
 		"<i class=\"material-icons\">done</i>",

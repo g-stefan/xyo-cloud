@@ -8,7 +8,9 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setItemBefore("delete","user_group",
+$this->toolbarPush();
+
+$this->setItem("user_group",
         "item-js",
         "<i class=\"material-icons\">people</i>",
         "user_group",
@@ -16,3 +18,7 @@ $this->setItemBefore("delete","user_group",
         "#",
         "callUserGroupXUserGroup();"
 );
+
+$this->setItem("separator-table","separator",null,null,null,null,null);
+
+$this->toolbarPop();

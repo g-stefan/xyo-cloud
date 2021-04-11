@@ -8,7 +8,9 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setItemBefore("delete","logout",
+$this->toolbarPush();
+
+$this->setItem("logout",
         "item-js",
         "<i class=\"material-icons\">lock</i>",
         "logout",
@@ -17,7 +19,7 @@ $this->setItemBefore("delete","logout",
         $this->instanceV."doCommand('logout');"
 );
 
-$this->setItemAfter("logout","user_group",
+$this->setItem("user_group",
         "item-js",
         "<i class=\"material-icons\">people</i>",
         "user_group",
@@ -25,3 +27,7 @@ $this->setItemAfter("logout","user_group",
         "#",
         "callUserXUserGroup();"
 );
+
+$this->setItem("separator-table","separator",null,null,null,null,null);
+
+$this->toolbarPop();

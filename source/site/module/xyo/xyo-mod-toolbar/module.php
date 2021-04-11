@@ -18,6 +18,7 @@ class xyo_mod_Toolbar extends xyo_mod_Application {
 	protected $isEmbedded;
 	protected $isDialog;
 	protected $isInline;
+	protected $toolbarPush_;
 
 	function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
@@ -31,6 +32,7 @@ class xyo_mod_Toolbar extends xyo_mod_Application {
 		$this->isEmbedded = $this->getParameter("embedded", false);
 		$this->isDialog = $this->getParameter("dialog", false);
 		$this->isInline = $this->getParameter("inline", false);
+		$this->toolbarPush_ = array();
 
 		if(strlen($this->type)){
 			$this->type="-".$this->type;
@@ -141,14 +143,23 @@ class xyo_mod_Toolbar extends xyo_mod_Application {
 		};
 	}
 
-	public function removeItem($id){
+	public function removeItem($id) {
 		if(array_key_exists($id,$this->toolbar)){
 			unset($this->toolbar[$id]);
 		};
 	}
 
-	public function clearToolbar(){
+	public function clearToolbar() {
 		$this->toolbar=array();
 	}
 
+	public function toolbarPush() {
+		$this->toolbarPush_ = $this->toolbar;
+		$this->toolbar = array();
+	}
+
+	public function toolbarPop() {
+		$this->toolbar = array_merge($this->toolbar,$this->toolbarPush_);
+		$this->toolbarPush_ = array();
+	}
 }

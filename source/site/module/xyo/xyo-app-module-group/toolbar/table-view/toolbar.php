@@ -8,7 +8,9 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setItemBefore("delete","module_acl",
+$this->toolbarPush();
+
+$this->setItem("module_acl",
         "item-js",
         "<i class=\"material-icons\">lock</i>",
         "module_acl",
@@ -16,3 +18,7 @@ $this->setItemBefore("delete","module_acl",
         "#",
         "callModuleAcl();"
 );
+
+$this->setItem("separator-table","separator",null,null,null,null,null);
+
+$this->toolbarPop();

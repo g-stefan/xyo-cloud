@@ -11,7 +11,9 @@ defined("XYO_CLOUD") or die("Access is denied");
 $this->removeItem("new");
 $this->removeItem("delete");
 
-$this->setItemBefore("edit",
+$this->toolbarPush();
+
+$this->setItem(
 	"backup",
 	"item-js",
 	"<i class=\"material-icons\">storage</i>",
@@ -20,3 +22,7 @@ $this->setItemBefore("edit",
 	"#",
 	"callDatasourceBackup();"
 );
+
+$this->setItem("separator-table","separator",null,null,null,null,null);
+
+$this->toolbarPop();
