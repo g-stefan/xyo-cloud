@@ -15,6 +15,8 @@ $extension = $this->getArgument("extension",false);
 $deleteBeforeSave = $this->getArgument("delete_before_save",false);
 $elementName = $this->getElementName($element);
 $delete = $this->getArgument("delete",false);
+$deleteThumbnails = $this->getArgument("delete_thumbnails",true);
+$makeThumbnails = $this->getArgument("make_thumbnails",array());
 $isOk=false;
 if(strlen($fileName)){
 	if(array_key_exists($elementName,$_FILES)){
@@ -44,6 +46,10 @@ if(strlen($fileName)){
 						if($toDel){
 							if(file_exists($fileDelete)){
 								@unlink($fileDelete);
+							};							
+							if($deleteThumbnails) {
+								$modThumbnail=&$this->getModule("xyo-mod-thumbnail");
+								$modThumbnail->xuiRemoveThumbnails($fileDelete);
 							};
 						};
 					};
@@ -82,6 +88,10 @@ if(strlen($elementDelete)){
 			if(file_exists($fileDelete)){
 				@unlink($fileDelete);
 			};
+			if($deleteThumbnails) {
+				$modThumbnail=&$this->getModule("xyo-mod-thumbnail");
+				$modThumbnail->xuiRemoveThumbnails($fileDelete);
+			};
 		};
 		$this->setElementValue($element,"");
 		$isOk=true;
@@ -117,6 +127,16 @@ if(!$isDeleted){
 		$this->setElementValue($element,$value);
 	}else{
 		$this->setElementValue($element,"");
+	};
+};
+
+if(count($makeThumbnails)) {
+	$image=$this->getElementValue($element,"");
+	if(strlen($image)) {
+		$modThumbnail=&$this->getModule("xyo-mod-thumbnail");
+		foreach($makeThumbnails as $value) {
+			$modThumbnail->xuiMakeThumbnail($image,$value[0],$value[1],true);
+		};
 	};
 };
 

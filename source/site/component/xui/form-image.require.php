@@ -10,3 +10,4 @@ defined("XYO_CLOUD") or die("Access is denied");
 
 $this->requireModule("lib-cropit");
 $this->requireModule("xui-form-image");
+$this->requireModule("xyo-mod-thumbnail");

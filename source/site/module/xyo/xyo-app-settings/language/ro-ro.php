@@ -30,3 +30,7 @@ $this->set("title.log","Log");
 $this->set("label.login_has_select_language","Limba se poate selecta la intrare");
 
 $this->set("title.login","Logare");
+
+$this->set("label.brand_logo","Logo marca");
+$this->set("label.brand_name","Nume marca");
+$this->set("label.brand_mark","Tip marca");

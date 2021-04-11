@@ -41,6 +41,7 @@ if($dsUser->load(0,1)){
 };
 //
 $modImage=&$this->getModule("xui-form-image");
+$modThumbnail=&$this->getModule("xyo-mod-thumbnail");
 
 $sidebar=&$this->getModule("xyo-mod-xui-sidebar");
 $sidebar->initGroup("sidebar");
@@ -49,6 +50,18 @@ $userMenu=&$this->getModule("xyo-mod-xui-user");
 $userMenu->initGroup("user");
 
 $xuiDashboard=&$this->getModule("xui-dashboard");
+
+$modSettings = &$this->getModule("xyo-mod-ds-settings");
+$settings = array(
+	"brand_logo" => "",
+	"brand_name" => "Cloud",
+	"brand_mark" => ""
+);
+$modSettings->getSettingsList($settings);
+$settings["brand_logo"] = $modThumbnail->xuiMakeThumbnailSite($settings["brand_logo"],32,32);
+if(strlen($settings["brand_logo"])==0) {
+	$settings["brand_logo"]=$this->site."lib/xyo/xyo-32.png";
+};
 
 ?><!DOCTYPE html>
 <html<?php $this->eHtmlLanguage(); $this->eHtmlClass();?>>
@@ -66,6 +79,9 @@ $xuiDashboard=&$this->getModule("xui-dashboard");
 			}
 			#navigation-drawer-content > .os-padding {
 				z-index: auto;
+			}
+			.xui.app-brand > .xui._content > .xui._logo {
+				background-image: url(<?php echo $settings["brand_logo"] ?>);
 			}
 		</style>
 	</head>
@@ -112,9 +128,9 @@ $xuiDashboard=&$this->getModule("xui-dashboard");
 				<div class="xui _content" id="navigation-drawer-content">
 					<div class="xui app-brand">
 						<div class="xui _content">
-							<div class="xui _logo" style="background-image:url('<?php echo $this->site."lib/xyo/xyo-32.png"; ?>'"></div>
-							<div class="xui _name -fg-science-blue-3">Cloud</div>
-							<div class="xui _mark"></div>
+							<div class="xui _logo"></div>
+							<div class="xui _name -fg-science-blue-3"><?php echo $settings["brand_name"] ?></div>
+							<div class="xui _mark"><?php echo $settings["brand_mark"] ?></div>
 						</div>
 					</div>
 					<ul class="xui menu">

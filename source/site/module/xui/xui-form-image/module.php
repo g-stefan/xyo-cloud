@@ -70,7 +70,7 @@ class xui_FormImage extends xyo_Module {
 		$viewX = 320;
 		$viewY = 240;
 
-		if(count($list)>1){
+		if(count($list)>1) {
 			$offsetX = $list[1];
 			$offsetY = $list[2];
 			$zoom = $list[3];
@@ -78,7 +78,6 @@ class xui_FormImage extends xyo_Module {
 			$imageHeight = $list[5];
 			$viewX = $list[6];
 			$viewY = $list[7];
-
 		};
 
 		if(1*$zoom==0){

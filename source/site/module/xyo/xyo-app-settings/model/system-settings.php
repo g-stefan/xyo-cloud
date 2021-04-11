@@ -34,3 +34,27 @@ $this->addItem("xui.form-switch", "login_has_select_language",0);
 $this->addItem("xui.panel-end");
 
 $this->addItem("xui.box-1x2-end");
+
+$this->addItem("xui.box-1x2-begin");
+$this->addItem("xui.panel-begin");
+
+$this->addItem("xui.form-image","brand_logo","",array(
+	"view_x"=>256,
+	"view_y"=>256,
+	"filename"=>"repository/template/brand-logo-".time(),
+	"extension"=>true,
+	"delete_before_save"=>true,
+	"make_thumbnails" => array(
+		array(32,32)
+	)
+));
+
+$this->addItem("xui.panel-end");
+$this->addItem("xui.box-1x2-separator");
+$this->addItem("xui.panel-begin");
+
+$this->addItem("xui.form-text", "brand_name","Cloud");
+$this->addItem("xui.form-text", "brand_mark","");
+
+$this->addItem("xui.panel-end");
+$this->addItem("xui.box-1x2-end");
