@@ -20,6 +20,6 @@ if($this->filterHasSearch_) { ?>
 
 foreach ($this->tableSelect as $key => $value) {
 	if ($value) {
-		$this->generateComponent("xui.form-select", array("element" => $key));
+		$this->generateComponent("xui.form-select", array("element" => $key, "minimum_results_for_search"=> 15));
 	};
 };
