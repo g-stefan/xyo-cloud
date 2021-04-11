@@ -38,7 +38,7 @@ XYO.Table.selectIdOne = function(i_) {
 		el=document.getElementById(this.instance[i_].instanceV+"cbox_"+k);
 		if(el) {
 			if(el.checked) {
-				id=1*this.instance[i_].id[k-1];
+				id=this.instance[i_].id[k-1];
 			};
 		};
 	};
@@ -50,11 +50,11 @@ XYO.Table.selectId = function(i_) {
 	var id;
 
        	id="";
-        for(k=1;k<=this.instance[i_].id.length; ++k){
+        for(k=1;k<=this.instance[i_].id.length; ++k) {
        	    el=document.getElementById(this.instance[i_].instanceV+"cbox_"+k);
-            if(el){
-       	        if(el.checked){
-               	    id+=""+this.instance[i_].id[k-1];
+            if(el) {
+       	        if(el.checked) {
+               	    id+=this.instance[i_].id[k-1];
                     id+=",";
        	        };
             };
@@ -63,16 +63,16 @@ XYO.Table.selectId = function(i_) {
 	return id;
 }
 
-XYO.Table.doCommand = function(i_, action){
+XYO.Table.doCommand = function(i_, action) {
 	var id;
 
        	id=XYO.Table.selectId(i_);
 
-	if(this.instance[i_].embedded){
+	if(this.instance[i_].embedded) {
 		$request="&"+this.instance[i_].instanceV+"action="+action;
 		$request+="&"+this.instance[i_].instanceV+"primary_key_value="+id;
 		XYO.Table.doUpdate(i_,$request);
-	}else{
+	} else {
 		var appForm=this.instance[i_].form;
 	        appForm.elements[this.instance[i_].instanceV+"action"].value=action;
 		appForm.elements[this.instance[i_].instanceV+"primary_key_value"].value=id;
@@ -82,7 +82,7 @@ XYO.Table.doCommand = function(i_, action){
 	return false;
 }
     
-XYO.Table.doOrderSave = function(i_, key){
+XYO.Table.doOrderSave = function(i_, key) {
 	XYO.Table.doUpdate(i_,
 		"&"+this.instance[i_].instanceV+"action=table-order-save"+
 		"&"+this.instance[i_].instanceV+"order="+key+

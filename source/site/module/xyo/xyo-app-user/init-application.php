@@ -39,7 +39,7 @@ $this->requireComponent(array(
 
 // ---
 
-$userId=1*$this->getPrimaryKeyValueOne($this->getRequestInstance("primary_key_value"));
+$userId=$this->getPrimaryKeyValueOne($this->getRequestInstance("primary_key_value"));
 if($userId){
 	$dsUser = &$this->getDataSource("db.table.xyo_user");
 	if ($dsUser) {

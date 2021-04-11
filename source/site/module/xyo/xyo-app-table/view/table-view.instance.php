@@ -19,7 +19,7 @@ foreach ($this->viewData as $key => $value) {
 	}else{
 		$itemComa=true;
 	};
-	$sourceId.=$value[$this->primaryKey];
+	$sourceId.="\"".$value[$this->primaryKey]."\"";
 };
 $sourceId.="],";
 

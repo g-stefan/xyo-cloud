@@ -29,11 +29,11 @@ class xyo_app_Application extends xyo_mod_Application {
 	}
 
 	public function getPrimaryKeyValueOneElementOrRequest() {
-		return 1*$this->getPrimaryKeyValueOne($this->getElementValueString("primary_key_value", $this->getRequestInstance("primary_key_value")));
+		return $this->getPrimaryKeyValueOne($this->getElementValueString("primary_key_value", $this->getRequestInstance("primary_key_value")));
 	}
 
 	public function getPrimaryKeyValueOneRequest() {
-		return 1*$this->getPrimaryKeyValueOne($this->getRequestInstance("primary_key_value"));
+		return $this->getPrimaryKeyValueOne($this->getRequestInstance("primary_key_value"));
 	}
 
 }
