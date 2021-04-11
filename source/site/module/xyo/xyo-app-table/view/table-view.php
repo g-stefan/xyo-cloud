@@ -50,6 +50,10 @@ if($this->hideTopToolbar_) {
 	$cssClass.=" -hide-top-toolbar";
 };
 
+if($this->tableUseApplicationSearch) {
+	$cssClass.=" -use-application-search";
+};
+
 ?>
 
 <div class="xui component-table <?php echo $cssClass;?>">

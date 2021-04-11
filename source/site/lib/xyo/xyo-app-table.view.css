@@ -143,11 +143,14 @@
 	width:calc(100% - 60px);
 }
 
-.xui.component-table.-application.-hide-secondary-top-toolbar.-hide-top-toolbar table.xyo-app-table > thead > tr:first-child > th {
+.xui.component-table.-application.-hide-top-toolbar.-use-application-search table.xyo-app-table > thead > tr:first-child > th {
 	border-top: 0px solid #d3d7cf;	
 }
 
-.xui.component-table.-application.-hide-secondary-top-toolbar.-hide-top-toolbar > .xui._table {
+.xui.component-table.-application.-hide-top-toolbar.-use-application-search > .xui._table {
 	height: calc(100% - 40px);
 }
 
+.xui.component-table.-application.-is-inline-form.-hide-top-toolbar.-use-application-search .xui.app-toolbar:nth-child(2) {
+	display: none;
+}
