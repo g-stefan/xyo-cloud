@@ -20,6 +20,16 @@ if($this->filterHasSearch_) { ?>
 
 foreach ($this->tableSelect as $key => $value) {
 	if ($value) {
+		$selectListFilter = $this->getParameter("select.".$key, array());
+		$selectListFilter["*"] = $this->getFromLanguage("select.all");
+		$this->setParameter("select.".$key, $selectListFilter);
+		
+		if(strcmp($value,"multiple")==0) {
+			unset($selectListFilter["*"]);			
+			$this->setParameter("select.".$key, $selectListFilter);	
+			$this->generateComponent("xui.form-select-multiple", array("element" => $key));
+			continue;
+		};
 		$this->generateComponent("xui.form-select", array("element" => $key, "minimum_results_for_search"=> 15));
 	};
 };

@@ -25,6 +25,10 @@ if($this->filterHasSearch_) {
 };
 foreach ($this->tableSelect as $key => $value) {
 	if($value){
+		if(strcmp($value,"multiple")==0){
+			echo "\$(\"#".$this->instanceV."fn_filter_e_" . $key."\").val(\$(\"#".$this->instanceV."view_select_" . $key."\").val().split(\",\")).trigger(\"change\");";
+			continue;
+		};
 		echo "\$(\"#".$this->instanceV."fn_filter_e_" . $key."\").val(\$(\"#".$this->instanceV."view_select_" . $key."\").val()).trigger(\"change\");";
 	};
 };

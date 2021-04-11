@@ -17,11 +17,19 @@ if($this->xyo_module_group_id){
 };
 
 if(!$this->ds->isEmpty($this->ds->xyo_core_id)){
-	$this->ds->xyo_core_id=array(0,$this->ds->xyo_core_id);
+	if(is_array($this->ds->xyo_core_id)) {
+		$this->ds->xyo_core_id=array_merge(array(0),$this->ds->xyo_core_id);
+	} else {
+		$this->ds->xyo_core_id=array(0,$this->ds->xyo_core_id);
+	};
 };
 
 if(!$this->ds->isEmpty($this->ds->xyo_user_group_id)){
-	$this->ds->xyo_user_group_id=array(0,$this->ds->xyo_user_group_id);
+	if(is_array($this->ds->xyo_user_group_id)) {
+		$this->ds->xyo_user_group_id=array_merge(array(0),$this->ds->xyo_user_group_id);
+	} else {
+		$this->ds->xyo_user_group_id=array(0,$this->ds->xyo_user_group_id);
+	};
 };
 
 $this->ds->setGroup("id",true);

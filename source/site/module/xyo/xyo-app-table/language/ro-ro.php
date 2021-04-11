@@ -65,3 +65,5 @@ $this->set("info.no_records","- nu sunt inregistrari -");
 
 $this->set("cancel","Anuleaza");
 $this->set("done","Finalizat");
+
+$this->set("select.all", "- tot -");

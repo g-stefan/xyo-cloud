@@ -66,3 +66,6 @@ $this->set("info.no_records","- no records -");
 
 $this->set("cancel","Cancel");
 $this->set("done","Done");
+
+$this->set("select.all", "- all -");
+

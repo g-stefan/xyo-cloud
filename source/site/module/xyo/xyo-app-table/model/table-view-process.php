@@ -116,6 +116,22 @@ if ($this->ds) {
 
 	foreach ($this->tableSelect as $key => $value) {
 		if ($value) {
+			if(strcmp($value,"multiple")==0) {
+				if (strlen($select_value[$key])) {
+					$listSelect=explode(",",$select_value[$key]);
+					$isAll=false;
+					foreach($listSelect as $listVSelect) {
+						if(strcmp($listVSelect,"*")==0) {
+							$isAll=true;
+						};
+					};
+					if($isAll) {
+						continue;
+					};
+					$this->ds->$key = $listSelect;
+				};
+				continue;
+			}
 			if (strlen($select_value[$key])) {
 				if (!($select_value[$key] === "*")) {
 					$this->ds->$key = $select_value[$key];
