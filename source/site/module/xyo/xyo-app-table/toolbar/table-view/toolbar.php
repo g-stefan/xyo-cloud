@@ -18,7 +18,7 @@ if($filterToolbarButton){
 	$this->setItem("separator-filter","separator",null,null,null,null,null);	
 
 	$this->setItem("filter",
-	        "item-js",
+	        "item-js.important",
 	        "<i class=\"material-icons\">filter_list</i>",
 	        "filter",
         	"info",
