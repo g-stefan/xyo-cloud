@@ -31,7 +31,8 @@ class xui_FormImage extends xyo_Module {
 		$retV["imageWidth"]=320;
 		$retV["imageHeight"]=240;
 		$retV["viewX"]=320;
-		$retV["viewY"]=240;			
+		$retV["viewY"]=240;
+		$retV["hash"]="";
 
 		if(count($list)>1){
 			$retV["offsetX"]=$list[1];
@@ -41,6 +42,7 @@ class xui_FormImage extends xyo_Module {
 			$retV["imageHeight"]=$list[5];
 			$retV["viewX"]=$list[6];
 			$retV["viewY"]=$list[7];			
+			$retV["hash"]=$list[8];
 		};
 
 		return $retV;

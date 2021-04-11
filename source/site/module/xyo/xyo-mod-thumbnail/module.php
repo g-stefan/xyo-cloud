@@ -159,7 +159,7 @@ class xyo_mod_Thumbnail extends xyo_Module {
 		if(!$width){$width="";};
 		if(!$height){$height="";};
 
-		$wwwFile=strtolower("thumbnails/".basename($imageName,".".$fileExtension)."_".$width."x".$height.".".$fileExtension);
+		$wwwFile=strtolower("thumbnails/".basename($imageName,".".$fileExtension)."_".$imageInfo["hash"]."_".$width."x".$height.".".$fileExtension);
 		$thumbFile=$basePath.$wwwFile;
 		if(!$force){
 			if(file_exists($thumbFile)){

@@ -123,7 +123,8 @@ if(!$isDeleted){
 		$value.=$this->getElementValue($element."_width").",";
 		$value.=$this->getElementValue($element."_height").",";
 		$value.=$this->getElementValue($element."_view_x").",";
-		$value.=$this->getElementValue($element."_view_y");
+		$value.=$this->getElementValue($element."_view_y").",";
+		$value.=md5($value);
 		$this->setElementValue($element,$value);
 	}else{
 		$this->setElementValue($element,"");
@@ -135,7 +136,7 @@ if(count($makeThumbnails)) {
 	if(strlen($image)) {
 		$modThumbnail=&$this->getModule("xyo-mod-thumbnail");
 		foreach($makeThumbnails as $value) {
-			$modThumbnail->xuiMakeThumbnail($image,$value[0],$value[1],true);
+			$modThumbnail->xuiMakeThumbnail($image,$value[0],$value[1]);
 		};
 	};
 };
