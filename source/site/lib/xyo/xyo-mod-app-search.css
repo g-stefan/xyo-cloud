@@ -7,8 +7,14 @@
 //
 */
 
-#form_application_search > .xui.form-input-group {
-	margin-top: 5px;
+#application_search_super {
+	display: inline-block;
+	padding-top: 5px;
+	height: 40px;
+	overflow: visible;
+}
+
+#application_search_form > .xui.form-input-group {	
 	min-width: 122px;
 	display: none;
 }
@@ -18,14 +24,13 @@
 }
 
 @media only screen and (min-width: 700px) {
-	#form_application_search > .xui.form-input-group {
-		display: inline-block;
+	#application_search_form > .xui.form-input-group {
+		display: block;
 	}
 }
 
 @media only screen and (min-width: 1000px) {
-	#application_search {
-		display: inline-block;
+	#application_search {		
 		width: 240px;
 	}
 }
