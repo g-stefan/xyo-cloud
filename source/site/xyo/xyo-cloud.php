@@ -273,7 +273,7 @@ class xyo_Cloud extends xyo_Config {
 		};
 	}	
 
-	public function setModule($moduleParent=null, $path=null, $module, $enabled=true, $registered=true, $override=false) {
+	public function setModule($moduleParent, $path, $module, $enabled=true, $registered=true, $override=false) {
 		if (!$override) {
 			if (array_key_exists($module, $this->moduleList)) {
 				$this->moduleList[$module]->enabled = $enabled;
