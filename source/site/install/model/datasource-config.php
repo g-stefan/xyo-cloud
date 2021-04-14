@@ -113,7 +113,7 @@ if ($fileHandle) {
 		fwrite($fileHandle, "\$this->setDataSourceConnectionProvider(" .
                 	"\"db\",array(\r\n".
 			"\t\"type\"=>\"".$moduleName."\",\r\n".
-			"\t\"datasource\"=>\"repository/datasource/db." . md5(date("l jS \of F Y h:i:s A")) . ".sqlite\",\r\n".
+			"\t\"database\"=>\"repository/datasource/db." . md5(date("l jS \of F Y h:i:s A")) . ".sqlite\",\r\n".
 			"\t\"mode\"=>0666,\r\n".
 			"\t\"prefix\"=>\"\",\r\n".
 			"\t\"debug\"=>false,\r\n".
