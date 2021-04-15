@@ -53,11 +53,7 @@ class xyo_datasource_sqlite_Table extends xyo_Config {
 		$this->datasource_ = $datasource;
 		$this->realName_ = $connection->getPrefix().$name;		
 		$this->descriptor_=$descriptor;
-
-		if(array_key_exists($datasource,$connection->notify)){
-			$this->notify_=$connection->notify[$datasource];			
-		};
-
+		
 		$this->datasourceName_ = $datasource;
 
 		if ($doInit) {
@@ -988,7 +984,7 @@ class xyo_datasource_sqlite_Table extends xyo_Config {
 			return true;
 		};
 		foreach($this->tableIndex_ as $index) {
-			$query="CREATE INDEX '" . $index . "' ON '" . $this->realName_ . "' ('" . $index . "')";
+			$query="CREATE INDEX '".$this->realName_."_" . $index . "' ON '" . $this->realName_ . "' ('" . $index . "')";
 			$result = $this->connection_->queryDirect($query);
 			if ($result) {
 				continue;
