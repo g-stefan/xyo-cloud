@@ -73,5 +73,39 @@ class xyo_Attributes {
 		return false;
 	}
 
+	public function mergeKey($name, $value) {
+		if ($name) {
+			if (array_key_exists($name, $this->attributes_)) {
+				if(is_array($this->attributes_[$name])) {
+					$this->attributes_[$name] = array_merge($this->attributes_[$name], $value);
+					return;
+				};
+				$this->attributes_[$name] = array_merge(array($this->attributes_[$name]), $value);
+				return;
+			};
+			$this->attributes_[$name] = $value;
+		};
+	}
+
+	public function mergeKeyIndex($name, $key, $value) {
+		if ($name) {
+			if ($key) {
+				if (array_key_exists($name, $this->attributes_)) {
+					if (array_key_exists($key, $this->attributes_[$name])) {
+						if(is_array($this->attributes_[$name][$key])) {
+							$this->attributes_[$name][$key] = array_merge($this->attributes_[$name][$key], $value);
+							return;
+						};
+						$this->attributes_[$name][$key] = array_merge(array($this->attributes_[$name][$key]), $value);
+						return;
+					};
+					$this->attributes_[$name][$key] = $value;
+					return;
+				};
+				$this->attributes_[$name] = array ();
+				$this->attributes_[$name][$key]=$value;
+			};
+		};
+	}
 }
 
