@@ -30,7 +30,7 @@ if($this->isError()){
 };
 
 ?>
-<div class="xui application -has-toolbar<?php if($hasMessage&&(!$this->useNotify)){echo " -has-message";}; ?>">
+<div class="xui application -has-toolbar<?php if($hasMessage&&(!$this->useNotify)){echo " -has-message";}; if($this->isEmbedded){echo " -embedded";}; ?>">
 	<div class="xui app-toolbar <?php  if($this->isEmbedded){echo " -compact -wide";}; ?>" id="<?php echo $this->instanceV; ?>xui-app-toolbar">
 	<?php if($this->isEmbedded){ ?>
 		<style>
