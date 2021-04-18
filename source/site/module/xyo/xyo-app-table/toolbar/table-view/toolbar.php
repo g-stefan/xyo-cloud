@@ -21,7 +21,7 @@ if($filterToolbarButton){
 	        "item-js.important",
 	        "<i class=\"material-icons\">filter_list</i>",
 	        "filter",
-        	"info",
+        	"info".($this->isEmbedded?" -only-icon":""),
 	        "#",
         	$this->instanceV."cmdDialogFilter()"
 	);

@@ -32,24 +32,39 @@ if($this->isError()){
 ?>
 <div class="xui application -has-toolbar<?php if($hasMessage&&(!$this->useNotify)){echo " -has-message";}; ?>">
 	<div class="xui app-toolbar <?php  if($this->isEmbedded){echo " -compact -wide";}; ?>" id="<?php echo $this->instanceV; ?>xui-app-toolbar">
-		<div class="xui _content" <?php  if(!$this->isEmbedded){echo "id=\"".$this->instanceV."xui-app-toolbar_content\"";};?>>
-<?php if($this->isEmbedded){ ?>
-			<div class="xui grid">
-				<div class="xui grid -row">
-					<div class="xui grid -col -x0">
-						<div class="xui -fg-primary-2 -left" style="height:32px;padding: 6px;display: inline-block;"><?php echo $this->applicationIcon; ?></div>
-						<div class="xui -fg-secondary-2 -left" style="height:32px;padding-top: 6px;font-size: 16px;line-height: 24px;font-weight: normal;display: inline-block;"><?php echo $this->applicationTitle; ?></div>
-					</div>
-					<div class="xui grid -col -x0" id="<?php echo $this->instanceV; ?>xui-app-toolbar_content">
-<?php }; 
+	<?php if($this->isEmbedded){ ?>
+		<style>
+		.xui.application .xyo-app-application-info_embedded_icon {
+			height:32px;
+			padding: 6px;
+			display: inline-block;
+		}
+
+		.xui.application .xyo-app-application-info_embedded_text {
+			height:32px;
+			padding-top: 6px;
+			font-size: 16px;
+			line-height: 24px;
+			font-weight: normal;
+			display: inline-block;
+		}
+			
+		.xui.application .xui.app-toolbar.-important .xyo-app-application-info_embedded_text {
+			display: none;
+		}
+		</style>
+		<div class="xui _content_left" id="<?php echo $this->instanceV; ?>xui-app-toolbar_content_left">
+			<div class="xui -fg-primary-2 -left xyo-app-application-info_embedded_icon"><?php echo $this->applicationIcon; ?></div>
+			<div class="xui -fg-secondary-2 -left xyo-app-application-info_embedded_text"><?php echo $this->applicationTitle; ?></div>
+		</div>
+		<div class="xui _content_right" id="<?php echo $this->instanceV; ?>xui-app-toolbar_content_right">
+	<?php } else { ?>
+		<div class="xui _content" id="<?php echo $this->instanceV; ?>xui-app-toolbar_content">
+	<?php }; 
 
 $this->generateView("toolbar"); 
 
-if($this->isEmbedded){ ?>
-					</div>
-				</div>
-			</div>
-<?php }; ?>
+?>
 		</div>
 	</div>
 
@@ -75,4 +90,9 @@ if($this->isEmbedded){ ?>
 
 <?php
 
-$this->setHtmlJsSourceOrAjax("XUI.App.Toolbar.linkResponsive(\"".$this->instanceV."xui-application-responsive\",\"".$this->instanceV."xui-app-toolbar\",\"".$this->instanceV."xui-app-toolbar_content\");","load");
+if($this->isEmbedded){
+	$this->setHtmlJsSourceOrAjax("XUI.App.Toolbar.linkResponsiveLeftRight(\"".$this->instanceV."xui-application-responsive\",\"".$this->instanceV."xui-app-toolbar\",\"".$this->instanceV."xui-app-toolbar_content_left\",\"".$this->instanceV."xui-app-toolbar_content_right\");","load");
+} else {
+	$this->setHtmlJsSourceOrAjax("XUI.App.Toolbar.linkResponsive(\"".$this->instanceV."xui-application-responsive\",\"".$this->instanceV."xui-app-toolbar\",\"".$this->instanceV."xui-app-toolbar_content\");","load");
+}
+

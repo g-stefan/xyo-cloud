@@ -31,7 +31,7 @@ $this->tableSelect = array(
 );
 
 $this->tableType=array(
-	"name" => array("cmd-edit"),
+	"name"=>array("custom","table-view-cell-name"),
 	"enabled"=>array("toggle"),	
 	"invisible"=>array("toggle",array(
 		"on"=>array(
@@ -71,6 +71,23 @@ $this->tableImportant=array(
 	"name"=>true
 );
 
+$this->tableData=array(
+	"picture" => "picture",
+	"logged_in" => "logged_in",
+	"logged_at" => "logged_at",
+	"created_at" => "created_at",
+	"invisible" => "invisible",
+	"description" => "description",
+	"enabled" => "enabled"
+);
+
+$this->tableAction=array(
+	"name" => array(
+		"action" => "form-edit",
+		"primary_key_value" => array($this->primaryKey)
+	)
+);
+
 if($this->isInlineForm){
 	$this->tableHead = array(
 		"#" => "#",
@@ -78,18 +95,6 @@ if($this->isInlineForm){
 	);
 
 	$this->tableType=array(	  
-		"name"=>array("custom","table-view-cell-name"),
-	);
-	
-	$this->tableData=array(
-		"picture" => "picture",
-		"logged_in" => "logged_in",
-		"logged_at" => "logged_at",
-		"created_at" => "created_at",
-		"invisible" => "invisible",
-		"description" => "description",
-		"enabled" => "enabled"
+		"name"=>array("custom","table-view-cell-name-inline"),
 	);
 };
-
-

@@ -275,8 +275,21 @@ class xyo_app_Table extends xyo_app_Application {
 		return false;
 	}
 
-	public function useApplicationSearch($value){
+	public function useApplicationSearch($value) {
 		$this->tableUseApplicationSearch = $value;
 	}
 
+	public function getCmdEditLink($index) {
+		return $this->requestUriThis(array("action"=>"form-edit","primary_key_value"=>$this->viewData[$index][$this->primaryKey]));
+	}
+
+	public function getCmdEditOnClick($key,$index) {
+		if($this->dialogEdit_){
+			return $this->instanceV."cmdDialogEdit('".$this->viewData[$index][$this->primaryKey]."');return false;";
+		};
+		if($this->inlineEdit_){
+			return $this->instanceV."cmdDialogEdit('".$this->viewData[$index][$this->primaryKey]."');return false;";
+		};
+		return $this->instanceV."callActionLink_".$key."({'action':'form-edit','primary_key_value':'".$this->viewData[$index][$this->primaryKey]."'});return false;";
+	}
 }
