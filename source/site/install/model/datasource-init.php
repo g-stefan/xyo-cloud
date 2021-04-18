@@ -8,22 +8,20 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
+$setup = &$this->cloud->getModule("xyo-mod-setup");
+if (!$setup) {
+	$this->setError("error.unable_to_instantiate_setup");
+	return;
+};
+
 $conDb = &$this->cloud->dataSource->getDataSourceConnection("db");
-if ($conDb) {
-	if ($conDb->open()) {
-		$conDb->close();
-	} else {
-		$this->setError(array("error.connection_error" => "db"));
-		return;
-	};
-} else {
+if (!$conDb) {
 	$this->setError(array("error.connection_unknown" => "db"));
 	return;
 };
 
-$setup = &$this->cloud->getModule("xyo-mod-setup");
-if (!$setup) {
-	$this->setError("error.unable_to_instantiate_setup");
+if (!$conDb->open()) {
+	$this->setError(array("error.connection_error" => "db"));
 	return;
 };
 
@@ -47,22 +45,24 @@ $listDatasource=array();
 
 include($this->path . "repository/_order.php");
 
-	$allOk = true;
-	foreach ($order as $level_ => $source_) {
-		$value = "yes";
-		$dataSource = &$this->getDataSource($source_);
-		if ($dataSource) {
-			$filename = $this->path . "repository/" . $source_ . ".php";
-			if (file_exists($filename)) {
-				include($filename);
-			};
-		} else {
-			$value = "no";
-			$allOk = false;
+$allOk = true;
+foreach ($order as $level_ => $source_) {
+	$value = "yes";
+	$dataSource = &$this->getDataSource($source_);
+	if ($dataSource) {
+		$filename = $this->path . "repository/" . $source_ . ".php";
+		if (file_exists($filename)) {
+			include($filename);
 		};
-
-		$listDatasource[$source_]=$value;
+	} else {
+		$value = "no";
+		$allOk = false;
 	};
+
+	$listDatasource[$source_]=$value;
+};
+
+$conDb->close();
 
 if (!$allOk) {
 	$this->setError("error.datasource_init");
