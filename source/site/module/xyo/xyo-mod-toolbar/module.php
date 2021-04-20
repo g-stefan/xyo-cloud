@@ -19,6 +19,8 @@ class xyo_mod_Toolbar extends xyo_mod_Application {
 	protected $isDialog;
 	protected $isInline;
 	protected $toolbarPush_;
+	protected $process;
+	protected $parent;
 
 	function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
@@ -33,6 +35,8 @@ class xyo_mod_Toolbar extends xyo_mod_Application {
 		$this->isDialog = $this->getParameter("dialog", false);
 		$this->isInline = $this->getParameter("inline", false);
 		$this->toolbarPush_ = array();
+		$this->process = $this->getParameter("process", "toolbar");
+		$this->parent = $this->getParameter("parent", null);
 
 		if(strlen($this->type)){
 			$this->type="-".$this->type;
@@ -68,7 +72,7 @@ class xyo_mod_Toolbar extends xyo_mod_Application {
 			};
 
 			foreach(array_reverse($modPathBase,true) as $path) {
-				$file = $path . $this->config . "/toolbar.php";
+				$file = $path . $this->config . "/".$this->process.".php";
 				if (file_exists($file)) {
 					include($file);
 				};

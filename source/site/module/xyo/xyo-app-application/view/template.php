@@ -56,18 +56,19 @@ if($this->isError()){
 		<div class="xui _content_left" id="<?php echo $this->instanceV; ?>xui-app-toolbar_content_left">
 			<div class="xui -fg-primary-2 -left xyo-app-application-info_embedded_icon"><?php echo $this->applicationIcon; ?></div>
 			<div class="xui -fg-secondary-2 -left xyo-app-application-info_embedded_text"><?php echo $this->applicationTitle; ?></div>
+			<?php if($this->hasLeftToolbar){ $this->generateView("toolbar-left"); }; ?>
+		</div>
+		<div class="xui _content_right" id="<?php echo $this->instanceV; ?>xui-app-toolbar_content_right">
+	<?php } else if($this->hasLeftToolbar){ ?>
+		<div class="xui _content_left" id="<?php echo $this->instanceV; ?>xui-app-toolbar_content_left">
+			<?php $this->generateView("toolbar-left"); ?>
 		</div>
 		<div class="xui _content_right" id="<?php echo $this->instanceV; ?>xui-app-toolbar_content_right">
 	<?php } else { ?>
 		<div class="xui _content" id="<?php echo $this->instanceV; ?>xui-app-toolbar_content">
-	<?php }; 
-
-$this->generateView("toolbar"); 
-
-?>
+	<?php }; $this->generateView("toolbar"); ?>
 		</div>
 	</div>
-
 <?php
 	if($hasMessage&&(!$this->useNotify)){
 		if ($this->isError()) {
@@ -90,9 +91,17 @@ $this->generateView("toolbar");
 
 <?php
 
-if($this->isEmbedded){
+if($this->isEmbedded || $this->hasLeftToolbar){
 	$this->setHtmlJsSourceOrAjax("XUI.App.Toolbar.linkResponsiveLeftRight(\"".$this->instanceV."xui-application-responsive\",\"".$this->instanceV."xui-app-toolbar\",\"".$this->instanceV."xui-app-toolbar_content_left\",\"".$this->instanceV."xui-app-toolbar_content_right\");","load");
 } else {
 	$this->setHtmlJsSourceOrAjax("XUI.App.Toolbar.linkResponsive(\"".$this->instanceV."xui-application-responsive\",\"".$this->instanceV."xui-app-toolbar\",\"".$this->instanceV."xui-app-toolbar_content\");","load");
 }
 
+if($this->hasApplicationMenu) {
+	$xuiDashboard=&$this->getModule("xui-dashboard");
+	$applicationMenu=&$this->getModule("xyo-mod-xui-menu");	
+	$applicationMenu->initModule($this->name);
+	echo "<ul class=\"xui menu -popup\" id=\"popup-menu-application\">";
+		$xuiDashboard->generateApplicationMenu($applicationMenu->getMenu());
+	echo "</ul>";
+};

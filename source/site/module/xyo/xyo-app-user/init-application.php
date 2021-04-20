@@ -12,7 +12,12 @@ $this->setApplicationIcon("<i class=\"material-icons\">person</i>");
 $this->setApplicationDataSource("db.query.xyo_user");
 $this->setPrimaryKey("id");
 
-//$this->setInlineForm(true);
+$this->hasLeftToolbar = true;
+$this->hasApplicationMenu = true;
+$userSettings = &$this->getModule("xyo-mod-ds-user-settings");
+if(1*$userSettings->getModuleSetting($this->name,"inline_form",0)) {
+	$this->setInlineForm(true);
+};
 
 $this->requireComponent(array(
 	"xui.form-action-begin",

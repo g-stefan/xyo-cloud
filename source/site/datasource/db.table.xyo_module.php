@@ -16,8 +16,7 @@ $this->set("table_item", array(
 	"name" => array("varchar",null,255),
 	"description" => array("varchar",null,255),
 	"enabled" => array("int",0,"unsigned"),
-	"parent" => array("varchar",null,255),
-	"parameter" => array("int",0,"unsigned")
+	"parent" => array("varchar",null,255)	
 ));
 
 $this->set("table_index", array(	

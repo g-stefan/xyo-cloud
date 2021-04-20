@@ -15,3 +15,16 @@ $this->eGenerateCallRequest(
 	"xyo_user_id",
 	"callUserXUserGroup"
 );
+
+$dsModule = &$this->getDataSource("db.table.xyo_module");
+$dsModule->clear();
+$dsModule->name = $this->name;
+if($dsModule->load(0,1)) {
+	$this->eGenerateCallRequestJs(
+		array("action"=>"form-edit"),
+		"xyo-app-module-settings-x-user",
+		array("xyo_module_id"=>$dsModule->id),
+		"callAppSettings",
+		"function(form_){return true;}"
+	);
+};

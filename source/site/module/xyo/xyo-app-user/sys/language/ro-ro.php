@@ -9,3 +9,7 @@
 defined("XYO_CLOUD") or die("Access is denied");
 
 $this->set("application","Utilizatori");
+$this->set("settings","Setari");
+$this->set("label.inline_form","Forma inclusa in tabel");
+$this->set("label.button_cancel","Anuleaza");
+$this->set("label.button_apply","Aplica");

@@ -67,6 +67,13 @@ if (count($this->toolbar)) {
 			continue;	
 		};
 
+		if($item["type"]=="application-menu") {
+			echo "<div class=\"xui button -transparent -icon -size-x32 -".$item["mode"]." -important -effect-ripple ".$this->type."\" id=\"popup-menu-application-action\">";
+				echo $item["img"];
+			echo "</div>";
+			continue;
+		};
+
 	};
 
 };

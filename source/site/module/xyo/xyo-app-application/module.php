@@ -14,6 +14,9 @@ class xyo_app_Application extends xyo_mod_Application {
 
 	//
 	protected $toolbarParameter;
+	protected $toolbarLeftParameter;
+	protected $hasLeftToolbar;
+	protected $hasApplicationMenu;
 	//
 	protected $useNotify;
 
@@ -22,6 +25,10 @@ class xyo_app_Application extends xyo_mod_Application {
 
 		$this->toolbarParameter = array();
 		$this->useNotify = true;
+
+		$this->toolbarLeftParameter = array();
+		$this->hasLeftToolbar = false;
+		$this->hasApplicationMenu = false;
 	}
 
 	public function setUseNotify($value) {

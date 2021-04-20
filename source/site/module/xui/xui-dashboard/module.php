@@ -82,5 +82,38 @@ class xui_Dashboard extends xyo_Module {
 		$this->generateUserMenuView($menu);
 	}
 
+	// Application menu
+
+	public function scanApplicationMenuActive(&$menu){
+		foreach ($menu as $key => $value) {
+			if(array_key_exists("active",$value)){
+				if($value["active"]){
+					return true;
+				}		
+			}
+			if(array_key_exists("popup",$value)){
+				if(count($menu[$key]["popup"])){
+					if($this->scanApplicationMenuActive($menu[$key]["popup"])){
+							$menu[$key]["on"]=true;
+							$menu[$key]["active"]=true;
+							return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	public function generateApplicationMenuView($menu){
+		foreach($menu as $key=>$value){
+			$this->generateView("application-menu-item",array("item"=>$value));
+		}
+	}
+
+	public function generateApplicationMenu($menu){
+		$this->scanApplicationMenuActive($menu);
+		$this->generateApplicationMenuView($menu);
+	}
+
 }
 

@@ -21,10 +21,5 @@ if($this->xyo_module_id>0) {
 			$this->ds->save();		
 		};
 	};
-
-	$dsModule=&$this->getDataSource("db.table.xyo_module");
-	$dsModule->clear();
-	$dsModule->id=$this->xyo_module_id;
-	$dsModule->parameter=1;
-	$dsModule->save();	
+		
 };

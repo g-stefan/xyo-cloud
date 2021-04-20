@@ -37,6 +37,7 @@ if ($this->xyo_module_id) {
 		$dsModule->id = $this->xyo_module_id;
 		if ($dsModule->load(0, 1)) {
 
+			$moduleNameFound = false;
 			$moduleName = $dsModule->name;
 			$path=$this->getModulePath($dsModule->name);
 			if($path) {
@@ -47,19 +48,31 @@ if ($this->xyo_module_id) {
 						if(property_exists($json,"theme")) {
 							if(property_exists($json->theme,"name")) {
 								$moduleName=$json->theme->name;
-							};			
+								$moduleNameFound = true;
+							};
 						};
 
 						if(property_exists($json,"module")) {
 							if(property_exists($json->module,"name")) {
 								$moduleName=$json->module->name;
-							};			
+								$moduleNameFound = true;
+							};
 						};
 
 					};
 				};
 			};
 
+			if(!$moduleNameFound) {
+				$mod = &$this->getModule($dsModule->name);
+				if ($mod instanceof xyo_mod_Application) {
+					$moduleName = $mod->getApplicationTitle();
+				} else
+				if ($mod instanceof xyo_Module) {
+					$mod->loadLanguage();
+					$moduleName = $mod->getFromLanguage("application.title","");
+				};				
+			};
 
 			$this->setApplicationTitle($this->getFromLanguage("application.title") . " - " . $moduleName);
 			$this->addModule($dsModule->name);

@@ -19,6 +19,7 @@ $this->setModule("xyo",null,"xyo-mod-crypt-rpc");
 $this->setModule("xyo",null,"xyo-mod-setup");
 $this->setModule("xyo",null,"xyo-mod-thumbnail");
 //
+$this->setModule("xyo",null,"xyo-mod-xui-menu");
 $this->setModule("xyo",null,"xyo-mod-xui-sidebar");
 $this->setModule("xyo",null,"xyo-mod-xui-user");
 $this->setModule("xyo",null,"xyo-app-dashboard");

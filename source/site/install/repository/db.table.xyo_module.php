@@ -115,6 +115,9 @@ if ($setup) {
 	$setup->registerModuleAcl("xyo-app-user-profile", "control-panel","administrator", "authenticated", 18000, true);
 	$setup->registerModuleAcl("xyo-app-user-profile", "user","administrator", "authenticated", 100, true);
 
+	$setup->registerModule("xyo", null, "xyo-app-module-settings-x-user");
+	$setup->registerModuleAcl("xyo-app-module-settings-x-user","none","administrator","authenticated",240,true);
+
 	// local / customize
 
 	$setup->includeConfigWithPattern("xyo-cloud-install");

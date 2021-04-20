@@ -8,5 +8,6 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
+$this->set("menu","Meniu");
 $this->set("logout","Iesire");
 $this->set("user_group","Grup");

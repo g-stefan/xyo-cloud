@@ -29,6 +29,12 @@ if(array_key_exists("url",$item)){
 		$url.=" onclick=\"return false;\"";
 	};
 };
+if(array_key_exists("js",$item)){
+	$url=" href=\"#\" onclick=\"".$item["js"].";return false;\"";
+	if($isPopup){
+		$url.=" onclick=\"return false;\"";
+	};
+};
 
 $icon="";
 if(array_key_exists("icon",$item)){

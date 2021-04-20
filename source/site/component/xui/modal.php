@@ -64,7 +64,7 @@ if(strlen($jsButtonClick)==0){
 		<div class="xui _modal-close-button button -icon -size-x32 -circle -danger -transparent -effect-ripple"><i class="material-icons">close</i></div>
 		<?php if(!$noTitle){ ?>
 		<div class="xui panel_title">
-			<?php $this->eLanguage($title); ?>
+			<?php echo $title; ?>
 		</div>
 		<div class="xui panel_line"></div>
 		<?php }; ?>
@@ -72,7 +72,7 @@ if(strlen($jsButtonClick)==0){
 		<div class="xui panel_line"></div>
 		<div class="xui panel_footer">
 <?php if($hasCancel){ ?>
-			<button type="button" class="xui button -transparent -danger -left" id="<?php echo $id; ?>_cancel">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("cancel"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
+			<button type="button" class="xui button -outline -danger -left" id="<?php echo $id; ?>_cancel">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("cancel"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
 <?php }; ?>
 			<button type="button" class="xui button <?php echo $buttonType; ?> -right" id="<?php echo $id; ?>_button">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage($button); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
 		</div>

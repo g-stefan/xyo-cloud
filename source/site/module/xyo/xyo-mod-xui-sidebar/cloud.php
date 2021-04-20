@@ -8,5 +8,5 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setReferenceBase($module, "xyo-mod-application");
+$this->setReferenceBase($module, "xyo-mod-xui-menu");
 $this->setVersion($module, "1.0.0");

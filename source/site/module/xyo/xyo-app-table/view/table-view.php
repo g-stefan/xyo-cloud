@@ -368,7 +368,7 @@ if($this->dialogFilter_){
 
 $this->generateComponent("xui.modal", array(
 	"id" => $this->instanceV."xyo-app-table-modal-delete",
-	"title" => "form.title_delete",
+	"title-text" => "<span class=\"xui -fg-danger-2\" style=\"line-height: 24px;\"><i class=\"material-icons-outlined\" style=\"float:left\">error_outline</i>&nbsp;".$this->getFromLanguage("form.title_delete")."</span>",
 	"box" => "1x1",
 	"button" => "label.button_delete",
 	"buttonType" => "danger",

@@ -15,5 +15,6 @@ $this->runModule("xyo-mod-toolbar", array_merge(array(
 	"type" => ($this->isEmbedded)?"small -toolbar":"",
 	"embedded" => $this->isEmbedded,
 	"dialog" => $this->isDialog,
-	"inline" => $this->isInline
+	"inline" => $this->isInline,
+	"parent" => $this->name
 ), $this->toolbarParameter));

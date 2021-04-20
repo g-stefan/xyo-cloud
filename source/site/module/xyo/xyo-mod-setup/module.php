@@ -38,8 +38,7 @@ class xyo_mod_Setup extends xyo_Module {
 			$dsModule->path = $path;
 			$dsModule->enabled = $enabled;
 			$dsModule->parent = $parent;
-			$dsModule->description = $description;
-			$dsModule->parameter = 0;
+			$dsModule->description = $description;			
 			return $dsModule->save();
 		};
 		return false;
