@@ -8,9 +8,9 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$className = "xyo_app_ModuleSettings";
+$className = "xyo_app_ModuleSettingsXUser";
 
-class xyo_app_ModuleSettings extends xyo_app_Application {
+class xyo_app_ModuleSettingsXUser extends xyo_app_Application {
 
 	protected $xyo_module_id;
 	protected $items; 

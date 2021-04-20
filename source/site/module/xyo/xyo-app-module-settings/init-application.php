@@ -70,7 +70,7 @@ if ($this->xyo_module_id) {
 				} else
 				if ($mod instanceof xyo_Module) {
 					$mod->loadLanguage();
-					$moduleName = $mod->getFromLanguage("application.title","");
+					$moduleName = $mod->getFromLanguage("application.title",$dsModule->name);
 				};				
 			};
 
