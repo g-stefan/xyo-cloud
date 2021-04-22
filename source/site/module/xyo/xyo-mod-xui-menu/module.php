@@ -59,16 +59,16 @@ class xyo_mod_xui_Menu extends xyo_mod_Application {
 	}
 
 	public function addModule(&$menu, $module) {
-		$path = $this->cloud->getModulePath($module);
-		if ($path) {
+		$pathList = $this->cloud->getModulePathBase($module);
+		foreach($pathList as $path) {
 			$this->loadLanguageFromPathDirect($path . "sys/language/",$this->getSystemLanguage());
 			$file = $path . "sys/".$this->process.".php";
 			if (file_exists($file)) {
 				include($file);
-			} else {
-				$this->addItem($menu, "item", null, $module, $module, null);
+				return;
 			};
 		};
+		$this->addItem($menu, "item", null, $module, $module, null);
 	}
 
 	public function &addItem(&$menu, $type, $icon, $title, $module, $parameters=null, $iconActive=null) {
