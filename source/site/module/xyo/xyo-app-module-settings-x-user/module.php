@@ -24,13 +24,17 @@ class xyo_app_ModuleSettingsXUser extends xyo_app_Application {
 	}
 
 	public function addModule($module) {
-		$path = $this->cloud->getModulePath($module);
-		if ($path) {
+		$pathList = $this->cloud->getModulePathBase($module);
+		if(!is_array($pathList)){
+			$pathList=array($module=>$this->cloud->getModulePath($module));
+		};
+		foreach($pathList as $path) {
 			$this->loadLanguageFromPathDirect($path . "sys/language/", $this->getSystemLanguage());
 			$file = $path . "sys/settings-user.php";
 			if (file_exists($file)) {
 				include($file);
-            		};
+				return;
+           		};
 		};
 	}
 
