@@ -9,4 +9,5 @@
 defined("XYO_CLOUD") or die("Access is denied");
 
 $this->set("apply","Aplica");
+$this->set("save","Salveaza");
 $this->set("done","Finalizat");
