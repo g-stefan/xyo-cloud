@@ -59,10 +59,8 @@ class xyo_mod_xui_Menu extends xyo_mod_Application {
 	}
 
 	public function addModule(&$menu, $module) {
-		$pathList = $this->cloud->getModulePathBase($module);
-		if(!is_array($pathList)){
-			$pathList=array($module=>$this->cloud->getModulePath($module));
-		};
+		$this->cloud->initModule($module);
+		$pathList = $this->cloud->getModulePathBase($module);		
 		foreach($pathList as $path) {
 			$this->loadLanguageFromPathDirect($path . "sys/language/",$this->getSystemLanguage());
 			$file = $path . "sys/".$this->process.".php";

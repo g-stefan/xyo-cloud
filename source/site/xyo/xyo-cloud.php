@@ -180,6 +180,17 @@ class xyo_Cloud extends xyo_Config {
 				require_once($initFile);
 			};
 
+			$moduleObject->pathBase = array($module => $moduleObject->path);
+			$moduleBase = $module;
+			while (array_key_exists($moduleBase, $this->referenceBase)) {
+				$moduleBase = $this->referenceBase[$moduleBase];
+				$this->initModule($moduleBase);
+				$base = &$this->getModuleObject($moduleBase);
+				if ($base) {
+					$moduleObject->pathBase[$moduleBase] = $base->path;
+				};
+			};
+
 			$moduleObject->init = true;
 			return true;
 
@@ -200,15 +211,8 @@ class xyo_Cloud extends xyo_Config {
 			};
 
 			if (!$moduleObject->init) {
-
-				$initFile = $moduleObject->path . "cloud.php";
-				if (file_exists($initFile)) {
-					require_once($initFile);
-				};
-
-			};
-
-			$moduleObject->init = true;
+				$this->initModule($module);
+			};			
 
 			if (!$this->loadReferenceLinks($module)) {
 				return false;
@@ -237,17 +241,7 @@ class xyo_Cloud extends xyo_Config {
 				};
 			} else {
 				$moduleObject->baseClass = $className;
-			};
-
-			$moduleObject->pathBase = array($module => $moduleObject->path);
-			$moduleBase = $module;
-			while (array_key_exists($moduleBase, $this->referenceBase)) {
-				$moduleBase = $this->referenceBase[$moduleBase];
-				$base = &$this->getModuleObject($moduleBase);
-				if ($base) {
-					$moduleObject->pathBase[$moduleBase] = $base->path;
-				};
-			};
+			};			
 
 			$moduleObject->loaded = true;
 			$moduleObject->object = new $moduleObject->className($moduleObject, $this);
