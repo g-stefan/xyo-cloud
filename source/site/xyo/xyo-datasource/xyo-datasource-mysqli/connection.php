@@ -389,5 +389,23 @@ class xyo_datasource_mysqli_Connection {
 		return addcslashes($this->db->real_escape_string ($value), "%_");
 	}
 
+	function destroyStorage($storage) {		
+		$query = "DROP TABLE IF EXISTS `".$this->prefix.$storage."`;";
+		$result = $this->queryDirect($query);
+		if ($result) {
+			return true;
+		}
+		return false;
+	}
+
+	function renameStorage($oldName,$newName) {
+		$query = "ALTER TABLE `".$this->prefix.$oldName."` RENAME TO `".$this->prefix.$newName."`;";
+		$result = $this->queryDirect($query);
+		if ($result) {
+			return true;
+		}
+		return false;
+	}	
+
 }
 

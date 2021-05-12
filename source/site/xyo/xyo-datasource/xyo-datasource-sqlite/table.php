@@ -1239,5 +1239,81 @@ class xyo_datasource_sqlite_Table extends xyo_Config {
 		return $this->atomicSub($field,1);
 	}
 
+	function storageRemoveField($name) {
+		$query = "ALTER TABLE [" . $this->realName_ . "] DROP COLUMN [".$name."];";
+		$result = $this->connection_->queryDirect($query);
+		if ($result) {
+			return true;
+		}
+		return false;		
+	}
+
+	function storageRenameField($oldName, $newName) {
+		$query = "ALTER TABLE [" . $this->realName_ . "] CHANGE COLUMN [".$oldName."] [".$newName."];";
+		$result = $this->connection_->queryDirect($query);
+		if ($result) {
+			return true;
+		}
+		return false;		
+	}
+
+	function storageUpdateField($name) {
+		$query = "ALTER TABLE [" . $this->realName_ . "] MODIFY ";
+
+		$key_ = $name;
+		$value_ = $this->fieldType_[$name];
+
+		$query.="[" . $key_ . "] " . strtoupper($value_);
+
+		$x = true;
+		if (strcmp($this->primaryKey_, $key_) == 0) {
+			if (strcmp($value_, "int") == 0) {
+				$query.="[" . $key_ . "] INTEGER PRIMARY KEY ASC";
+				$x = false;
+			} else if (strcmp($value_, "bigint") == 0) {
+				$query.="[" . $key_ . "] INTEGER PRIMARY KEY ASC";
+				$x = false;
+			};
+		};
+
+		if ($x) {
+
+			$query.="[" . $key_ . "] " . strtoupper($value_);
+			if (array_key_exists($key_, $this->fieldAttribute_)) {
+				if($value_=="varchar") {
+					$query.="(" . strtoupper($this->fieldAttribute_[$key_]).")";
+				} else {
+					$query.=" " . strtoupper($this->fieldAttribute_[$key_]);
+				};
+			};
+
+			if (array_key_exists($key_, $this->fieldExtra_)) {
+				if (strcmp($this->fieldExtra_[$key_], "auto_increment") == 0) {
+					$query.=" AUTOINCREMENT";
+				} else {
+					$query.=" " . strtoupper($this->fieldExtra_[$key_]);
+				};
+			};
+
+			if (array_key_exists($key_, $this->fieldDefaultValue_)) {
+				if (strcmp($this->fieldDefaultValue_[$key_], "DEFAULT") == 0) {
+
+				} else if (is_int($this->fieldDefaultValue_[$key_])) {
+					$query.=" DEFAULT " . $this->fieldDefaultValue_[$key_];
+				} else if (is_null($this->fieldDefaultValue_[$key_])) {
+
+				} else {
+					$query.=" DEFAULT '" . $this->fieldDefaultValue_[$key_] . "'";
+				};
+			};
+		}
+
+		$query.= ";";
+		$result = $this->connection_->queryDirect($query);
+		if ($result) {
+			return true;
+		}
+		return false;		
+	}
 }
 

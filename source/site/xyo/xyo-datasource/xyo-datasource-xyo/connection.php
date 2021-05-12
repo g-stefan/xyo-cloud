@@ -31,4 +31,20 @@ class xyo_datasource_xyo_Connection {
 
 	}
 
+	function destroyStorage($storage) {
+		$fileName = $this->databasePath . $storage . ".php";
+		if (file_exists($fileName)) {
+			return unlink($fileName);
+		};
+		return true;
+	}
+
+	function renameStorage($oldName,$newName) {
+		$fileNameOld = $this->databasePath . $oldName . ".php";
+		$fileNameNew = $this->databasePath . $newName . ".php";
+		if (file_exists($fileNameOld)) {
+			return rename ($fileNameOld, $fileNameNew);
+		};
+		return false;
+	}
 };

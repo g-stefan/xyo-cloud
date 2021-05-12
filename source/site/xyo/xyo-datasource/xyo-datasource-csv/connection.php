@@ -30,6 +30,23 @@ class xyo_datasource_csv_Connection {
 	function close() {
 
 	}
+
+	function destroyStorage($storage) {
+		$fileName = $this->databasePath . $storage . ".csv";
+		if (file_exists($fileName)) {
+			return unlink($fileName);
+		};
+		return true;
+	}
+
+	function renameStorage($oldName,$newName) {
+		$fileNameOld = $this->databasePath . $oldName . ".csv";
+		$fileNameNew = $this->databasePath . $newName . ".csv";
+		if (file_exists($fileNameOld)) {
+			return rename ($fileNameOld, $fileNameNew);
+		};
+		return false;
+	}
 	
 };
 

@@ -1312,5 +1312,153 @@ class xyo_datasource_postgresql_Table extends xyo_Config {
 		return $this->atomicSub($field,1);
 	}
 
+
+	function storageRemoveField($name) {
+		$query = "ALTER TABLE \"" . $this->realName_ . "\" DROP COLUMN \"".$name."\";";
+		$result = $this->connection_->queryDirect($query);
+		if ($result) {
+			return true;
+		}
+		return false;		
+	}
+
+	function storageRenameField($oldName, $newName) {
+		$query = "ALTER TABLE \"" . $this->realName_ . "\" CHANGE COLUMN \"".$oldName."\" \"".$newName."\";";
+		$result = $this->connection_->queryDirect($query);
+		if ($result) {
+			return true;
+		}
+		return false;		
+	}
+
+	function storageUpdateField($name) {
+		$query = "ALTER TABLE \"" . $this->realName_ . "\" MODIFY ";
+
+		$key_ = $name;
+		$value_ = $this->fieldType_[$name];
+
+		if ($value_ == "int") {
+			$xc = 1;
+			if ($this->primaryKey_) {
+				if ($this->primaryKey_ == $key_) {
+					$xc = 0;
+				}
+			}
+
+			if ($xc) {
+				$query.="\"" . $key_ . "\" INTEGER";
+			} else {
+				$query.="\"" . $key_ . "\" ";
+			}
+		} else if ($value_ == "bigint") {
+			$xc = 1;
+			if ($this->primaryKey_) {
+				if ($this->primaryKey_ == $key_) {
+					$xc = 0;
+				}
+			}
+
+			if ($xc) {
+				$query.="\"" . $key_ . "\" BIGINT";
+			} else {
+				$query.="\"" . $key_ . "\" ";
+			}
+		} else if ($value_ == "float") {
+			$xc = 1;
+			if ($this->primaryKey_) {
+				if ($this->primaryKey_ == $key_) {
+					$xc = 0;
+				}
+			}
+
+			if ($xc) {
+				$query.="\"" . $key_ . "\" FLOAT";
+			} else {
+				$query.="\"" . $key_ . "\" ";
+			}
+		} else if($value_=="varchar") {
+			$xc = 1;
+			if ($this->primaryKey_) {
+				if ($this->primaryKey_ == $key_) {
+					$xc = 0;
+				}
+			}
+
+			if ($xc) {
+				$query.="\"" . $key_ . "\" VARCHAR";
+			} else {
+				$query.="\"" . $key_ . "\" ";
+			}
+
+			if (array_key_exists($key_, $this->fieldAttribute_)) {
+				$query.="(" . strtoupper($this->fieldAttribute_[$key_]).")";
+			};
+			if (array_key_exists($key_, $this->fieldDefaultValue_)) {
+				if (is_null($this->fieldDefaultValue_[$key_])) {
+
+				} else {
+					$query.=" DEFAULT \"" . $this->fieldDefaultValue_[$key_] . "\"";
+				};
+			};
+		} else if ($value_ == "datetime") {
+			$query.="\"" . $key_ . "\" TIMESTAMP";
+		} else {
+			$query.="\"" . $key_ . "\" " . strtoupper($value_);
+		}
+		if (array_key_exists($key_, $this->fieldAttribute_)) {
+			$xc = 1;
+			if (($value_ == "int")||($value_ == "bigint")) {
+				if ($this->fieldAttribute_[$key_] == "unsigned") {
+					$xc = 0;
+				};
+			};
+			if ($xc) {
+				if ($value_ == "varchar") {
+				} else {
+
+					$query.=" " . strtoupper($this->fieldAttribute_[$key_]);
+
+				};
+			};
+		};
+
+		if (array_key_exists($key_, $this->fieldExtra_)) {
+			if ($this->fieldExtra_[$key_] == "auto_increment") {
+				if ($this->primaryKey_) {
+					if ($this->primaryKey_ == $key_) {
+						$query.=" SERIAL";
+					}
+				}
+			} else {
+				$query.=" " . strtoupper($this->fieldExtra_[$key_]);
+			}
+		};
+
+		if ($this->primaryKey_) {
+			if ($this->primaryKey_ == $key_) {
+				$query.=" PRIMARY KEY";
+			}
+		}
+
+		if (array_key_exists($key_, $this->fieldDefaultValue_)) {
+			if (strcmp($this->fieldDefaultValue_[$key_], "DEFAULT") == 0) {
+
+			} else if (is_int($this->fieldDefaultValue_[$key_])) {
+				$query.=" DEFAULT " . $this->fieldDefaultValue_[$key_];
+			} else if (is_null($this->fieldDefaultValue_[$key_])) {
+
+			} else {
+				$query.=" DEFAULT \"" . $this->fieldDefaultValue_[$key_] . "\"";
+			};
+		};
+
+		$query.= ";";
+		$result = $this->connection_->queryDirect($query);
+		if ($result) {
+			return true;
+		}
+		return false;		
+	}
+
 }
 

@@ -26,4 +26,11 @@ class xyo_datasource_memory_Connection {
 
 	}
 
+	function destroyStorage($storage) {		
+		return false;
+	}
+
+	function renameStorage($oldName,$newName) {		
+		return false;
+	}
 };

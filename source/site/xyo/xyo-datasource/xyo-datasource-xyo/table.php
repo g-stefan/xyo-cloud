@@ -1737,4 +1737,15 @@ class xyo_datasource_xyo_Table extends xyo_Config {
 		return $this->atomicSub($field,1);
 	}
 
+	function storageRemoveField($name) {
+		return false;		
+	}
+
+	function storageRenameField($oldName, $newName) {
+		return false;		
+	}
+
+	function storageUpdateField($name) {		
+		return true;
+	}
 }
