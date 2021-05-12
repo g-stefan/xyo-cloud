@@ -8,7 +8,9 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-echo "<div class=\"xui -left\" style=\"width:64px;margin:3px;\">";
+echo "<table class=\"xui\"><tr>";
+
+echo "<td class=\"xui\" style=\"width:64px;padding-right:3px;\">";
 	echo "<div class=\"xui -elevation-2 -elevation-4-hover -elevation-transition\" style=\"width:64px;height:64px;overflow:hidden;border-radius:50%;cursor: pointer;\"".
 		" onclick=\"".$this->getCmdEditOnClick($this->viewKey,$this->viewId)."\">";
 		$xuiImage=&$this->getModule("xui-form-image");
@@ -24,11 +26,11 @@ echo "<div class=\"xui -left\" style=\"width:64px;margin:3px;\">";
 		echo "</style>";
 		echo "<div class=\"xui ".$this->name."-image_".$this->viewRow["id"]."\"></div>";
 	echo "</div>";
-echo "</div>";
+echo "</td>";
 
 // ---
                                                                                          
-echo "<div class=\"xui -left\" style=\"width:calc(100% - 73px);margin-left:3px;margin-top:6px;\">";
+echo "<td class=\"xui\" style=\"padding-left:3px;\">";
 	echo "<a class=\"xui link\" href=\"".$this->getCmdEditLink($this->viewId)."\" onclick=\"".$this->getCmdEditOnClick($this->viewKey,$this->viewId)."\">";
 		echo "<span class=\"xui\">";
 		echo $this->viewRow["name"];
@@ -52,4 +54,6 @@ echo "<div class=\"xui -left\" style=\"width:calc(100% - 73px);margin-left:3px;m
 	echo "&nbsp;&nbsp;";
 	echo $this->viewRow["logged_at"];
 	echo "</span>";
-echo "</div>";
+echo "</td>";
+
+echo "</tr></table>";
