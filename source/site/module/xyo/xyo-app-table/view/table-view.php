@@ -481,5 +481,7 @@ if($this->isInlineForm){
 	$this->setHtmlJsSourceOrAjax("window.".$this->instanceV."doCommand=function(action){ return XYO.Table.doCommand(\"".$this->instance."\",action); };","load");
 };
 
-
+if($this->isEmbedded){
+	$this->setHtmlJsSourceOrAjax("XUI.EffectRipple.init();","load");
+};
 
