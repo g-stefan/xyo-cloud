@@ -4,7 +4,7 @@ rem http://unlicense.org/
 rem Created by Grigore Stefan <g_stefan@yahoo.com>
 
 set PROJECT=xyo-cloud
-set VERSION_LAST=3.2.0
+set VERSION_LAST=3.3.0
 
 set VENDOR_XUI_VERSION=2.6.0
 

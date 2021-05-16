@@ -17,6 +17,7 @@ if(!$this->isInline){
 		echo "document.getElementById(\"".$this->instanceV."page\").value=\"".$page."\";";
 		echo "document.getElementById(\"".$this->instanceV."page-count\").innerHTML=\"".$page_count."\";";
 		echo "document.getElementById(\"".$this->instanceV."item-count\").innerHTML=\"".$nr_items."\";";
+		echo "XUI.EffectRipple.init();";
 		$this->ejsEnd();
 		return;
 	};
@@ -480,6 +481,5 @@ if($this->isInlineForm){
 	$this->setHtmlJsSourceOrAjax("window.".$this->instanceV."doCommand=function(action){ return XYO.Table.doCommand(\"".$this->instance."\",action); };","load");
 };
 
-$this->setHtmlJsSourceOrAjax("XUI.EffectRipple.init();","load");
 
 

@@ -12,7 +12,7 @@ $this->setItem("menu",
         "application-menu",
         "<i class=\"material-icons\">more_vert</i>",
         "menu",
-        "secondary",
+        "",
 	"",
 	""
 );
