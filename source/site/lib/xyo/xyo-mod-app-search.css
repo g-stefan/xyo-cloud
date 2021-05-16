@@ -12,6 +12,8 @@
 	padding-top: 5px;
 	height: 40px;
 	overflow: visible;
+	float: left;
+	margin-right: 3px;
 }
 
 #application_search_form > .xui.form-input-group {	
