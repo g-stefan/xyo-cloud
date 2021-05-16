@@ -766,7 +766,10 @@ class xyo_mod_ds_User extends xyo_Module {
 		$dsUser=&$this->dsUser->copyThis();
 		$dsUser->clear();
 		$dsUser->logged_in=1;
-		for($dsUser->load();$dsUser->isValid();$dsUser->loadNext()){		
+		for($dsUser->load();$dsUser->isValid();$dsUser->loadNext()){
+			if(strlen($dsUser->action_at)==0){
+				continue;
+			};
 			if(time()-mktime(
 					substr($dsUser->action_at,11,2),	
 					substr($dsUser->action_at,14,2),
