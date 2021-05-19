@@ -33,7 +33,7 @@ if ($this->isElementError()) {
 		if ($this->ds->load(0, 1)) {
 			$this->processComponent("xui.form-image",array(
 			"element" => "picture",
-			"filename"=>"repository/xyo-user/".$this->ds->id."-".$this->ds->username."-picture-".time(),
+			"filename"=>"repository/xyo-user/".$this->ds->id."-".urlencode($this->ds->username)."-picture-".time(),
 			"extension"=>true,
 			"delete_before_save"=>true));
 		};
@@ -87,7 +87,7 @@ if ($this->ds->save()) {
 
 	$this->processComponent("xui.form-image",array(
 	"element" => "picture",
-	"filename"=>"repository/xyo-user/".$this->ds->id."-".$this->ds->username."-picture-".time(),
+	"filename"=>"repository/xyo-user/".$this->ds->id."-".urlencode($this->ds->username)."-picture-".time(),
 	"extension"=>true,
 	"delete_before_save"=>true,
 	"make_thumbnails" => array(
