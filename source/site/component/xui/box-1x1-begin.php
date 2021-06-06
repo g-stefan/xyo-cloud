@@ -8,8 +8,11 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$title=$this->getArgument("title",$this->getParameter("form_title"));
+$cssClass=$this->getArgument("css-class","");
+if(strlen($cssClass)>0){
+	$cssClass=" ".$cssClass;
+};
 
 ?>
 <div class="xui box -row">
-	<div class="xui box -x1x1">
+	<div class="xui box -x1x1<?php echo $cssClass; ?>">
