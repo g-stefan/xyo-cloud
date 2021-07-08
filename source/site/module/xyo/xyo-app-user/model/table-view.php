@@ -95,6 +95,10 @@ if($this->isInlineForm){
 	);
 
 	$this->tableType=array(	  
-		"name"=>array("custom","table-view-cell-name-inline"),
+		"name"=>array("custom","table-view-cell-name-inline")
 	);
+
+	$this->tableData=array_merge($this->tableData,array(
+		"username"=>"username"
+	));
 };

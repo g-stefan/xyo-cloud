@@ -107,10 +107,8 @@ if(strlen($userImageThumbnail)>0) {
 				</div>
 				<div class="xui app-user-info">
 					<div class="xui app-user">
-						<div class="xui _content">
-							<div class="xui _background_img"></div>
-							<div class="xui _background"></div>
-							<div class="xui _image -elevation-2">
+						<div class="xui _content">							
+							<div class="xui _image">
 								<div class="xui _image_img"></div>
 							</div>
 							<div class="xui _info">								

@@ -23,3 +23,24 @@ $this->requestUriRedirect("/admin/template",array("run"=>"xyo-app-template"),"/a
 $this->requestUriRedirect("/admin/about",array("run"=>"xyo-app-about"),"/admin/run/xyo-app-about");
 $this->requestUriRedirect("/admin/profile",array("run"=>"xyo-app-user-profile"),"/admin/run/xyo-app-user-profile");
 $this->requestUriRedirect("/admin/logout",array("run"=>"xyo-app-logout"),"/admin/run/xyo-app-logout");
+
+if(defined("XYO_CLOUD_ROUTER_DEFAULT") && defined("XYO_CLOUD_ADMINISTRATOR")) {
+
+	$this->requestUriRedirect("/dashboard",array("run"=>"xyo-app-dashboard"),"/run/xyo-app-dashboard");
+	$this->requestUriRedirect("/install",array("run"=>"xyo-app-install"),"/run/xyo-app-install");
+	$this->requestUriRedirect("/users",array("run"=>"xyo-app-user"),"/run/xyo-app-user");
+	$this->requestUriRedirect("/groups-of-users",array("run"=>"xyo-app-user-group"),"/run/xyo-app-user-group");
+	$this->requestUriRedirect("/module",array("run"=>"xyo-app-module"),"/run/xyo-app-module");
+	$this->requestUriRedirect("/module-groups",array("run"=>"xyo-app-module-group"),"/run/xyo-app-module-group");
+	$this->requestUriRedirect("/language",array("run"=>"xyo-app-language"),"/run/xyo-app-language");
+	$this->requestUriRedirect("/datasource",array("run"=>"xyo-app-datasource"),"/run/xyo-app-datasource");
+	$this->requestUriRedirect("/core",array("run"=>"xyo-app-core"),"/run/xyo-app-core");
+	$this->requestUriRedirect("/acl-module",array("run"=>"xyo-app-acl-module"),"/run/xyo-app-acl-module");
+	$this->requestUriRedirect("/settings",array("run"=>"xyo-app-settings"),"/run/xyo-app-settings");
+	$this->requestUriRedirect("/template",array("run"=>"xyo-app-template"),"/run/xyo-app-template");
+	$this->requestUriRedirect("/about",array("run"=>"xyo-app-about"),"/run/xyo-app-about");
+	$this->requestUriRedirect("/profile",array("run"=>"xyo-app-user-profile"),"/run/xyo-app-user-profile");
+	$this->requestUriRedirect("/logout",array("run"=>"xyo-app-logout"),"/run/xyo-app-logout");
+
+};
+

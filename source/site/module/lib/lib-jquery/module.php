@@ -15,7 +15,7 @@ class lib_JQuery extends xyo_Module {
 	public function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
 		if ($this->isBase("lib_JQuery")) {
-			$this->setHtmlJs($this->site."lib/jquery/jquery-3.5.1.min.js");
+			$this->setHtmlJs($this->site."lib/jquery/jquery-3.6.0.min.js");
         	}
 	}
 

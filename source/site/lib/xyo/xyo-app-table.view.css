@@ -154,3 +154,11 @@
 .xui.component-table.-application.-is-inline-form.-hide-top-toolbar.-use-application-search .xui.app-toolbar:nth-child(2) {
 	display: none;
 }
+
+.xui.application > ._content:before {
+	display: none;
+}
+
+.xui.application > ._content:after {
+	display: none;
+}

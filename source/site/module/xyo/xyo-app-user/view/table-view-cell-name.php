@@ -11,7 +11,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 echo "<table class=\"xui\"><tr>";
 
 echo "<td class=\"xui\" style=\"width:64px;padding-right:3px;\">";
-	echo "<div class=\"xui -elevation-2 -elevation-4-hover -elevation-transition\" style=\"width:64px;height:64px;overflow:hidden;border-radius:50%;cursor: pointer;\"".
+	echo "<div class=\"xui -bd-rock-1\" style=\"width:64px;height:64px;overflow:hidden;border-radius:50%;cursor:pointer;border-style:solid;border-width:1px;\"".
 		" onclick=\"".$this->getCmdEditOnClick($this->viewKey,$this->viewId)."\">";
 		$modThumbnail=&$this->getModule("xyo-mod-thumbnail");
 		$xuiImage=&$this->getModule("xui-form-image");
