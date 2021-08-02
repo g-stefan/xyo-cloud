@@ -823,16 +823,6 @@ class xyo_datasource_sqlite_Query extends xyo_Config {
 	function delete() {
 		if ($this->isOkToDelete()) {
 
-			$no = false;
-			foreach ($this->queryOnDeleteSet_ as $key_ => $value_) {
-				$no = true;
-				$this->$key_ = $value_;
-			};
-			if ($no) {
-
-			};
-
-
 			foreach ($this->queryDelete_ as $key_ => $value_) {
 				if ($this->fieldTable_[$key_]->isValid()) {
 					$this->fieldTable_[$key_]->delete();
