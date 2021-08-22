@@ -1103,11 +1103,13 @@ class xyo_Module extends xyo_Config {
 		$action_=$this->requestUri($this->moduleFromRequestDirect($request_));
 		$fName=$this->instanceV."fn_call_".$this->fnCallId;
 		echo "<form name=\"".$fName."\" method=\"POST\" action=\"".$action_."\">";
+		$this->eFormRequestCsrf();
 		$this->eFormBuildRequest($request_);
 		echo "</form>";
 		$this->ejsBegin();
 		echo "function ".$functionJs."(){";
 			echo "if(".$processJs."(document.forms.".$fName.")){";
+				echo "document.forms.".$fName.".elements.request_csrf.value=window.requestCSRF;";
 				echo "document.forms.".$fName.".submit();";
 			echo "};";
 			echo "return false;";
@@ -1836,6 +1838,22 @@ class xyo_Module extends xyo_Config {
 
 	public function setDataSource($name) {
 		return $this->cloud->dataSource->setModuleDataSource($this->name, $name);
+	}
+
+	//
+	// Request CSRF
+	//
+
+	public function eFormRequestCsrf() {
+		echo "<input type=\"hidden\" name=\"request_csrf\" value=\"".$this->cloud->get("request_csrf")."\"></input>";
+	}
+
+	public function setHtmlRequestCsrfJsSourceOrAjax() {
+		$this->setHtmlJsSourceOrAjax("window.requestCSRF=\"".$this->cloud->get("request_csrf")."\";","load");
+	}
+
+	public function getRequestCsrf() {
+		return $this->cloud->get("request_csrf");
 	}
 
 	//

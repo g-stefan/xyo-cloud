@@ -33,6 +33,7 @@ $this->requireComponent(array(
 	"xui.form-image",
 	"xui.form-switch",
 	"xui.form-action-apply",
+	"xui.form-text-icon-right",
 
 	"xui.box-1x2-begin",
 	"xui.box-1x2-separator",
@@ -56,3 +57,6 @@ if($userId){
 	};
 };
 
+// --- 
+
+$this->setHtmlCss($this->site."lib/xyo/xyo-app-user-form.css");

@@ -22,6 +22,7 @@ class xyo_mod_ds_user_Info {
 	public $authorizedBy;
 	public $captcha;
 	public $key;
+	public $csrf;
 
 }
 
@@ -107,6 +108,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		$this->info->authorizedBy = null;
 		$this->info->captcha=null;
 		$this->info->key=null;
+		$this->info->csrf=null;
 
 		$this->authorized = false;
 
@@ -146,14 +148,20 @@ class xyo_mod_ds_User extends xyo_Module {
 					};
 
 					$this->authorized = $this->performUserCheckLogin();
+
+					if ($this->authorized) {
+						$this->csrfBegin();
+						return true;
+					};
+
 				};
 			};
 		};
-		if ($this->authorized) {
+		if ($this->authorized) {			
 			return true;
 		};
 
-		if (!$authorization) {
+		if (!$authorization) {			
 			$id = $this->cloud->getRequest("user_id");
 			if ($id) {
 				$key = $this->cloud->getRequest("user_key");
@@ -166,7 +174,13 @@ class xyo_mod_ds_User extends xyo_Module {
 							$this->info->key = $key;
 							$this->info->session = $session;
 							$this->info->rnd = $rnd;
-							$this->authorized = $this->performUserCheckSession();
+
+							if($this->csrfCheck()) {
+								$this->authorized = $this->performUserCheckSession();
+								if($this->authorized){
+									$this->csrfNext();
+								};
+							};
 						};
 					};
 				};
@@ -174,6 +188,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		};
 
 		if(!$this->authorized){
+			$this->csrfReset();
 			$this->info->id = 0;
 			$this->info->name = "Guest";
 			$this->info->username = "guest";
@@ -375,7 +390,7 @@ class xyo_mod_ds_User extends xyo_Module {
 				$this->info->username = $this->dsUser->username;
 				$this->info->name = $this->dsUser->name;
 				$this->info->authorizedBy = "datasource";
-				// key is allways system authorized => password = sha512[passowordHash]
+				// key is always system authorized => password = sha512[passwordHash]
 				$loginSalt = hash("sha512",$this->info->rnd.".".$this->cloud->get("user_login_salt", "unknown"),false);
 				$this->info->key = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$checkPasword2Y,$this->info->rnd);
 				if(strlen($this->dsUser->session)==0){
@@ -483,6 +498,7 @@ class xyo_mod_ds_User extends xyo_Module {
 	}
 
 	function doReset(){
+
 		$this->info->id = 0;
 		$this->info->name = "Guest";
 		$this->info->username = "guest";
@@ -493,6 +509,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		$this->info->authorizedBy = null;
 		$this->info->captcha = null;
 		$this->info->key = null;
+		$this->info->csrf = null;		
 
 		$this->authorized = false;
 
@@ -517,7 +534,10 @@ class xyo_mod_ds_User extends xyo_Module {
 		if ($this->cloud->isRequest("user_key")) {
 			$this->cloud->setRequest("user_key", null);
 		};
-
+		if ($this->cloud->isRequest("user_csrf")) {
+			$this->cloud->setRequest("user_csrf", null);
+		};
+		
 		if($this->useCaptcha) {
 			if ($this->cloud->isRequest("user_captcha")) {
 				$this->cloud->setRequest("user_captcha", null);
@@ -527,6 +547,7 @@ class xyo_mod_ds_User extends xyo_Module {
 			$_SESSION["user_captcha_key"]="";
 		};
 
+		$this->csrfReset();
 		$this->updateSysAcl();
 	}
 
@@ -614,6 +635,7 @@ class xyo_mod_ds_User extends xyo_Module {
 			setcookie("user_session", $this->info->session, 0, $this->siteBase, null);
 			setcookie("user_rnd", $this->info->rnd, 0, $this->siteBase, null);
 			setcookie("user_key", $this->info->key, 0, $this->siteBase, null);
+			setcookie("user_csrf", $this->info->csrf, 0, $this->siteBase, null);
 			return true;
 		};
 		return false;
@@ -624,6 +646,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		setcookie("user_session", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);
 		setcookie("user_rnd", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);
 		setcookie("user_key", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);
+		setcookie("user_csrf", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);		
 	}
 
 	function generateAutoCookie() {
@@ -633,8 +656,12 @@ class xyo_mod_ds_User extends xyo_Module {
 				if (!$this->makeCookie()) {
 					$this->makeResetCookie();
 				};
-			}
-		}
+				return;
+			};
+		};
+		if($this->authorized) {
+			setcookie("user_csrf", $this->info->csrf, 0, $this->siteBase, null);
+		};
 	}
 
 	function jsMakeScript() {
@@ -643,6 +670,7 @@ class xyo_mod_ds_User extends xyo_Module {
 			"document.cookie=\"user_session=\"+escape(\"" . $this->info->session . "\")+\";path=".$this->siteBase."\";".
 			"document.cookie=\"user_rnd=\"+escape(\"" . $this->info->rnd . "\")+\";path=".$this->siteBase."\";".
 			"document.cookie=\"user_key=\"+escape(\"" . $this->info->key . "\")+\";path=".$this->siteBase."\";";
+			"document.cookie=\"user_csrf=\"+escape(\"" . $this->info->csrf . "\")+\";path=".$this->siteBase."\";";
 		};
 		return null;
 	}
@@ -651,7 +679,8 @@ class xyo_mod_ds_User extends xyo_Module {
 		return "document.cookie=\"user_id=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=".$this->siteBase."\";".
 		"document.cookie=\"user_session=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=".$this->siteBase."\";".
 		"document.cookie=\"user_rnd=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=".$this->siteBase."\";".
-		"document.cookie=\"user_key=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=".$this->siteBase."\";";
+		"document.cookie=\"user_key=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=".$this->siteBase."\";".
+		"document.cookie=\"user_csrf=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=".$this->siteBase."\";";
 	}
 
 	function setSessionScript() {
@@ -659,7 +688,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		if (is_null($script)) {
 			$script=$this->jsMakeResetScript();
 		};
-		$this->setHtmlJsSourceOrAjax($script);		
+		$this->setHtmlJsSourceOrAjax($script);
 	}
 
 	function generateAutoScript() {
@@ -668,6 +697,9 @@ class xyo_mod_ds_User extends xyo_Module {
 			if ($authorization === "true") {
 				$this->setSessionScript();
 			};
+		};
+		if($this->authorized) {
+			$this->setHtmlJsSourceOrAjax("document.cookie=\"user_csrf=\"+escape(\"" . $this->info->csrf . "\")+\";path=".$this->siteBase."\";");
 		};
 	}
 
@@ -807,7 +839,6 @@ class xyo_mod_ds_User extends xyo_Module {
 			};
 		};
 
-
 		if($this->isAuthorized()){
 			$this->dsUser->action_at = "NOW";
 			$this->dsUser->action = $this->dsUser->action + 1;
@@ -843,6 +874,64 @@ class xyo_mod_ds_User extends xyo_Module {
 		};
 
 	}
-}
 
+	function csrfGet() {		
+		return hash("sha256",$this->info->rnd.".".$this->info->session.".".$_SESSION["user_csrf_key"]."#".$_SESSION["user_csrf_state"],false);
+	}
+
+	function csrfRequestGet() {
+		return hash("sha256",$this->info->rnd.".".$this->info->session.".".$_SESSION["user_csrf_key_request"]."#".$_SESSION["user_csrf_state"],false);
+	}
+
+	function csrfBegin() {
+		$_SESSION["user_csrf_state"] = 1;
+		$_SESSION["user_csrf_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
+		$_SESSION["user_csrf_key_request"] = hash("sha256",$_SESSION["user_csrf_key"]."#request",false);
+		$this->info->csrf = $this->csrfGet();
+		$this->cloud->set("request_csrf",$this->csrfRequestGet());
+	}
+
+	function csrfReset() {
+		$_SESSION["user_csrf_state"] = "unknown";		
+		$_SESSION["user_csrf_key"] = "unknown";
+		$_SESSION["user_csrf_key_request"] = "unknown";
+		$this->info->csrf = "";
+		$this->cloud->set("request_csrf","");
+	}
+
+	function csrfCheck() {		
+		$csrf = $this->cloud->getRequest("user_csrf","");
+		if(strlen($csrf)){
+			if(strcmp($csrf,$this->csrfGet())==0) {
+				if($this->cloud->get("user_csrf_on_request",true)) {
+					if ((strcmp($_SERVER["REQUEST_METHOD"],"POST")==0) ||
+					(strcmp($_SERVER["REQUEST_METHOD"],"PUT")==0) ||
+					(strcmp($_SERVER["REQUEST_METHOD"],"DELETE")==0)) {
+						$csrf = $this->cloud->getRequest("request_csrf","");
+						if(strlen($csrf)) {
+							if(strcmp($csrf,$this->csrfRequestGet())==0) {
+								return true;
+							};
+						};
+						return false;
+					};
+				};
+				return true;
+			};
+		};
+		return false;
+	}
+
+	function csrfNext() {		
+		++$_SESSION["user_csrf_state"];
+		$_SESSION["user_csrf_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
+		$_SESSION["user_csrf_key_request"] = hash("sha256",$_SESSION["user_csrf_key"]."#request",false);
+		$this->info->csrf = $this->csrfGet();
+		$this->cloud->set("request_csrf",$this->csrfRequestGet());
+	}
+
+	function csrfRequestJS() {
+		$this->setHtmlJsSourceOrAjax("window.requestCSRF=\"".$this->csrfRequestGet()."\";");
+	}
+}
 

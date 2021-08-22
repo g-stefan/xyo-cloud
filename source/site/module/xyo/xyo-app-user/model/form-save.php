@@ -49,23 +49,36 @@ if(!$this->dsPrimaryKeyLoad()){
 	return;
 };
 
-$username = $this->getElementValueString("username");
-if (!$this->isNew) {
-	if(strcmp($this->ds->username,$username)!=0){
-		$this->ds->password=$this->user->changePasswordHashUsername($username,$this->ds->username,$this->ds->password,$this->cloud->get("user_password_encoding","hash"));
-	};
-};
+$isAdministrator=($this->user->isInGroup("wheel")||$this->user->isInGroup("administrator"));
 
-$this->ds->name = $this->getElementValueString("name");
-$this->ds->username = $username;
-if ($this->isNew) {
-	$this->ds->created_at = "NOW";
-	$this->ds->password = $this->user->setPasswordHash($username,$password1,$this->cloud->get("user_password_encoding","hash"));
+if($isAdministrator){ 
+	$username = $this->getElementValueString("username");
+	if (!$this->isNew) {
+		if(strcmp($this->ds->username,$username)!=0){
+			$this->ds->password=$this->user->changePasswordHashUsername($username,$this->ds->username,$this->ds->password,$this->cloud->get("user_password_encoding","hash"));
+		};
+	};
+
+	$this->ds->name = $this->getElementValueString("name");
+	$this->ds->username = $username;
+	if ($this->isNew) {
+		$this->ds->created_at = "NOW";
+		$this->ds->password = $this->user->setPasswordHash($username,$password1,$this->cloud->get("user_password_encoding","hash"));
+	} else {
+		if (strlen($password1)) {
+			$this->ds->password = $this->user->setPasswordHash($username,$password1,$this->cloud->get("user_password_encoding","hash"));
+		};
+	};
 } else {
+	if ($this->isNew) {
+		$this->setError("error.save");
+		return;
+	};
+	$username = $this->ds->username;
 	if (strlen($password1)) {
 		$this->ds->password = $this->user->setPasswordHash($username,$password1,$this->cloud->get("user_password_encoding","hash"));
 	};
-};
+}
 
 $this->ds->xyo_language_id = $this->getElementValueNumber("xyo_language_id");
 $this->ds->enabled = $this->getElementValueNumber("enabled");

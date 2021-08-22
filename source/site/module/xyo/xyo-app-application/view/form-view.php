@@ -8,6 +8,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
+$this->setHtmlRequestCsrfJsSourceOrAjax();
 $this->generateView("notify-alert");
 $this->generateView("notify-error");
 
@@ -23,6 +24,7 @@ if($this->isNew){
 <?php $this->ejsBegin(); ?>
 	function <?php echo $this->instanceV; ?>doCommand(action){
 		document.forms.<?php $this->eFormName(); ?>.elements.<?php echo $this->instanceV; ?>action.value=action;
+		document.forms.<?php $this->eFormName(); ?>.elements.request_csrf.value=window.requestCSRF;
 		document.forms.<?php $this->eFormName(); ?>.submit();
 		return false;
 	}
@@ -38,3 +40,4 @@ $this->generateComponent("xui.form-action-end",array(
 ));
 $this->generateView("form-call");
 $this->generateComponent("xui.box-space");
+$this->generateView("form-return");

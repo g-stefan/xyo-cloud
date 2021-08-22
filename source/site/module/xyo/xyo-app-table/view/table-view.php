@@ -28,6 +28,7 @@ if(!$this->isEmbedded){
 	<form id="<?php $this->eFormName(); ?>" name="<?php $this->eFormName(); ?>" method="POST" action="<?php $this->eFormAction(); ?>" 
 	 class="xyo-app-table_form"
 	 onsubmit="XYO.Table.doUpdate('');return false;" >
+	 <?php $this->eFormRequestCsrf(); ?>
 <?php	};
 
 if($this->isInlineForm){
@@ -414,6 +415,7 @@ foreach($this->tableType as $key_=>$value_){
 		$request_=$this->requestThisDirect($p);
 		$action_=$this->requestUri($this->moduleFromRequestDirect($request_));
 		echo "<form name=\"".$this->instanceV."fn_action_".$key_."\" method=\"POST\" action=\"".$action_."\">";
+			$this->eFormRequestCsrf();
 			$this->eFormBuildRequest($request_);
 		echo "</form>";		
 		$this->ejsBegin();
@@ -421,6 +423,7 @@ foreach($this->tableType as $key_=>$value_){
 		echo " for(var k in request_){";
 		echo "  document.forms.".$this->instanceV."fn_action_".$key_.".elements[k].value=request_[k];";
 		echo " };";
+		echo " document.forms.".$this->instanceV."fn_action_".$key_.".elements[\"request_csrf\"].value=window.requestCSRF;";
 		echo " document.forms.".$this->instanceV."fn_action_".$key_.".submit();";
 		echo "};";			
 		$this->ejsEnd();
@@ -436,6 +439,7 @@ foreach($this->tableAction as $key_=>$value_) {
 	$request_=$this->requestThisDirect($p);
 	$action_=$this->requestUri($this->moduleFromRequestDirect($request_));
 	echo "<form name=\"".$this->instanceV."fn_action_".$key_."\" method=\"POST\" action=\"".$action_."\">";
+		$this->eFormRequestCsrf();
 		$this->eFormBuildRequest($request_);
 	echo "</form>";		
 	$this->ejsBegin();
@@ -443,6 +447,7 @@ foreach($this->tableAction as $key_=>$value_) {
 	echo " for(var k in request_){";
 	echo "  document.forms.".$this->instanceV."fn_action_".$key_.".elements[k].value=request_[k];";
 	echo " };";
+	echo " document.forms.".$this->instanceV."fn_action_".$key_.".elements[\"request_csrf\"].value=window.requestCSRF;";
 	echo " document.forms.".$this->instanceV."fn_action_".$key_.".submit();";
 	echo "};";			
 	$this->ejsEnd();
@@ -467,7 +472,7 @@ if($this->isInlineForm){
 		"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 		"\$(\"#xyo-app-table-inline_content\").html(loader);".          
 		"document.getElementById(\"xyo-application-title\").innerHTML=\"".$this->getApplicationTitle()."\";".
-		"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-empty\", ajax: 1 })".
+		"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-empty\", ajax: 1, request_csrf: window.requestCSRF  })".
 	  	".done(function(result){".
 			"var jsAndHtml=XUI.Html.extractScript(result);".
 			"\$(\"#xyo-app-table-inline_content\").html(jsAndHtml.html);".

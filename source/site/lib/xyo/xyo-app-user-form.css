@@ -1,0 +1,20 @@
+/*
+//
+// Copyright (c) 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+// Created by Grigore Stefan <g_stefan@yahoo.com>
+//
+// MIT License (MIT) <http://opensource.org/licenses/MIT>
+//
+*/
+
+#fn_e_picture_component > .xui._image > .cropit-preview {
+	border-radius: 50%;
+}
+
+#fn_e_picture_component > .xui._image > .cropit-preview > .cropit-preview-background-container {
+	border-radius: 50%;
+}
+
+#fn_e_picture_component > .xui._image > .cropit-preview > .cropit-preview-image-container {
+	border-radius: 50%;
+}

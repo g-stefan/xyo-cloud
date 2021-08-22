@@ -47,13 +47,20 @@ if(!$this->dsPrimaryKeyLoad()){
 	return;
 };
 
-$username = $this->getElementValueString("username");
-if(strcmp($this->ds->username,$username)!=0){
-	$this->ds->password=$this->user->changePasswordHashUsername($username,$this->ds->username,$this->ds->password,$this->cloud->get("user_password_encoding","hash"));
+$isAdministrator=($this->user->isInGroup("wheel")||$this->user->isInGroup("administrator"));
+
+if($isAdministrator) {
+	$username = $this->getElementValueString("username");
+	if(strcmp($this->ds->username,$username)!=0){
+		$this->ds->password = $this->user->changePasswordHashUsername($username, $this->ds->username, $this->ds->password, $this->cloud->get("user_password_encoding","hash"));
+	};
+
+	$this->ds->name = $this->getElementValueString("name");
+	$this->ds->username = $username;	
+} else {	
+	$username=$this->ds->username;
 };
 
-$this->ds->name = $this->getElementValueString("name");
-$this->ds->username = $username;
 if (strlen($password1)) {
 	$this->ds->password = $this->user->setPasswordHash($username,$this->getElementValue("password1"),$this->cloud->get("user_password_encoding","hash"));
 };

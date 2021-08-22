@@ -8,6 +8,8 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
+$isAdministrator=($this->user->isInGroup("wheel")||$this->user->isInGroup("administrator"));
+
 $this->generateComponent("xui.box-1x2-begin");
 $this->generateComponent("xui.panel-begin");
 
@@ -18,8 +20,14 @@ $this->generateComponent("xui.panel-end");
 $this->generateComponent("xui.box-1x2-separator");
 $this->generateComponent("xui.panel-begin");
 
-$this->generateComponent("xui.form-text", array("element" => "name","required"=>true));
-$this->generateComponent("xui.form-username", array("element" => "username","required"=>true));
+if($isAdministrator) {
+	$this->generateComponent("xui.form-text", array("element" => "name","required"=>true));
+	$this->generateComponent("xui.form-username", array("element" =>"username","autocomplete"=>"off","required"=>true));
+} else{ 
+	$this->generateComponent("xui.form-text-icon-right", array("element" => "name", "readonly" => true, "icon"=>"<i class=\"material-icons\">edit_off</i>"));
+	$this->generateComponent("xui.form-text-icon-right", array("element" => "username", "readonly" => true, "icon"=>"<i class=\"material-icons\">edit_off</i>"));
+};
+
 $this->generateComponent("xui.form-password", array("element" => "password1","autocomplete"=>"new-password"));
 $this->generateComponent("xui.form-password", array("element" => "password2","autocomplete"=>"off"));
 $this->generateComponent("xui.form-email", array("element" => "email"));

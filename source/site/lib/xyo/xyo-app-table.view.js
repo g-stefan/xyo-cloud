@@ -76,6 +76,7 @@ XYO.Table.doCommand = function(i_, action) {
 		var appForm=this.instance[i_].form;
 	        appForm.elements[this.instance[i_].instanceV+"action"].value=action;
 		appForm.elements[this.instance[i_].instanceV+"primary_key_value"].value=id;
+		appForm.elements["request_csrf"]=window.requestCSRF;
 		appForm.submit();
 	};
 
@@ -112,6 +113,7 @@ XYO.Table.doToggle = function(i_,field,key,forceRequest) {
 	        appForm.elements[this.instance[i_].instanceV+"action"].value="table-toggle";
 		appForm.elements[this.instance[i_].instanceV+"toggle"].value=key;
 		appForm.elements[this.instance[i_].instanceV+"primary_key_value"].value=field;
+		appForm.elements["request_csrf"]=window.requestCSRF;
 		appForm.submit();		
 		return;
 	};
@@ -171,7 +173,7 @@ XYO.Table.doUpdate = function(i_,request){
 	document.getElementById(instanceV+"table-loader").style.display="block";
 	$.post(
 		this.instance[i_].uri,
-		fSerialized+request+"&ajax=1"
+		fSerialized+request+"&ajax=1&request_csrf="+window.requestCSRF
 	).done(function(response){
 		var jsAndHtml=XUI.Html.extractScript(response);
 		$("#"+instanceV+"table").html(jsAndHtml.html);			
@@ -199,7 +201,7 @@ XYO.Table.checkboxOnlyOneById = function (i_, id) {
 
 XYO.Application = XYO.Application || {};
 
-XYO.Application.doSearch = function () {
+XYO.Application.doSearch = function () {	
 	document.getElementById("search").value=document.getElementById("application_search").value;
 	XYO.Table.doUpdate("","&submit_search=1");
 };

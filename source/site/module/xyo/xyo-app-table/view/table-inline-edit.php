@@ -8,6 +8,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
+$this->setHtmlRequestCsrfJsSourceOrAjax();
 $this->generateView("notify-alert");
 $this->generateView("notify-error");
 
@@ -32,7 +33,7 @@ $this->generateComponent("xui.form-action-end",array(
 $this->ejsBegin();
 echo "window.".$this->instanceV."doCommandInlineForm=function(action){".
 	"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
-	"\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", success: function(response){".
+	"\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", data:{request_csrf:window.requestCSRF}, success: function(response){".
 		"setTimeout(function(){".
 		"var jsAndHtml=XUI.Html.extractScript(response);".
 		"\$(\"#xyo-app-table-inline_content\").html(jsAndHtml.html);".

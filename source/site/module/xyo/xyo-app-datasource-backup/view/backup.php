@@ -8,7 +8,9 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-echo "<forn name=\"x\" class=\"xui application-form\">";
+$this->setHtmlRequestCsrfJsSourceOrAjax();
+//echo "<form name=\"x\" class=\"xui application-form\">";
+//$this->eFormRequestCsrf();
 $this->generateComponent("xui.box-1x1-begin");
 $this->generateComponent("xui.panel-begin",array("title-text"=>$this->getFromLanguage("backup_title")));
 
@@ -32,12 +34,11 @@ $this->generateComponent("xui.panel-begin",array("title-text"=>$this->getFromLan
 
 <div id="status_info"></div>
 
-
 <?php 
 
 $this->generateComponent("xui.panel-end");
 $this->generateComponent("xui.box-1x1-end");
-echo "</form>";
+//echo "</form>";
 
 $this->ejsBegin(); ?>
 
@@ -76,9 +77,9 @@ if($layer&&$connection){
 		"connection"=>$connection,
 		"ajax-js"=>1
 	));
-	$js.="\",success:function(result){eval(result);}});";
+	$js.="\",data:{request_csrf:window.requestCSRF},success:function(result){eval(result);}});";
 	$this->setHtmlJsSource($js,"load");
-}else{
+} else {
 	$js="";
 	$js.="progressBarSetProcent1(100);";
 	$js.="progressBarSetProcent2(100);";
@@ -88,18 +89,20 @@ if($layer&&$connection){
 
 ?>
 <script>
-	function doCommand(action){
+function <?php echo $this->instanceV; ?>doCommand(action){
         var el;
         var id;
 
         document.forms.<?php $this->eFormName(); ?>.elements.action.value=action;
+	document.forms.<?php $this->eFormName(); ?>.elements.request_csrf.value=window.requestCSRF;
         document.forms.<?php $this->eFormName(); ?>.submit();
         return false;
-    }
+}
 </script>
 <form name="<?php $this->eFormName(); ?>" method="POST" action="<?php $this->eFormAction(); ?>" >
+	<?php $this->eFormRequestCsrf(); ?>
 	<input type="hidden" name="action" value="default" />
 	<input type="hidden" name="<?php $this->eElementName("id"); ?>" value="<?php echo $this->eElementValue("id", 0); ?>" />
 	<?php $this->eFormRequest(); ?>
 </form>
-<?php $this->generateView("view-return"); ?>
+<?php $this->generateView("form-return"); ?>

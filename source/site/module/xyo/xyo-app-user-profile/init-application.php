@@ -23,6 +23,7 @@ $this->requireComponent(array(
 	"xui.form-image",
 	"xui.form-email",
 	"xui.form-action-apply",
+	"xui.form-text-icon-right",
 
 	"xui.panel-begin",
 	"xui.panel-end",
@@ -42,3 +43,8 @@ if($this->user->info->id){
 		};
 	};
 };
+
+// --- 
+
+$this->setHtmlCss($this->site."lib/xyo/xyo-app-user-form.css");
+

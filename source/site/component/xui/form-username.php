@@ -12,6 +12,7 @@ $element = $this->getArgument("element");
 $isRequired = $this->getArgument("required", false);
 $maxlength= 1*$this->getArgument("maxlength");
 $autocomplete = $this->getArgument("autocomplete");
+$readonly = $this->getArgument("readonly","");
 
 if($maxlength==0){
 	$maxlength="";
@@ -30,12 +31,20 @@ if($isRequired){
 	$isRequiredClass = " -required";
 };
 
+$classReadonly="";
+if(($readonly == 1) ||  ($readonly == "true")){
+	$readonly=" readonly=\"readonly\"";
+	$classReadonly=" -readonly";
+}else{
+	$readonly="";
+};
+
 ?>
 
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
-<div class="xui form-text -icon-left<?php echo $isRequiredClass; if($this->isElementError($element)){echo " -danger";}; ?>" style="width:100%">
-<input type="text"<?php echo $maxlength; ?> placeholder="" style="width:100%" <?php echo $autocomplete; ?>
+<div class="xui form-text -icon-left<?php echo $isRequiredClass; if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>" style="width:100%">
+<input type="text"<?php echo $maxlength; ?> placeholder="" style="width:100%" <?php echo $autocomplete; ?> <?php echo $readonly; ?>
 	name="<?php $this->eElementName($element); ?>"
 	value="<?php $this->eElementValue($element, ""); ?>"
 	id="<?php $this->eElementId($element); ?>" ></input>
