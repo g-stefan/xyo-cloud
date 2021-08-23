@@ -1856,6 +1856,10 @@ class xyo_Module extends xyo_Config {
 		return $this->cloud->get("request_csrf");
 	}
 
+	public function getRequestCsrfJsSource() {
+		return "window.requestCSRF=\"".$this->cloud->get("request_csrf")."\";";
+	}
+
 	//
 	// Constructor
 	//

@@ -8,5 +8,5 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setHtmlJsSourceOrAjax("doReturn();","load");
 $this->generateView("form-return");
+$this->setHtmlJsSourceOrAjax("doReturn();","load");

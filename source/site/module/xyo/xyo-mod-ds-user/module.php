@@ -875,27 +875,31 @@ class xyo_mod_ds_User extends xyo_Module {
 
 	}
 
-	function csrfGet() {		
+	function csrfGet() {
 		return hash("sha256",$this->info->rnd.".".$this->info->session.".".$_SESSION["user_csrf_key"]."#".$_SESSION["user_csrf_state"],false);
 	}
 
 	function csrfRequestGet() {
-		return hash("sha256",$this->info->rnd.".".$this->info->session.".".$_SESSION["user_csrf_key_request"]."#".$_SESSION["user_csrf_state"],false);
+		return hash("sha256",$this->info->rnd.".".$this->info->session.".".$_SESSION["user_csrf_key_request"]."#".$_SESSION["user_csrf_state_request"],false);
 	}
 
-	function csrfBegin() {
+	function csrfBegin() {		
 		$_SESSION["user_csrf_state"] = 1;
 		$_SESSION["user_csrf_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
-		$_SESSION["user_csrf_key_request"] = hash("sha256",$_SESSION["user_csrf_key"]."#request",false);
 		$this->info->csrf = $this->csrfGet();
+
+		$_SESSION["user_csrf_state_request"] = 1;
+		$_SESSION["user_csrf_key_request"] = hash("sha256",$_SESSION["user_csrf_key"]."#request",false);		
 		$this->cloud->set("request_csrf",$this->csrfRequestGet());
 	}
 
 	function csrfReset() {
-		$_SESSION["user_csrf_state"] = "unknown";		
+		$_SESSION["user_csrf_state"] = "unknown";
 		$_SESSION["user_csrf_key"] = "unknown";
-		$_SESSION["user_csrf_key_request"] = "unknown";
 		$this->info->csrf = "";
+
+		$_SESSION["user_csrf_state_request"] = "unknown";
+		$_SESSION["user_csrf_key_request"] = "unknown";
 		$this->cloud->set("request_csrf","");
 	}
 
@@ -909,25 +913,30 @@ class xyo_mod_ds_User extends xyo_Module {
 					(strcmp($_SERVER["REQUEST_METHOD"],"DELETE")==0)) {
 						$csrf = $this->cloud->getRequest("request_csrf","");
 						if(strlen($csrf)) {
-							if(strcmp($csrf,$this->csrfRequestGet())==0) {
+							if(strcmp($csrf,$this->csrfRequestGet())==0) {								
 								return true;
 							};
-						};
+						};						
 						return false;
 					};
-				};
+				};				
 				return true;
 			};
-		};
+		};		
 		return false;
 	}
 
-	function csrfNext() {		
+	function csrfNext() {
 		++$_SESSION["user_csrf_state"];
 		$_SESSION["user_csrf_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
-		$_SESSION["user_csrf_key_request"] = hash("sha256",$_SESSION["user_csrf_key"]."#request",false);
 		$this->info->csrf = $this->csrfGet();
-		$this->cloud->set("request_csrf",$this->csrfRequestGet());
+
+		$csrf = $this->cloud->getRequest("request_csrf","");
+		if(strlen($csrf)) {
+			++$_SESSION["user_csrf_state_request"];
+			$_SESSION["user_csrf_key_request"] = hash("sha256",$_SESSION["user_csrf_key"]."#request",false);
+		};
+		$this->cloud->set("request_csrf",$this->csrfRequestGet());		
 	}
 
 	function csrfRequestJS() {

@@ -15,11 +15,12 @@ if($this->hasRequestStack($request)){
 	$this->eFormRequestCsrf();
 	$this->eFormBuildRequest($request);
 	echo "</form>";
+	$this->setHtmlRequestCsrfJsSourceOrAjax();
 	$this->ejsBegin();
-	echo "window.".$this->instanceV."doReturn=function(){";
+	echo "window.".$this->instanceV."doReturn=function(){";		
 		echo "document.forms.".$this->instanceV."fn_return.elements.request_csrf.value=window.requestCSRF;";
 		echo "document.forms.".$this->instanceV."fn_return.submit();";
 		echo "return false;";
 	echo "};";	
-	$this->ejsEnd();
+	$this->ejsEnd();	
 };

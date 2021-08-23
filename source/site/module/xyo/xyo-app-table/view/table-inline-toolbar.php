@@ -8,13 +8,16 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setHtmlRequestCsrfJsSourceOrAjax();
+$toolbar_id="xui-app-toolbar_content";
+if($this->isInlineForm){
+	$toolbar_id="xui-app-toolbar_content_right";
+};
+//echo 	$this->getRequestCsrfJsSource();
 echo	"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
-	"\$(\"#xui-app-toolbar_content\").html(loader);".
+	"\$(\"#".$toolbar_id."\").html(loader);".
 	"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"".$this->getArgument("action","table-inline-view-toolbar")."\", ajax: 1, request_csrf: window.requestCSRF })".
   	".done(function(result){".
 		"var jsAndHtml=XUI.Html.extractScript(result);".
-		"\$(\"#xui-app-toolbar_content\").html(jsAndHtml.html);".
-		"\$(\"#xui-app-toolbar_content\").append(jsAndHtml.js);".
+		"\$(\"#".$toolbar_id."\").html(jsAndHtml.html);".
+		"\$(\"#".$toolbar_id."\").append(jsAndHtml.js);".
 	"});";
-	//"XYO.Table.checkboxOnlyOneById('".$this->instance."');";

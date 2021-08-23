@@ -470,7 +470,7 @@ if($this->isInlineForm){
 	"if(action==\"table-view\"){".
 		$this->generateViewToString("table-inline-toolbar",array("action"=>"table-inline-view-toolbar")).
 		"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
-		"\$(\"#xyo-app-table-inline_content\").html(loader);".          
+		"\$(\"#xyo-app-table-inline_content\").html(loader);".
 		"document.getElementById(\"xyo-application-title\").innerHTML=\"".$this->getApplicationTitle()."\";".
 		"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-empty\", ajax: 1, request_csrf: window.requestCSRF  })".
 	  	".done(function(result){".
