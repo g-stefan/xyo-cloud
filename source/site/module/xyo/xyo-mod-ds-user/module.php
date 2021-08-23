@@ -883,64 +883,101 @@ class xyo_mod_ds_User extends xyo_Module {
 		return hash("sha256",$this->info->rnd.".".$this->info->session.".".$_SESSION["user_csrf_key_request"]."#".$_SESSION["user_csrf_state_request"],false);
 	}
 
-	function csrfBegin() {		
+	//
+	// Reference count is used to help with expected multiple request
+	// for example: a javascript code will perform 3 ajax request in parallel,
+	// to not invalidate user session, reference count should be set to 3
+	// 
+	function csrfBegin() {
 		$_SESSION["user_csrf_state"] = 1;
+		$_SESSION["user_csrf_reference_count"] = 1;
 		$_SESSION["user_csrf_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
 		$this->info->csrf = $this->csrfGet();
 
 		$_SESSION["user_csrf_state_request"] = 1;
-		$_SESSION["user_csrf_key_request"] = hash("sha256",$_SESSION["user_csrf_key"]."#request",false);		
+		$_SESSION["user_csrf_reference_count_request"] = 1;
+		$_SESSION["user_csrf_key_request"] = hash("sha256",$_SESSION["user_csrf_key"]."#request",false);
 		$this->cloud->set("request_csrf",$this->csrfRequestGet());
 	}
 
 	function csrfReset() {
 		$_SESSION["user_csrf_state"] = "unknown";
+		$_SESSION["user_csrf_reference_count"] = "unknown";
 		$_SESSION["user_csrf_key"] = "unknown";
 		$this->info->csrf = "";
 
 		$_SESSION["user_csrf_state_request"] = "unknown";
+		$_SESSION["user_csrf_reference_count_request"] = "unknown";
 		$_SESSION["user_csrf_key_request"] = "unknown";
 		$this->cloud->set("request_csrf","");
 	}
 
-	function csrfCheck() {		
+	function csrfCheck() {
 		$csrf = $this->cloud->getRequest("user_csrf","");
 		if(strlen($csrf)){
 			if(strcmp($csrf,$this->csrfGet())==0) {
 				if($this->cloud->get("user_csrf_on_request",true)) {
 					if ((strcmp($_SERVER["REQUEST_METHOD"],"POST")==0) ||
 					(strcmp($_SERVER["REQUEST_METHOD"],"PUT")==0) ||
-					(strcmp($_SERVER["REQUEST_METHOD"],"DELETE")==0)) {
+					(strcmp($_SERVER["REQUEST_METHOD"],"DELETE")==0)||
+					(strcmp($_SERVER["REQUEST_METHOD"],"PATCH")==0)) {
 						$csrf = $this->cloud->getRequest("request_csrf","");
 						if(strlen($csrf)) {
-							if(strcmp($csrf,$this->csrfRequestGet())==0) {								
+							if(strcmp($csrf,$this->csrfRequestGet())==0) {
 								return true;
 							};
-						};						
+						};
 						return false;
 					};
-				};				
+				};
 				return true;
 			};
-		};		
+		};
 		return false;
 	}
 
 	function csrfNext() {
-		++$_SESSION["user_csrf_state"];
-		$_SESSION["user_csrf_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
+		--$_SESSION["user_csrf_reference_count"];
+		if($_SESSION["user_csrf_reference_count"]<=0) {
+			$_SESSION["user_csrf_reference_count"]=1;
+			++$_SESSION["user_csrf_state"];
+			$_SESSION["user_csrf_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
+		};
 		$this->info->csrf = $this->csrfGet();
 
 		$csrf = $this->cloud->getRequest("request_csrf","");
 		if(strlen($csrf)) {
-			++$_SESSION["user_csrf_state_request"];
-			$_SESSION["user_csrf_key_request"] = hash("sha256",$_SESSION["user_csrf_key"]."#request",false);
+			--$_SESSION["user_csrf_reference_count_request"];
+			if($_SESSION["user_csrf_reference_count_request"]<=0) {
+				$_SESSION["user_csrf_reference_count_request"]=1;
+				++$_SESSION["user_csrf_state_request"];
+				$_SESSION["user_csrf_key_request"] = hash("sha256",$_SESSION["user_csrf_key"]."#request",false);
+			};
 		};
-		$this->cloud->set("request_csrf",$this->csrfRequestGet());		
+		$this->cloud->set("request_csrf",$this->csrfRequestGet());
 	}
 
 	function csrfRequestJS() {
 		$this->setHtmlJsSourceOrAjax("window.requestCSRF=\"".$this->csrfRequestGet()."\";");
+	}
+
+	function csrfSetReferenceCount($count) {
+		if($count<=0) {
+			$count=1;
+		};
+		$_SESSION["user_csrf_reference_count"]=$count;
+	}
+
+	function csrfRequestSetReferenceCount($count) {
+		if($count<=0) {
+			$count=1;
+		};
+		$_SESSION["user_csrf_reference_count_request"]=$count;
+	}
+
+	function csrfSetReferenceCountAll($count) {
+		$this->csrfSetReferenceCount($count);
+		$this->csrfRequestSetReferenceCount($count);
 	}
 }
 

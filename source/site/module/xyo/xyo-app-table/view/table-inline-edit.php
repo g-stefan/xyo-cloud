@@ -8,6 +8,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
+$this->user->csrfSetReferenceCountAll(2);
 $this->setHtmlRequestCsrfJsSourceOrAjax();
 $this->generateView("notify-alert");
 $this->generateView("notify-error");
