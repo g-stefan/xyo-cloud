@@ -14,7 +14,7 @@ if($this->cloud->hasApplication()) {
 		if($modApp->hasSearch()) {
 			echo "<div class=\"xui\" id=\"application_search_super\">";
 				echo "<form name=\"application_search\" id=\"application_search_form\" onsubmit=\"XYO.Application.doSearch();return false;\">";
-					$this->eFormRequestCsrf();
+					$this->eFormCsrfRequest();
 					echo "<div class=\"xui form-text -icon-right\">";
 					echo "<input type=\"text\" name=\"search\" value=\"\" size=\"32\" placeholder=\"Search\" id=\"application_search\"></input>";
 					echo "<i class=\"material-icons\">search</i>";

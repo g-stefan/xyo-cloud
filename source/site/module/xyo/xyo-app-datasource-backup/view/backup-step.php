@@ -8,7 +8,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setHtmlRequestCsrfJsSourceOrAjax();
+$this->setHtmlJsSourceOrAjaxCsrfRequest();
 $this->processModel("datasource-layer");
 
 $connection=$this->getParameterRequest("connection",null);
@@ -159,7 +159,7 @@ if($index1<$dsListIndex){
 		));
 
 		  ?>",
-		data: {request_csrf:window.requestCSRF},
+		data: {csrf_request:window.csrfRequest},
 		success:function(result){
 			eval(result);
 		}

@@ -81,5 +81,6 @@ if ($website_language !== "*") {
 $this->setModule("xyo", null, "xyo-mod-ds-loader-mod");
 $this->setModuleLoader("xyo-mod-ds-loader-mod");
 $this->setGroupLoader("xyo-mod-ds-loader-mod");
-//
+// other providers
+$this->setCSRFMitigationProvider("xyo-mod-ds-user");
 //

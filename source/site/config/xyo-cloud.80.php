@@ -22,9 +22,9 @@ $this->set("user_password_encoding","hash");
 $this->set("user_login_salt","unknown");
 // --- overwrite this in xyo-cloud.local.init
 $this->set("user_reco_salt","unknown");
-// --- true - default, force CSRF check on form submit, single tab application
-// --- false - use only cookie CSRF check, allow multiple browser tabs
-$this->set("user_csrf_on_request",true);
+// --- true - default, force CSRF request and token check on form submit, single tab application
+// --- false - use only cookie CSRF token check, allow multiple browser tabs
+$this->set("csrf_request_activated",true);
 $this->set("service_key","unknown");
 $this->set("crypt_rpc_private_key","unknown");
 // ---

@@ -1103,13 +1103,13 @@ class xyo_Module extends xyo_Config {
 		$action_=$this->requestUri($this->moduleFromRequestDirect($request_));
 		$fName=$this->instanceV."fn_call_".$this->fnCallId;
 		echo "<form name=\"".$fName."\" method=\"POST\" action=\"".$action_."\">";
-		$this->eFormRequestCsrf();
+		$this->eFormCsrfRequest();
 		$this->eFormBuildRequest($request_);
 		echo "</form>";
 		$this->ejsBegin();
 		echo "function ".$functionJs."(){";
 			echo "if(".$processJs."(document.forms.".$fName.")){";
-				echo "document.forms.".$fName.".elements.request_csrf.value=window.requestCSRF;";
+				echo "document.forms.".$fName.".elements.csrf_request.value=window.csrfRequest;";
 				echo "document.forms.".$fName.".submit();";
 			echo "};";
 			echo "return false;";
@@ -1841,23 +1841,31 @@ class xyo_Module extends xyo_Config {
 	}
 
 	//
-	// Request CSRF
+	// CSRF Mitigation
 	//
 
-	public function eFormRequestCsrf() {
-		echo "<input type=\"hidden\" name=\"request_csrf\" value=\"".$this->cloud->get("request_csrf")."\"></input>";
+	public function eFormCsrfRequest() {
+		echo ($this->cloud->getCSRFMitigationProvider())->systemGetFormCsrfRequest();
 	}
 
-	public function setHtmlRequestCsrfJsSourceOrAjax() {
-		$this->setHtmlJsSourceOrAjax("window.requestCSRF=\"".$this->cloud->get("request_csrf")."\";","load");
+	public function getFormCsrfRequest() {
+		return ($this->cloud->getCSRFMitigationProvider())->systemGetFormCsrfRequest();
 	}
 
-	public function getRequestCsrf() {
-		return $this->cloud->get("request_csrf");
+	public function setHtmlJsSourceOrAjaxCsrfRequest() {
+		$this->setHtmlJsSourceOrAjax(($this->cloud->getCSRFMitigationProvider())->systemGetCsrfRequestJsSource(),"load");
 	}
 
-	public function getRequestCsrfJsSource() {
-		return "window.requestCSRF=\"".$this->cloud->get("request_csrf")."\";";
+	public function getCsrfRequest() {
+		return ($this->cloud->getCSRFMitigationProvider())->systemGetCsrfRequest();
+	}
+
+	public function getCsrfRequestJsSource() {
+		return ($this->cloud->getCSRFMitigationProvider())->systemGetCsrfRequestJsSource();
+	}
+
+	public function setCsrfReferenceCount($count) {
+		($this->cloud->getCSRFMitigationProvider())->systemSetCsrfReferenceCount($count);
 	}
 
 	//

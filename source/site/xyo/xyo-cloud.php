@@ -1388,6 +1388,9 @@ class xyo_Cloud extends xyo_Config {
 	}
 
 	public function setHtmlJsSourceOrAjax($module,$source,$opt="none") {
+		if(strlen($source)==0){
+			return;
+		};
 		if($this->isAjaxJs) {
 			echo $source;
 			return;
@@ -1485,7 +1488,45 @@ class xyo_Cloud extends xyo_Config {
 		//
 		$this->setModule(null, $this->path."xyo/xyo-datasource/xyo-datasource-quantum", "xyo-datasource-quantum");
 		$this->setModule(null, $this->path."xyo/xyo-datasource/xyo-datasource-memory", "xyo-datasource-memory");
-	}	
+	}
+
+	//
+	// CSRF Mitigation Manager
+	//
+
+	protected $csrfMitigationProvider;
+
+	protected function initCSRFMitigationManager() {
+		$this->csrfMitigationProvider = &$this;
+	}
+
+	public function setCSRFMitigationProvider($name) {
+		$this->csrfMitigationProvider = &$this->getModule($name);
+	}
+
+	public function getCSRFMitigationProvider() {
+		return $this->csrfMitigationProvider;
+	}
+
+	//
+	// CSRF Mitigation Dummy provider
+	//
+
+	public function systemGetFormCsrfRequest() {
+		return "";
+	}
+		
+	public function systemGetCsrfRequest() {
+		return "";
+	}
+
+	public function systemGetCsrfRequestJsSource() {		
+		return "";
+	}
+
+	public function systemSetCsrfReferenceCount($count) {		
+	}
+
 
 	//
 	// Main
@@ -1516,7 +1557,8 @@ class xyo_Cloud extends xyo_Config {
 		$this->initRequestManager();
 		$this->initHtmlManager();
 		$this->initTemplateManager();
-		$this->initDataSourceManager();		
+		$this->initDataSourceManager();
+		$this->initCSRFMitigationManager();
 	}
 
 	public function getClientIP() {

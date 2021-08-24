@@ -8,7 +8,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setHtmlRequestCsrfJsSourceOrAjax();
+$this->setHtmlJsSourceOrAjaxCsrfRequest();
 $this->ejsBegin();
 echo "XYO.Table.doUpdate(\"".$this->instance."\",\"&".$this->instanceV."action=table-view\");";
 $this->ejsEnd();

@@ -8,7 +8,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setHtmlRequestCsrfJsSourceOrAjax();
+$this->setHtmlJsSourceOrAjaxCsrfRequest();
 $formTitle="form.title_select";
 $layer=$this->getElementValueString("layer","xyo");
 
@@ -19,7 +19,7 @@ $layer=$this->getElementValueString("layer","xyo");
         var id;
 
         document.forms.<?php $this->eFormName(); ?>.elements.action.value=action;
-	document.forms.<?php $this->eFormName(); ?>.elements.request_csrf.value=window.requestCSRF;
+	document.forms.<?php $this->eFormName(); ?>.elements.csrf_request.value=window.csrfRequest;
         document.forms.<?php $this->eFormName(); ?>.submit();
         return false;
     }
@@ -29,7 +29,7 @@ $layer=$this->getElementValueString("layer","xyo");
 
 <?php
 
-$this->eFormRequestCsrf();
+$this->eFormCsrfRequest();
 $this->generateComponent("xui.box-1x1-begin");
 $this->generateComponent("xui.panel-begin",array("title-text"=>$this->getFromLanguage($formTitle)));
 
