@@ -8,10 +8,6 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-if($this->isInlineForm) {
-	$this->setCsrfReferenceCount(2);
-};
-
 include("table-view.init.php");
 if(!$this->isInline){
 	if($this->isAjax()){
@@ -465,27 +461,34 @@ include("table-view.instance.php");
 
 if($this->isInlineForm){
 	$this->setHtmlJsSourceOrAjax("window.".$this->instanceV."doCommand=function(action){".
-	"if(".
-	"action==\"form-new-apply\"||".
-	"action==\"form-edit-apply\"||".
-	"action==\"table-new-save\"||".
-	"action==\"table-edit-save\"){".
-		"return window.doCommandInlineForm(action);".
-	"};".
-	"if(action==\"table-view\"){".
-		$this->generateViewToString("table-inline-toolbar",array("action"=>"table-inline-view-toolbar")).
-		"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
-		"\$(\"#xyo-app-table-inline_content\").html(loader);".
-		"document.getElementById(\"xyo-application-title\").innerHTML=\"".$this->getApplicationTitle()."\";".
-		"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-empty\", ajax: 1, csrf_request: window.csrfRequest  })".
-	  	".done(function(result){".
-			"var jsAndHtml=XUI.Html.extractScript(result);".
-			"\$(\"#xyo-app-table-inline_content\").html(jsAndHtml.html);".
-			"\$(\"#xyo-app-table-inline_content\").append(jsAndHtml.js);".
-		"});".
-		"return false;".
-	"};".
-	"return XYO.Table.doCommand(\"".$this->instance."\",action); };"
+	"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-form-command\", ajax: 1, csrf_request: window.csrfRequest  })".
+	".done(function(result){".
+		"var jsAndHtml=XUI.Html.extractScript(result);".		
+		"\$(\"#xyo-app-table-inline_content\").append(jsAndHtml.js);".		
+		"if(".
+		"action==\"form-new-apply\"||".
+		"action==\"form-edit-apply\"||".
+		"action==\"table-new-save\"||".
+		"action==\"table-edit-save\"){".
+			"return window.doCommandInlineForm(action);".
+		"};".
+		"if(action==\"table-view\"){".
+			$this->generateViewToString("table-inline-toolbar",array("action"=>"table-inline-view-toolbar")).
+			"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
+			"\$(\"#xyo-app-table-inline_content\").html(loader);".
+			"document.getElementById(\"xyo-application-title\").innerHTML=\"".$this->getApplicationTitle()."\";".
+			"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-empty\", ajax: 1, csrf_request: window.csrfRequest  })".
+	  		".done(function(result){".
+				"var jsAndHtml=XUI.Html.extractScript(result);".
+				"\$(\"#xyo-app-table-inline_content\").html(jsAndHtml.html);".
+				"\$(\"#xyo-app-table-inline_content\").append(jsAndHtml.js);".
+			"});".
+			"return false;".
+		"};".
+		"return XYO.Table.doCommand(\"".$this->instance."\",action);".		
+	"});".
+	"return false;".
+	"};"
 	,"load");
 } else {
 	$this->setHtmlJsSourceOrAjax("window.".$this->instanceV."doCommand=function(action){ return XYO.Table.doCommand(\"".$this->instance."\",action); };","load");
