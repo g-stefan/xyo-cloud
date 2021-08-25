@@ -26,6 +26,7 @@ $this->addItem("xui.form-switch", "log_module",0);
 $this->addItem("xui.form-switch", "log_request",0);
 $this->addItem("xui.form-switch", "log_response",0);
 $this->addItem("xui.form-switch", "log_language",0);
+$this->addItem("xui.form-switch", "csrf_request_refresh",1);
 
 $this->addItem("xui.panel-end");
 

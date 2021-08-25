@@ -47,12 +47,14 @@ class xyo_mod_ds_User extends xyo_Module {
 	var $excludeModuleFromAction_;	
 	//
 	var $csrfRequestJsSourceOnce_;
+	var $csrfRequestRefresh_;
 
 	function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
 
 		$this->info = new xyo_mod_ds_user_Info();
 		$this->csrfRequestJsSourceOnce_ = true;
+		$this->csrfRequestRefresh_ = 1*$this->cloud->get("csrf_request_refresh", true);
 
 		$this->useAction = 1*$this->cloud->get("user_action", false);
 		$this->useCaptcha= 1*$this->cloud->get("user_captcha", false);
@@ -122,12 +124,12 @@ class xyo_mod_ds_User extends xyo_Module {
 			if ($authorization === "true") {
 				$authorization = false;
 
-				$username = $this->cloud->getRequest("user_username");
-				$password = $this->cloud->getRequest("user_password");
-				$rnd = $this->cloud->getRequest("user_rnd");
+				$username = $this->cloud->getPostRequest("user_username");
+				$password = $this->cloud->getPostRequest("user_password");
+				$rnd = $this->cloud->getPostRequest("user_rnd");
 
 				if($this->useCaptcha) {
-					$captcha = $this->cloud->getRequest("user_captcha");
+					$captcha = $this->cloud->getPostRequest("user_captcha");
 				} else {
 					$captcha = true;
 				};
@@ -928,20 +930,18 @@ class xyo_mod_ds_User extends xyo_Module {
 	function csrfCheck() {
 		$csrf = $this->cloud->getRequest("csrf_token","");
 		if(strlen($csrf)){
-			if(strcmp($csrf,$this->csrfTokenGet())==0) {
-				if($this->cloud->get("csrf_request_activated",true)) {
-					if ((strcmp($_SERVER["REQUEST_METHOD"],"POST")==0) ||
-					(strcmp($_SERVER["REQUEST_METHOD"],"PUT")==0) ||
-					(strcmp($_SERVER["REQUEST_METHOD"],"DELETE")==0)||
-					(strcmp($_SERVER["REQUEST_METHOD"],"PATCH")==0)) {
-						$csrf = $this->cloud->getRequest("csrf_request","");
-						if(strlen($csrf)) {
-							if(strcmp($csrf,$this->csrfRequestGet())==0) {
-								return true;
-							};
+			if(strcmp($csrf,$this->csrfTokenGet())==0) {				
+				if ((strcmp($_SERVER["REQUEST_METHOD"],"POST")==0) ||
+				(strcmp($_SERVER["REQUEST_METHOD"],"PUT")==0) ||
+				(strcmp($_SERVER["REQUEST_METHOD"],"DELETE")==0)||
+				(strcmp($_SERVER["REQUEST_METHOD"],"PATCH")==0)) {
+					$csrf = $this->cloud->getPostRequest("csrf_request","");
+					if(strlen($csrf)) {
+						if(strcmp($csrf,$this->csrfRequestGet())==0) {
+							return true;
 						};
-						return false;
 					};
+					return false;
 				};
 				return true;
 			};
@@ -956,18 +956,20 @@ class xyo_mod_ds_User extends xyo_Module {
 			++$_SESSION["csrf_token_state"];
 			$_SESSION["csrf_token_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
 		};
-		$this->info->csrf_token = $this->csrfTokenGet();		
+		$this->info->csrf_token = $this->csrfTokenGet();
 
-		$csrf = $this->cloud->getRequest("csrf_request","");
-		if(strlen($csrf)) {
-			--$_SESSION["csrf_request_reference_count"];
-			if($_SESSION["csrf_request_reference_count"]<=0) {
-				$_SESSION["csrf_request_reference_count"]=1;
-				++$_SESSION["csrf_request_state"];
-				$_SESSION["csrf_request_key"] = hash("sha256",$_SESSION["csrf_token_key"]."#request",false);
+		if($this->csrfRequestRefresh_) {
+			$csrf = $this->cloud->getRequest("csrf_request","");
+			if(strlen($csrf)) {
+				--$_SESSION["csrf_request_reference_count"];
+				if($_SESSION["csrf_request_reference_count"]<=0) {
+					$_SESSION["csrf_request_reference_count"]=1;
+					++$_SESSION["csrf_request_state"];
+					$_SESSION["csrf_request_key"] = hash("sha256",$_SESSION["csrf_token_key"]."#request",false);
+				};
 			};
+			$this->info->csrf_request = $this->csrfRequestGet();		
 		};
-		$this->info->csrf_request = $this->csrfRequestGet();		
 	}
 
 	function csrfRequestJS() {

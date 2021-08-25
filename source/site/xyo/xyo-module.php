@@ -1122,6 +1122,10 @@ class xyo_Module extends xyo_Config {
 		return $this->cloud->isRequestRedirect();
 	}
 
+	public function getPostRequest($name, $default=null) {
+		return $this->cloud->getPostRequest($name, $default);
+	}
+
 	//
 	// Storage Manager
 	//

@@ -654,6 +654,7 @@ class xyo_Cloud extends xyo_Config {
 	public $isJson;
 	public $requestUriRedirectList;
 	public $requestUriRedirectListInverse;
+	protected $requestPost;
 
 	private function initRequestManager() {
 		$this->request=new xyo_Attributes(array_merge(xyo_Cloud_Request__stripSlashesDeep($_COOKIE),xyo_Cloud_Request__stripSlashesDeep($_GET),xyo_Cloud_Request__stripSlashesDeep($_POST)));
@@ -662,7 +663,8 @@ class xyo_Cloud extends xyo_Config {
 		$this->isAjaxJs=false;
 		$this->isJson=false;
 		$this->requestUriRedirectList=array();
-		$this->requestUriRedirectListInverse=array();
+		$this->requestUriRedirectListInverse=array();		
+		$this->requestPost =new xyo_Attributes(xyo_Cloud_Request__stripSlashesDeep($_POST));
 	}
 
 	public function getRequest($name, $default=null) {
@@ -1059,6 +1061,10 @@ class xyo_Cloud extends xyo_Config {
 				$this->requestUriRedirectListInverse[$inverseUri]=$uri;
 			};
 		};
+	}
+
+	public function getPostRequest($name, $default=null) {		
+		return $this->requestPost->get($name, $default);
 	}
 
 	//
