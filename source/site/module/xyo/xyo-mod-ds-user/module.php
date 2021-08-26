@@ -46,8 +46,7 @@ class xyo_mod_ds_User extends xyo_Module {
 	var $excludeModuleFromAction_;	
 	//
 	var $csrfTokenJsSourceOnce_;
-	var $csrfTokenRefresh_;
-	var $csrfTokenRefresh_;
+	var $csrfTokenRefresh_;	
 
 	function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
