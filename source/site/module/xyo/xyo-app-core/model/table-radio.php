@@ -18,7 +18,7 @@ if(!$this->ds->default){
 $routerContent="";
 $routerContent.="<"."?"."php\r\n";
 $routerContent.="//\r\n";
-$routerContent.="// Copyright (c) 2018 Grigore Stefan <g_stefan@yahoo.com>\r\n";
+$routerContent.="// Copyright (c) 2020-2021 Grigore Stefan <g_stefan@yahoo.com>\r\n";
 $routerContent.="// Created by Grigore Stefan <g_stefan@yahoo.com>\r\n";
 $routerContent.="//\r\n";
 $routerContent.="// MIT License (MIT) <http://opensource.org/licenses/MIT>\r\n";
