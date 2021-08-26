@@ -24,7 +24,7 @@ $this->set("user_login_salt","unknown");
 $this->set("user_reco_salt","unknown");
 // --- false - default, CSRF request token set at login (not changed after), allow multiple browser tabs
 // --- true - force CSRF request token to be changed on every POST request, single tab application
-$this->set("csrf_request_refresh",false);
+$this->set("csrf_token_refresh",false);
 // ---
 $this->set("service_key","unknown");
 $this->set("crypt_rpc_private_key","unknown");

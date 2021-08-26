@@ -11,7 +11,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 include("table-view.init.php");
 if(!$this->isInline){
 	if($this->isAjax()){
-		$this->setHtmlJsSourceOrAjaxCsrfRequest();
+		$this->setHtmlJsSourceOrAjaxCsrfToken();
 		require_once("table-view.sub.php");
 		include("table-view.instance.php");
 		$this->ejsBegin();
@@ -29,7 +29,7 @@ if(!$this->isEmbedded){
 	<form id="<?php $this->eFormName(); ?>" name="<?php $this->eFormName(); ?>" method="POST" action="<?php $this->eFormAction(); ?>" 
 	 class="xyo-app-table_form"
 	 onsubmit="XYO.Table.doUpdate('');return false;" >
-	 <?php $this->eFormCsrfRequest(); ?>
+	 <?php $this->eFormCsrfToken(); ?>
 <?php	};
 
 if($this->isInlineForm){
@@ -416,7 +416,7 @@ foreach($this->tableType as $key_=>$value_){
 		$request_=$this->requestThisDirect($p);
 		$action_=$this->requestUri($this->moduleFromRequestDirect($request_));
 		echo "<form name=\"".$this->instanceV."fn_action_".$key_."\" method=\"POST\" action=\"".$action_."\">";
-			$this->eFormCsrfRequest();
+			$this->eFormCsrfToken();
 			$this->eFormBuildRequest($request_);
 		echo "</form>";		
 		$this->ejsBegin();
@@ -424,7 +424,7 @@ foreach($this->tableType as $key_=>$value_){
 		echo " for(var k in request_){";
 		echo "  document.forms.".$this->instanceV."fn_action_".$key_.".elements[k].value=request_[k];";
 		echo " };";
-		echo " document.forms.".$this->instanceV."fn_action_".$key_.".elements[\"csrf_request\"].value=window.csrfRequest;";
+		echo " document.forms.".$this->instanceV."fn_action_".$key_.".elements[\"csrf_token\"].value=window.csrfToken;";
 		echo " document.forms.".$this->instanceV."fn_action_".$key_.".submit();";
 		echo "};";			
 		$this->ejsEnd();
@@ -440,7 +440,7 @@ foreach($this->tableAction as $key_=>$value_) {
 	$request_=$this->requestThisDirect($p);
 	$action_=$this->requestUri($this->moduleFromRequestDirect($request_));
 	echo "<form name=\"".$this->instanceV."fn_action_".$key_."\" method=\"POST\" action=\"".$action_."\">";
-		$this->eFormCsrfRequest();
+		$this->eFormCsrfToken();
 		$this->eFormBuildRequest($request_);
 	echo "</form>";		
 	$this->ejsBegin();
@@ -448,7 +448,7 @@ foreach($this->tableAction as $key_=>$value_) {
 	echo " for(var k in request_){";
 	echo "  document.forms.".$this->instanceV."fn_action_".$key_.".elements[k].value=request_[k];";
 	echo " };";
-	echo " document.forms.".$this->instanceV."fn_action_".$key_.".elements[\"csrf_request\"].value=window.csrfRequest;";
+	echo " document.forms.".$this->instanceV."fn_action_".$key_.".elements[\"csrf_token\"].value=window.csrfToken;";
 	echo " document.forms.".$this->instanceV."fn_action_".$key_.".submit();";
 	echo "};";			
 	$this->ejsEnd();
@@ -461,7 +461,7 @@ include("table-view.instance.php");
 
 if($this->isInlineForm){
 	$this->setHtmlJsSourceOrAjax("window.".$this->instanceV."doCommand=function(action){".
-	"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-form-command\", ajax: 1, csrf_request: window.csrfRequest  })".
+	"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-form-command\", ajax: 1, csrf_token: window.csrfToken  })".
 	".done(function(result){".
 		"var jsAndHtml=XUI.Html.extractScript(result);".		
 		"\$(\"#xyo-app-table-inline_content\").append(jsAndHtml.js);".		
@@ -477,7 +477,7 @@ if($this->isInlineForm){
 			"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 			"\$(\"#xyo-app-table-inline_content\").html(loader);".
 			"document.getElementById(\"xyo-application-title\").innerHTML=\"".$this->getApplicationTitle()."\";".
-			"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-empty\", ajax: 1, csrf_request: window.csrfRequest  })".
+			"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-empty\", ajax: 1, csrf_token: window.csrfToken  })".
 	  		".done(function(result){".
 				"var jsAndHtml=XUI.Html.extractScript(result);".
 				"\$(\"#xyo-app-table-inline_content\").html(jsAndHtml.html);".

@@ -1103,13 +1103,13 @@ class xyo_Module extends xyo_Config {
 		$action_=$this->requestUri($this->moduleFromRequestDirect($request_));
 		$fName=$this->instanceV."fn_call_".$this->fnCallId;
 		echo "<form name=\"".$fName."\" method=\"POST\" action=\"".$action_."\">";
-		$this->eFormCsrfRequest();
+		$this->eFormCsrfToken();
 		$this->eFormBuildRequest($request_);
 		echo "</form>";
 		$this->ejsBegin();
 		echo "function ".$functionJs."(){";
 			echo "if(".$processJs."(document.forms.".$fName.")){";
-				echo "document.forms.".$fName.".elements.csrf_request.value=window.csrfRequest;";
+				echo "document.forms.".$fName.".elements.csrf_token.value=window.csrfToken;";
 				echo "document.forms.".$fName.".submit();";
 			echo "};";
 			echo "return false;";
@@ -1848,24 +1848,24 @@ class xyo_Module extends xyo_Config {
 	// CSRF Mitigation
 	//
 
-	public function eFormCsrfRequest() {
-		echo ($this->cloud->getCSRFMitigationProvider())->systemGetFormCsrfRequest();
+	public function eFormCsrfToken() {
+		echo ($this->cloud->getCSRFMitigationProvider())->systemGetFormCsrfToken();
 	}
 
-	public function getFormCsrfRequest() {
-		return ($this->cloud->getCSRFMitigationProvider())->systemGetFormCsrfRequest();
+	public function getFormCsrfToken() {
+		return ($this->cloud->getCSRFMitigationProvider())->systemGetFormCsrfToken();
 	}
 
-	public function setHtmlJsSourceOrAjaxCsrfRequest() {
-		$this->setHtmlJsSourceOrAjax(($this->cloud->getCSRFMitigationProvider())->systemGetCsrfRequestJsSource(),"load");
+	public function setHtmlJsSourceOrAjaxCsrfToken() {
+		$this->setHtmlJsSourceOrAjax(($this->cloud->getCSRFMitigationProvider())->systemGetCsrfTokenJsSource(),"load");
 	}
 
-	public function getCsrfRequest() {
-		return ($this->cloud->getCSRFMitigationProvider())->systemGetCsrfRequest();
+	public function getCsrfToken() {
+		return ($this->cloud->getCSRFMitigationProvider())->systemGetCsrfToken();
 	}
 
-	public function getCsrfRequestJsSource() {
-		return ($this->cloud->getCSRFMitigationProvider())->systemGetCsrfRequestJsSource();
+	public function getCsrfTokenJsSource() {
+		return ($this->cloud->getCSRFMitigationProvider())->systemGetCsrfTokenJsSource();
 	}
 
 	public function setCsrfReferenceCount($count) {

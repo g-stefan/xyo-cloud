@@ -8,7 +8,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setHtmlJsSourceOrAjaxCsrfRequest();
+$this->setHtmlJsSourceOrAjaxCsrfToken();
 $this->runModule("xyo-mod-toolbar", array_merge(array(
 	"instance" => $this->instance,
 	"module" => $this->name,

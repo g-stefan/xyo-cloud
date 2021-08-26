@@ -8,9 +8,9 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setHtmlJsSourceOrAjaxCsrfRequest();
+$this->setHtmlJsSourceOrAjaxCsrfToken();
 //echo "<form name=\"x\" class=\"xui application-form\">";
-//$this->eFormCsrfRequest();
+//$this->eFormCsrfToken();
 $this->generateComponent("xui.box-1x1-begin");
 $this->generateComponent("xui.panel-begin",array("title-text"=>$this->getFromLanguage("backup_title")));
 
@@ -77,7 +77,7 @@ if($layer&&$connection){
 		"connection"=>$connection,
 		"ajax-js"=>1
 	));
-	$js.="\",data:{csrf_request:window.csrfRequest},success:function(result){eval(result);}});";
+	$js.="\",data:{csrf_token:window.csrfToken},success:function(result){eval(result);}});";
 	$this->setHtmlJsSource($js,"load");
 } else {
 	$js="";
@@ -94,13 +94,13 @@ function <?php echo $this->instanceV; ?>doCommand(action){
         var id;
 
         document.forms.<?php $this->eFormName(); ?>.elements.action.value=action;
-	document.forms.<?php $this->eFormName(); ?>.elements.csrf_request.value=window.csrfRequest;
+	document.forms.<?php $this->eFormName(); ?>.elements.csrf_token.value=window.csrfToken;
         document.forms.<?php $this->eFormName(); ?>.submit();
         return false;
 }
 </script>
 <form name="<?php $this->eFormName(); ?>" method="POST" action="<?php $this->eFormAction(); ?>" >
-	<?php $this->eFormCsrfRequest(); ?>
+	<?php $this->eFormCsrfToken(); ?>
 	<input type="hidden" name="action" value="default" />
 	<input type="hidden" name="<?php $this->eElementName("id"); ?>" value="<?php echo $this->eElementValue("id", 0); ?>" />
 	<?php $this->eFormRequest(); ?>

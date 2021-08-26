@@ -46,7 +46,7 @@ $settings = array(
 	"log_response" => 0,
 	"log_language" => 0,
 	"login_has_select_language" => 0, // must be attached to module settings
-	"csrf_request_refresh" => 0
+	"csrf_token_refresh" => 0
 );
 $modSettings->getSettingsList($settings);
 $this->merge($settings);

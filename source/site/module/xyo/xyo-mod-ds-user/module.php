@@ -22,7 +22,7 @@ class xyo_mod_ds_user_Info {
 	public $authorizedBy;
 	public $captcha;
 	public $key;	
-	public $csrf_request;
+	public $csrf_token;
 
 }
 
@@ -45,16 +45,16 @@ class xyo_mod_ds_User extends xyo_Module {
 	var $isInGroupCache;
 	var $excludeModuleFromAction_;	
 	//
-	var $csrfRequestJsSourceOnce_;
-	var $csrfRequestRefresh_;
+	var $csrfTokenJsSourceOnce_;
+	var $csrfTokenRefresh_;
 	var $csrfTokenRefresh_;
 
 	function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
 
 		$this->info = new xyo_mod_ds_user_Info();
-		$this->csrfRequestJsSourceOnce_ = true;
-		$this->csrfRequestRefresh_ = 1*$this->cloud->get("csrf_request_refresh", true);		
+		$this->csrfTokenJsSourceOnce_ = true;
+		$this->csrfTokenRefresh_ = 1*$this->cloud->get("csrf_token_refresh", true);		
 
 		$this->useAction = 1*$this->cloud->get("user_action", false);
 		$this->useCaptcha= 1*$this->cloud->get("user_captcha", false);
@@ -114,7 +114,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		$this->info->authorizedBy = null;
 		$this->info->captcha=null;
 		$this->info->key=null;		
-		$this->info->csrf_request=null;
+		$this->info->csrf_token=null;
 
 		$this->authorized = false;
 
@@ -515,7 +515,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		$this->info->authorizedBy = null;
 		$this->info->captcha = null;
 		$this->info->key = null;		
-		$this->info->csrf_request = null;
+		$this->info->csrf_token = null;
 
 		$this->authorized = false;
 
@@ -540,8 +540,8 @@ class xyo_mod_ds_User extends xyo_Module {
 		if ($this->cloud->isRequest("user_key")) {
 			$this->cloud->setRequest("user_key", null);
 		};		
-		if ($this->cloud->isRequest("csrf_request")) {
-			$this->cloud->setRequest("csrf_request", null);
+		if ($this->cloud->isRequest("csrf_token")) {
+			$this->cloud->setRequest("csrf_token", null);
 		};
 		
 		if($this->useCaptcha) {
@@ -875,8 +875,8 @@ class xyo_mod_ds_User extends xyo_Module {
 	// CSRF Mitigation
 	//	
 
-	function csrfRequestGet() {
-		return hash("sha256",$this->info->rnd.".".$this->info->session.".".$_SESSION["csrf_request_key"]."#".$_SESSION["csrf_request_state"],false);
+	function csrfTokenGet() {
+		return hash("sha256",$this->info->rnd.".".$this->info->session.".".$_SESSION["csrf_token_key"]."#".$_SESSION["csrf_token_state"],false);
 	}
 
 	//
@@ -885,17 +885,17 @@ class xyo_mod_ds_User extends xyo_Module {
 	// to not invalidate user session, reference count should be set to 3
 	// 
 	function csrfBegin() {		
-		$_SESSION["csrf_request_state"] = 1;
-		$_SESSION["csrf_request_reference_count"] = 1;
-		$_SESSION["csrf_request_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
-		$this->info->csrf_request = $this->csrfRequestGet();		
+		$_SESSION["csrf_token_state"] = 1;
+		$_SESSION["csrf_token_reference_count"] = 1;
+		$_SESSION["csrf_token_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
+		$this->info->csrf_token = $this->csrfTokenGet();		
 	}
 
 	function csrfReset() {		
-		$_SESSION["csrf_request_state"] = "unknown";
-		$_SESSION["csrf_request_reference_count"] = "unknown";
-		$_SESSION["csrf_request_key"] = "unknown";
-		$this->info->csrf_request = "";		
+		$_SESSION["csrf_token_state"] = "unknown";
+		$_SESSION["csrf_token_reference_count"] = "unknown";
+		$_SESSION["csrf_token_key"] = "unknown";
+		$this->info->csrf_token = "";		
 	}
 
 	function csrfCheck() {
@@ -903,9 +903,9 @@ class xyo_mod_ds_User extends xyo_Module {
 		(strcmp($_SERVER["REQUEST_METHOD"],"PUT")==0) ||
 		(strcmp($_SERVER["REQUEST_METHOD"],"DELETE")==0)||
 		(strcmp($_SERVER["REQUEST_METHOD"],"PATCH")==0)) {
-			$csrf = $this->cloud->getPostRequest("csrf_request","");
+			$csrf = $this->cloud->getPostRequest("csrf_token","");
 			if(strlen($csrf)) {
-				if(strcmp($csrf,$this->csrfRequestGet())==0) {
+				if(strcmp($csrf,$this->csrfTokenGet())==0) {
 					return true;
 				};
 			};
@@ -915,57 +915,49 @@ class xyo_mod_ds_User extends xyo_Module {
 	}
 
 	function csrfNext() {
-		if($this->csrfRequestRefresh_) {
-			$csrf = $this->cloud->getRequest("csrf_request","");
+		if($this->csrfTokenRefresh_) {
+			$csrf = $this->cloud->getRequest("csrf_token","");
 			if(strlen($csrf)) {
-				--$_SESSION["csrf_request_reference_count"];
-				if($_SESSION["csrf_request_reference_count"]<=0) {
-					$_SESSION["csrf_request_reference_count"]=1;
-					++$_SESSION["csrf_request_state"];
-					$_SESSION["csrf_request_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
+				--$_SESSION["csrf_token_reference_count"];
+				if($_SESSION["csrf_token_reference_count"]<=0) {
+					$_SESSION["csrf_token_reference_count"]=1;
+					++$_SESSION["csrf_token_state"];
+					$_SESSION["csrf_token_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
 				};
 			};
 		};
-		$this->info->csrf_request = $this->csrfRequestGet();
-	}
-
-	function csrfRequestJS() {
-		$this->setHtmlJsSourceOrAjax("window.csrfRequest=\"".$this->csrfRequestGet()."\";");
+		$this->info->csrf_token = $this->csrfTokenGet();
 	}
 	
-	function csrfRequestSetReferenceCount($count) {
+	function csrfTokenSetReferenceCount($count) {
 		if($count<=0) {
 			$count=1;
 		};
-		$_SESSION["csrf_request_reference_count"]=$count;
+		$_SESSION["csrf_token_reference_count"]=$count;
 	}
-
-	function csrfSetReferenceCount($count) {		
-		$this->csrfRequestSetReferenceCount($count);
-	}
-
+	
 	//
 	// CSRF Mitigation Provider
 	//
 
-	public function systemGetFormCsrfRequest() {
-		return "<input type=\"hidden\" name=\"csrf_request\" value=\"".$this->info->csrf_request."\"></input>";
+	public function systemGetFormCsrfToken() {
+		return "<input type=\"hidden\" name=\"csrf_token\" value=\"".$this->info->csrf_token."\"></input>";
 	}
 		
-	public function systemGetCsrfRequest() {
-		return $this->info->csrf_request;
+	public function systemGetCsrfToken() {
+		return $this->info->csrf_token;
 	}
 
-	public function systemGetCsrfRequestJsSource() {
-		if($this->csrfRequestJsSourceOnce_){
-			$this->csrfRequestJsSourceOnce_=false;
-			return "window.csrfRequest=\"".$this->info->csrf_request."\";";
+	public function systemGetCsrfTokenJsSource() {
+		if($this->csrfTokenJsSourceOnce_){
+			$this->csrfTokenJsSourceOnce_=false;
+			return "window.csrfToken=\"".$this->info->csrf_token."\";";
 		};
 		return "";
 	}
 
 	public function systemSetCsrfReferenceCount($count) {
-		$this->csrfSetReferenceCount($count);
+		$this->csrfTokenSetReferenceCount($count);
 	}
 }
 

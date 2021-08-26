@@ -31,7 +31,7 @@ if(strlen($jsButtonClick)==0){
 	$originalFormName=$this->getFormName();
 	$this->setFormName($originalFormName.$formSuffix);
 	$jsButtonClick=	"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
-			"\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", data: {csrf_request:window.csrfRequest}, success: function(response){".
+			"\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", data: {csrf_token:window.csrfToken}, success: function(response){".
 				"setTimeout(function(){".
 				"var jsAndHtml=XUI.Html.extractScript(response);".
 				"\$(\"#".$id."_content\").html(jsAndHtml.html);".
@@ -51,7 +51,7 @@ if(!$noHtml) {
 
 $this->setHtmlJsSourceOrAjax(
 	"window.".$jsFunction."=function(jsParameters){".
-		"var jsAction= { ".$instanceV."action: \"".$action."\", ajax: 1, csrf_request: window.csrfRequest  };".
+		"var jsAction= { ".$instanceV."action: \"".$action."\", ajax: 1, csrf_token: window.csrfToken  };".
 		"if(jsParameters){ for (var x in jsParameters) { jsAction[x] = jsParameters[x]; }; };".
 		"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 		"\$(\"#".$id."_content\").html(loader);".

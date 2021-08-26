@@ -8,7 +8,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setHtmlJsSourceOrAjaxCsrfRequest();
+$this->setHtmlJsSourceOrAjaxCsrfToken();
 ?>
 <div class="xui" style="position:relative;width:100%;min-height:320px;">
 	<div class="xui center-xy" style="height:320px;">

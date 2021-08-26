@@ -35,4 +35,4 @@ $instanceJS.="uri:\"".$this->requestUriThis()."\"";
 $instanceJS.="};";
 
 $this->setHtmlJsSourceOrAjax($instanceJS,"load");
-$this->setHtmlJsSourceOrAjaxCsrfRequest();
+$this->setHtmlJsSourceOrAjaxCsrfToken();

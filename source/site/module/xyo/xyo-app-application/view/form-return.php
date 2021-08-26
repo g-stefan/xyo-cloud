@@ -12,13 +12,13 @@ $request=$this->getRequestDirect();
 if($this->hasRequestStack($request)){
 	$request=$this->returnRequest($request);
 	echo "<form name=\"".$this->instanceV."fn_return\" method=\"POST\" action=\"".$this->requestUri($this->moduleFromRequestDirect($request))."\">";
-	$this->eFormCsrfRequest();
+	$this->eFormCsrfToken();
 	$this->eFormBuildRequest($request);
 	echo "</form>";
-	$this->setHtmlJsSourceOrAjaxCsrfRequest();
+	$this->setHtmlJsSourceOrAjaxCsrfToken();
 	$this->ejsBegin();
 	echo "window.".$this->instanceV."doReturn=function(){";		
-		echo "document.forms.".$this->instanceV."fn_return.elements.csrf_request.value=window.csrfRequest;";
+		echo "document.forms.".$this->instanceV."fn_return.elements.csrf_token.value=window.csrfToken;";
 		echo "document.forms.".$this->instanceV."fn_return.submit();";
 		echo "return false;";
 	echo "};";	
