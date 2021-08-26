@@ -25,6 +25,9 @@ $this->set("user_reco_salt","unknown");
 // --- true - default, force CSRF request token to be changed on every request, single tab application
 // --- false - CSRF request token set at login (not changed after), allow multiple browser tabs
 $this->set("csrf_request_refresh",true);
+// --- for system use (repository.php), always true, disabled for multiple file transfers
+$this->set("csrf_token_refresh", !defined("XYO_CLOUD_REPOSITORY"));
+// ---
 $this->set("service_key","unknown");
 $this->set("crypt_rpc_private_key","unknown");
 // ---

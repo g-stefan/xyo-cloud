@@ -8,6 +8,9 @@ AddDefaultCharset utf-8
 #
 RewriteEngine on
 #
+# Repository protect
+RewriteRule "^repository/(.*)" "repository.php?__=$1" [L,NC,QSA]
+#
 # If the request is not for a valid directory
 RewriteCond %{REQUEST_FILENAME} !-d
 # If the request is not for a valid file

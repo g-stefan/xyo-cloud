@@ -48,6 +48,7 @@ class xyo_mod_ds_User extends xyo_Module {
 	//
 	var $csrfRequestJsSourceOnce_;
 	var $csrfRequestRefresh_;
+	var $csrfTokenRefresh_;
 
 	function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
@@ -55,6 +56,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		$this->info = new xyo_mod_ds_user_Info();
 		$this->csrfRequestJsSourceOnce_ = true;
 		$this->csrfRequestRefresh_ = 1*$this->cloud->get("csrf_request_refresh", true);
+		$this->csrfTokenRefresh_ = 1*$this->cloud->get("csrf_token_refresh", true);
 
 		$this->useAction = 1*$this->cloud->get("user_action", false);
 		$this->useCaptcha= 1*$this->cloud->get("user_captcha", false);
@@ -341,28 +343,28 @@ class xyo_mod_ds_User extends xyo_Module {
 			$inputPassword = $this->info->password;
 
 			$loginSalt = hash("sha512",$this->info->rnd.".".$this->cloud->get("user_login_salt", "unknown"),false);
-			$checkPasword = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$inputPassword,$this->info->rnd);
-			if(strlen($checkPasword)==0){
+			$checkPassword = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$inputPassword,$this->info->rnd);
+			if(strlen($checkPassword)==0){
 				return false;
 			};
-			$checkPasword = $passwordX[0].".".hash("sha512",$passwordX[0].$checkPasword,false);
+			$checkPassword = $passwordX[0].".".hash("sha512",$passwordX[0].$checkPassword,false);
 			
 			// check system generated authorization (password is sha512[passowordHash])
-			$checkPasword2X = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$this->info->password,$this->info->rnd);
+			$checkPassword2X = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$this->info->password,$this->info->rnd);
 
-			if(strlen($checkPasword2X)==0){
+			if(strlen($checkPassword2X)==0){
 				return false;
 			};
-			$checkPasword2Y = hash("sha512",$password,false);
+			$checkPassword2Y = hash("sha512",$password,false);
 
 			// possible external authorization with service key
-			if(strcmp($password,$checkPasword)!=0){
+			if(strcmp($password,$checkPassword)!=0){
 				$loginSalt = hash("sha512",$this->info->rnd.".".$this->cloud->get("service_key", "unknown"),false);
-				$checkPasword = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$inputPassword,$this->info->rnd);
-				if(strlen($checkPasword) == 0){
+				$checkPassword = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$inputPassword,$this->info->rnd);
+				if(strlen($checkPassword) == 0){
 					return false;
 				};
-				$checkPasword = $passwordX[0].".".hash("sha512",$passwordX[0].$checkPasword,false);
+				$checkPassword = $passwordX[0].".".hash("sha512",$passwordX[0].$checkPassword,false);
 			};
 
 			$captchaOk=false;
@@ -391,7 +393,7 @@ class xyo_mod_ds_User extends xyo_Module {
 				$captchaOk=true;
 			}
 
-			if (((strcmp($password,$checkPasword)==0)||(strcmp($checkPasword2X,$checkPasword2Y)==0))&&($captchaOk)) {
+			if (((strcmp($password,$checkPassword)==0)||(strcmp($checkPassword2X,$checkPassword2Y)==0))&&($captchaOk)) {
 
 				$this->info->id = $this->dsUser->id;
 				$this->info->username = $this->dsUser->username;
@@ -399,7 +401,7 @@ class xyo_mod_ds_User extends xyo_Module {
 				$this->info->authorizedBy = "datasource";
 				// key is always system authorized => password = sha512[passwordHash]
 				$loginSalt = hash("sha512",$this->info->rnd.".".$this->cloud->get("user_login_salt", "unknown"),false);
-				$this->info->key = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$checkPasword2Y,$this->info->rnd);
+				$this->info->key = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$checkPassword2Y,$this->info->rnd);
 				if(strlen($this->dsUser->session)==0){
 					$this->dsUser->session=hash("sha512",$this->info->key,false);
 				};
@@ -457,13 +459,13 @@ class xyo_mod_ds_User extends xyo_Module {
 
 			// key is allways system authorized => password = sha512[passowordHash]
 			$loginSalt = hash("sha512",$this->info->rnd.".".$this->cloud->get("user_login_salt", "unknown"),false);
-			$checkPasword2X = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$this->info->key,$this->info->rnd);
-			if(strlen($checkPasword2X)==0){
+			$checkPassword2X = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$this->info->key,$this->info->rnd);
+			if(strlen($checkPassword2X)==0){
 				return false;
 			};
-			$checkPasword2Y = hash("sha512",$password,false);
+			$checkPassword2Y = hash("sha512",$password,false);
 
-			if (strcmp($checkPasword2X,$checkPasword2Y)==0) {
+			if (strcmp($checkPassword2X,$checkPassword2Y)==0) {
 
 				$this->info->id = $this->dsUser->id;
 				$this->info->username = $this->dsUser->username;
@@ -671,7 +673,9 @@ class xyo_mod_ds_User extends xyo_Module {
 			};
 		};
 		if($this->authorized) {
-			setcookie("csrf_token", $this->info->csrf_token, 0, $this->siteBase, null);
+			if($this->csrfTokenRefresh_) {
+				setcookie("csrf_token", $this->info->csrf_token, 0, $this->siteBase, null);
+			};
 		};
 	}
 
@@ -708,9 +712,11 @@ class xyo_mod_ds_User extends xyo_Module {
 			if ($authorization === "true") {
 				$this->setSessionScript();
 			};
-		};
+		};		
 		if($this->authorized) {
-			$this->setHtmlJsSourceOrAjax("document.cookie=\"csrf_token=\"+escape(\"" . $this->info->csrf_token . "\")+\";path=".$this->siteBase."\";");
+			if($this->csrfTokenRefresh_) {
+				$this->setHtmlJsSourceOrAjax("document.cookie=\"csrf_token=\"+escape(\"" . $this->info->csrf_token . "\")+\";path=".$this->siteBase."\";");
+			};
 		};
 	}
 
@@ -930,7 +936,7 @@ class xyo_mod_ds_User extends xyo_Module {
 	function csrfCheck() {
 		$csrf = $this->cloud->getRequest("csrf_token","");
 		if(strlen($csrf)){
-			if(strcmp($csrf,$this->csrfTokenGet())==0) {				
+			if(strcmp($csrf,$this->csrfTokenGet())==0) {
 				if ((strcmp($_SERVER["REQUEST_METHOD"],"POST")==0) ||
 				(strcmp($_SERVER["REQUEST_METHOD"],"PUT")==0) ||
 				(strcmp($_SERVER["REQUEST_METHOD"],"DELETE")==0)||
@@ -950,13 +956,15 @@ class xyo_mod_ds_User extends xyo_Module {
 	}
 
 	function csrfNext() {
-		--$_SESSION["csrf_token_reference_count"];
-		if($_SESSION["csrf_token_reference_count"]<=0) {
-			$_SESSION["csrf_token_reference_count"]=1;
-			++$_SESSION["csrf_token_state"];
-			$_SESSION["csrf_token_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
+		if($this->csrfTokenRefresh_) {
+			--$_SESSION["csrf_token_reference_count"];
+			if($_SESSION["csrf_token_reference_count"]<=0) {
+				$_SESSION["csrf_token_reference_count"]=1;
+				++$_SESSION["csrf_token_state"];
+				$_SESSION["csrf_token_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
+			};
+			$this->info->csrf_token = $this->csrfTokenGet();
 		};
-		$this->info->csrf_token = $this->csrfTokenGet();
 
 		if($this->csrfRequestRefresh_) {
 			$csrf = $this->cloud->getRequest("csrf_request","");
@@ -969,7 +977,7 @@ class xyo_mod_ds_User extends xyo_Module {
 				};
 			};
 			$this->info->csrf_request = $this->csrfRequestGet();		
-		};
+		};		
 	}
 
 	function csrfRequestJS() {
