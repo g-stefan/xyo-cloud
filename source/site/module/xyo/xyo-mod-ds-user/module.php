@@ -21,8 +21,7 @@ class xyo_mod_ds_user_Info {
 	public $language;
 	public $authorizedBy;
 	public $captcha;
-	public $key;
-	public $csrf_token;
+	public $key;	
 	public $csrf_request;
 
 }
@@ -55,8 +54,7 @@ class xyo_mod_ds_User extends xyo_Module {
 
 		$this->info = new xyo_mod_ds_user_Info();
 		$this->csrfRequestJsSourceOnce_ = true;
-		$this->csrfRequestRefresh_ = 1*$this->cloud->get("csrf_request_refresh", true);
-		$this->csrfTokenRefresh_ = 1*$this->cloud->get("csrf_token_refresh", true);
+		$this->csrfRequestRefresh_ = 1*$this->cloud->get("csrf_request_refresh", true);		
 
 		$this->useAction = 1*$this->cloud->get("user_action", false);
 		$this->useCaptcha= 1*$this->cloud->get("user_captcha", false);
@@ -115,8 +113,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		$this->info->language = null;
 		$this->info->authorizedBy = null;
 		$this->info->captcha=null;
-		$this->info->key=null;
-		$this->info->csrf_token=null;
+		$this->info->key=null;		
 		$this->info->csrf_request=null;
 
 		$this->authorized = false;
@@ -517,8 +514,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		$this->info->language = null;
 		$this->info->authorizedBy = null;
 		$this->info->captcha = null;
-		$this->info->key = null;
-		$this->info->csrf_token = null;
+		$this->info->key = null;		
 		$this->info->csrf_request = null;
 
 		$this->authorized = false;
@@ -543,10 +539,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		};
 		if ($this->cloud->isRequest("user_key")) {
 			$this->cloud->setRequest("user_key", null);
-		};
-		if ($this->cloud->isRequest("csrf_token")) {
-			$this->cloud->setRequest("csrf_token", null);
-		};
+		};		
 		if ($this->cloud->isRequest("csrf_request")) {
 			$this->cloud->setRequest("csrf_request", null);
 		};
@@ -648,7 +641,6 @@ class xyo_mod_ds_User extends xyo_Module {
 			setcookie("user_session", $this->info->session, 0, $this->siteBase, null);
 			setcookie("user_rnd", $this->info->rnd, 0, $this->siteBase, null);
 			setcookie("user_key", $this->info->key, 0, $this->siteBase, null);
-			setcookie("csrf_token", $this->info->csrf_token, 0, $this->siteBase, null);
 			return true;
 		};
 		return false;
@@ -658,8 +650,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		setcookie("user_id", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);
 		setcookie("user_session", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);
 		setcookie("user_rnd", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);
-		setcookie("user_key", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);
-		setcookie("csrf_token", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);		
+		setcookie("user_key", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);		
 	}
 
 	function generateAutoCookie() {
@@ -671,12 +662,7 @@ class xyo_mod_ds_User extends xyo_Module {
 				};
 				return;
 			};
-		};
-		if($this->authorized) {
-			if($this->csrfTokenRefresh_) {
-				setcookie("csrf_token", $this->info->csrf_token, 0, $this->siteBase, null);
-			};
-		};
+		};		
 	}
 
 	function jsMakeScript() {
@@ -684,8 +670,7 @@ class xyo_mod_ds_User extends xyo_Module {
 			return "document.cookie=\"user_id=\"+escape(\"" . $this->info->id . "\")+\";path=".$this->siteBase."\";".
 			"document.cookie=\"user_session=\"+escape(\"" . $this->info->session . "\")+\";path=".$this->siteBase."\";".
 			"document.cookie=\"user_rnd=\"+escape(\"" . $this->info->rnd . "\")+\";path=".$this->siteBase."\";".
-			"document.cookie=\"user_key=\"+escape(\"" . $this->info->key . "\")+\";path=".$this->siteBase."\";";
-			"document.cookie=\"csrf_token=\"+escape(\"" . $this->info->csrf_token . "\")+\";path=".$this->siteBase."\";";
+			"document.cookie=\"user_key=\"+escape(\"" . $this->info->key . "\")+\";path=".$this->siteBase."\";";			
 		};
 		return null;
 	}
@@ -694,8 +679,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		return "document.cookie=\"user_id=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=".$this->siteBase."\";".
 		"document.cookie=\"user_session=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=".$this->siteBase."\";".
 		"document.cookie=\"user_rnd=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=".$this->siteBase."\";".
-		"document.cookie=\"user_key=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=".$this->siteBase."\";".
-		"document.cookie=\"csrf_token=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=".$this->siteBase."\";";
+		"document.cookie=\"user_key=;expires=Thu, 01-Jan-1970 00:00:01 GMT;path=".$this->siteBase."\";";		
 	}
 
 	function setSessionScript() {
@@ -711,11 +695,6 @@ class xyo_mod_ds_User extends xyo_Module {
 		if ($authorization) {
 			if ($authorization === "true") {
 				$this->setSessionScript();
-			};
-		};		
-		if($this->authorized) {
-			if($this->csrfTokenRefresh_) {
-				$this->setHtmlJsSourceOrAjax("document.cookie=\"csrf_token=\"+escape(\"" . $this->info->csrf_token . "\")+\";path=".$this->siteBase."\";");
 			};
 		};
 	}
@@ -894,11 +873,7 @@ class xyo_mod_ds_User extends xyo_Module {
 
 	//
 	// CSRF Mitigation
-	//
-
-	function csrfTokenGet() {
-		return hash("sha256",$this->info->rnd.".".$this->info->session.".".$_SESSION["csrf_token_key"]."#".$_SESSION["csrf_token_state"],false);
-	}
+	//	
 
 	function csrfRequestGet() {
 		return hash("sha256",$this->info->rnd.".".$this->info->session.".".$_SESSION["csrf_request_key"]."#".$_SESSION["csrf_request_state"],false);
@@ -909,24 +884,14 @@ class xyo_mod_ds_User extends xyo_Module {
 	// for example: a javascript code will perform 3 ajax request in parallel,
 	// to not invalidate user session, reference count should be set to 3
 	// 
-	function csrfBegin() {
-		$_SESSION["csrf_token_state"] = 1;
-		$_SESSION["csrf_token_reference_count"] = 1;
-		$_SESSION["csrf_token_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
-		$this->info->csrf_token = $this->csrfTokenGet();		
-
+	function csrfBegin() {		
 		$_SESSION["csrf_request_state"] = 1;
 		$_SESSION["csrf_request_reference_count"] = 1;
-		$_SESSION["csrf_request_key"] = hash("sha256",$_SESSION["csrf_token_key"]."#request",false);
+		$_SESSION["csrf_request_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
 		$this->info->csrf_request = $this->csrfRequestGet();		
 	}
 
-	function csrfReset() {
-		$_SESSION["csrf_token_state"] = "unknown";
-		$_SESSION["csrf_token_reference_count"] = "unknown";
-		$_SESSION["csrf_token_key"] = "unknown";
-		$this->info->csrf_token = "";		
-
+	function csrfReset() {		
 		$_SESSION["csrf_request_state"] = "unknown";
 		$_SESSION["csrf_request_reference_count"] = "unknown";
 		$_SESSION["csrf_request_key"] = "unknown";
@@ -934,38 +899,21 @@ class xyo_mod_ds_User extends xyo_Module {
 	}
 
 	function csrfCheck() {
-		$csrf = $this->cloud->getRequest("csrf_token","");
-		if(strlen($csrf)){
-			if(strcmp($csrf,$this->csrfTokenGet())==0) {
-				if ((strcmp($_SERVER["REQUEST_METHOD"],"POST")==0) ||
-				(strcmp($_SERVER["REQUEST_METHOD"],"PUT")==0) ||
-				(strcmp($_SERVER["REQUEST_METHOD"],"DELETE")==0)||
-				(strcmp($_SERVER["REQUEST_METHOD"],"PATCH")==0)) {
-					$csrf = $this->cloud->getPostRequest("csrf_request","");
-					if(strlen($csrf)) {
-						if(strcmp($csrf,$this->csrfRequestGet())==0) {
-							return true;
-						};
-					};
-					return false;
+		if ((strcmp($_SERVER["REQUEST_METHOD"],"POST")==0) ||
+		(strcmp($_SERVER["REQUEST_METHOD"],"PUT")==0) ||
+		(strcmp($_SERVER["REQUEST_METHOD"],"DELETE")==0)||
+		(strcmp($_SERVER["REQUEST_METHOD"],"PATCH")==0)) {
+			$csrf = $this->cloud->getPostRequest("csrf_request","");
+			if(strlen($csrf)) {
+				if(strcmp($csrf,$this->csrfRequestGet())==0) {
+					return true;
 				};
-				return true;
 			};
 		};
-		return false;
+		return false;		
 	}
 
 	function csrfNext() {
-		if($this->csrfTokenRefresh_) {
-			--$_SESSION["csrf_token_reference_count"];
-			if($_SESSION["csrf_token_reference_count"]<=0) {
-				$_SESSION["csrf_token_reference_count"]=1;
-				++$_SESSION["csrf_token_state"];
-				$_SESSION["csrf_token_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
-			};
-			$this->info->csrf_token = $this->csrfTokenGet();
-		};
-
 		if($this->csrfRequestRefresh_) {
 			$csrf = $this->cloud->getRequest("csrf_request","");
 			if(strlen($csrf)) {
@@ -973,7 +921,7 @@ class xyo_mod_ds_User extends xyo_Module {
 				if($_SESSION["csrf_request_reference_count"]<=0) {
 					$_SESSION["csrf_request_reference_count"]=1;
 					++$_SESSION["csrf_request_state"];
-					$_SESSION["csrf_request_key"] = hash("sha256",$_SESSION["csrf_token_key"]."#request",false);
+					$_SESSION["csrf_request_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
 				};
 			};
 			$this->info->csrf_request = $this->csrfRequestGet();		
@@ -983,14 +931,7 @@ class xyo_mod_ds_User extends xyo_Module {
 	function csrfRequestJS() {
 		$this->setHtmlJsSourceOrAjax("window.csrfRequest=\"".$this->csrfRequestGet()."\";");
 	}
-
-	function csrfTokenSetReferenceCount($count) {
-		if($count<=0) {
-			$count=1;
-		};
-		$_SESSION["csrf_token_reference_count"]=$count;
-	}
-
+	
 	function csrfRequestSetReferenceCount($count) {
 		if($count<=0) {
 			$count=1;
@@ -998,8 +939,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		$_SESSION["csrf_request_reference_count"]=$count;
 	}
 
-	function csrfSetReferenceCount($count) {
-		$this->csrfTokenSetReferenceCount($count);
+	function csrfSetReferenceCount($count) {		
 		$this->csrfRequestSetReferenceCount($count);
 	}
 
