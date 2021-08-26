@@ -23,7 +23,7 @@ $this->set("user_login_salt","unknown");
 // --- overwrite this in xyo-cloud.local.init
 $this->set("user_reco_salt","unknown");
 // --- false - default, CSRF request token set at login (not changed after), allow multiple browser tabs
-// --- true - force CSRF request token to be changed on every request, single tab application
+// --- true - force CSRF request token to be changed on every POST request, single tab application
 $this->set("csrf_request_refresh",false);
 // ---
 $this->set("service_key","unknown");

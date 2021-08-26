@@ -909,8 +909,9 @@ class xyo_mod_ds_User extends xyo_Module {
 					return true;
 				};
 			};
+			return false;
 		};
-		return false;		
+		return true;
 	}
 
 	function csrfNext() {
@@ -924,8 +925,8 @@ class xyo_mod_ds_User extends xyo_Module {
 					$_SESSION["csrf_request_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
 				};
 			};
-			$this->info->csrf_request = $this->csrfRequestGet();		
-		};		
+		};
+		$this->info->csrf_request = $this->csrfRequestGet();
 	}
 
 	function csrfRequestJS() {
