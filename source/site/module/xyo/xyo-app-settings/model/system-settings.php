@@ -26,12 +26,15 @@ $this->addItem("xui.form-switch", "log_module",0);
 $this->addItem("xui.form-switch", "log_request",0);
 $this->addItem("xui.form-switch", "log_response",0);
 $this->addItem("xui.form-switch", "log_language",0);
-$this->addItem("xui.form-switch", "csrf_token_refresh",0);
 
 $this->addItem("xui.panel-end");
 
 $this->addItem("xui.panel-begin",null,null,array("title"=>"title.login"));
 $this->addItem("xui.form-switch", "login_has_select_language",0);
+$this->addItem("xui.panel-end");
+
+$this->addItem("xui.panel-begin",null,null,array("title"=>"title.security"));
+$this->addItem("xui.form-switch", "csrf_token_refresh",0);
 $this->addItem("xui.panel-end");
 
 $this->addItem("xui.box-1x2-end");

@@ -35,4 +35,5 @@ $this->set("label.brand_logo","Brand logo");
 $this->set("label.brand_name","Brand name");
 $this->set("label.brand_mark","Brand mark");
 
+$this->set("title.security","Security");
 $this->set("label.csrf_token_refresh","CSRF Mitigation - Refresh on every POST request");

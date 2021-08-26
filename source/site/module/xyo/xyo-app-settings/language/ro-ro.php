@@ -35,4 +35,5 @@ $this->set("label.brand_logo","Logo marca");
 $this->set("label.brand_name","Nume marca");
 $this->set("label.brand_mark","Tip marca");
 
+$this->set("title.security","Securitate");
 $this->set("label.csrf_token_refresh","Mitigare CSRF - Actualizeaza la fiecare cerere de tip POST");
