@@ -117,10 +117,14 @@ class xyo_mod_ds_User extends xyo_Module {
 
 		$this->authorized = false;
 
-		$authorization = $this->cloud->getRequest("user_authorization");
+		$authorization = $this->cloud->getPostRequest("user_authorization");
 		if ($authorization) {
 			if ($authorization === "true") {
 				$authorization = false;
+
+				if(!$this->csrfCheck()) {
+					return false;
+				};
 
 				$username = $this->cloud->getPostRequest("user_username");
 				$password = $this->cloud->getPostRequest("user_password");
@@ -155,18 +159,18 @@ class xyo_mod_ds_User extends xyo_Module {
 					$this->authorized = $this->performUserCheckLogin();
 
 					if ($this->authorized) {
-						$this->csrfBegin();
+						$this->csrfReset();
 						return true;
 					};
 
 				};
 			};
 		};
-		if ($this->authorized) {			
+		if ($this->authorized) {
 			return true;
 		};
 
-		if (!$authorization) {			
+		if (!$authorization) {
 			$id = $this->cloud->getRequest("user_id");
 			if ($id) {
 				$key = $this->cloud->getRequest("user_key");
@@ -193,7 +197,6 @@ class xyo_mod_ds_User extends xyo_Module {
 		};
 
 		if(!$this->authorized){
-			$this->csrfReset();
 			$this->info->id = 0;
 			$this->info->name = "Guest";
 			$this->info->username = "guest";
@@ -204,6 +207,7 @@ class xyo_mod_ds_User extends xyo_Module {
 			$this->info->authorizedBy = null;
 			$this->info->captcha=null;
 			$this->info->key=null;
+			$this->csrfReset();
 			$this->updateSysAcl();
 		};
 
@@ -345,7 +349,7 @@ class xyo_mod_ds_User extends xyo_Module {
 			};
 			$checkPassword = $passwordX[0].".".hash("sha512",$passwordX[0].$checkPassword,false);
 			
-			// check system generated authorization (password is sha512[passowordHash])
+			// check system generated authorization (password is sha512[passwordHash])
 			$checkPassword2X = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$this->info->password,$this->info->rnd);
 
 			if(strlen($checkPassword2X)==0){
@@ -453,7 +457,7 @@ class xyo_mod_ds_User extends xyo_Module {
 				return false;
 			};
 
-			// key is allways system authorized => password = sha512[passowordHash]
+			// key is always system authorized => password = sha512[passwordHash]
 			$loginSalt = hash("sha512",$this->info->rnd.".".$this->cloud->get("user_login_salt", "unknown"),false);
 			$checkPassword2X = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$this->info->key,$this->info->rnd);
 			if(strlen($checkPassword2X)==0){
@@ -883,18 +887,11 @@ class xyo_mod_ds_User extends xyo_Module {
 	// for example: a javascript code will perform 3 ajax request in parallel,
 	// to not invalidate user session, reference count should be set to 3
 	// 
-	function csrfBegin() {		
+	function csrfReset() {
 		$_SESSION["csrf_token_state"] = 1;
 		$_SESSION["csrf_token_reference_count"] = 1;
 		$_SESSION["csrf_token_key"] = hash("sha256",date("Y-m-d H:i:s")." - ".rand().".".$this->info->rnd.".".$this->info->session,false);
 		$this->info->csrf_token = $this->csrfTokenGet();		
-	}
-
-	function csrfReset() {		
-		$_SESSION["csrf_token_state"] = "unknown";
-		$_SESSION["csrf_token_reference_count"] = "unknown";
-		$_SESSION["csrf_token_key"] = "unknown";
-		$this->info->csrf_token = "";		
 	}
 
 	function csrfCheck() {
@@ -945,6 +942,10 @@ class xyo_mod_ds_User extends xyo_Module {
 		
 	public function systemGetCsrfToken() {
 		return $this->info->csrf_token;
+	}
+
+	public function systemCsrfCheck() {
+		return $this->csrfCheck();
 	}
 
 	public function systemGetCsrfTokenJsSource() {
