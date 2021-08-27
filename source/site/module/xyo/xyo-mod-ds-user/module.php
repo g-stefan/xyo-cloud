@@ -638,9 +638,9 @@ class xyo_mod_ds_User extends xyo_Module {
 		return null;
 	}
 
-	function setInfoFromAuthorizationRequestDirect($request) {		
+	function setInfoFromAuthorizationRequest($request) {
 		$this->info->username=$request["user_username"];
-		$this->info->password=$request["user_password"];
+		$this->info->password=substr($request["user_password"],strlen("hash:"));
 		$this->info->rnd=$request["user_rnd"];
 		$this->info->authorization=$request["user_authorization"];
 		$this->info->captcha = null;
@@ -652,7 +652,11 @@ class xyo_mod_ds_User extends xyo_Module {
 	function reauthorizeUser() {
 		$request=$this->getAuthorizationRequestDirect();
 		if(is_array($request)) {
+			$this->setInfoFromAuthorizationRequest($request);
 			$this->authorized = $this->performUserCheckLogin();
+			if($this->authorized){
+				$this->csrfReset();
+			};
 			return $this->authorized;
 		};		
 		return false;		
