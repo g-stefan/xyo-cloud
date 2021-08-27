@@ -1848,6 +1848,10 @@ class xyo_Module extends xyo_Config {
 	// CSRF Mitigation
 	//
 
+	public function csrfReset() {
+		return ($this->cloud->getCSRFMitigationProvider())->systemCsrfReset();
+	}
+
 	public function csrfCheck() {
 		return ($this->cloud->getCSRFMitigationProvider())->systemCsrfCheck();
 	}

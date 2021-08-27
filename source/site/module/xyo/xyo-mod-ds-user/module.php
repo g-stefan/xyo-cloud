@@ -120,8 +120,7 @@ class xyo_mod_ds_User extends xyo_Module {
 		$authorization = $this->cloud->getPostRequest("user_authorization");
 		if ($authorization) {
 			if ($authorization === "true") {
-				$authorization = false;
-
+				
 				if(!$this->csrfCheck()) {
 					return false;
 				};
@@ -164,8 +163,9 @@ class xyo_mod_ds_User extends xyo_Module {
 					};
 
 				};
-			};
+			};			
 		};
+
 		if ($this->authorized) {
 			return true;
 		};
@@ -188,6 +188,7 @@ class xyo_mod_ds_User extends xyo_Module {
 								$this->authorized = $this->performUserCheckSession();
 								if($this->authorized){
 									$this->csrfNext();
+									return true;
 								};
 							};
 						};
@@ -196,20 +197,19 @@ class xyo_mod_ds_User extends xyo_Module {
 			};
 		};
 
-		if(!$this->authorized){
-			$this->info->id = 0;
-			$this->info->name = "Guest";
-			$this->info->username = "guest";
-			$this->info->password = null;
-			$this->info->session = null;
-			$this->info->rnd = null;
-			$this->info->language = null;
-			$this->info->authorizedBy = null;
-			$this->info->captcha=null;
-			$this->info->key=null;
-			$this->csrfReset();
-			$this->updateSysAcl();
-		};
+		
+		$this->info->id = 0;
+		$this->info->name = "Guest";
+		$this->info->username = "guest";
+		$this->info->password = null;
+		$this->info->session = null;
+		$this->info->rnd = null;
+		$this->info->language = null;
+		$this->info->authorizedBy = null;
+		$this->info->captcha=null;
+		$this->info->key=null;
+		$this->csrfNext();
+		$this->updateSysAcl();		
 
 		return $this->authorized;
 	}
@@ -911,6 +911,9 @@ class xyo_mod_ds_User extends xyo_Module {
 	}
 
 	function csrfNext() {
+		if(!array_key_exists("csrf_token_key",$_SESSION)) {
+			$this->csrfReset();
+		};
 		if($this->csrfTokenRefresh_) {
 			$csrf = $this->cloud->getRequest("csrf_token","");
 			if(strlen($csrf)) {
@@ -942,6 +945,10 @@ class xyo_mod_ds_User extends xyo_Module {
 		
 	public function systemGetCsrfToken() {
 		return $this->info->csrf_token;
+	}
+
+	public function systemCsrfReset() {
+		$this->csrfReset();
 	}
 
 	public function systemCsrfCheck() {

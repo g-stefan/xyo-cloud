@@ -8,6 +8,11 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
+// allow captcha image generator, the CSRF Token is reset on login
+$this->csrfReset();
+$this->setCsrfReferenceCount(2); 
+// ---
+
 $languageSelector=$this->cloud->get("login_has_select_language",0);
 if($languageSelector==1){
 	$languageSelector=!$this->getModuleSetting("no_language_selector",0);

@@ -1518,6 +1518,10 @@ class xyo_Cloud extends xyo_Config {
 	// CSRF Mitigation Dummy provider
 	//
 
+	public function systemCsrfReset() {
+		return true;
+	}
+
 	public function systemCsrfCheck() {
 		return true;
 	}
