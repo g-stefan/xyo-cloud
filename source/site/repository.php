@@ -99,7 +99,7 @@ foreach($rangeInfoList as $range){
 	};
 	if(strlen($rangeEnd)) {
 		$end = intval($rangeBegin);
-		if($end => $length) {
+		if($end >= $length) {
 			$end = $length-1;
 		};
 	};
@@ -110,7 +110,7 @@ foreach($rangeInfoList as $range){
 	if($begin < 0){
 		$begin=0;
 	};
-	if($end => $length) {
+	if($end >= $length) {
 		$end = $length-1;
 	};
 	if($end<$begin) {
