@@ -67,7 +67,7 @@ if (!array_key_exists("HTTP_RANGE",$_SERVER)) {
 		$length -= $bufferSize;
 	};
 	if ($length){
-		print(fread($file, $length));
+		print(fread($fp, $length));
 	};
 	fclose($fp);
 
@@ -144,7 +144,7 @@ if(count($rangeList)==1) {
 		$length -= $bufferSize;
 	};
 	if ($length){
-		print(fread($file, $length));
+		print(fread($fp, $length));
 	};
 	fclose($fp);
 
@@ -173,9 +173,10 @@ foreach($rangeList as $range) {
 		$length -= $bufferSize;
 	};
 	if ($length) {
-		print(fread($file, $length));
+		print(fread($fp, $length));
 	};
 };
 echo "--".$boundary."--\r\n";
+fclose($fp);
 
 die();
