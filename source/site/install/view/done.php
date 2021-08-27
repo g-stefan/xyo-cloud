@@ -29,6 +29,7 @@ if ($this->isError()) {
 
 // get login salt
 $this->cloud->includeConfig("config.website");
+$this->cloud->setCSRFMitigationProvider("xyo-mod-ds-user");
 
 $administrator = $this->getRequest("administrator_username");
 if ($administrator) {
@@ -36,6 +37,8 @@ if ($administrator) {
 	$this->user->reloadDataSource();
 	$authorization = $this->user->getAuthorizationRequestDirect($administrator);
 	if ($authorization) {
+		$this->csrfReset();
+		$this->eFormCsrfToken();
 		$this->eFormBuildRequest($authorization);
 	};
 };
