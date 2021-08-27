@@ -127,14 +127,9 @@ if ($this->ds->save()) {
     
 	if($this->ds->id==$this->user->info->id){
 		if (strlen($password1)) {
-			$auth=$this->user->getAuthorizationRequestDirect($this->ds->username);                        
-			if(!is_null($auth)){
-				foreach($auth as $key=>$value){
-					$this->setRequest($key,$value);
-				}
-				$this->user->doLogin();
+			if($this->user->reauthorizeUser()) {
 				$this->user->setSessionScript();
-			}else{
+			} else {
 				$this->setError("error.save");
 			};
 		};

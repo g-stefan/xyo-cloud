@@ -638,6 +638,26 @@ class xyo_mod_ds_User extends xyo_Module {
 		return null;
 	}
 
+	function setInfoFromAuthorizationRequestDirect($request) {		
+		$this->info->username=$request["user_username"];
+		$this->info->password=$request["user_password"];
+		$this->info->rnd=$request["user_rnd"];
+		$this->info->authorization=$request["user_authorization"];
+		$this->info->captcha = null;
+		if(array_key_exists("user_captcha",$request)) {
+			$this->info->captcha = $request["user_captcha"];
+		};
+	}
+
+	function reauthorizeUser() {
+		$request=$this->getAuthorizationRequestDirect();
+		if(is_array($request)) {
+			$this->authorized = $this->performUserCheckLogin();
+			return $this->authorized;
+		};		
+		return false;		
+	}
+
 	function makeCookie() {
 		if ($this->authorized) {
 			setcookie("user_id", $this->info->id, 0, $this->siteBase, null);
