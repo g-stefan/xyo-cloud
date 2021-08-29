@@ -162,3 +162,10 @@
 .xui.application > ._content:after {
 	display: none;
 }
+
+@media only screen and (min-width: 600px) {
+	#xyo-app-table-inline_content {
+		padding-left: 6px;
+		padding-right: 6px;
+	}
+}
