@@ -8,14 +8,16 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$className = "lib_FontAwesome";
+$className = "lib_Quill";
 
-class lib_FontAwesome extends xyo_Module {
+class lib_Quill extends xyo_Module {
 
 	public function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
-		if ($this->isBase("lib_FontAwesome")) {
-			$this->setHtmlCss($this->site."lib/font-awesome/font-awesome.min.css");
-		};
+		if ($this->isBase("lib_Quill")) {
+			$this->setHtmlCss($this->site."lib/quill/quill.snow.css");
+			$this->setHtmlJs($this->site."lib/quill/quill.min.js");
+		}
 	}
+
 }

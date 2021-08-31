@@ -8,4 +8,4 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->requireModule("lib-tinymce");
+$this->requireModule("lib-quill");

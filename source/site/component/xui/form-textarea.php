@@ -36,12 +36,12 @@ if(($readonly == 1) ||  ($readonly == "true")){
 	<textarea<?php echo $maxlength; ?>
 		rows="4"
 		name="<?php $this->eElementName($element); ?>"
-		id="<?php $this->eElementId($element); ?>" <?php echo $readonly; ?> ><?php $this->eElementValue($element); ?></textarea>
+		id="<?php $this->eElementId($element); ?>" <?php echo $readonly; ?> ><?php echo $this->getElementValue($element); ?></textarea>
 </div>
 <?php } else { ?>
 <textarea<?php echo $maxlength; ?> class="xui form-text<?php if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>"
 	rows="4"
 	name="<?php $this->eElementName($element); ?>"
-	id="<?php $this->eElementId($element); ?>" <?php echo $readonly; ?> ><?php $this->eElementValue($element); ?></textarea>
+	id="<?php $this->eElementId($element); ?>" <?php echo $readonly; ?> ><?php echo $this->getElementValue($element); ?></textarea>
 <?php }; ?>
 <br>

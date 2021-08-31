@@ -9,7 +9,7 @@
 defined("XYO_CLOUD") or die("Access is denied");
 
 $this->setReferenceLink($module, "xyo-mod-xui-sidebar");
-$this->setReferenceLink($module, "lib-font-awesome");
+$this->setReferenceLink($module, "lib-roboto-regular");
 $this->setReferenceLink($module, "xyo-mod-app-search");
 
 $this->setReferenceBase($module, "xyo-mod-application");

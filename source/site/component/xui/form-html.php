@@ -17,27 +17,15 @@ if($maxlength==0){
 	$maxlength=" maxlength=\"".$maxlength."\"";
 };
 
-$this->setHtmlJsSourceOrAjax("\$(\"#".($this->getElementId($element))."\").".
-"tinymce({\r\n".
-"    selector: \"textarea\",\r\n".
-"    plugins: [\r\n".
-"        \"advlist autolink lists link image charmap print preview hr anchor pagebreak\",\r\n".
-"        \"searchreplace wordcount visualblocks visualchars code fullscreen\",\r\n".
-"        \"insertdatetime media nonbreaking save table contextmenu directionality\",\r\n".
-"        \"emoticons template paste textcolor colorpicker textpattern\"\r\n".
-"    ],\r\n".
-"    toolbar1: \"insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image\",\r\n".
-"    toolbar2: \"print preview media | forecolor backcolor emoticons\",\r\n".
-"    image_advtab: true\r\n".
-"});","load");
-
+$this->eJsSourceAjax("XUI.FormHtml.initById(\"".($this->getElementId($element))."\");");
 
 ?>
 
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
-<textarea<?php echo $maxlength; ?> class="xui form-textarea<?php if($this->isElementError($element)){echo " -danger";}; ?>"
-	rows="8"
+<div class="xui form-html<?php if($this->isElementError($element)){echo " -danger";}; ?>" id="<?php $this->eElementId($element); ?>">
+	<div class="xui _content" style="min-height:240px;"><?php echo $this->getElementValue($element); ?></div>
+	<textarea <?php echo $maxlength; ?> class="xui _value" style="display:none;"
 	name="<?php $this->eElementName($element); ?>"
-	id="<?php $this->eElementId($element); ?>"><?php $this->eElementValue($element); ?></textarea>
+	id="<?php $this->eElementId($element); ?>_html"><?php echo $this->getElementValue($element); ?></textarea>
 <br>

@@ -76,14 +76,6 @@ Files: output/site/lib/cropit/*
 Copyright: Copyright (c) 2014 Scott Cheng
 License: MIT
 
-Files: output/site/lib/font-awesome/*
-Copyright: Font Awesome Free by @fontawesome - https://fontawesome.com
-License: OFL-1.1
-
-Files: output/site/lib/ionicons/*
-Copyright: Copyright (c) 2015-present Ionic (http://ionic.io/)
-License: MIT
-
 Files: output/site/lib/jquery/*
 Copyright: (c) JS Foundation and other contributors
 License: MIT
@@ -120,14 +112,6 @@ Files: output/site/lib/overlayscrollbars/*
 Copyright: Copyright KingSora | Rene Haas.
 License: MIT
 
-Files: output/site/lib/pickr/*
-Copyright: Copyright (c) 2018 - 2020 Simon Reinisch
-License: MIT
-
-Files: output/site/lib/rainbow/*
-Copyright: Copyright (c) Craig Campbell
-License: Apache-2.0
-
 Files: output/site/lib/roboto-regular/*
 Copyright: Copyright (c) Christian Robertson
 License: Apache-2.0
@@ -140,14 +124,15 @@ Files: output/site/lib/sha512/*
 Copyright: Chen, Yi-Cyuan 2014-2018
 License: MIT
 
-Files: output/site/lib/tinymce/*
-Copyright: Copyright (c) Tiny Technologies, Inc. All rights reserved.
-License: LGPL-2.1-only
-
 Files: output/site/lib/jquery-tag-editor/jquery.tag-editor.*
 Copyright: Copyright (c) 2014 Simon Steinberger / Pixabay
 License: MIT
 
 Files: output/site/lib/jquery-tag-editor/jquery.caret.*
 Copyright: Copyright (c) 2009, Gideon Sireling
+License: BSD-3-Clause
+
+Files: output/site/lib/quill/*
+Copyright: Copyright (c) 2014, Jason Chen
+ Copyright (c) 2013, salesforce.com
 License: BSD-3-Clause
