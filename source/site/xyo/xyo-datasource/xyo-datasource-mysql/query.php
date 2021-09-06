@@ -57,10 +57,10 @@ class xyo_datasource_mysql_Query extends xyo_Config {
 		$this->datasource_ = $datasource;
 		$this->descriptor_=$descriptor;
 
-		$this->isOk_ = true;
+		$this->isOk_ = false;
 
 		if ($doInit) {
-			$this->includeFile($this->descriptor_);
+			$this->isOk_ = $this->includeFile($this->descriptor_);
 
 			$this->queryTable_ = $this->get("query_table", array());
 			$this->queryField_ = $this->get("query_field", array());
@@ -209,6 +209,7 @@ class xyo_datasource_mysql_Query extends xyo_Config {
 		$retV = new xyo_datasource_mysql_Query($this->module_, $this->connection_, $this->name_, $this->datasource_, $this->descriptor_, false);
 		if ($retV) {
 
+			$retV->isOk_ = $this->isOk_;
 			$retV->queryTable_ = &$this->queryTable_;
 			$retV->queryField_ = &$this->queryField_;
 			$retV->queryKey_ = &$this->queryKey_;

@@ -44,6 +44,8 @@ class xyo_datasource_mysqli_Table extends xyo_Config {
 
 	var $fieldAutoIncrement_;
 
+	var $isOk_;
+
 	function __construct(&$module, &$connection, $name, $datasource, $descriptor, $doInit=true) {
 		parent::__construct($module->getCloud());
 
@@ -56,8 +58,10 @@ class xyo_datasource_mysqli_Table extends xyo_Config {
 
 		$this->datasourceName_ = $datasource;
 
+		$this->isOk_=false;
+
 		if ($doInit) {
-			$this->includeFile($this->descriptor_);
+			$this->isOk_ = $this->includeFile($this->descriptor_);
 
 			$this->realName_ = $connection->getPrefix().$this->get("name", $name);
 
@@ -119,7 +123,7 @@ class xyo_datasource_mysqli_Table extends xyo_Config {
 	function isOk() {
 		if ($this->realName_) {
 			if ($this->connection_) {
-				return true;
+				return $this->isOk_;
 			};
 		};
 		return false;
@@ -163,6 +167,7 @@ class xyo_datasource_mysqli_Table extends xyo_Config {
 
 		$retV = new xyo_datasource_mysqli_Table($this->module_, $this->connection_, $this->name_, $this->datasource_, $this->descriptor_, false);
 		if ($retV) {
+			$retV->isOk_ = $this->isOk_;
 			$retV->realName_ =$this->realName_;
 
 			$retV->primaryKey_ = &$this->primaryKey_;

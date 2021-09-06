@@ -101,7 +101,16 @@ foreach ($this->tableHead as $key => $value) {
 
 <?php
 
-if(count($this->viewData)==0){
+if(!$this->ds){
+	echo "<tr>";
+	echo "<td class=\"xui -align-center -important -bg-danger-1\" colspan=\"".count($this->tableHead)."\" style=\"color:#FFF;\">";
+		$this->eLanguage("error.datasource_not_found");
+		echo ": ".$this->applicationDataSource;
+	echo "</td>";
+	echo "</tr>";
+};
+
+if(($this->ds)&&(count($this->viewData)==0)){
 	echo "<tr>";
 	echo "<td class=\"xui -align-center -fg-aluminium-3 -important\" colspan=\"".count($this->tableHead)."\">";
 		$this->eLanguage("info.no_records");

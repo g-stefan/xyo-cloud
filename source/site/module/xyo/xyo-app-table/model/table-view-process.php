@@ -181,7 +181,6 @@ if ($this->ds) {
 		$page = 1;
 	};
 	
-
 	$this->setKeepRequestInstance("view_page",$page);
 
 	$index = 0;
@@ -215,6 +214,8 @@ if ($this->ds) {
 	};
 
 	$this->processModel("table-filter");
+}else {
+	$this->setError(array("error.datasource_not_found" => $this->applicationDataSource));
 };
 
 $select_info = array_merge($select_info, array(
