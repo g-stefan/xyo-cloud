@@ -31,7 +31,7 @@ if($this->isNew){
 <?php $this->ejsEnd(); 
 
 $this->generateComponent("xui.form-action-begin");
-$this->generateView("form");
+$this->generateView($this->getParameter("form.view","form"));
 $this->generateComponent("xui.form-action-end",array(
 	"parameters"=>array(
 		$this->instanceV."action"=>"default",
