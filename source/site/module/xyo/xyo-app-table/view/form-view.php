@@ -8,6 +8,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
+$this->setHtmlJsSourceOrAjaxCsrfToken();
 $this->generateView("notify-alert");
 $this->generateView("notify-error");
 
@@ -23,13 +24,14 @@ if($this->isNew){
 <?php $this->ejsBegin(); ?>
 function <?php echo $this->instanceV; ?>doCommand(action){	
 	document.forms.<?php $this->eFormName(); ?>.elements.<?php echo $this->instanceV; ?>action.value=action;
+	document.forms.<?php $this->eFormName(); ?>.elements.csrf_token.value=window.csrfToken;
 	document.forms.<?php $this->eFormName(); ?>.submit();
 	return false;
 };
 <?php $this->ejsEnd();
 
 $this->generateComponent("xui.form-action-begin");
-$this->generateView("form");
+$this->generateView($this->getParameter("form.view","form"));
 $this->generateComponent("xui.form-action-end",array(
 	"parameters"=>array(
 		$this->instanceV."action"=>$this->getParameterRequestInstance("action","default"),
