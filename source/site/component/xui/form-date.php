@@ -32,28 +32,28 @@ if(strlen($value)){
 $format = $this->getArgument("format",$this->cloud->get("locale_date_format",""));
 if(strlen($format)){
 	if($format=="Y-m-d"){
-		$format="yyyy-mm-dd";
+		$format="yyyy-MM-dd";
 		$value=$this->getElementValueString($element);
 		if(strlen($value)){
 			$this->setElementValue($element,substr($value,0,4)."-".substr($value,5,2)."-".substr($value,8,2));
 		};
 	};
 	if($format=="Y/m/d"){
-		$format="yyyy/mm/dd";
+		$format="yyyy/MM/dd";
 		$value=$this->getElementValueString($element);
 		if(strlen($value)){
 			$this->setElementValue($element,substr($value,0,4)."-".substr($value,5,2)."-".substr($value,8,2));
 		};
 	};
 	if($format=="d-m-Y"){
-		$format="dd-mm-yyyy";
+		$format="dd-MM-yyyy";
 		$value=$this->getElementValueString($element);
 		if(strlen($value)){
 			$this->setElementValue($element,substr($value,8,2)."-".substr($value,5,2)."-".substr($value,0,4));
 		};
 	};
 	if($format=="d/m/Y"){
-		$format="dd/mm/yyyy";
+		$format="dd/MM/yyyy";
 		$value=$this->getElementValueString($element);
 		if(strlen($value)){
 			$this->setElementValue($element,substr($value,8,2)."-".substr($value,5,2)."-".substr($value,0,4));
@@ -61,10 +61,11 @@ if(strlen($format)){
 	};
 };
 
+$airDatePicker="new AirDatepicker(\"#".$this->getElementId($element)."\",{autoClose:true,locale:AirDatepickerLocaleEN,dateFormat:\"".$format."\"})";
 if($hasValue){
-	$this->setHtmlJsSourceOrAjax("\$(\"#".$this->getElementId($element)."\").datepicker({autoClose:true}).data(\"datepicker\").selectDate(new Date(".$year.",".$month.",".$day."));","load");
+	$this->setHtmlJsSourceOrAjax("(".$airDatePicker.").selectDate(new Date(".$year.",".$month.",".$day."));","load");
 }else{
-	$this->setHtmlJsSourceOrAjax("\$(\"#".$this->getElementId($element)."\").datepicker({autoClose:true});","load");
+	$this->setHtmlJsSourceOrAjax($airDatePicker.";","load");
 };
 
 ?>
@@ -73,8 +74,7 @@ if($hasValue){
 <input type="text"<?php echo $maxlength; ?> class="xui form-text<?php if($this->isElementError($element)){echo " -danger";}; ?>" placeholder="" autocomplete="off"
 	name="<?php $this->eElementName($element); ?>"
 	value="<?php $this->eElementValue($element, ""); ?>"
-	id="<?php $this->eElementId($element); ?>"
-	data-date-format="<?php echo $format; ?>" data-language="en"></input>
+	id="<?php $this->eElementId($element); ?>"></input>
 <?php if(strlen($format)){ ?>
 	<input type="hidden" name="<?php $this->eElementName($element); ?>_format" value="<?php echo base64_encode($format); ?>"></input>
 <?php }; ?>

@@ -34,20 +34,21 @@ if(strlen($value)){
 $format = $this->getArgument("format",$this->cloud->get("locale_time_format",""));
 if(strlen($format)){
 	if($format=="H:i:s"){
-		$format="hh:ii";
+		$format="HH:mm";
 		$value=$this->getElementValueString($element);		
 		if(strlen($value)){
 			$this->setElementValue($element,substr($value,0,2).":".substr($value,3,2));
 		};
 	};
 }else{
-	$format="hh:ii";
+	$format="HH:mm";
 };
 
+$airDatePicker="new AirDatepicker(\"#".$this->getElementId($element)."\",{autoClose:false,timepicker:true,onlyTimepicker:true,locale:AirDatepickerLocaleEN,timeFormat:\"".$format."\"})";
 if($hasValue){
-	$this->setHtmlJsSourceOrAjax("\$(\"#".$this->getElementId($element)."\").datepicker({autoClose:true,onlyTimepicker:true}).data(\"datepicker\").selectDate(new Date(".$year.",".$month.",".$day.",".$hour.",".$minutes."));","load");
+	$this->setHtmlJsSourceOrAjax("(".$airDatePicker.").selectDate(new Date(".$year.",".$month.",".$day.",".$hour.",".$minutes."),{updateTime:true});","load");
 }else{
-	$this->setHtmlJsSourceOrAjax("\$(\"#".$this->getElementId($element)."\").datepicker({autoClose:true,onlyTimepicker:true});","load");
+	$this->setHtmlJsSourceOrAjax($airDatePicker.";","load");
 };
 
 $classReadonly="";
@@ -64,8 +65,7 @@ if(($readonly == 1) ||  ($readonly == "true")){
 <input type="text"<?php echo $maxlength; ?> class="xui form-text<?php if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>" placeholder="" autocomplete="off"
 	name="<?php $this->eElementName($element); ?>"
 	value="<?php $this->eElementValue($element, ""); ?>"
-	id="<?php $this->eElementId($element); ?>" <?php echo $readonly; ?>
-	data-date-format="<?php echo $format; ?>" data-timepicker="true" data-time-format="hh:ii" data-language="en"></input>
+	id="<?php $this->eElementId($element); ?>" <?php echo $readonly; ?> ></input>
 <?php if(strlen($format)){ ?>
 	<input type="hidden" name="<?php $this->eElementName($element); ?>_format" value="<?php echo base64_encode($format); ?>"></input>
 <?php }; ?>

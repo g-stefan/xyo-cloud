@@ -15,7 +15,7 @@ class lib_JSCookie extends xyo_Module {
 	public function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
 		if ($this->isBase("lib_JSCookie")) {
-			$this->setHtmlJs($this->site."lib/js-cookie/js.cookie-2.2.1.min.js");
+			$this->setHtmlJs($this->site."lib/js-cookie/js.cookie.min.js");
 		}
 	}
 

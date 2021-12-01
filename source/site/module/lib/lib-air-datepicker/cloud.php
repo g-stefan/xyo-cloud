@@ -9,5 +9,3 @@
 defined("XYO_CLOUD") or die("Access is denied");
 
 $this->setVersion($module, "1.0.0");
-
-$this->setReferenceLink($module, "lib-jquery");
