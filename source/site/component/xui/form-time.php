@@ -44,7 +44,7 @@ if(strlen($format)){
 	$format="HH:mm";
 };
 
-$airDatePicker="new AirDatepicker(\"#".$this->getElementId($element)."\",{autoClose:false,timepicker:true,onlyTimepicker:true,locale:AirDatepickerLocaleEN,timeFormat:\"".$format."\"})";
+$airDatePicker="new AirDatepicker(\"#".$this->getElementId($element)."\",{autoClose:true,timepicker:true,onlyTimepicker:true,locale:AirDatepickerLocaleEN,timeFormat:\"".$format."\"})";
 if($hasValue){
 	$this->setHtmlJsSourceOrAjax("(".$airDatePicker.").selectDate(new Date(".$year.",".$month.",".$day.",".$hour.",".$minutes."),{updateTime:true});","load");
 }else{
