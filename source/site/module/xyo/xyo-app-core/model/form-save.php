@@ -1,6 +1,6 @@
 <?php
 //
-// Copyright (c) 2020-2021 Grigore Stefan <g_stefan@yahoo.com>
+// Copyright (c) 2020-2022 Grigore Stefan <g_stefan@yahoo.com>
 // Created by Grigore Stefan <g_stefan@yahoo.com>
 //
 // MIT License (MIT) <http://opensource.org/licenses/MIT>
@@ -41,7 +41,7 @@ if ($this->ds->save()) {
 		$routerContent="";
 		$routerContent.="<"."?"."php\r\n";
 		$routerContent.="//\r\n";
-		$routerContent.="// Copyright (c) 2020-2021 Grigore Stefan <g_stefan@yahoo.com>\r\n";
+		$routerContent.="// Copyright (c) 2020-2022 Grigore Stefan <g_stefan@yahoo.com>\r\n";
 		$routerContent.="// Created by Grigore Stefan <g_stefan@yahoo.com>\r\n";
 		$routerContent.="//\r\n";
 		$routerContent.="// MIT License (MIT) <http://opensource.org/licenses/MIT>\r\n";
