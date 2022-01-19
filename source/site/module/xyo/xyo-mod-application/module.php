@@ -266,9 +266,9 @@ class xyo_mod_Application extends xyo_Module {
 		return false;
 	}
 
-	public function elementValueNumberIsEmpty($element) {
-		if (strlen($this->getElementValueNumber($element)) == 0) {
-			$this->setElementErrorFromLanguage($element, "is_empty");
+	public function elementValueNumberIsZero($element) {
+		if ($this->getElementValueNumber($element) == 0) {
+			$this->setElementErrorFromLanguage($element, "is_zero");
 			return true;
 		};
 		return false;

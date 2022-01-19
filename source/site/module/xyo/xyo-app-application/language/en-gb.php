@@ -30,6 +30,7 @@ $this->set("error.not_found", "Not found");
 $this->set("error.save", "Error saving");
 
 $this->set("element.is_empty","is empty");
+$this->set("element.is_zero","is zero");
 $this->set("element.does_not_match","does not match");
 $this->set("element.not_selected","not selected");
 $this->set("element.already_exists","already exists");

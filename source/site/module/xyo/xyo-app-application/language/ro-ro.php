@@ -30,6 +30,7 @@ $this->set("error.not_found", "Nu a fost gasit");
 $this->set("error.save", "Eroare salvare");
 
 $this->set("element.is_empty","este gol");
+$this->set("element.is_zero","este zero");
 $this->set("element.does_not_match","nu se potriveste");
 $this->set("element.not_selected","nu este selectat");
 $this->set("element.already_exists","deja exista");
