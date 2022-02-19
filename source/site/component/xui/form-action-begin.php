@@ -13,7 +13,12 @@ if(strlen($onSubmit)){
 };
 
 $action=$this->getArgument("action",$this->getFormAction());
+$attributeList=$this->getArgument("attributes",array());
+$attributes="";
+foreach($attributeList as $key=>$value){
+	$attributes.=" ".$key."=\"".$value."\"";
+};
 
 ?>
-<form name="<?php $this->eFormName(); ?>" id="<?php $this->eFormName(); ?>" method="POST" action="<?php echo $action; ?>" enctype="multipart/form-data" class="xui application-form" <?php echo $onSubmit; ?>>
+<form name="<?php $this->eFormName(); ?>" id="<?php $this->eFormName(); ?>" method="POST" action="<?php echo $action; ?>" enctype="multipart/form-data" class="xui application-form" <?php echo $attributes; echo $onSubmit; ?>>
 <?php $this->eFormCsrfToken();

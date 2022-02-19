@@ -78,7 +78,7 @@ if(strlen($userImageThumbnail)>0) {
 		<?php $this->eHtmlDescription(); ?>
 		<?php $this->eHtmlIcon(); ?>
 		<?php $this->eHtmlCss(); ?>
-		<style>
+		<?php $this->ecssBegin(); ?>
 			.xui.app-user > .xui._content > .xui._image > .xui._image_img {
 				<?php echo $userImageCss; ?>
 			}
@@ -88,7 +88,7 @@ if(strlen($userImageThumbnail)>0) {
 			.xui.app-brand > .xui._content > .xui._logo {
 				background-image: url(<?php echo $settings["brand_logo"] ?>);
 			}
-		</style>
+		<?php $this->ecssEnd(); ?>
 	</head>
 	<body<?php $this->eHtmlBodyClass(); ?>>
 		<div class="xui dashboard -main<?php echo $dasboardType; ?>">

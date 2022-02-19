@@ -52,3 +52,15 @@ function xyoFormLoginAction(fn,salt) {
 	return true;
 }
 
+function xyoLoginFormInit () {
+	var elForm=document.getElementById("login");
+	elForm.onsubmit=function(){
+		return xyoFormLoginAction(elForm,elForm.dataset.salt);
+	};
+};
+
+function xyoLoginFormOnLoad () {
+	window.removeEventListener("load", xyoLoginFormOnLoad);
+	xyoLoginFormInit();
+};
+window.addEventListener("load", xyoLoginFormOnLoad);

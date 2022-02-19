@@ -13,7 +13,7 @@ $formTitle="form.title_select";
 $layer=$this->getElementValueString("layer","xyo");
 
 ?>
-<script>
+<?php $this->ejsBegin(); ?>
     function doCommand(action){
         var el;
         var id;
@@ -23,7 +23,7 @@ $layer=$this->getElementValueString("layer","xyo");
         document.forms.<?php $this->eFormName(); ?>.submit();
         return false;
     }
-</script>
+    <?php $this->ejsEnd(); ?>
 
 <form name="<?php $this->eFormName(); ?>" method="POST" action="<?php $this->eFormAction(); ?>" class="xui application-form">
 

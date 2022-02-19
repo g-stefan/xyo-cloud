@@ -1286,7 +1286,7 @@ class xyo_Cloud extends xyo_Config {
 			};
 
 			if(count($simple)||count($load)) {
-				echo "<script>\n";
+				echo "<script ".$this->sCSPNonce().">\n";
 				foreach($simple as $code) {
 					echo $code;
 				};
@@ -1402,7 +1402,7 @@ class xyo_Cloud extends xyo_Config {
 			return;
 		};
 		if($this->isAjax) {
-			echo "<script>\n";
+			echo "<script ".$this->sCSPNonce().">\n";
 			echo $source;
 			echo "</script>\n";
 			return;
@@ -1416,7 +1416,7 @@ class xyo_Cloud extends xyo_Config {
 			return;
 		};
 		if($this->isAjax) {
-			echo "<script>\n";
+			echo "<script ".$this->sCSPNonce().">\n";
 			echo $source;
 			echo "</script>\n";
 			return;
@@ -1541,6 +1541,46 @@ class xyo_Cloud extends xyo_Config {
 	public function systemSetCsrfReferenceCount($count) {		
 	}
 
+	//
+	// Content Security Policy Manager
+	//
+
+	protected $cspHeader;
+	protected $cspNonce;
+
+	protected function initCSPManager() {
+		$this->cspNonce=hash("sha256", $this->getClientIP().".".rand().".".time(), false);
+		$this->cspHeader="default-src 'self' nonce-".$this->cspNonce.";";
+	}
+
+	public function setCSPHeader($value) {
+		$this->cspHeader=$value;
+	}
+
+	public function getCSPHeader() {
+		return $this->cspHeader;
+	}
+
+	public function emitCSPHeader() {
+		if(strlen($this->cspHeader)>0){
+			header("Content-Security-Policy: ".$this->cspHeader);
+		};		
+	}
+
+	public function setCSPNonce($value) {
+		$this->cspNonce=$value;
+	}
+
+	public function getCSPNonce() {
+		return $this->cspNonce;
+	}
+
+	public function sCSPNonce() {
+		if(strlen($this->cspNonce)>0){
+			return "nonce=\"".$this->cspNonce."\"";
+		};
+		return "";
+	}
 
 	//
 	// Main
@@ -1573,6 +1613,7 @@ class xyo_Cloud extends xyo_Config {
 		$this->initTemplateManager();
 		$this->initDataSourceManager();
 		$this->initCSRFMitigationManager();
+		$this->initCSPManager();
 	}
 
 	public function getClientIP() {
@@ -1737,6 +1778,9 @@ class xyo_Cloud extends xyo_Config {
 
 		$this->runGroup("system-init");
 		if ($this->isInitOk) {
+
+			$this->emitCSPHeader();
+
 			$run_ = true;
 			$module = $this->loadModuleRunPath($this->request->get("run",$this->getApplication()));
 			if ($module) {

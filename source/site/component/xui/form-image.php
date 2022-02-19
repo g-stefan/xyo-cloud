@@ -106,8 +106,8 @@ $src.="};";
 
 $this->setHtmlJsSourceOrAjax($src,"load");
 
+$this->ecssBegin();
 ?>
-<style>
 
 #<?php $this->eElementId($element); ?>_component .cropit-preview{
 	margin-left: auto;
@@ -117,7 +117,7 @@ $this->setHtmlJsSourceOrAjax($src,"load");
 	border: 16px solid #EEEEEE;
 }
 
-</style>
+<?php $this->ecssBegin(); ?>
 
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>

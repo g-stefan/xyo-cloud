@@ -88,7 +88,7 @@ if($layer&&$connection){
 };
 
 ?>
-<script>
+<?php $this->ejsBegin(); ?>
 function <?php echo $this->instanceV; ?>doCommand(action){
         var el;
         var id;
@@ -98,7 +98,7 @@ function <?php echo $this->instanceV; ?>doCommand(action){
         document.forms.<?php $this->eFormName(); ?>.submit();
         return false;
 }
-</script>
+<?php $this->ejsEnd(); ?>
 <form name="<?php $this->eFormName(); ?>" method="POST" action="<?php $this->eFormAction(); ?>" >
 	<?php $this->eFormCsrfToken(); ?>
 	<input type="hidden" name="action" value="default" />

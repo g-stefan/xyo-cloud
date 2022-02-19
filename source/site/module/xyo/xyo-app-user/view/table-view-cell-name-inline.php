@@ -14,7 +14,7 @@ echo "<td class=\"xui\" style=\"width:64px;padding-right:3px;\">";
 	echo "<div class=\"xui -bd-rock-1\" style=\"width:64px;height:64px;overflow:hidden;border-radius:50%;cursor:pointer;border-style:solid;border-width:1px;\"".
 		" onclick=\"".$this->getCmdEditOnClick($this->viewKey,$this->viewId)."\">";
 		$xuiImage=&$this->getModule("xui-form-image");
-		echo "<style>";
+		$this->ecssBegin();
 		echo ".".$this->name."-image_".$this->viewRow["id"]." {";
 			if(strlen($this->viewRow["picture"])) {
 				$xuiImage->eImageCss($this->viewRow["picture"]);
@@ -23,7 +23,7 @@ echo "<td class=\"xui\" style=\"width:64px;padding-right:3px;\">";
 				",-16,0,1.5,64,64,64,64");
 			};
 		echo "}";            
-		echo "</style>";
+		$this->ecssEnd();
 		echo "<div class=\"xui ".$this->name."-image_".$this->viewRow["id"]."\"></div>";
 	echo "</div>";
 echo "</td>";

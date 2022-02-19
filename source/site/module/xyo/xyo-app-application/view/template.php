@@ -33,7 +33,7 @@ if($this->isError()){
 <div class="xui application -has-toolbar<?php if($hasMessage&&(!$this->useNotify)){echo " -has-message";}; if($this->isEmbedded){echo " -embedded";}; ?>">
 	<div class="xui app-toolbar <?php  if($this->isEmbedded){echo " -compact -wide";}; ?>" id="<?php echo $this->instanceV; ?>xui-app-toolbar">
 	<?php if($this->isEmbedded){ ?>
-		<style>
+		<?php $this->ecssBegin(); ?>
 		.xui.application .xyo-app-application-info_embedded_icon {
 			height:32px;
 			padding: 6px;
@@ -52,7 +52,7 @@ if($this->isError()){
 		.xui.application .xui.app-toolbar.-important .xyo-app-application-info_embedded_text {
 			display: none;
 		}
-		</style>
+		<?php $this->ecssEnd(); ?>
 		<div class="xui _content_left" id="<?php echo $this->instanceV; ?>xui-app-toolbar_content_left">
 			<div class="xui -fg-primary-2 -left xyo-app-application-info_embedded_icon"><?php echo $this->applicationIcon; ?></div>
 			<div class="xui -fg-secondary-2 -left xyo-app-application-info_embedded_text"><?php echo $this->applicationTitle; ?></div>

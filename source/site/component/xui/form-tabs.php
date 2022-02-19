@@ -18,7 +18,7 @@ $activeItem = $this->getArgument("active_item",$this->getElementValue($element,$
 
 ?>
 <input type="hidden" name="<?php $this->eElementName($element); ?>" value="<?php $this->eElementValue($element); ?>" id="<?php $this->eElementId($element); ?>" ></input>
-<style>
+<?php $this->ecssBegin(); ?>
 
 .<?php echo $baseClass; ?> .<?php echo $baseClass; ?>_tab-content {
 	display: block;
@@ -44,9 +44,9 @@ $activeItem = $this->getArgument("active_item",$this->getElementValue($element,$
 	flex-grow: 0 !important;
 }
 
-</style>
+<?php $this->ecssEnd(); ?>
 
-<script>
+<?php $this->ejsBegin(); ?>
 
 function <?php echo $prefixJS; ?>_selectTab(e,tab){
 	var el = document.getElementsByClassName("<?php echo $baseClass; ?>_tab-content");
@@ -72,7 +72,7 @@ function <?php echo $prefixJS; ?>_selectTab(e,tab){
 	document.getElementById("<?php $this->eElementId($element); ?>").value=tab;
 };
 
-</script>
+<?php $this->ejsEnd(); ?>
 
 <?php
 echo "<div class=\"xui ".$baseClass."\">";

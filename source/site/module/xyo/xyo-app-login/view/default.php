@@ -67,7 +67,7 @@ if ($this->isError()) {
 	$msg_lang = $this->getFromLanguage("error.unknown");
 };
 
-$this->generateComponent("xui.form-action-begin",array("onsubmit"=>"return (xyoFormLoginAction(this,'".$salt."'));"));
+$this->generateComponent("xui.form-action-begin",array("attributes"=>array("data-salt"=>$salt)));
 $this->generateComponent("xui.box-1x1-begin");
 $this->generateComponent("xui.panel-begin",array("title"=>"title.login","css-class"=>"-elevation-4"));
 

@@ -10,7 +10,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 
 ?>
 
-<style>
+<?php $this->ecssBegin(); ?>
 @media only screen and (min-width: 1280px) {
 
 	.xui.box.-row {
@@ -131,4 +131,4 @@ defined("XYO_CLOUD") or die("Access is denied");
 	}
 }
 
-</style>
+<?php $this->ecssEnd(); ?>

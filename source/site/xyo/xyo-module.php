@@ -1178,11 +1178,19 @@ class xyo_Module extends xyo_Config {
 	}
 
 	public function ejsBegin() {
-		echo "<script>";
+		echo "<script ".$this->sCSPNonce().">";
 	}
 
 	public function ejsEnd() {
 		echo "</script>";
+	}
+
+	public function ecssBegin() {
+		echo "<style ".$this->sCSPNonce().">";
+	}
+
+	public function ecssEnd() {
+		echo "</style>";
 	}
 
 	//
@@ -1878,6 +1886,30 @@ class xyo_Module extends xyo_Config {
 
 	public function setCsrfReferenceCount($count) {
 		($this->cloud->getCSRFMitigationProvider())->systemSetCsrfReferenceCount($count);
+	}
+
+	//
+	// Content Security Policy
+	//
+
+	public function setCSPHeader($value) {
+		$this->cloud->setCSPHeader($value);
+	}
+
+	public function getCSPHeader() {
+		return $this->cloud->getCSPHeader();
+	}
+
+	public function setCSPNonce($value) {
+		$this->cloud->setCSPNonce($value);
+	}
+
+	public function getCSPNonce() {
+		return $this->cloud->getCSPNonce();
+	}
+
+	public function sCSPNonce() {
+		$this->cloud->sCSPNonce();
 	}
 
 	//

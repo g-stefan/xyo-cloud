@@ -15,7 +15,7 @@ echo "<td class=\"xui\" style=\"width:64px;padding-right:3px;\">";
 		" onclick=\"".$this->getCmdEditOnClick($this->viewKey,$this->viewId)."\">";
 		$modThumbnail=&$this->getModule("xyo-mod-thumbnail");
 		$xuiImage=&$this->getModule("xui-form-image");
-		echo "<style>";
+		$this->ecssBegin();
 		echo ".".$this->name."-image_".$this->viewRow["id"]." {";
 			$pictureOk=false;
 			if(strlen($this->viewRow["picture"])) {
@@ -33,7 +33,7 @@ echo "<td class=\"xui\" style=\"width:64px;padding-right:3px;\">";
 				",-16,0,1.5,64,64,64,64");
 			};
 		echo "}";            
-		echo "</style>";
+		$this->ecssEnd();
 		echo "<div class=\"xui ".$this->name."-image_".$this->viewRow["id"]."\"></div>";
 	echo "</div>";
 echo "</td>";
