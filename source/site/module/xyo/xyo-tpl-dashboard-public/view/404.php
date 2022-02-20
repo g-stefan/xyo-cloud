@@ -19,7 +19,7 @@ header("HTTP/1.0 404 Not Found");
 		<?php $this->eHtmlTitle(); ?>
 		<?php $this->eHtmlDescription(); ?>
 		<?php $this->eHtmlIcon(); ?>
-		<?php $this->eHtmlCss(); ?>
+		<?php $this->eHtmlStyle(); ?>
 	</head>
 	<body<?php $this->eHtmlBodyClass(); ?>>
 		<center>

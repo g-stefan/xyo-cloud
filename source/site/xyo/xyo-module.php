@@ -701,7 +701,7 @@ class xyo_Module extends xyo_Config {
 	public function eHtmlLanguage() {
 		$this->cloud->eHtmlLanguage();
 	}
-
+	
 	public function setHtmlJs($url,$opt="defer") {
 		$this->cloud->setHtmlJs($this->name,$url,$opt);
 	}
@@ -770,6 +770,26 @@ class xyo_Module extends xyo_Config {
 		$this->cloud->eHtmlCss();
 	}
 
+	public function setHtmlCssSource($code) {
+		$this->cloud->setHtmlCssSource($this->name,$code);
+	}
+
+	public function removeHtmlCssSourceAll() {
+		$this->cloud->removeHtmlCssSourceAll($this->name);
+	}
+
+	public function setHtmlCssSourceBefore($moduleOther){
+		$this->cloud->setHtmlCssSourceBefore($this->name,$moduleOther);
+	}
+
+	public function setHtmlCssSourceAfter($moduleOther){
+		$this->cloud->setHtmlCssSourceAfter($this->name,$moduleOther);
+	}
+
+	public function eHtmlCssSource() {
+		$this->cloud->eHtmlCssSource();
+	}
+
 	public function setHtmlTitle($title) {
 		$this->cloud->setHtmlTitle($title);
 	}
@@ -794,12 +814,24 @@ class xyo_Module extends xyo_Config {
 		$this->cloud->eHtmlIcon();
 	}
 
-	public function setHtmlJsSourceOrAjax($source,$opt="none") {
-		$this->cloud->setHtmlJsSourceOrAjax($this->name,$source,$opt);
+	public function setHtmlCssSourceOrAjax($source) {
+		$this->cloud->setHtmlCssSourceOrAjax($this->name,$source);
+	}
+
+	public function eCssSourceAjax($source) {
+		$this->cloud->eCssSourceAjax($source);
+	}
+
+	public function setHtmlJsSourceOrAjax($source) {
+		$this->cloud->setHtmlJsSourceOrAjax($this->name,$source);
 	}
 
 	public function eJsSourceAjax($source) {
 		$this->cloud->eJsSourceAjax($source);
+	}
+
+	public function eHtmlStyle() {
+		$this->cloud->eHtmlStyle();
 	}
 
 	public function eHtmlScript() {
@@ -1178,7 +1210,7 @@ class xyo_Module extends xyo_Config {
 	}
 
 	public function ejsBegin() {
-		echo "<script ".$this->sCSPNonce().">";
+		echo "<script".$this->sCSPNonce().">";
 	}
 
 	public function ejsEnd() {
@@ -1186,7 +1218,7 @@ class xyo_Module extends xyo_Config {
 	}
 
 	public function ecssBegin() {
-		echo "<style ".$this->sCSPNonce().">";
+		echo "<style".$this->sCSPNonce().">";
 	}
 
 	public function ecssEnd() {
@@ -1909,8 +1941,16 @@ class xyo_Module extends xyo_Config {
 	}
 
 	public function sCSPNonce() {
-		$this->cloud->sCSPNonce();
+		return $this->cloud->sCSPNonce();
 	}
+
+	//
+	// Unique Identifier
+	//
+
+	public function getUID() {
+		return $this->cloud->getUID();
+	}	
 
 	//
 	// Constructor

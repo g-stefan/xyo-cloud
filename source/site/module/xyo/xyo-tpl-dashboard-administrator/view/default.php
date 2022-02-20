@@ -77,7 +77,7 @@ if(strlen($userImageThumbnail)>0) {
 		<?php $this->eHtmlTitle(); ?>
 		<?php $this->eHtmlDescription(); ?>
 		<?php $this->eHtmlIcon(); ?>
-		<?php $this->eHtmlCss(); ?>
+		<?php $this->eHtmlStyle(); ?>
 		<?php $this->ecssBegin(); ?>
 
 			.xui.app-user > .xui._content > .xui._image > .xui._image_img {

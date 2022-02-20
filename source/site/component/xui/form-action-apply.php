@@ -7,9 +7,11 @@
 //
 
 defined("XYO_CLOUD") or die("Access is denied");
+$uid = $this->getUID();
 $onClickApply = $this->getArgument("click","this.form.submit();");
 
-?>
-<div class="xui form-separator"></div>
-<button type="button" class="xui button -primary -right" tabindex="0" onclick="<?php echo $onClickApply; ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("label.button_apply"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
+$this->setHtmlJsSourceOrAjax("document.getElementById(\"".$uid."\").onclick=function(){".$onClickApply."};");
+
+?><div class="xui form-separator"></div>
+<button type="button" class="xui button -primary -right" tabindex="0" id="<?php echo $uid; ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("label.button_apply"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
 <div class="xui separator"></div>

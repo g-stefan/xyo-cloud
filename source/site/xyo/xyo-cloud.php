@@ -1086,6 +1086,7 @@ class xyo_Cloud extends xyo_Config {
 	protected $htmlClassList;
 	protected $htmlBodyClassList;
 	protected $htmlCssList;
+	protected $htmlCssSourceList;
 	protected $htmlJsList;
 	protected $htmlJsSourceList;
 	protected $htmlTitle;
@@ -1096,6 +1097,7 @@ class xyo_Cloud extends xyo_Config {
 		$this->htmlClassList=array();
 		$this->htmlBodyClassList=array();
 		$this->htmlCssList=array();
+		$this->htmlCssSourceList=array();
 		$this->htmlJsList=array();
 		$this->htmlJsSourceList=array();
 		$this->htmlTitle="XYO Cloud";
@@ -1221,7 +1223,7 @@ class xyo_Cloud extends xyo_Config {
 				if(strlen($info[1])>0) {
 					$extra=" ".$info[1];
 				};
-				echo "<script src=\"" . $info[0] . "\"".$extra."></script>\n";
+				echo "<script src=\"" . $info[0] . "\"".$this->sCSPNonce().$extra."></script>\n";
 			};
 		};
 	}
@@ -1286,7 +1288,7 @@ class xyo_Cloud extends xyo_Config {
 			};
 
 			if(count($simple)||count($load)) {
-				echo "<script ".$this->sCSPNonce().">\n";
+				echo "<script".$this->sCSPNonce().">\n";
 				foreach($simple as $code) {
 					echo $code;
 				};
@@ -1358,8 +1360,64 @@ class xyo_Cloud extends xyo_Config {
 	public function eHtmlCss() {
 		foreach($this->htmlCssList as $key=>$css) {
 			foreach($css as $url) {
-				echo "<link rel=\"stylesheet\" href=\"" . $url . "\">\n";
+				echo "<link rel=\"stylesheet\" href=\"" . $url . "\"".$this->sCSPNonce().">\n";
 			};
+		};
+	}
+
+	public function setHtmlCssSource($module,$code) {
+		if(!array_key_exists($module,$this->htmlCssSourceList)) {
+			$this->htmlCssSourceList[$module]=array();
+		};
+		$this->htmlCssSourceList[$module][]=$code;
+	}
+
+	public function removeHtmlCssSourceAll($module) {
+		if(!array_key_exists($module,$this->htmlCssSourceList)) {
+			return;
+		};
+		unset($this->htmlCssSourceList[$module]);
+	}
+
+	public function setHtmlCssSourceBefore($module,$moduleOther) {
+		if(array_key_exists($module,$this->htmlCssSourceList)) {
+			if(array_key_exists($moduleOther,$this->htmlCssSourceList)) {
+				$keys = array_keys($this->htmlCssSourceList);
+				$pos1 = array_search($module, $keys);
+				$pos2 = array_search($moduleOther, $keys);
+				if($pos1 > $pos2){
+					$part1 = array_splice($this->htmlCssSourceList, $pos1, 1);
+					$part2 = array_splice($this->htmlCssSourceList, 0, $pos2);
+					$this->htmlCssSourceList = array_merge($part2,$part1,$this->htmlCssSourceList);
+				};
+			};
+		};
+	}
+
+	public function setHtmlCssSourceAfter($module,$moduleOther) {
+		if(array_key_exists($module,$this->htmlCssSourceList)) {
+			if(array_key_exists($moduleOther,$this->htmlCssSourceList)) {
+				$keys = array_keys($this->htmlCssSourceList);
+				$pos1 = array_search($module, $keys);
+				$pos2 = array_search($moduleOther, $keys);
+				if($pos1 < $pos2){
+					$part1 = array_splice($this->htmlCssSourceList, 0, $pos2 + 1);
+					$part2 = array_splice($part1, $pos1, 1);
+					$this->htmlCssSourceList = array_merge($part1,$part2,$this->htmlCssSourceList);
+				};
+			};
+		};
+	}
+
+	public function eHtmlCssSource() {
+		if(count($this->htmlCssSourceList)>0) {
+			echo "<style".$this->sCSPNonce().">\n";
+			foreach($this->htmlCssSourceList as $key=>$css) {
+				foreach($css as $code) {
+					echo $code;
+				};
+			};
+			echo "</style>\n";
 		};
 	}
 
@@ -1393,6 +1451,42 @@ class xyo_Cloud extends xyo_Config {
 		};
 	}
 
+	public function setHtmlCssSourceOrAjax($module,$source) {
+		if(strlen($source)==0){
+			return;
+		};
+		if($this->isAjaxJs) {			
+			return;
+		};
+		if($this->isAjax) {
+			echo "<style".$this->sCSPNonce().">\n";
+			echo $source;
+			echo "</style>\n";
+			return;
+		};
+		$this->setHtmlCssSource($module,$source);
+	}
+
+	public function eCssSourceAjax($source) {
+		if(strlen($source)==0){
+			return;
+		};
+		if($this->isAjaxJs) {			
+			return;
+		};
+		if($this->isAjax) {
+			echo "<style".$this->sCSPNonce().">\n";
+			echo $source;
+			echo "</style>\n";
+			return;
+		};
+	}
+
+	public function eHtmlStyle() {
+		$this->eHtmlCss();
+		$this->eHtmlCssSource();
+	}
+
 	public function setHtmlJsSourceOrAjax($module,$source,$opt="none") {
 		if(strlen($source)==0){
 			return;
@@ -1402,7 +1496,7 @@ class xyo_Cloud extends xyo_Config {
 			return;
 		};
 		if($this->isAjax) {
-			echo "<script ".$this->sCSPNonce().">\n";
+			echo "<script".$this->sCSPNonce().">\n";
 			echo $source;
 			echo "</script>\n";
 			return;
@@ -1411,17 +1505,20 @@ class xyo_Cloud extends xyo_Config {
 	}
 
 	public function eJsSourceAjax($source) {
+		if(strlen($source)==0){
+			return;
+		};
 		if($this->isAjaxJs) {
 			echo $source;
 			return;
 		};
 		if($this->isAjax) {
-			echo "<script ".$this->sCSPNonce().">\n";
+			echo "<script".$this->sCSPNonce().">\n";
 			echo $source;
 			echo "</script>\n";
 			return;
 		};
-	}
+	}	
 
 	public function eHtmlScript() {
 		$this->eHtmlJs();
@@ -1432,12 +1529,14 @@ class xyo_Cloud extends xyo_Config {
 		$this->setHtmlJsBefore($module,$moduleOther);
 		$this->setHtmlJsSourceBefore($module,$moduleOther);
 		$this->setHtmlCssBefore($module,$moduleOther);
+		$this->setHtmlCssSourceBefore($module,$moduleOther);
 	}
 
 	public function setHtmlAfter($module,$moduleOther) {
 		$this->setHtmlJsAfter($module,$moduleOther);
 		$this->setHtmlJsSourceAfter($module,$moduleOther);
 		$this->setHtmlCssAfter($module,$moduleOther);
+		$this->setHtmlCssSourceAfter($module,$moduleOther);
 	}
 
 	//
@@ -1577,9 +1676,24 @@ class xyo_Cloud extends xyo_Config {
 
 	public function sCSPNonce() {
 		if(strlen($this->cspNonce)>0){
-			return "nonce=\"".$this->cspNonce."\"";
+			return " nonce=\"".$this->cspNonce."\"";
 		};
 		return "";
+	}
+
+	//
+	// Unique Identifier Manager
+	//
+
+	protected $uidIndex;
+
+	protected function initUIDManager() {
+		$this->uidIndex=0;
+	}
+
+	public function getUID() {
+		++$this->uidIndex;
+		return "uid".$this->uidIndex;
 	}
 
 	//
@@ -1614,6 +1728,7 @@ class xyo_Cloud extends xyo_Config {
 		$this->initDataSourceManager();
 		$this->initCSRFMitigationManager();
 		$this->initCSPManager();
+		$this->initUIDManager();
 	}
 
 	public function getClientIP() {
