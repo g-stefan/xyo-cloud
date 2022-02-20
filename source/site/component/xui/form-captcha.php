@@ -20,6 +20,8 @@ if($prefix) {
 	$params=array_merge($params,array("prefix"=>$prefix));
 };
 
+$uid = $this->getUID();
+
 ?>
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
@@ -30,13 +32,13 @@ if($prefix) {
 		value="<?php $this->eElementValue($element, ""); ?>"
 		name="<?php $this->eElementName($element); ?>"
 		id="<?php $this->eElementId($element); ?>" ></input>
-	<button type="button" onclick="window.<?php $this->eElementId($element); ?>_refresh();"><i class="material-icons">sync</i></button>
+	<button type="button" id="<?php echo $uid; ?>"><i class="material-icons">sync</i></button>
 	</div>
 </div>
 <?php
 
 $id=$this->getElementId($element);
-$source="window.".$id."_refresh=function(){";
+$source="document.getElementById(\"".$uid."\").onclick=function(){";
 $source.="var el=document.getElementById(\"".$id."_image\");";
 $source.="if(el){";
 $source.=" el.src=\"".$this->requestUriModule("xui-image-captcha",$params)."&stamp=\"+Math.random();";
@@ -44,3 +46,4 @@ $source.="};";
 $source.="return false;";
 $source.="};";
 $this->setHtmlJsSource($source,"load");
+

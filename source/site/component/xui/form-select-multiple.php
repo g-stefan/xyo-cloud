@@ -14,15 +14,16 @@ $select_list = $this->getParameter("select." . $element);
 $select_value = explode(",",$this->getElementValue($element));
 $submit=$this->getArgument("submit",false);
 $onChange=$this->getArgument("on_change",null);
+$uid=$this->getElementId($element);
 
 if($submit){
-	$submit=" onchange=\"this.form.submit();\"";
+	$submit="this.form.submit();";
 }else{
 	$submit="";
 };
 
 if($onChange){
-	$submit=" onchange=\"".$onChange."\"";
+	$submit=$onChange;
 };
 
 $isRequiredClass="";
@@ -30,11 +31,15 @@ if($isRequired){
 	$isRequiredClass=" -required";
 };
 
+if(strlen($submit)){
+	$this->setHtmlJsSourceOrAjax("document.getElementById(\"".$uid."\").onchange=function(){".$submit."};");
+};
+
 ?>	
 
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
-<select class="xui form-select -multiple<?php echo $isRequiredClass; if($this->isElementError($element)){echo " -danger";}; ?>" name="<?php $this->eElementName($element); ?>" id="<?php $this->eElementId($element); ?>" <?php echo $submit; ?> multiple="multiple" style="width:100%;">
+<select class="xui form-select -multiple<?php echo $isRequiredClass; if($this->isElementError($element)){echo " -danger";}; ?>" name="<?php $this->eElementName($element); ?>" id="<?php $this->eElementId($element); ?>" multiple="multiple" style="width:100%;">
 <?php
 	foreach ($select_list as $key => $value) {
 		$selected = "";

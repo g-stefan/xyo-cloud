@@ -49,6 +49,9 @@ if(1*$zoom==0){
 
 $maxZoom = $this->getArgument("max_zoom",3);
 
+$uidDelete = $this->getUID();
+$uidClear = $this->getUID();
+
 $src="";
 $src.="var ".$this->getElementId($element)."_first=true;";
 if($emptySet){
@@ -90,7 +93,7 @@ if(strlen($fileName)>0){
 	$src.="var ".$this->getElementId($element)."_filename=\"\";";
 };
 
-$src.=$this->getElementId($element)."__delete=function(){";
+$src.="document.getElementById(\"".$uidDelete."\").onclick=function(){";
 $src.="$(\"#".$this->getElementId($element)."_delete\").val(1);";
 $src.=$this->getElementId($element)."_filename=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTnU1rJkAAABSklEQVR4Xu3IMQEAAAyDsPk33RnAARx5ctsihhkPzHhgxgMzHpjxwIwHZjww44EZD8x4YMYDMx6Y8cCMB2Y8MOOBGQ/MeGDGAzMemPHAjAdmPDDjgRkPzHhgxgMzHpjxwIwHZjww44EZD8x4YMYDMx6Y8cCMB2Y8MOOBGQ/MeGDGAzMemPHAjAdmPDDjgRkPzHhgxgMzHpjxwIwHZjww44EZD8x4YMYDMx6Y8cCMB2Y8MOOBGQ/MeGDGAzMemPHAjAdmPDDjgRkPzHhgxgMzHpjxwIwHZjww44EZD8x4YMYDMx6Y8cCMB2Y8MOOBGQ/MeGDGAzMemPHAjAdmPDDjgRkPzHhgxgMzHpjxwIwHZjww44EZD8x4YMYDMx6Y8cCMB2Y8MOOBGQ/MeGDGAzMemPHAjAdmPDDjgRkPzHhgxgMzHpjxwIwHZix2DyeSSzItWkMzAAAAAElFTkSuQmCC\";";
 $src.="document.getElementById(\"".$this->getElementId($element)."\").value=null;";
@@ -98,7 +101,7 @@ $src.="$(\"#".$this->getElementId($element)."\").trigger(\"change\");";
 $src.="\$(\"#".$this->getElementId($element)."_component\").cropit(\"imageSrc\",".$this->getElementId($element)."_filename);";
 $src.="};";
 
-$src.=$this->getElementId($element)."__clear=function(){";
+$src.="document.getElementById(\"".$uidClear."\").onclick=function(){";
 $src.="document.getElementById(\"".$this->getElementId($element)."\").value=null;";
 $src.="$(\"#".$this->getElementId($element)."\").trigger(\"change\");";
 $src.="\$(\"#".$this->getElementId($element)."_component\").cropit(\"imageSrc\",".$this->getElementId($element)."_filename);";
@@ -136,11 +139,11 @@ $this->ecssBegin();
 		<a href="<?php echo $this->site.$fileName; ?>" target="_blank" class="xui _link button -icon -success -size-x32 -circle -transparent -effect-ripple" style="margin: 3px 3px 3px 3px;"><i class="material-icons">photo</i></a>
 <?php	}; ?>
 <?php }; ?>
-<div class="xui _delete button -icon -danger -size-x32 -circle -transparent -effect-ripple" style="margin: 3px 3px 3px 3px;" onclick="<?php $this->eElementId($element); ?>__delete();return false;"><i class="material-icons">close</i></div>
+<div class="xui _delete button -icon -danger -size-x32 -circle -transparent -effect-ripple" style="margin: 3px 3px 3px 3px;" id="<?php echo $uidDelete; ?>"><i class="material-icons">close</i></div>
 <div class="xui form-file">
 <input type="file" name="<?php $this->eElementName($element); ?>" id="<?php $this->eElementId($element); ?>" class="xui _file cropit-image-input" accept="image/*"></input>
 <label for="<?php $this->eElementId($element); ?>" class="xui button -icon-left -outline"><i class="material-icons">file_upload</i><span>Browse ...</span></label>
-<button type="button" class="xui button -icon -info" onclick="<?php $this->eElementId($element); ?>__clear();return false;"><i class="material-icons">delete</i></button>
+<button type="button" class="xui button -icon -info" id="<?php echo $uidClear; ?>"><i class="material-icons">delete</i></button>
 </div>
 </div>
 <input type="hidden"

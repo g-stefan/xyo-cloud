@@ -7,9 +7,11 @@
 //
 
 defined("XYO_CLOUD") or die("Access is denied");
+$uid=$this->getFormName();
+
 $onSubmit=$this->getArgument("onsubmit","");
 if(strlen($onSubmit)){
-	$onSubmit=" onsubmit=\"".$onSubmit."\"";
+	$this->setHtmlJsSourceOrAjax("document.getElementById(\"".$uid."\").onsubmit=function(){".$onSubmit."};");	
 };
 
 $action=$this->getArgument("action",$this->getFormAction());
@@ -20,5 +22,5 @@ foreach($attributeList as $key=>$value){
 };
 
 ?>
-<form name="<?php $this->eFormName(); ?>" id="<?php $this->eFormName(); ?>" method="POST" action="<?php echo $action; ?>" enctype="multipart/form-data" class="xui application-form" <?php echo $attributes; echo $onSubmit; ?>>
+<form name="<?php $this->eFormName(); ?>" id="<?php echo $uid; ?>" method="POST" action="<?php echo $action; ?>" enctype="multipart/form-data" class="xui application-form" <?php echo $attributes; echo $onSubmit; ?>>
 <?php $this->eFormCsrfToken();

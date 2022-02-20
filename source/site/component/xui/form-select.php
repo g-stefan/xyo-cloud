@@ -15,14 +15,19 @@ $select_value = $this->getElementValue($element);
 $submit=$this->getArgument("submit",false);
 $onChange=$this->getArgument("on_change",null);
 $minimumResultsForSearch=$this->getArgument("minimum_results_for_search",null);
+$uid=$this->getElementId($element);
 if($submit){
-	$submit=" onchange=\"this.form.submit();\"";
+	$submit="this.form.submit();";
 }else{
 	$submit="";
 };
 
 if($onChange){
-	$submit=" onchange=\"".$onChange."\"";
+	$submit=$onChange;
+};
+
+if(strlen($submit)){
+	$this->setHtmlJsSourceOrAjax("document.getElementById(\"".$uid."\").onchange=function(){".$submit."};");
 };
 
 $isRequiredClass="";
@@ -40,7 +45,7 @@ if($minimumResultsForSearch){
 
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
-<select class="xui form-select<?php echo $isRequiredClass; if($this->isElementError($element)){echo " -danger";}; ?>" name="<?php $this->eElementName($element); ?>" id="<?php $this->eElementId($element); ?>" <?php echo $minimumResultsForSearch; echo $submit; ?> >
+<select class="xui form-select<?php echo $isRequiredClass; if($this->isElementError($element)){echo " -danger";}; ?>" name="<?php $this->eElementName($element); ?>" id="<?php $this->eElementId($element); ?>" <?php echo $minimumResultsForSearch;?> >
 <?php
 	foreach ($select_list as $key => $value) {
 		$selected = "";

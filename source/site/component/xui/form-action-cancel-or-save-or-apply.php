@@ -11,9 +11,17 @@ $onClickCancel = $this->getArgument("clickCancel","return false;");
 $onClickApply = $this->getArgument("clickApply","this.form.submit();");
 $onClickSave = $this->getArgument("clickSave","this.form.submit();");
 
+$uidCancel = $this->getUID();
+$uidApply = $this->getUID();
+$uidSave= $this->getUID();
+
+$this->setHtmlJsSourceOrAjax("document.getElementById(\"".$uidCancel."\").onclick=function(){".$onClickCancel."};");
+$this->setHtmlJsSourceOrAjax("document.getElementById(\"".$uidApply."\").onclick=function(){".$onClickApply."};");
+$this->setHtmlJsSourceOrAjax("document.getElementById(\"".$uidSave."\").onclick=function(){".$onClickSave."};");
+
 ?>
 <div class="xui form-separator"></div>
-<button type="button" class="xui button -secondary -outline -left" tabindex="0" onclick="<?php echo $onClickCancel; ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("label.button_cancel"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
-<button type="button" class="xui button -primary -right" tabindex="0" onclick="<?php echo $onClickApply; ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("label.button_apply"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
-<button type="button" class="xui button -success -right" style="margin-right:6px;" tabindex="0" onclick="<?php echo $onClickSave; ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("label.button_save"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
+<button type="button" class="xui button -secondary -outline -left" tabindex="0" id="<?php echo $uidCancel; ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("label.button_cancel"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
+<button type="button" class="xui button -primary -right" tabindex="0" id="<?php echo $uidApply; ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("label.button_apply"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
+<button type="button" class="xui button -success -right" style="margin-right:6px;" tabindex="0" id="<?php echo $uidSave; ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("label.button_save"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
 <div class="xui separator"></div>
