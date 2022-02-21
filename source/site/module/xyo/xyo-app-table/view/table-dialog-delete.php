@@ -41,7 +41,11 @@ foreach($this->viewData as $key=>$value){
 
 include("table-view.init.php");
 
-echo "<table class=\"xui table xyo-app-table\" style=\"width:100%\">";
+$this->ecssBegin();
+echo ".xyo-app-table.-x-delete-1{width:100%}";
+$this->ecssEnd();
+
+echo "<table class=\"xui table xyo-app-table -x-delete-1\">";
 include("table-view.sub.php");
 echo "</table>";
 

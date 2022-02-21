@@ -18,13 +18,17 @@ if($maxlength==0){
 };
 
 $this->eJsSourceAjax("XUI.FormHtml.initById(\"".($this->getElementId($element))."\");");
+$this->ecssBegin();
+echo ".-form-html-file._content{min-height:240px;}";
+echo ".-form-html-file._value{display:none;}";
+$this->ecssEnd();
 
 ?>
 
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
 <div class="xui form-html<?php if($this->isElementError($element)){echo " -danger";}; ?>" id="<?php $this->eElementId($element); ?>">
-	<div class="xui _content" style="min-height:240px;"><?php
+	<div class="xui _content -form-html-file"><?php
 
 	$htmlFile=$this->getElementValue($element);
 	if(strlen($htmlFile)){
@@ -32,7 +36,7 @@ $this->eJsSourceAjax("XUI.FormHtml.initById(\"".($this->getElementId($element)).
 	};
 
 	?></div>
-	<textarea <?php echo $maxlength; ?> class="xui _value" style="display:none;"
+	<textarea <?php echo $maxlength; ?> class="xui _value -form-html-file"
 	name="<?php $this->eElementName($element); ?>_html"
 	id="<?php $this->eElementId($element); ?>_html"><?php
 

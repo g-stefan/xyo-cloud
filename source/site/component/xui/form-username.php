@@ -43,8 +43,8 @@ if(($readonly == 1) ||  ($readonly == "true")){
 
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
-<div class="xui form-text -icon-left<?php echo $isRequiredClass; if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>" style="width:100%">
-<input type="text"<?php echo $maxlength; ?> placeholder="" style="width:100%" <?php echo $autocomplete; ?> <?php echo $readonly; ?>
+<div class="xui form-text -icon-left<?php echo $isRequiredClass; if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>">
+<input type="text"<?php echo $maxlength; ?> placeholder="" <?php echo $autocomplete; ?> <?php echo $readonly; ?>
 	name="<?php $this->eElementName($element); ?>"
 	value="<?php $this->eElementValue($element, ""); ?>"
 	id="<?php $this->eElementId($element); ?>" ></input>

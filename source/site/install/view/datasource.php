@@ -36,7 +36,7 @@ if ($this->isError()) {
 
 ?>
 
-	<select class="xui form-select" id="<?php $this->eElementName("layer"); ?>" name="<?php $this->eElementName("layer"); ?>" onChange="this.form.submit();">
+	<select class="xui form-select" id="<?php $this->eElementName("layer"); ?>" name="<?php $this->eElementName("layer"); ?>">
 <?php
                     foreach ($layerList as $value) {
                         $selected = "";
@@ -63,3 +63,7 @@ if ($this->isError()) {
                     ));
 
 $this->generateComponent("xui.form-action-end");
+
+$this->ejsBegin();
+echo "document.getElementById(\"".$this->getElementName("layer")."\").onchange=function(){this.form.submit();};";
+$this->ejsEnd();

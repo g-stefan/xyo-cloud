@@ -12,8 +12,12 @@ $toolbar_id="xui-app-toolbar_content";
 if($this->isInlineForm){
 	$toolbar_id="xui-app-toolbar_content_right";
 };
+$this->ecssBegin();
+echo ".xyo-app-table.-x-inline-toolbar-1{position:relative;width:100%;min-height:240px;}";
+echo ".xyo-app-table.-x-inline-toolbar-2{height:240px;}";
+$this->ecssEnd();
 //echo 	$this->getCsrfTokenJsSource();
-echo	"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
+echo	"var loader=\"<div class=\\\"xui xyo-app-table -x-inline-toolbar-1\\\"><div class=\\\"xui center-xy xyo-app-table -x-inline-toolbar-2\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 	"\$(\"#".$toolbar_id."\").html(loader);".
 	"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"".$this->getArgument("action","table-inline-view-toolbar")."\", ajax: 1, csrf_token: window.csrfToken })".
   	".done(function(result){".

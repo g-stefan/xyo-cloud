@@ -20,6 +20,18 @@ defined("XYO_CLOUD") or die("Access is denied");
 		<?php $this->eHtmlStyle(); ?>
 	</head>
 	<body<?php $this->eHtmlBodyClass(); ?>>
+<?php
+$uid=$this->getUID();
+$this->ecssBegin();
+echo ".".$uid."-img {width:32px;height:32px;border: 0px;vertical-align: middle;}";
+echo ".".$uid."-1 {font-size:22px;font-weight:bold;vertical-align: middle;}";
+echo ".".$uid."-2 {font-size:11px;padding-top:16px;padding-bottom:0px;margin-bottom:0px;overflow:hidden;height:32px;box-sizing: border-box;}";
+echo ".".$uid."-3 {color:#000000;font-size:11px;white-space: nowrap;}";
+echo ".".$uid."-4 {height:96px;}";
+echo ".".$uid."-5 {text-decoration:none;}";
+$this->ecssEnd();
+
+?>
 
 		<div class="xyo install-application-top-space"></div>
 
@@ -28,9 +40,9 @@ defined("XYO_CLOUD") or die("Access is denied");
 		$this->generateComponent("xui.panel2-begin",array("css-class"=>"-elevation-4"));
 		?>
 	
-		<img src="<?php echo $this->site; ?>lib/xyo/xyo-32.png" style="width:32px;height:32px;border: 0px;vertical-align: middle;" alt="XYO" ></img>
-		<span class="xui -fg-science-blue-3" style="font-size:22px;font-weight:bold;vertical-align: middle;">&#160;CLOUD&#160;</span>
-		<span class="xui -right -fg-science-blue-3" style="font-size:11px;padding-top:16px;padding-bottom:0px;margin-bottom:0px;overflow:hidden;height:32px;box-sizing: border-box;">
+		<img src="<?php echo $this->site; ?>lib/xyo/xyo-32.png" class="<?php echo $uid."-img"; ?>" alt="XYO" ></img>
+		<span class="xui -fg-science-blue-3 <?php echo $uid."-1"; ?>" >&#160;CLOUD&#160;</span>
+		<span class="xui -right -fg-science-blue-3 <?php echo $uid."-2"; ?>">
 			<?php echo $this->cloud->get("xyo_cloud_version"); ?>
 		</span>
 
@@ -41,7 +53,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 		$this->generateComponent("xui.panel2-footer");
 
 		?>
-		<span class="xui -right" style="color:#000000;font-size:11px;white-space: nowrap;"><?php echo $this->getFromLanguage("copyright"); ?> &copy; 2020-2021 <a href="http://www.xyo.ro" style="text-decoration:none;"><span class="xui -fg-science-blue-3">Grigore Stefan</span></a></span>
+		<span class="xui -right <?php echo $uid."-3"; ?>"><?php echo $this->getFromLanguage("copyright"); ?> &copy; 2020-2021 <a href="http://www.xyo.ro" class="<?php echo $uid."-5"; ?>""><span class="xui -fg-science-blue-3">Grigore Stefan</span></a></span>
 
 		<?php
 
@@ -50,7 +62,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 
 		?>
 
-		<div style="height:96px;"></div>
+		<div class="<?php echo $uid."-4"; ?>"></div>
 
 		<?php $this->eHtmlScript(); ?>
 	</body>

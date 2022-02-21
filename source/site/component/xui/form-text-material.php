@@ -28,7 +28,7 @@ if(($readonly == 1) ||  ($readonly == "true")){
 
 ?>
 
-<div class="xui form-text -material<?php if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>" style="width:100%">
+<div class="xui form-text -material<?php if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>">
 <label for="<?php $this->eElementId($element); ?>"<?php if(strlen($this->getElementValue($element, ""))>0){ echo " class=\"xui -has-value\""; }?>><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <input type="text"<?php echo $maxlength; ?> placeholder=""
 	name="<?php $this->eElementName($element); ?>"

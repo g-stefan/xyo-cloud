@@ -18,6 +18,10 @@ $this->ejsBegin();
 echo "document.getElementById(\"xyo-application-title\").innerHTML=\"".$this->getApplicationTitle()."\";";
 $this->generateView("table-inline-toolbar",array("action"=>"table-inline-edit-toolbar"));
 $this->ejsEnd();
+$this->ecssBegin();
+echo ".xyo-app-table.-x-inline-edit-1{position:relative;width:100%;min-height:240px;}";
+echo ".xyo-app-table.-x-inline-edit-2{height:240px;}";
+$this->ecssEnd();
 // ---
 
 $this->setParameter("form.title","form.title_edit");
@@ -33,7 +37,7 @@ $this->generateComponent("xui.form-action-end",array(
 
 $this->ejsBegin();
 echo "window.".$this->instanceV."doCommandInlineForm=function(action){".
-	"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
+	"var loader=\"<div class=\\\"xui xyo-app-table -x-inline-edit-1\\\"><div class=\\\"xui center-xy xyo-app-table -x-inline-edit-2\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 	"\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", data:{csrf_token:window.csrfToken}, success: function(response){".
 		"setTimeout(function(){".
 			"var jsAndHtml=XUI.Html.extractScript(response);".		

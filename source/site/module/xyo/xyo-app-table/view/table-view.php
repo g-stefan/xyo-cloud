@@ -57,6 +57,16 @@ if($this->tableUseApplicationSearch) {
 	$cssClass.=" -use-application-search";
 };
 
+$this->ecssBegin();
+echo ".xyo-app-table.-x-1{width:100%;}";
+echo ".xyo-app-table.-x-2{display:none;}";
+echo ".xyo-app-table.-x-3{margin-left: 4px;}";
+echo ".xyo-app-table.-x-4{margin-left:6px;}";
+echo ".xyo-app-table.-x-5{display:none;position:absolute;top:0px;left:0px;bottom:0px;right:0px;z-index:100;background-color:rgba(128,128,128,0.2);backdrop-filter:blur(3px);}";
+echo ".xyo-app-table.-x-6{height:100%;min-height:128px;}";
+echo ".xyo-app-table.-x-7{margin-right:0;margin-left:0;}";
+$this->ecssEnd();
+
 ?>
 
 <div class="xui component-table <?php echo $cssClass;?>">
@@ -64,7 +74,7 @@ if($this->tableUseApplicationSearch) {
 	<div class="xui app-toolbar -compact -wide">
 		<div class="xui _content">
 		<?php if($this->isInlineForm && $has_search){ ?>
-			<div class="xui form-input-group" style="width:100%;<?php if($this->tableUseApplicationSearch){echo "display:none;";}; ?>">
+			<div class="xui form-input-group xyo-app-table -x-1 <?php if($this->tableUseApplicationSearch){echo " -x-2";}; ?>">
 				<input type="text" name="<?php echo $this->instanceV; ?>search" value="<?php echo $search_value; ?>" size="32" placeholder="<?php $this->eLanguage("search"); ?>" id="<?php echo $this->instanceV; ?>search" class="xyo-app-table_search -inline-form"></input>
 				<button type="submit" name="<?php echo $this->instanceV; ?>submit_search" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>submit_search=1');return false;"><i class="material-icons">search</i></button>
 				<button type="button" name="<?php echo $this->instanceV; ?>search_reset" onclick="XYO.Table.resetSearch('<?php echo $this->instance; ?>',this,'<?php echo $this->instanceV; ?>search');"><i class="material-icons">close</i></button>
@@ -74,7 +84,7 @@ if($this->tableUseApplicationSearch) {
 				<div class="xui grid -row">
 					<div class="xui grid -col -x0">
 					<?php if($has_search){ ?>
-						<div class="xui form-input-group" <?php if($this->tableUseApplicationSearch){echo "style=\"display:none;\"";}; ?>>
+						<div class="xui form-input-group xyo-app-table <?php if($this->tableUseApplicationSearch){echo " -x-2";}; ?>">
 							<input type="text" name="<?php echo $this->instanceV; ?>search" value="<?php echo $search_value; ?>" size="32" placeholder="<?php $this->eLanguage("search"); ?>" id="<?php echo $this->instanceV; ?>search" class="xyo-app-table_search"></input>
 							<button type="submit" name="<?php echo $this->instanceV; ?>submit_search" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>submit_search=1');return false;"><i class="material-icons">search</i></button>
 							<button type="button" name="<?php echo $this->instanceV; ?>search_reset" onclick="XYO.Table.resetSearch('<?php echo $this->instance; ?>',this,'<?php echo $this->instanceV; ?>search');"><i class="material-icons">close</i></button>
@@ -93,11 +103,11 @@ if($this->tableUseApplicationSearch) {
 
 	       					foreach (array_reverse($this->tableSelect,true) as $key => $value) {
 							if ($value) { ?>
-							<div class="xui -right" style="margin-left: 4px;">
+							<div class="xui -right xyo-app-table -x-3">
 							<select name="<?php echo $this->instanceV; ?>view_select_<?php echo $key; ?>"
 								size="1"
 								onChange="XYO.Table.doUpdate('<?php echo $this->instance; ?>');"
-							   	class="xui form-select" id="<?php echo $this->instanceV; ?>view_select_<?php echo $key; ?>" style="margin-left:6px;"
+							   	class="xui form-select xyo-app-table -x-4" id="<?php echo $this->instanceV; ?>view_select_<?php echo $key; ?>"
 								data-xui-select-theme="-default"><?php
 								foreach ($select_info[$key] as $key_ => $value_) {
 									$selected = "";
@@ -124,7 +134,7 @@ if($this->tableUseApplicationSearch) {
         <table class="xui table -sticky-first-row-and-column xyo-app-table <?php if($this->isEmbedded){echo " -no-border";}; ?>" id="<?php echo $this->instanceV; ?>table">
 	<?php include("table-view.sub.php"); ?>
 	</table>
-	<div class="xui" id="<?php echo $this->instanceV; ?>table-loader" style="display:none;position:absolute;top:0px;left:0px;bottom:0px;right:0px;z-index:100;background-color:rgba(128,128,128,0.2);backdrop-filter:blur(3px);"><div class="xui center-xy" style="height:100%;min-height:128px;"><div class="xui animated -loader"></div></div></div>
+	<div class="xui" id="<?php echo $this->instanceV; ?>table-loader xyo-app-table -x-5"><div class="xui center-xy xyo-app-table -x-6"><div class="xui animated -loader"></div></div></div>
 	</div>
 	<div class="xui app-toolbar -left -compact">
 		<div class="xui _content">
@@ -142,11 +152,11 @@ if($this->tableUseApplicationSearch) {
 
 		?>
 
-		<div class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left" style="margin-right:0;margin-left:0;" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>go_first=1');"><i class="material-icons">first_page</i></div>
-		<div class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left" style="margin-right:0;margin-left:0;" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>go_previous=1');return false;"><i class="material-icons">chevron_left</i></div>
+		<div class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>go_first=1');"><i class="material-icons">first_page</i></div>
+		<div class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>go_previous=1');return false;"><i class="material-icons">chevron_left</i></div>
 		<input class="xui form-text <?php echo $cssClass; ?> -left" type="text" name="<?php echo $this->instanceV; ?>page" style="margin-right:3px;margin-left:3px;width:<?php echo ($this->isEmbedded)?48:64; ?>px;" value="<?php echo $page; ?>" size="4" id="<?php echo $this->instanceV; ?>page"></input>
-		<div class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left" style="margin-right:0;margin-left:0;" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>go_next=1');return false;"><i class="material-icons">chevron_right</i></div>
-		<div class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left" style="margin-right:0;margin-left:0;" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>go_last=1');return false;"><i class="material-icons">last_page</i></div>
+		<div class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>go_next=1');return false;"><i class="material-icons">chevron_right</i></div>
+		<div class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>go_last=1');return false;"><i class="material-icons">last_page</i></div>
 
 		&nbsp;
 
@@ -497,4 +507,5 @@ if($this->isInlineForm){
 if($this->isEmbedded){
 	$this->setHtmlJsSourceOrAjax("XUI.EffectRipple.init();","load");
 };
+
 

@@ -11,10 +11,14 @@ defined("XYO_CLOUD") or die("Access is denied");
 $element = $this->getArgument("element");
 $uid = $this->getUID();
 
+$this->ecssBegin();
+echo ".-form-file{width:100%;display:block;}";
+$this->ecssEnd();
+
 ?>
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
-<div class="xui form-file" style="width:100%;display:block;" id="<?php $this->eElementId($element); ?>_super">
+<div class="xui form-file -form-file" id="<?php $this->eElementId($element); ?>_super">
 <input type="file" name="<?php $this->eElementName($element); ?>" id="<?php $this->eElementId($element); ?>" class="xui _file"></input>
 <label for="<?php $this->eElementId($element); ?>" class="xui button -icon-left -outline"><i class="material-icons">file_upload</i><span>Browse ...</span></label>
 <button type="button" class="xui button -icon -info" id="<?php echo $uid; ?>" ><i class="material-icons">delete</i></button>

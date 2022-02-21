@@ -58,6 +58,10 @@ if(strlen($jsButtonClick)==0){
 	$this->setFormName($originalFormName);
 };
 
+$this->ecssBegin();
+echo ".-com-modal.-loader{position:relative;width:100%;min-height:240px;}";
+echo ".-com-modal.-div-1{height:240px;}";
+$this->ecssEnd();
 ?>
 <div id="<?php echo $id; ?>" class="xui modal">
 	<div class="xui panel _modal-content -overlay-scrollbars os-host-flexbox">
@@ -84,7 +88,7 @@ $this->setHtmlJsSourceOrAjax(
 	"window.".$jsFunction."=function(jsParameters){".
 		"var jsAction= { ".$instanceV."action: \"".$action."\", ajax: 1, csrf_token: window.csrfToken };".
 		"if(jsParameters){ for (var x in jsParameters) { jsAction[x] = jsParameters[x]; }; };".
-		"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
+		"var loader=\"<div class=\\\"xui -com-modal -loader\\\"><div class=\\\"xui center-xy -com-modal -div-1\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 		"\$(\"#".$id."_content\").html(loader);".
 		"XUI.Modal.activate(\"".$id."\");".
 		"\$.post(\"".$this->requestUriThis()."\", jsAction)".

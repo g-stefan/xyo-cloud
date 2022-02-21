@@ -34,8 +34,8 @@ if($isRequired){
 
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
-<div class="xui form-text -icon-left<?php echo $isRequiredClass; if($this->isElementError($element)){echo " -danger";}; ?>" style="width:100%">
-<input type="password"<?php echo $maxlength; ?> placeholder="" style="width:100%" <?php echo $autocomplete; ?>
+<div class="xui form-text -icon-left<?php echo $isRequiredClass; if($this->isElementError($element)){echo " -danger";}; ?>">
+<input type="password"<?php echo $maxlength; ?> placeholder="" <?php echo $autocomplete; ?>
 	name="<?php $this->eElementName($element); ?>"
 	value="<?php $this->eElementValue($element, ""); ?>"
 	id="<?php $this->eElementId($element); ?>" ></input>

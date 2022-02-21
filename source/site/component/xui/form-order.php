@@ -17,12 +17,14 @@ if($maxlength==0){
 	$maxlength=" maxlength=\"".$maxlength."\"";
 };
 
+$this->ecssBegin();
+echo ".-form-order{width:96px}";
+$this->ecssEnd();
 ?>
 
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
-<input type="text"<?php echo $maxlength; ?> class="xui form-text<?php if($this->isElementError($element)){echo " -danger";}; ?>" placeholder=""
-	style="width:96px"
+<input type="text"<?php echo $maxlength; ?> class="xui form-text<?php if($this->isElementError($element)){echo " -danger";}; ?> -form-order" placeholder=""
 	name="<?php $this->eElementName($element); ?>"
 	value="<?php $this->eElementValue($element, ""); ?>"
 	id="<?php $this->eElementId($element); ?>" ></input>

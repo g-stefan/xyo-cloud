@@ -72,9 +72,14 @@ function <?php echo $prefixJS; ?>_selectTab(e,tab){
 	document.getElementById("<?php $this->eElementId($element); ?>").value=tab;
 };
 
-<?php $this->ejsEnd(); ?>
-
 <?php
+$this->ejsEnd();
+
+$this->ecssBegin();
+echo ".-form-tabs._separator{flex-grow: 1;}";
+$this->ecssEnd();
+
+
 echo "<div class=\"xui ".$baseClass."\">";
 echo "<ul class=\"xui menu -tab\">";
 	echo "<li class=\"xui _separator\"></li>";
@@ -94,7 +99,7 @@ echo "<ul class=\"xui menu -tab\">";
 			echo "</div>";
 		echo "</li>";
 	};
-	echo "<li class=\"xui _separator\" style=\"flex-grow: 1;\"></li>";
+	echo "<li class=\"xui _separator -form-tabs\"></li>";
 echo "</ul>";
 
 foreach ($items as $key => $value) {

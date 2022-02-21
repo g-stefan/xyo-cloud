@@ -39,7 +39,7 @@ if(strlen($submit)){
 
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
-<select class="xui form-select -multiple<?php echo $isRequiredClass; if($this->isElementError($element)){echo " -danger";}; ?>" name="<?php $this->eElementName($element); ?>" id="<?php $this->eElementId($element); ?>" multiple="multiple" style="width:100%;">
+<select class="xui form-select -multiple<?php echo $isRequiredClass; if($this->isElementError($element)){echo " -danger";}; ?>" name="<?php $this->eElementName($element); ?>" id="<?php $this->eElementId($element); ?>" multiple="multiple">
 <?php
 	foreach ($select_list as $key => $value) {
 		$selected = "";

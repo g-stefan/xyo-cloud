@@ -84,10 +84,14 @@ if($useCaptcha){
 
 $this->generateComponent("xui.separator");
 
+$this->ecssBegin();
+echo ".-default.-div-1{display:block;text-align:center;}";
+$this->ecssEnd();
+
 ?>
 
 <br />
-<div style="display:block;text-align:center;">
+<div class="-default -div-1">
 	<input type="submit" class="xui button -primary" name="<?php $this->eElementName("login"); ?>" value="<?php $this->eLanguage("cmd_login"); ?>" ></input>
 </div>
 

@@ -21,8 +21,8 @@ if($maxlength==0){
 
 <label class="xui form-label<?php if($this->isElementError($element)){echo " -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
-<div class="xui form-text -icon-left<?php if($this->isElementError($element)){echo " -danger";}; ?>" style="width:100%">
-<input type="text"<?php echo $maxlength; ?> placeholder="" style="width:100%"
+<div class="xui form-text -icon-left<?php if($this->isElementError($element)){echo " -danger";}; ?>">
+<input type="text"<?php echo $maxlength; ?> placeholder=""
 	name="<?php $this->eElementName($element); ?>"
 	value="<?php $this->eElementValue($element, ""); ?>"
 	id="<?php $this->eElementId($element); ?>" ></input>

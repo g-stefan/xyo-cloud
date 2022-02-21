@@ -7,7 +7,6 @@
 //
 
 defined("XYO_CLOUD") or die("Access is denied");
-
 $language = $this->getSystemLanguage();
 $languageList = array(
 	"en-GB" => $this->getFromLanguage("language.en_gb"),
@@ -42,7 +41,7 @@ echo "<br />";
 	<?php $this->generateViewLanguage("msg-language"); ?>
 	</label>
 	<br />
-	<select class="xui form-select -defult" id="website_language" name="website_language" data-xui-select-theme="-default" onChange="this.form.submit();">
+	<select class="xui form-select -defult" id="website_language" name="website_language" data-xui-select-theme="-default">
 <?php
                     foreach ($languageList as $key => $value) {
                         $selected = "";
@@ -65,3 +64,7 @@ echo "<br />";
 	));
 
 $this->generateComponent("xui.form-action-end");
+
+$this->ejsBegin();
+echo "document.getElementById(\"website_language\").onchange=function(){this.form.submit();};";
+$this->ejsEnd();

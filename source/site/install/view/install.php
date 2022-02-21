@@ -18,7 +18,15 @@ foreach ($selectDatasource as $key => $value) {
 	};
 	$allOk = false;
 	break;
-};			
+};
+
+$uid=$this->getUID();
+$this->ecssBegin();
+echo ".".$uid." {";
+echo "color: #AA0000;";
+echo "}";
+$this->ecssEnd();
+
 
 $this->generateComponent("xui.form-action-begin");
 
@@ -51,7 +59,7 @@ if($allOk){
 			echo "<div class=\"xui list-group_item_text\">";
 	                        echo $key;
 			echo "</div>";			
-			echo "<div class=\"xui list-group_item_icon-right\" style=\"color: #AA0000;\">";
+			echo "<div class=\"xui list-group_item_icon-right ".$uid."\">";
 				echo "<i class=\"material-icons\">highlight_off</i>";
                 	echo "</div>";
         	echo "</div>";

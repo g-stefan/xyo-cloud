@@ -19,9 +19,13 @@ $this->setHtmlJsSourceOrAjax("document.getElementById(\"".$uidCancel."\").onclic
 $this->setHtmlJsSourceOrAjax("document.getElementById(\"".$uidApply."\").onclick=function(){".$onClickApply."};");
 $this->setHtmlJsSourceOrAjax("document.getElementById(\"".$uidSave."\").onclick=function(){".$onClickSave."};");
 
+$this->ecssBegin();
+echo ".-form-action-cancel-or-save-or-apply.-success{margin-right:6px;}";
+$this->ecssEnd();
+
 ?>
 <div class="xui form-separator"></div>
 <button type="button" class="xui button -secondary -outline -left" tabindex="0" id="<?php echo $uidCancel; ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("label.button_cancel"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
 <button type="button" class="xui button -primary -right" tabindex="0" id="<?php echo $uidApply; ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("label.button_apply"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
-<button type="button" class="xui button -success -right" style="margin-right:6px;" tabindex="0" id="<?php echo $uidSave; ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("label.button_save"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
+<button type="button" class="xui button -success -right -form-action-cancel-or-save-or-apply" tabindex="0" id="<?php echo $uidSave; ?>">&nbsp;&nbsp;&nbsp;&nbsp;<?php $this->eLanguage("label.button_save"); ?>&nbsp;&nbsp;&nbsp;&nbsp;</button>
 <div class="xui separator"></div>

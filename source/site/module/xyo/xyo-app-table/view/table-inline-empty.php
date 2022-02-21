@@ -9,10 +9,15 @@
 defined("XYO_CLOUD") or die("Access is denied");
 
 $this->setHtmlJsSourceOrAjaxCsrfToken();
+$this->ecssBegin();
+echo ".xyo-app-table.-x-inline-empty-1{position:relative;width:100%;min-height:320px;}";
+echo ".xyo-app-table.-x-inline-empty-2{height:320px;}";
+echo ".xyo-app-table.-x-inline-empty-3{border-radius:50%;width:64px;height:64px;background-color:#EEEEEE;overflow:hidden;}";
+$this->ecssEnd();
 ?>
-<div class="xui" style="position:relative;width:100%;min-height:320px;">
-	<div class="xui center-xy" style="height:320px;">
-		<div class="xui" style="border-radius:50%;width:64px;height:64px;background-color:#EEEEEE;overflow:hidden;">
+<div class="xui xyo-app-table -x-inline-empty-1">
+	<div class="xui center-xy xyo-app-table -x-inline-empty-2">
+		<div class="xui xyo-app-table -x-inline-empty-3">
 		</div>
 	</div>
 </div>

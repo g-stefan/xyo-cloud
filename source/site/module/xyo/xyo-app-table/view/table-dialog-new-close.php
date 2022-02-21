@@ -13,8 +13,11 @@ $this->generateView("notify-alert");
 $this->generateView("notify-error");
 
 // ---
+$this->ecssBegin();
+echo ".xyo-app-table.-x-new-close-1{height:240px;}";
+$this->ecssEnd();
 
-echo "<div style=\"height:240px;\"></div>";
+echo "<div class=\"xyo-app-table -x-new-close-1\"></div>";
 $this->ejsBegin();
 echo "XUI.Modal.deactivate();";
 echo "XYO.Table.doUpdate(\"".$this->instance."\",\"&".$this->instanceV."action=table-view\");";

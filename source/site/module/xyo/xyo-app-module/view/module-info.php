@@ -8,6 +8,10 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
+$this->ecssBegin();
+echo ".xyo-app-module.-x-1{font-size:14px;}";
+$this->ecssEnd();
+
 $path=$this->getModulePath($this->viewValue);
 if($path) {
 	if(file_exists($path."sys/info.json")) {
@@ -69,7 +73,7 @@ if($path) {
 
 			if(strlen($description)) {
 				echo "<br />";
-				echo "<span class=\"xui -fg-aluminium-5\" style=\"font-size:14px;\">";
+				echo "<span class=\"xui -fg-aluminium-5 xyo-app-module -x-1\">";
 				echo $description;
 				echo "</span>";
 			};
@@ -78,7 +82,7 @@ if($path) {
 			   strlen($authorURI)||
 			   strlen($license)){
 				echo "<br />";
-				echo "<span class=\"xui -fg-aluminium-4\" style=\"font-size:14px;\">";
+				echo "<span class=\"xui -fg-aluminium-4 xyo-app-module -x-1\">";
 				$separator="";
 				if(strlen($version)) {
 					echo $this->getFromLanguage("info.version")." ".$version;

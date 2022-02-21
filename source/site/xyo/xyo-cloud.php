@@ -1649,7 +1649,7 @@ class xyo_Cloud extends xyo_Config {
 
 	protected function initCSPManager() {
 		$this->cspNonce=hash("sha256", $this->getClientIP().".".rand().".".time(), false);
-		$this->cspHeader="default-src 'self' nonce-".$this->cspNonce.";";
+		$this->cspHeader="default-src 'self' 'nonce-".$this->cspNonce."';";
 	}
 
 	public function setCSPHeader($value) {

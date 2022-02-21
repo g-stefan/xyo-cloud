@@ -8,6 +8,10 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
+$this->ecssBegin();
+echo ".-default.-ul-1{margin-top:2px;}";
+$this->ecssEnd();
+
 ?>
 
 <br>
@@ -24,7 +28,7 @@ MIT License (MIT) &lt;<a href="http://opensource.org/licenses/MIT" target="_blan
 This product includes PHP software, freely available from &lt;<a href="http://www.php.net/software/">http://www.php.net/software/</a>&gt;<br/>
 <br/>
 This product may include software endorsed with following licenses:
-<ul style="margin-top:2px;">
+<ul class="-default -ul-1">
 	<li>MIT License (MIT)</li>
 	<li>PHP License version 3.01</li>
 	<li>The BSD License</li>
