@@ -94,9 +94,15 @@ if(strlen($userImageThumbnail)>0) {
 		<div class="xui dashboard -main<?php echo $dasboardType; ?>">
 			<div class="xui app-header">
 				<div class="xui app-bar">
-					<div class="xui button -icon -transparent -left -effect-ripple" onclick="XUI.Dashboard.toggleAction();">
+				<?php $uid=$this->getUID();?>
+					<div  id="<?php echo $uid; ?>" class="xui button -icon -transparent -left -effect-ripple">
 						<i class="material-icons">menu</i>
 					</div>
+					<?php
+					$this->ejsBegin();
+					echo "document.getElementById(\"".$uid."\").onclick=function(){XUI.Dashboard.toggleAction();};";
+					$this->ejsEnd();
+					?>
 					<div class="xui text -size-h24x40 -left" id="xyo-application-title">
 						<?php echo $title; ?>
 					</div>
