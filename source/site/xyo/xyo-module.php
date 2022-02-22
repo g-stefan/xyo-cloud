@@ -822,8 +822,8 @@ class xyo_Module extends xyo_Config {
 		$this->cloud->eCssSourceAjax($source);
 	}
 
-	public function setHtmlJsSourceOrAjax($source) {
-		$this->cloud->setHtmlJsSourceOrAjax($this->name,$source);
+	public function setHtmlJsSourceOrAjax($source,$opt="none") {
+		$this->cloud->setHtmlJsSourceOrAjax($this->name,$source,$opt);
 	}
 
 	public function eJsSourceAjax($source) {

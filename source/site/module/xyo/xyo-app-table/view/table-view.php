@@ -9,6 +9,33 @@
 defined("XYO_CLOUD") or die("Access is denied");
 
 include("table-view.init.php");
+
+$this->ecssBegin();
+echo ".xyo-app-table.-x-1{width:100%;}";
+echo ".xyo-app-table.-x-2{display:none;}";
+echo ".xyo-app-table.-x-3{margin-left: 4px;}";
+echo ".xyo-app-table.-x-4{margin-left:6px;}";
+echo ".xyo-app-table.-x-5{display:none;position:absolute;top:0px;left:0px;bottom:0px;right:0px;z-index:100;background-color:rgba(128,128,128,0.2);backdrop-filter:blur(3px);}";
+echo ".xyo-app-table.-x-6{height:100%;min-height:128px;}";
+echo ".xyo-app-table.-x-7{margin-right:0;margin-left:0;}";
+echo ".xyo-app-table.-x-8{margin-right:3px;margin-left:3px;}";
+echo ".xyo-app-table.-x-x48{width:48px}";
+echo ".xyo-app-table.-x-x64{width:64px}";
+echo ".xyo-app-table.-x-9{font-size: 16px;line-height: 20px;font-weight: normal;margin-left:4px;margin-top: 6px;}";
+echo ".xyo-app-table.-x-10{color: #999;}";
+echo ".xyo-app-table.-x-11{font-size: 14px;line-height: 18px;font-weight: normal;margin-left: 6px;margin-top: 3px;}";
+echo ".xyo-app-table.-x-12{display:none;height:100%;width:100%;overflow:auto;}";
+echo ".xyo-app-table.-x-13{line-height: 24px;}";
+echo ".xyo-app-table.-x-14{float:left;}";
+echo ".xyo-app-table.-x-15{position:relative;width:100%;min-height:240px;}";
+echo ".xyo-app-table.-x-16{height:240px;}";
+echo ".xyo-app-table.-x-inline-toolbar-1{position:relative;width:100%;min-height:240px;}";
+echo ".xyo-app-table.-x-inline-toolbar-2{height:240px;}";
+$this->ecssEnd();
+
+$this->ecssEnd();
+
+
 if(!$this->isInline){
 	if($this->isAjax()){
 		$this->setHtmlJsSourceOrAjaxCsrfToken();
@@ -56,27 +83,6 @@ if($this->hideTopToolbar_) {
 if($this->tableUseApplicationSearch) {
 	$cssClass.=" -use-application-search";
 };
-
-$this->ecssBegin();
-echo ".xyo-app-table.-x-1{width:100%;}";
-echo ".xyo-app-table.-x-2{display:none;}";
-echo ".xyo-app-table.-x-3{margin-left: 4px;}";
-echo ".xyo-app-table.-x-4{margin-left:6px;}";
-echo ".xyo-app-table.-x-5{display:none;position:absolute;top:0px;left:0px;bottom:0px;right:0px;z-index:100;background-color:rgba(128,128,128,0.2);backdrop-filter:blur(3px);}";
-echo ".xyo-app-table.-x-6{height:100%;min-height:128px;}";
-echo ".xyo-app-table.-x-7{margin-right:0;margin-left:0;}";
-echo ".xyo-app-table.-x-8{margin-right:3px;margin-left:3px;}";
-echo ".xyo-app-table.-x-x48{width:48px}";
-echo ".xyo-app-table.-x-x64{width:64px}";
-echo ".xyo-app-table.-x-9{font-size: 16px;line-height: 20px;font-weight: normal;margin-left:4px;margin-top: 6px;}";
-echo ".xyo-app-table.-x-10{color: #999;}";
-echo ".xyo-app-table.-x-11{font-size: 14px;line-height: 18px;font-weight: normal;margin-left: 6px;margin-top: 3px;}";
-echo ".xyo-app-table.-x-12{display:none;height:100%;width:100%;overflow:auto;}";
-echo ".xyo-app-table.-x-13{line-height: 24px;}";
-echo ".xyo-app-table.-x-14{float:left;}";
-echo ".xyo-app-table.-x-15{position:relative;width:100%;min-height:240px;}";
-echo ".xyo-app-table.-x-16{height:240px;}";
-$this->ecssEnd();
 
 ?>
 
@@ -175,7 +181,7 @@ $this->ecssEnd();
         <table class="xui table -sticky-first-row-and-column xyo-app-table <?php if($this->isEmbedded){echo " -no-border";}; ?>" id="<?php echo $this->instanceV; ?>table">
 	<?php include("table-view.sub.php"); ?>
 	</table>
-	<div class="xui" id="<?php echo $this->instanceV; ?>table-loader xyo-app-table -x-5"><div class="xui center-xy xyo-app-table -x-6"><div class="xui animated -loader"></div></div></div>
+	<div class="xui xyo-app-table -x-5" id="<?php echo $this->instanceV; ?>table-loader"><div class="xui center-xy xyo-app-table -x-6"><div class="xui animated -loader"></div></div></div>
 	</div>
 	<div class="xui app-toolbar -left -compact">
 		<div class="xui _content">

@@ -22,17 +22,19 @@ if(array_key_exists("active",$item)){
 	$active=$item["active"];
 };
 
-$url=" href=\"#\" onclick=\"return false;\"";
+$onclick="return false;";
+$url=" href=\"#\"";
 if(array_key_exists("url",$item)){
 	$url=" href=\"".$item["url"]."\"";
-	if($isPopup){
-		$url.=" onclick=\"return false;\"";
+	$onclick="";
+	if($isPopup){		
+		$onclick="return false;";
 	};
 };
 if(array_key_exists("js",$item)){
-	$url=" href=\"#\" onclick=\"".$item["js"].";return false;\"";
-	if($isPopup){
-		$url.=" onclick=\"return false;\"";
+	$onclick=$item["js"].";return false;";	
+	if($isPopup){		
+		$onclick="return false;";	
 	};
 };
 
@@ -67,13 +69,19 @@ if($isPopup){
 	echo "<li>";
 };
 
-echo "<a class=\"xui action -effect-ripple".($active?" -selected":"").($isPopup?" -toggle":"")."\"".$url.($isPopup?" data-xui-toggle=\"parent\"":"").">";
+$uid=$this->getUID();
+echo "<a id=\"$uid\" class=\"xui action -effect-ripple".($active?" -selected":"").($isPopup?" -toggle":"")."\"".$url.($isPopup?" data-xui-toggle=\"parent\"":"").">";
 	echo $icon;
 	echo "<span>".$text."</span>";
 	if($isPopup){
 		echo "<i class=\"material-icons\">chevron_right</i>";
 	};
 echo "</a>";
+if(strlen($onclick)>0){
+	$this->ejsBegin();
+	echo "document.getElementById(\"".$uid."\").onclick=function(){".$onclick."};";
+	$this->ejsEnd();
+};
 
 if($isPopup){
 	echo "<ul>";

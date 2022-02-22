@@ -1273,7 +1273,7 @@ class xyo_Cloud extends xyo_Config {
 	}
 
 	public function eHtmlJsSource() {
-		if(count($this->htmlJsSourceList)>0) {
+		if(count($this->htmlJsSourceList)>0) {			
 			$simple=array();
 			$load=array();
 
@@ -1649,7 +1649,7 @@ class xyo_Cloud extends xyo_Config {
 
 	protected function initCSPManager() {
 		$this->cspNonce=hash("sha256", $this->getClientIP().".".rand().".".time(), false);
-		$this->cspHeader="default-src 'self' 'nonce-".$this->cspNonce."';";
+		$this->cspHeader="default-src 'self' 'nonce-".$this->cspNonce."' data:;";
 	}
 
 	public function setCSPHeader($value) {
@@ -1693,7 +1693,7 @@ class xyo_Cloud extends xyo_Config {
 
 	public function getUID() {
 		++$this->uidIndex;
-		return "uid".$this->uidIndex;
+		return "uid".$this->uidIndex.time();
 	}
 
 	//

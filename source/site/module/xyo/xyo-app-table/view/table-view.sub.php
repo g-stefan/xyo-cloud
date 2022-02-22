@@ -56,7 +56,11 @@ foreach ($this->tableHead as $key => $value) {
 	
 	if ($key === "#") {
 		echo "<div class=\"xui form-checkbox -box\">";
-			echo "<input type=\"checkbox\" id=\"".$this->instanceV."id_0\" name=\"".$this->instanceV."id_0\" value=\"0\" onchange=\"XYO.Table.setCheckboxState('".$this->instance."',this);\" onclick=\"XYO.Table.setCheckboxState('".$this->instance."',this);\">";
+			echo "<input type=\"checkbox\" id=\"".$this->instanceV."id_0\" name=\"".$this->instanceV."id_0\" value=\"0\">";
+			$this->ejsBegin();
+			echo "document.getElementById(\"".$this->instanceV."id_0\").onchange=function(){XYO.Table.setCheckboxState('".$this->instance."',this);};";
+			echo "document.getElementById(\"".$this->instanceV."id_0\").onclick=function(){XYO.Table.setCheckboxState('".$this->instance."',this);};";
+			$this->ejsEnd();
 			echo "<label for=\"".$this->instanceV."id_0\"></label>";
 		echo "</div>";
 		echo "</th>";
@@ -72,30 +76,46 @@ echo ".xyo-app-table.-z-5{display:none;}";
 $this->ecssEnd();
 
 	if (array_key_exists($key, $this->tableSort)){
-		echo "<span class=\"xyo-app-table -z-1\" onclick=\"XYO.Table.doSort('".$this->instance."','".$key."','".$sortNextState[$sortState[$key]]."');return false;\">";
+		$uid=$this->getUID();
+		echo "<span id=\"".$uid."\" class=\"xyo-app-table -z-1\">";		
 		$this->eLanguage($value);
 		echo "</span>";
+		$this->ejsBegin();
+		echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doSort(\"".$this->instance."\",\"".$key."\",\"".$sortNextState[$sortState[$key]]."\");return false;};";
+		$this->ejsEnd();
 	}else{
 		$this->eLanguage($value);
 	};
 
 	if (array_key_exists($key, $this->tableType)) {
 		if (($this->tableType[$key][0]=="order")||($this->tableType[$key][0]=="value")) {
-			echo "<div class=\"xui button -transparent -effect-ripple -primary -icon -small -size-xy28\" onclick=\"XYO.Table.doOrderSave('".$this->instance."','" . $key . "');return false;\">";
+			$uid=$this->getUID();
+			echo "<div id=\"".$uid."\" class=\"xui button -transparent -effect-ripple -primary -icon -small -size-xy28\">";
 				echo "<i class=\"material-icons\">save</i>";
 			echo "</div>";
+			$this->ejsBegin();
+			echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doOrderSave(\"".$this->instance."\",\"" . $key . "\");return false;};";
+			$this->ejsEnd();
 		};
 	};
 				 
 	if ($hasSort){					
 		if(is_array($sort_img[$sortState[$key]])){
-			echo "<div class=\"xui button -transparent -effect-ripple -".$sort_img[$sortState[$key]][1]." -icon -small -size-xy28 -circle\" onclick=\"XYO.Table.doSort('".$this->instance."','".$key."','".$sortNextState[$sortState[$key]]."');return false;\">";
+			$uid=$this->getUID();
+			echo "<div id=\"".$uid."\" class=\"xui button -transparent -effect-ripple -".$sort_img[$sortState[$key]][1]." -icon -small -size-xy28 -circle\">";
 				echo $sort_img[$sortState[$key]][0];	
 			echo "</div>";
+			$this->ejsBegin();
+			echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doSort(\"".$this->instance."\",\"".$key."\",\"".$sortNextState[$sortState[$key]]."\");return false;};";
+			$this->ejsEnd();
 		}else{
-			echo "<div class=\"xui button -transparent -effect-ripple -secondary -icon -small -size-xy28 -circle\" onclick=\"XYO.Table.doSort('".$this->instance."','".$key."','".$sortNextState[$sortState[$key]]."');return false;\">";
+			$uid=$this->getUID();
+			echo "<div id=\"".$uid."\" class=\"xui button -transparent -effect-ripple -secondary -icon -small -size-xy28 -circle\">";
 				echo $sort_img[$sortState[$key]];	
 			echo "</div>";
+			$this->ejsBegin();
+			echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doSort(\"".$this->instance."\",\"".$key."\",\"".$sortNextState[$sortState[$key]]."\");return false;};";
+			$this->ejsEnd();
 		};
 	};
         
@@ -204,13 +224,21 @@ foreach ($this->viewData as $key => $value) {
 				if($value["@write"]){
 
 		                       	if(is_array($toggle_img_[$img])){
-						echo "<div class=\"xui button -".$toggle_img_[$img][1]." -transparent -effect-ripple -icon -small -size-xy24-22 -left\" onclick=\"XYO.Table.doToggle('".$this->instance."','" . $value[$this->primaryKey] . "','" . $key_ . "',".$forceCommand.");return false;\">";
+						$uid=$this->getUID();
+						echo "<div id=\"".$uid."\" class=\"xui button -".$toggle_img_[$img][1]." -transparent -effect-ripple -icon -small -size-xy24-22 -left\">";
 						echo $toggle_img_[$img][0];
 						echo "</div>";
+						$this->ejsBegin();
+						echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doToggle(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\",".$forceCommand.");return false;};";
+						$this->ejsEnd();
 					} else {
-						echo "<div class=\"xui button -primary -transparent -effect-ripple -icon -small -size-xy24-22 -left\" onclick=\"XYO.Table.doToggle('".$this->instance."','" . $value[$this->primaryKey] . "','" . $key_ . "',".$forceCommand.");return false;\">";
+						$uid=$this->getUID();
+						echo "<div id=\"".$uid."\" class=\"xui button -primary -transparent -effect-ripple -icon -small -size-xy24-22 -left\">";
 						echo $toggle_img_[$img];
 						echo "</div>";
+						$this->ejsBegin();
+						echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doToggle(v".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\",".$forceCommand.");return false;};";
+						$this->ejsEnd();
 					};
 
 				}else{
@@ -305,13 +333,21 @@ foreach ($this->viewData as $key => $value) {
 				if($value["@write"]){
 
 					if(is_array($toggle_img_[$img])){
-						echo "<div class=\"xui button -".$toggle_img_[$img][1]." -transparent -effect-ripple -icon -small -size-xy24-22 -left\" onclick=\"XYO.Table.doRadio('".$this->instance."','" . $value[$this->primaryKey] . "','" . $key_ . "');return false;\">";
+						$uid=$this->getUID();
+						echo "<div id=\"".$uid."\" class=\"xui button -".$toggle_img_[$img][1]." -transparent -effect-ripple -icon -small -size-xy24-22 -left\">";
 						echo $toggle_img_[$img][0];
 						echo "</div>";
+						$this->ejsBegin();
+						echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doRadio(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\");return false;};";
+						$this->ejsEnd();
 					} else {
-						echo "<div class=\"xui button -primary -transparent -effect-ripple -icon -small -size-xy24-22 -left\" onclick=\"XYO.Table.doRadio('".$this->instance."','" . $value[$this->primaryKey] . "','" . $key_ . "');return false;\">";
+						$uid=$this->getUID();
+						echo "<div id=\"".$uid."\" class=\"xui button -primary -transparent -effect-ripple -icon -small -size-xy24-22 -left\">";
 						echo $toggle_img_[$img];
 						echo "</div>";
+						$this->ejsBegin();
+						echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doRadio(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\");return false;};";
+						$this->ejsEnd();
 					};
 
 				}else{
@@ -335,8 +371,16 @@ foreach ($this->viewData as $key => $value) {
 						echo " name=\"".$this->instanceV."order_" . $value[$this->primaryKey] . "\"";
 						echo " value=\"" . $value[$key_] . "\"";
 						echo " size=\"4\"></input>";
-					echo "<button type=\"button\" onclick=\"XYO.Table.doOrderUp('".$this->instance."','" . $value[$this->primaryKey] . "','" . $key_ . "');return false;\"><i class=\"material-icons\">expand_less</i></button>";
-					echo "<button type=\"button\" onclick=\"XYO.Table.doOrderDown('".$this->instance."','" . $value[$this->primaryKey] . "','" . $key_ . "');return false;\"><i class=\"material-icons\">expand_more</i></button>";
+					$uid=$this->getUID();
+					echo "<button id=\"".$uid."\" type=\"button\"><i class=\"material-icons\">expand_less</i></button>";
+					$this->ejsBegin();
+					echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doOrderUp(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\");return false;};";
+					$this->ejsEnd();
+					$uid=$this->getUID();
+					echo "<button id=\"".$uid."\" type=\"button\"><i class=\"material-icons\">expand_more</i></button>";
+					$this->ejsBegin();
+					echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doOrderDown(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\");return false;};";
+					$this->ejsEnd();
 				echo "</div>";
 			}else			
 			if($this->tableType[$key_][0]=="value"){
@@ -405,7 +449,11 @@ foreach ($this->viewData as $key => $value) {
 						};
 					};
 					$p .= "}";
-					echo "<a class=\"xui link\" href=\"".$this->requestUriThis($parameters)."\" onclick=\"".$this->instanceV."callActionLink_".$key_."(".$p.");return false;\">" . $valueX . "</a>";
+					$uid=$this->getUID();
+					echo "<a id=\"".$uid."\" class=\"xui link\" href=\"".$this->requestUriThis($parameters)."\">" . $valueX . "</a>";
+					$this->ejsBegin();
+					echo "document.getElementById(\"".$uid."\").onclick=function(){".$this->instanceV."callActionLink_".$key_."(".$p.");return false;};";
+					$this->ejsEnd();
 				}else{
 					echo $valueX;
 				};
@@ -430,7 +478,11 @@ foreach ($this->viewData as $key => $value) {
 				};
 
 				if($value["@write"]){
-					echo "<a class=\"xui link\" href=\"".$this->requestUriThis(array("action"=>"form-edit","primary_key_value"=>$value[$this->primaryKey]))."\" onclick=\"".$this->instanceV."cmdDialogEdit('".$value[$this->primaryKey]."');return false;\">" . $valueX . "</a>";
+					$uid=$this->getUID();
+					echo "<a id=\"".$uid."\" class=\"xui link\" href=\"".$this->requestUriThis(array("action"=>"form-edit","primary_key_value"=>$value[$this->primaryKey]))."\">" . $valueX . "</a>";
+					$this->ejsBegin();
+					echo "document.getElementById(\"".$uid."\").onclick=function(){".$this->instanceV."cmdDialogEdit('".$value[$this->primaryKey]."');return false;};";
+					$this->ejsEnd();
 				}else{
 					echo $valueX;
 				};

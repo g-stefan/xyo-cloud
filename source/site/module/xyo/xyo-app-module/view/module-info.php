@@ -69,7 +69,11 @@ if($path) {
 				$moduleName=$this->viewValue;
 			};
 			
-			echo "<a class=\"xui link\" href=\"".$this->requestUriThis(array("action"=>"form-edit","primary_key_value"=>$this->viewPrimaryKey))."\" onclick=\"".$this->instanceV."cmdDialogEdit('".$this->viewPrimaryKey."');return false;\">".$moduleName."</a>";
+			$uid=$this->getUID();
+			echo "<a id=\"".$uid."\" class=\"xui link\" href=\"".$this->requestUriThis(array("action"=>"form-edit","primary_key_value"=>$this->viewPrimaryKey))."\">".$moduleName."</a>";
+			$this->ejsBegin();
+			echo "document.getElementById(\"".$uid."\").onclick=function(){".$this->instanceV."cmdDialogEdit(\"".$this->viewPrimaryKey."\");return false;};";
+			$this->ejsEnd();
 
 			if(strlen($description)) {
 				echo "<br />";
@@ -115,7 +119,11 @@ if($path) {
 };
 
 if($this->viewData[$this->viewId]["@write"]) {
-	echo "<a class=\"xui link\" href=\"".$this->requestUriThis(array("action"=>"form-edit","primary_key_value"=>$this->viewPrimaryKey))."\" onclick=\"".$this->instanceV."cmdDialogEdit('".$this->viewPrimaryKey."');return false;\">".$this->viewValue."</a>";
+	$uid=$this->getUID();
+	echo "<a id=\"".$uid."\" class=\"xui link\" href=\"".$this->requestUriThis(array("action"=>"form-edit","primary_key_value"=>$this->viewPrimaryKey))."\">".$this->viewValue."</a>";
+	$this->ejsBegin();
+	echo "document.getElementById(\"".$uid."\").onclick=function(){".$this->instanceV."cmdDialogEdit(\"".$this->viewPrimaryKey."\");return false;};";
+	$this->ejsEnd();
 }else{
 	echo $this->viewValue;
 };

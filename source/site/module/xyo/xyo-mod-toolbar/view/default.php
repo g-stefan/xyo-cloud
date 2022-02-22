@@ -33,12 +33,16 @@ if (count($this->toolbar)) {
 		};
 
 		if($item["type"]=="item-js"){
-			echo "<a class=\"xui button -transparent -icon-left -".$item["mode"]." -effect-ripple ".$this->type."\" href=\"#\" onclick=\"".$item["parameters"].";return false;\">";
+			$uid=$this->getUID();
+			echo "<a id=\"".$uid."\" class=\"xui button -transparent -icon-left -".$item["mode"]." -effect-ripple ".$this->type."\" href=\"#\">";
 				echo $item["img"];
 				echo "<span>";
 				echo $item["title"];
 				echo "</span>";
 			echo "</a>";
+			$this->ejsBegin();
+			echo "document.getElementById(\"".$uid."\").onclick=function(){".$item["parameters"].";return false;};";
+			$this->ejsEnd();
 			continue;
 		};
 
@@ -53,12 +57,16 @@ if (count($this->toolbar)) {
 		};
 
 		if($item["type"]=="item-js.important"){
-			echo "<a class=\"xui button -transparent -icon-left -".$item["mode"]." -important -effect-ripple ".$this->type."\" href=\"#\" onclick=\"".$item["parameters"].";return false;\">";
+			$uid=$this->getUID();
+			echo "<a id=\"".$uid."\" class=\"xui button -transparent -icon-left -".$item["mode"]." -important -effect-ripple ".$this->type."\" href=\"#\">";
 				echo $item["img"];
 				echo "<span>";
 				echo $item["title"];
 				echo "</span>";
 			echo "</a>";
+			$this->ejsBegin();
+			echo "document.getElementById(\"".$uid."\").onclick=function(){".$item["parameters"].";return false;};";
+			$this->ejsEnd();
 			continue;
 		};
 

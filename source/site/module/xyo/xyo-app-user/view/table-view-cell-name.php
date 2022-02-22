@@ -18,8 +18,8 @@ $this->ecssEnd();
 echo "<table class=\"xui\"><tr>";
 
 echo "<td class=\"xui xyo-app-user -z-1\">";
-	echo "<div class=\"xui -bd-rock-1 xyo-app-user -z-2\"".
-		" onclick=\"".$this->getCmdEditOnClick($this->viewKey,$this->viewId)."\">";
+	$uid=$this->getUID();
+	echo "<div id=\"".$uid."\" class=\"xui -bd-rock-1 xyo-app-user -z-2\">";		
 		$modThumbnail=&$this->getModule("xyo-mod-thumbnail");
 		$xuiImage=&$this->getModule("xui-form-image");
 		$this->ecssBegin();
@@ -43,16 +43,23 @@ echo "<td class=\"xui xyo-app-user -z-1\">";
 		$this->ecssEnd();
 		echo "<div class=\"xui ".$this->name."-image_".$this->viewRow["id"]."\"></div>";
 	echo "</div>";
+	$this->ejsBegin();
+	echo "document.getElementById(\"".$uid."\").onclick=function(){".$this->getCmdEditOnClick($this->viewKey,$this->viewId)."};";
+	$this->ejsEnd();
 echo "</td>";
 
 // ---
                                                                                          
 echo "<td class=\"xui xyo-app-user -z-3\">";
-	echo "<a class=\"xui link\" href=\"".$this->getCmdEditLink($this->viewId)."\" onclick=\"".$this->getCmdEditOnClick($this->viewKey,$this->viewId)."\">";
+	$uid=$this->getUID();
+	echo "<a id=\"".$uid."\" class=\"xui link\" href=\"".$this->getCmdEditLink($this->viewId)."\">";
 		echo "<span class=\"xui\">";
 		echo $this->viewRow["name"];
 		echo "</span>";
 	echo "</a>";
+	$this->ejsBegin();
+	echo "document.getElementById(\"".$uid."\").onclick=function(){".$this->getCmdEditOnClick($this->viewKey,$this->viewId)."};";
+	$this->ejsEnd();
 	echo "<br />";
 	echo "<span class=\"xui -fg-aluminium-5 xyo-app-user -z-4\">";
 		if(strlen($this->viewRow["description"])==0){
