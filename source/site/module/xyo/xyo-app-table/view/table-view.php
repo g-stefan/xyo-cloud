@@ -65,6 +65,17 @@ echo ".xyo-app-table.-x-4{margin-left:6px;}";
 echo ".xyo-app-table.-x-5{display:none;position:absolute;top:0px;left:0px;bottom:0px;right:0px;z-index:100;background-color:rgba(128,128,128,0.2);backdrop-filter:blur(3px);}";
 echo ".xyo-app-table.-x-6{height:100%;min-height:128px;}";
 echo ".xyo-app-table.-x-7{margin-right:0;margin-left:0;}";
+echo ".xyo-app-table.-x-8{margin-right:3px;margin-left:3px;}";
+echo ".xyo-app-table.-x-x48{width:48px}";
+echo ".xyo-app-table.-x-x64{width:64px}";
+echo ".xyo-app-table.-x-9{font-size: 16px;line-height: 20px;font-weight: normal;margin-left:4px;margin-top: 6px;}";
+echo ".xyo-app-table.-x-10{color: #999;}";
+echo ".xyo-app-table.-x-11{font-size: 14px;line-height: 18px;font-weight: normal;margin-left: 6px;margin-top: 3px;}";
+echo ".xyo-app-table.-x-12{display:none;height:100%;width:100%;overflow:auto;}";
+echo ".xyo-app-table.-x-13{line-height: 24px;}";
+echo ".xyo-app-table.-x-14{float:left;}";
+echo ".xyo-app-table.-x-15{position:relative;width:100%;min-height:240px;}";
+echo ".xyo-app-table.-x-16{height:240px;}";
 $this->ecssEnd();
 
 ?>
@@ -154,7 +165,7 @@ $this->ecssEnd();
 
 		<div class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>go_first=1');"><i class="material-icons">first_page</i></div>
 		<div class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>go_previous=1');return false;"><i class="material-icons">chevron_left</i></div>
-		<input class="xui form-text <?php echo $cssClass; ?> -left" type="text" name="<?php echo $this->instanceV; ?>page" style="margin-right:3px;margin-left:3px;width:<?php echo ($this->isEmbedded)?48:64; ?>px;" value="<?php echo $page; ?>" size="4" id="<?php echo $this->instanceV; ?>page"></input>
+		<input class="xui form-text <?php echo $cssClass; ?> -left xyo-app-table -x-8 <?php echo ($this->isEmbedded)?" -x-x48":" -x-x64"; ?>" type="text" name="<?php echo $this->instanceV; ?>page" value="<?php echo $page; ?>" size="4" id="<?php echo $this->instanceV; ?>page"></input>
 		<div class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>go_next=1');return false;"><i class="material-icons">chevron_right</i></div>
 		<div class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7" onclick="XYO.Table.doUpdate('<?php echo $this->instance; ?>','&<?php echo $this->instanceV; ?>go_last=1');return false;"><i class="material-icons">last_page</i></div>
 
@@ -189,16 +200,16 @@ $this->ecssEnd();
 
 		<?php if(!$this->isInlineForm) { ?>
 			<?php if(!$this->isEmbedded){ ?>
-			<span class="xui indicator-items-info" style="font-size: 16px;line-height: 20px;font-weight: normal;margin-left:4px;margin-top: 6px;">
-				<?php $this->eLanguage("info.items"); ?> <span style="color: #999;"> - </span> <span id="<?php echo $this->instanceV; ?>page-count"><?php echo $page_count; ?></span> <?php $this->eLanguage("info.pages"); ?> <span style="color: #999;"> - </span> <span id="<?php echo $this->instanceV; ?>item-count"><?php echo $nr_items; ?></span> <?php $this->eLanguage("info.total_items"); ?>
+			<span class="xui indicator-items-info xyo-app-table -x-9">
+				<?php $this->eLanguage("info.items"); ?> <span class="xyo-app-table -x-10"> - </span> <span id="<?php echo $this->instanceV; ?>page-count"><?php echo $page_count; ?></span> <?php $this->eLanguage("info.pages"); ?> <span class="xyo-app-table -x-10"> - </span> <span id="<?php echo $this->instanceV; ?>item-count"><?php echo $nr_items; ?></span> <?php $this->eLanguage("info.total_items"); ?>
 			</span>
 			<?php }else{ ?>
-			<span class="xui indicator-items-info -fg-aluminium-5" style="font-size: 14px;line-height: 18px;font-weight: normal;margin-left: 6px;margin-top: 3px;">
-				<span id="<?php echo $this->instanceV; ?>page-count"><?php echo $page_count; ?></span> <?php $this->eLanguage("info.pages"); ?> <span style="color: #999;"> - </span> <span id="<?php echo $this->instanceV; ?>item-count"><?php echo $nr_items; ?></span> <?php $this->eLanguage("info.items"); ?>
+			<span class="xui indicator-items-info -fg-aluminium-5 xyo-app-table -x-11">
+				<span id="<?php echo $this->instanceV; ?>page-count"><?php echo $page_count; ?></span> <?php $this->eLanguage("info.pages"); ?> <span class="xyo-app-table -x-10"> - </span> <span id="<?php echo $this->instanceV; ?>item-count"><?php echo $nr_items; ?></span> <?php $this->eLanguage("info.items"); ?>
 			</span>
 			<?php }; ?>
 		<?php }else{ ?>	
-			<span class="xui indicator-items-info" style="font-size: 16px;line-height: 20px;font-weight: normal;margin-left:4px;margin-top: 6px;">
+			<span class="xui indicator-items-info xyo-app-table -x-9">
 				<span id="<?php echo $this->instanceV; ?>page-count"><?php echo $page_count; ?></span> / <span id="<?php echo $this->instanceV; ?>item-count"><?php echo $nr_items; ?></span>
 			</span>
 		<?php }; ?>
@@ -241,7 +252,7 @@ if(!$this->isEmbedded){
 	if($this->isInlineForm) {
 		echo "</div>";
 		echo "<div class=\"xui xyo-app-table -is-inline-form _form\">";
-		echo "<div id=\"".$this->instanceV."xyo-app-table-inline\" class=\"xui -overlay-scrollbars\" style=\"display:none;height:100%;width:100%;overflow:auto;\">";
+		echo "<div id=\"".$this->instanceV."xyo-app-table-inline\" class=\"xui -overlay-scrollbars xyo-app-table -x-12\">";
 			echo "<div id=\"".$this->instanceV."xyo-app-table-inline_content\" class=\"xui\">";
 			$this->generateView("table-inline-empty");                         
 			$this->setHtmlJsSourceOrAjax("\$(\"#xyo-app-table-inline\").show();","load");
@@ -381,7 +392,7 @@ if($this->dialogFilter_){
 
 $this->generateComponent("xui.modal", array(
 	"id" => $this->instanceV."xyo-app-table-modal-delete",
-	"title-text" => "<span class=\"xui -fg-danger-2\" style=\"line-height: 24px;\"><i class=\"material-icons-outlined\" style=\"float:left\">error_outline</i>&nbsp;".$this->getFromLanguage("form.title_delete")."</span>",
+	"title-text" => "<span class=\"xui -fg-danger-2 xyo-app-table -x-13\"><i class=\"material-icons-outlined xyo-app-table -x-14\">error_outline</i>&nbsp;".$this->getFromLanguage("form.title_delete")."</span>",
 	"box" => "1x1",
 	"button" => "label.button_delete",
 	"buttonType" => "danger",
@@ -484,7 +495,7 @@ if($this->isInlineForm){
 		"};".
 		"if(action==\"table-view\"){".
 			$this->generateViewToString("table-inline-toolbar",array("action"=>"table-inline-view-toolbar")).
-			"var loader=\"<div class=\\\"xui\\\" style=\\\"position:relative;width:100%;min-height:240px;\\\"><div class=\\\"xui center-xy\\\" style=\\\"height:240px;\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
+			"var loader=\"<div class=\\\"xui xyo-app-table -x-15\\\"><div class=\\\"xui center-xy xyo-app-table -x-16\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 			"\$(\"#xyo-app-table-inline_content\").html(loader);".
 			"document.getElementById(\"xyo-application-title\").innerHTML=\"".$this->getApplicationTitle()."\";".
 			"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-empty\", ajax: 1, csrf_token: window.csrfToken  })".

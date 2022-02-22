@@ -20,11 +20,17 @@ header("HTTP/1.0 404 Not Found");
 		<?php $this->eHtmlDescription(); ?>
 		<?php $this->eHtmlIcon(); ?>
 		<?php $this->eHtmlStyle(); ?>
+		<?php 
+		$this->ecssBegin();
+		echo ".x404.-x-1{margin-top:64px;width:320px;}";
+		echo ".x404.-x-2{float:left;margin-top:-2px;}";
+		$this->ecssEnd();
+		?>
 	</head>
 	<body<?php $this->eHtmlBodyClass(); ?>>
 		<center>
-			<div class="xui alert -danger" style="margin-top:64px;width:320px;">
-				<span class="material-icons" style="float:left;margin-top:-2px;">error_outline</span>
+			<div class="xui alert -danger x404 -x-1">
+				<span class="material-icons x404 -x-2">error_outline</span>
 				404 Not found
 			</div>
 		</center>

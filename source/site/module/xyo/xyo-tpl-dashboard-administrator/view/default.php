@@ -79,7 +79,6 @@ if(strlen($userImageThumbnail)>0) {
 		<?php $this->eHtmlIcon(); ?>
 		<?php $this->eHtmlStyle(); ?>
 		<?php $this->ecssBegin(); ?>
-
 			.xui.app-user > .xui._content > .xui._image > .xui._image_img {
 				<?php echo $userImageCss; ?>
 			}
@@ -88,7 +87,8 @@ if(strlen($userImageThumbnail)>0) {
 			}
 			.xui.app-brand > .xui._content > .xui._logo {
 				background-image: url(<?php echo $settings["brand_logo"] ?>);
-			}			
+			}
+			.template.-x-1{display: inline-block;width:32px;overflow:visible;}
 		<?php $this->ecssEnd(); ?>
 	</head>
 	<body<?php $this->eHtmlBodyClass(); ?>>
@@ -111,7 +111,7 @@ if(strlen($userImageThumbnail)>0) {
 					<div class="xui -right">
 						<?php $this->runGroup("status"); ?>
 						<?php $this->runModule("xyo-mod-app-search"); ?>
-						<div style="display: inline-block;width:32px;overflow:visible;">
+						<div class="template -x-1">
 							<div class="xui button -icon -size-x32 -circle -transparent -effect-ripple" id="popup-menu-user-action">
 								<i class="material-icons">person</i>
 							</div>

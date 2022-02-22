@@ -8,10 +8,17 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
+$this->ecssBegin();
+echo ".xyo-app-user.-z-1{width:64px;padding-right:3px;}";
+echo ".xyo-app-user.-z-2{width:64px;height:64px;overflow:hidden;border-radius:50%;cursor:pointer;border-style:solid;border-width:1px;}";
+echo ".xyo-app-user.-z-3{padding-left:3px;}";
+echo ".xyo-app-user.-z-4{font-size:12px;}";
+$this->ecssEnd();
+
 echo "<table class=\"xui\"><tr>";
 
-echo "<td class=\"xui\" style=\"width:64px;padding-right:3px;\">";
-	echo "<div class=\"xui -bd-rock-1\" style=\"width:64px;height:64px;overflow:hidden;border-radius:50%;cursor:pointer;border-style:solid;border-width:1px;\"".
+echo "<td class=\"xui xyo-app-user -z-1\">";
+	echo "<div class=\"xui -bd-rock-1 xyo-app-user -z-2\"".
 		" onclick=\"".$this->getCmdEditOnClick($this->viewKey,$this->viewId)."\">";
 		$modThumbnail=&$this->getModule("xyo-mod-thumbnail");
 		$xuiImage=&$this->getModule("xui-form-image");
@@ -40,14 +47,14 @@ echo "</td>";
 
 // ---
                                                                                          
-echo "<td class=\"xui\" style=\"padding-left:3px;\">";
+echo "<td class=\"xui xyo-app-user -z-3\">";
 	echo "<a class=\"xui link\" href=\"".$this->getCmdEditLink($this->viewId)."\" onclick=\"".$this->getCmdEditOnClick($this->viewKey,$this->viewId)."\">";
 		echo "<span class=\"xui\">";
 		echo $this->viewRow["name"];
 		echo "</span>";
 	echo "</a>";
 	echo "<br />";
-	echo "<span class=\"xui -fg-aluminium-5\" style=\"font-size:12px;\">";
+	echo "<span class=\"xui -fg-aluminium-5 xyo-app-user -z-4\">";
 		if(strlen($this->viewRow["description"])==0){
 			echo "User";
 		} else {

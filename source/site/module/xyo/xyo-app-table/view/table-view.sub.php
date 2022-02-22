@@ -63,8 +63,16 @@ foreach ($this->tableHead as $key => $value) {
 		continue;
 	};
 
+$this->ecssBegin();
+echo ".xyo-app-table.-z-1{cursor:pointer;}";
+echo ".xyo-app-table.-z-2{cursor:default;}";
+echo ".xyo-app-table.-z-3{color:#FFF;}";
+echo ".xyo-app-table.-z-4{min-width: 130px;}";
+echo ".xyo-app-table.-z-5{display:none;}";
+$this->ecssEnd();
+
 	if (array_key_exists($key, $this->tableSort)){
-		echo "<span style=\"cursor:pointer;\" onclick=\"XYO.Table.doSort('".$this->instance."','".$key."','".$sortNextState[$sortState[$key]]."');return false;\">";
+		echo "<span class=\"xyo-app-table -z-1\" onclick=\"XYO.Table.doSort('".$this->instance."','".$key."','".$sortNextState[$sortState[$key]]."');return false;\">";
 		$this->eLanguage($value);
 		echo "</span>";
 	}else{
@@ -103,7 +111,7 @@ foreach ($this->tableHead as $key => $value) {
 
 if(!$this->ds){
 	echo "<tr>";
-	echo "<td class=\"xui -align-center -important -bg-danger-1\" colspan=\"".count($this->tableHead)."\" style=\"color:#FFF;\">";
+	echo "<td class=\"xui -align-center -important -bg-danger-1 xyo-app-table -z-3\" colspan=\"".count($this->tableHead)."\">";
 		$this->eLanguage("error.datasource_not_found");
 		echo ": ".$this->applicationDataSource;
 	echo "</td>";
@@ -208,11 +216,11 @@ foreach ($this->viewData as $key => $value) {
 				}else{
                         
 					if(is_array($toggle_img_[$img])){
-						echo "<div class=\"xui button -disabled -transparent -effect-ripple -icon -small -size-xy24-22 -left\" style=\"cursor:default;\">";
+						echo "<div class=\"xui button -disabled -transparent -effect-ripple -icon -small -size-xy24-22 -left xyo-app-table -z-2\">";
 						echo $toggle_img_[$img][0];
 						echo "</div>";
 					} else {
-						echo "<div class=\"xui button -disabled -transparent -effect-ripple -icon -small -size-xy24-22 -left\" style=\"cursor:default;\">";
+						echo "<div class=\"xui button -disabled -transparent -effect-ripple -icon -small -size-xy24-22 -left xyo-app-table -z-2\">";
 						echo $toggle_img_[$img];
 						echo "</div>";
 					};
@@ -246,11 +254,11 @@ foreach ($this->viewData as $key => $value) {
 				if($value["@write"]){
 
 					if(is_array($toggle_img_[$img])){
-						echo "<div class=\"xui button -".$toggle_img_[$img][1]." -transparent -effect-ripple -icon -small -size-xy24-22 -left\" style=\"cursor:default;\">";
+						echo "<div class=\"xui button -".$toggle_img_[$img][1]." -transparent -effect-ripple -icon -small -size-xy24-22 -left xyo-app-table -z-2\">";
 						echo $toggle_img_[$img][0];
 						echo "</div>";
 					} else {
-						echo "<div class=\"xui button -primary -transparent -effect-ripple -icon -small -size-xy24-22 -left\" style=\"cursor:default;\">";
+						echo "<div class=\"xui button -primary -transparent -effect-ripple -icon -small -size-xy24-22 -left xyo-app-table -z-2\">";
 						echo $toggle_img_[$img];
 						echo "</div>";
 					};
@@ -258,11 +266,11 @@ foreach ($this->viewData as $key => $value) {
 				}else{
 
 					if(is_array($toggle_img_[$img])){
-						echo "<div class=\"xui button -disabled -transparent -effect-ripple -icon -small -size-xy24-22 -left\" style=\"cursor:default;\">";
+						echo "<div class=\"xui button -disabled -transparent -effect-ripple -icon -small -size-xy24-22 -left xyo-app-table -z-2\">";
 						echo $toggle_img_[$img][0];
 						echo "</div>";
 					} else {
-						echo "<div class=\"xui button -disabled -transparent -effect-ripple -icon -small -size-xy24-22 -left\" style=\"cursor:default;\">";
+						echo "<div class=\"xui button -disabled -transparent -effect-ripple -icon -small -size-xy24-22 -left xyo-app-table -z-2\">";
 						echo $toggle_img_[$img];
 						echo "</div>";
 					};
@@ -309,11 +317,11 @@ foreach ($this->viewData as $key => $value) {
 				}else{
 
 					if(is_array($toggle_img_[$img])){
-						echo "<div class=\"xui button -disabled -transparent -effect-ripple -icon -small -size-xy24-22 -left\" style=\"cursor:default;\">";
+						echo "<div class=\"xui button -disabled -transparent -effect-ripple -icon -small -size-xy24-22 -left xyo-app-table -z-2\">";
 						echo $toggle_img_[$img][0];
 						echo "</div>";
 					} else {
-						echo "<div class=\"xui button -disabled -transparent -effect-ripple -icon -small -size-xy24-22 -left\" style=\"cursor:default;\">";
+						echo "<div class=\"xui button -disabled -transparent -effect-ripple -icon -small -size-xy24-22 -left xyo-app-table -z-2\">";
 						echo $toggle_img_[$img];
 						echo "</div>";
 					};
@@ -322,7 +330,7 @@ foreach ($this->viewData as $key => $value) {
 
 			}else
 			if($this->tableType[$key_][0]=="order"){
-				echo "<div class=\"xui form-input-group -small -left\" style=\"min-width: 130px;\">";
+				echo "<div class=\"xui form-input-group -small -left xyo-app-table -z-4\">";
 			       		echo "<input type=\"text\"";
 						echo " name=\"".$this->instanceV."order_" . $value[$this->primaryKey] . "\"";
 						echo " value=\"" . $value[$key_] . "\"";
@@ -454,7 +462,7 @@ foreach ($this->viewData as $key => $value) {
 	};
 	echo "</tr>";
 	if($this->hasDynamicRow_) {
-		echo "<tr id=\"".$this->instanceV."dynamic_row_" . $value[$this->primaryKey] . "\" class=\"xui -dynamic-row\" style=\"display:none;\" colspan=\"".count($this->tableHead)."\">";
+		echo "<tr id=\"".$this->instanceV."dynamic_row_" . $value[$this->primaryKey] . "\" class=\"xui -dynamic-row xyo-app-table -z-5\" colspan=\"".count($this->tableHead)."\">";
 		echo "</tr>";
 	};
 };
