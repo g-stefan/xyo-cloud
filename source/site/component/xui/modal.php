@@ -47,10 +47,8 @@ if(strlen($jsButtonClick)==0){
 	$originalFormName=$this->getFormName();
 	$this->setFormName($originalFormName.$formSuffix);
 	$jsButtonClick="\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", data: {csrf_token:window.csrfToken}, success: function(response){".
-				"setTimeout(function(){".
-				"var jsAndHtml=XUI.Html.extractScript(response);".
-				"\$(\"#".$id."_content\").html(jsAndHtml.html);".
-				"\$(\"#".$id."_content\").append(jsAndHtml.js);".
+				"setTimeout(function(){".				
+				"XUI.Html.update(\"".$id."_content\",response,null,\"".$this->getCSPNonce()."\");".
 				"},100)".
 			"}});".
 			"\$(\"#".$this->getFormName()."\").submit();".
@@ -92,14 +90,12 @@ $this->setHtmlJsSourceOrAjax(
 		"\$(\"#".$id."_content\").html(loader);".
 		"XUI.Modal.activate(\"".$id."\");".
 		"\$.post(\"".$this->requestUriThis()."\", jsAction)".
-  		".done(function(result){".
+  		".done(function(response){".
 			"\$(\"#".$id."_button\").off(\"click\").on(\"click\",function(){".
 				$jsButtonClick.
 			"});".
 			(($hasCancel)?"\$(\"#".$id."_cancel\").off(\"click\").on(\"click\",function(){".$jsButtonCancel."});":"").
-			"var jsAndHtml=XUI.Html.extractScript(result);".
-			"\$(\"#".$id."_content\").html(jsAndHtml.html);".
-			"\$(\"#".$id."_content\").append(jsAndHtml.js);".
+			"XUI.Html.update(\"".$id."_content\",response,null,\"".$this->getCSPNonce()."\");".
 		"});".
 	"};".
 	"\r\n"

@@ -16,8 +16,6 @@ if($this->isInlineForm){
 echo	"var loader=\"<div class=\\\"xui xyo-app-table -x-inline-toolbar-1\\\"><div class=\\\"xui center-xy xyo-app-table -x-inline-toolbar-2\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 	"\$(\"#".$toolbar_id."\").html(loader);".
 	"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"".$this->getArgument("action","table-inline-view-toolbar")."\", ajax: 1, csrf_token: window.csrfToken })".
-  	".done(function(result){".
-		"var jsAndHtml=XUI.Html.extractScript(result);".
-		"\$(\"#".$toolbar_id."\").html(jsAndHtml.html);".
-		"\$(\"#".$toolbar_id."\").append(jsAndHtml.js);".
+  	".done(function(response){".		
+		"XUI.Html.update(\"".$toolbar_id."\",response,null,\"".$this->getCSPNonce()."\");".
 	"});";

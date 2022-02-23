@@ -542,10 +542,9 @@ include("table-view.instance.php");
 
 if($this->isInlineForm){
 	$this->setHtmlJsSourceOrAjax("window.".$this->instanceV."doCommand=function(action){".
-	"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-form-command\", ajax: 1, csrf_token: window.csrfToken  })".
-	".done(function(result){".
-		"var jsAndHtml=XUI.Html.extractScript(result);".		
-		"\$(\"#xyo-app-table-inline_content\").append(jsAndHtml.js);".		
+	"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-form-command\", ajax: 1, csrf_token: window.csrfToken })".
+	".done(function(response){".		
+		"XUI.Script.run(XUI.Html.extract(response).script,\"".$this->getCSPNonce()."\");".
 		"if(".
 		"action==\"form-new-apply\"||".
 		"action==\"form-edit-apply\"||".
@@ -558,11 +557,9 @@ if($this->isInlineForm){
 			"var loader=\"<div class=\\\"xui xyo-app-table -x-15\\\"><div class=\\\"xui center-xy xyo-app-table -x-16\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 			"\$(\"#xyo-app-table-inline_content\").html(loader);".
 			"document.getElementById(\"xyo-application-title\").innerHTML=\"".$this->getApplicationTitle()."\";".
-			"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-empty\", ajax: 1, csrf_token: window.csrfToken  })".
-	  		".done(function(result){".
-				"var jsAndHtml=XUI.Html.extractScript(result);".
-				"\$(\"#xyo-app-table-inline_content\").html(jsAndHtml.html);".
-				"\$(\"#xyo-app-table-inline_content\").append(jsAndHtml.js);".
+			"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-empty\", ajax: 1, csrf_token: window.csrfToken })".
+	  		".done(function(response){".				
+				"XUI.Html.update(\"xyo-app-table-inline_content\",response,null,\"".$this->getCSPNonce()."\");".
 			"});".
 			"return false;".
 		"};".

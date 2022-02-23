@@ -22,7 +22,7 @@ if($this->filterHasSearch_) { ?>
 	<br />
 	<div class="xui form-input-group xyo-app-table -x-filter-form-1">
 		<input type="text" name="<?php echo $this->instanceV; ?>search" value="" class="xyo-app-table -x-filter-form-2" placeholder="" id="<?php echo $this->instanceV; ?>fn_filter_search"></input>
-		<button type="button" name="<?php echo $this->instanceV; ?>search_reset" id="<?php echo $uid; ?>"-search-reset"><i class="material-icons">close</i></button>
+		<button type="button" name="<?php echo $this->instanceV; ?>search_reset" id="<?php echo $uid; ?>-search-reset"><i class="material-icons">close</i></button>
 	</div>
 	<br />
 <?php };

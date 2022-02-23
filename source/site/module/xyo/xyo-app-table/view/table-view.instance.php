@@ -33,6 +33,7 @@ if($this->isEmbedded){
 };
 $instanceJS.="uri:\"".$this->requestUriThis()."\"";
 $instanceJS.="};";
+$instanceJS.="XYO.Table.nonce=\"".$this->getCSPNonce()."\";";
 
 $this->setHtmlJsSourceOrAjax($instanceJS,"load");
 $this->setHtmlJsSourceOrAjaxCsrfToken();

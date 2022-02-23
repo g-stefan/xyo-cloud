@@ -39,10 +39,8 @@ if(strlen($jsButtonClick)==0){
 	$this->setFormName($originalFormName.$formSuffix);
 	$jsButtonClick=	"var loader=\"<div class=\\\"xui -com-inline -loader\\\"><div class=\\\"xui center-xy -com-inline -div-1\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 			"\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", data: {csrf_token:window.csrfToken}, success: function(response){".
-				"setTimeout(function(){".
-				"var jsAndHtml=XUI.Html.extractScript(response);".
-				"\$(\"#".$id."_content\").html(jsAndHtml.html);".
-				"\$(\"#".$id."_content\").append(jsAndHtml.js);".
+				"setTimeout(function(){".				
+				"XUI.Html.update(\"".$id."_content\",response,null,\"".$this->getCSPNonce()."\");".
 				"},100)".
 			"}});".
 			"\$(\"#".$this->getFormName()."\").submit();".
@@ -58,16 +56,14 @@ if(!$noHtml) {
 
 $this->setHtmlJsSourceOrAjax(
 	"window.".$jsFunction."=function(jsParameters){".
-		"var jsAction= { ".$instanceV."action: \"".$action."\", ajax: 1, csrf_token: window.csrfToken  };".
+		"var jsAction= { ".$instanceV."action: \"".$action."\", ajax: 1, csrf_token: window.csrfToken };".
 		"if(jsParameters){ for (var x in jsParameters) { jsAction[x] = jsParameters[x]; }; };".
 		"var loader=\"<div class=\\\"xui -com-inline -loader\\\"><div class=\\\"xui center-xy -com-inline -div-1\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 		"\$(\"#".$id."_content\").html(loader);".
 		"\$(\"#".$id."\").show();".
 		"\$.post(\"".$this->requestUriThis()."\", jsAction)".
-  		".done(function(result){".
-			"var jsAndHtml=XUI.Html.extractScript(result);".
-			"\$(\"#".$id."_content\").html(jsAndHtml.html);".
-			"\$(\"#".$id."_content\").append(jsAndHtml.js);".
+  		".done(function(response){".			
+			"XUI.Html.update(\"".$id."_content\",response,null,\"".$this->getCSPNonce()."\");".
 		"});".
 	"};".
 	"\r\n".

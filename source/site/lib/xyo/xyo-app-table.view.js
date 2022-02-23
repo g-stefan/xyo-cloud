@@ -11,6 +11,7 @@ var XYO = XYO || {};
 XYO.Table = {};
 XYO.Table.instance={};
 XYO.Table.parentInstance={};
+XYO.Table.nonce=null;
 
 XYO.Table.setCheckboxState = function (i_, this_) {
 	var el;	
@@ -174,10 +175,8 @@ XYO.Table.doUpdate = function(i_,request){
 	$.post(
 		this.instance[i_].uri,
 		fSerialized+request+"&ajax=1&csrf_token="+window.csrfToken
-	).done(function(response){
-		var jsAndHtml=XUI.Html.extractScript(response);
-		$("#"+instanceV+"table").html(jsAndHtml.html);			
-		$("#"+instanceV+"table").append(jsAndHtml.js);
+	).done(function(response){		
+		XUI.Html.update(instanceV+"table",response,null,XYO.Table.nonce);
 		document.getElementById(instanceV+"table-loader").style.display="none";
 	});
 }

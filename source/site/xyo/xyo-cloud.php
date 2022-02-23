@@ -1648,8 +1648,13 @@ class xyo_Cloud extends xyo_Config {
 	protected $cspNonce;
 
 	protected function initCSPManager() {
-		$this->cspNonce=hash("sha256", $this->getClientIP().".".rand().".".time(), false);
-		$this->cspHeader="default-src 'self' 'nonce-".$this->cspNonce."' data:;";
+		$this->resetCSPNonce();
+		if($this->isAjax||$this->isAjaxJs){
+			$this->cspNonce=$_SESSION["xyo_csp_nonce"];
+		}else{
+			$_SESSION["xyo_csp_nonce"]=$this->cspNonce;
+		};
+		$this->cspHeader="default-src 'self' 'nonce-".$this->cspNonce."';img-src 'self' data:;";
 	}
 
 	public function setCSPHeader($value) {
@@ -1672,6 +1677,10 @@ class xyo_Cloud extends xyo_Config {
 
 	public function getCSPNonce() {
 		return $this->cspNonce;
+	}
+
+	public function resetCSPNonce() {
+		$this->cspNonce=hash("sha256", $this->getClientIP().".".rand().".".time().session_id(), false);
 	}
 
 	public function sCSPNonce() {
