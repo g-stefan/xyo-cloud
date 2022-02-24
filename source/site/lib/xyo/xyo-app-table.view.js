@@ -174,7 +174,7 @@ XYO.Table.doUpdate = function(i_,request){
 	document.getElementById(instanceV+"table-loader").style.display="block";
 	$.post(
 		this.instance[i_].uri,
-		fSerialized+request+"&ajax=1&csrf_token="+window.csrfToken
+		fSerialized+request+"&ajax=1&csrf_token="+window.csrfToken+"&csp_nonce="+XYO.Table.nonce
 	).done(function(response){		
 		XUI.Html.update(instanceV+"table",response,null,XYO.Table.nonce);
 		document.getElementById(instanceV+"table-loader").style.display="none";

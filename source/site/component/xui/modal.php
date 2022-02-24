@@ -84,7 +84,7 @@ $this->ecssEnd();
 
 $this->setHtmlJsSourceOrAjax(
 	"window.".$jsFunction."=function(jsParameters){".
-		"var jsAction= { ".$instanceV."action: \"".$action."\", ajax: 1, csrf_token: window.csrfToken };".
+		"var jsAction= { ".$instanceV."action: \"".$action."\", ajax: 1, csrf_token: window.csrfToken, csp_nonce: \"".$this->getCSPNonce()."\" };".
 		"if(jsParameters){ for (var x in jsParameters) { jsAction[x] = jsParameters[x]; }; };".
 		"var loader=\"<div class=\\\"xui -com-modal -loader\\\"><div class=\\\"xui center-xy -com-modal -div-1\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 		"\$(\"#".$id."_content\").html(loader);".
