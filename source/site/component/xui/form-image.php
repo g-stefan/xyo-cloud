@@ -113,23 +113,28 @@ $this->ecssBegin();
 ?>
 
 #<?php $this->eElementId($element); ?>_component .cropit-preview{
-	margin-left: auto;
-	margin-right: auto;
-	width: <?php echo $viewX; ?>px;
-	height: <?php echo $viewY; ?>px;
-	border: 16px solid #EEEEEE;
+	margin-left: auto  !important;
+	margin-right: auto  !important;
+	width: <?php echo $viewX; ?>px  !important;
+	height: <?php echo $viewY; ?>px  !important;
+	border: 16px solid #EEEEEE  !important;
 }
 .-form-image.-div-1{
-	height:48px;position: relative;
+	height:48px  !important;
+	position: relative  !important;
 }
 .-form-image.-icon-1{
-	font-size:24px;line-height: 48px;vertical-align: middle;
+	font-size:24px !important;
+	line-height: 48px !important;
+	vertical-align: middle !important;
 }
 .-form-image.-icon-2{
-	font-size:48px;line-height: 48px;vertical-align: middle;
+	font-size:48px !important;
+	line-height: 48px !important;
+	vertical-align: middle  !important;
 }
 .-form-image.-link{
-	margin: 3px 3px 3px 3px;
+	margin: 3px 3px 3px 3px !important;
 }
 
 <?php $this->ecssEnd(); ?>

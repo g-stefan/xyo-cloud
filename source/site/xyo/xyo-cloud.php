@@ -1657,7 +1657,7 @@ class xyo_Cloud extends xyo_Config {
 		if($this->isAjax||$this->isAjaxJs){
 			$this->cspNonce=$this->getRequest("csp_nonce",$this->cspNonce);
 		};
-		$this->cspHeader="default-src 'unsafe-inline' 'nonce-".$this->cspNonce."'; img-src 'self' data:; base-uri 'self'; object-src 'none'; font-src 'self'; connect-src 'self'"; //"; require-trusted-types-for 'script'";
+		$this->cspHeader="default-src 'unsafe-inline' 'nonce-".$this->cspNonce."'; img-src 'self' data:; base-uri 'self'; object-src 'none'; font-src 'self'; connect-src 'self'; style-src-elem 'self' 'nonce-".$this->cspNonce."'"; //"; require-trusted-types-for 'script'";
 	}
 
 	public function setCSPHeader($value) {
