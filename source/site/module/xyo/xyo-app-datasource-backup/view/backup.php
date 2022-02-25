@@ -77,7 +77,7 @@ if($layer&&$connection){
 		"connection"=>$connection,
 		"ajax-js"=>1
 	));
-	$js.="\",data:{csrf_token:window.csrfToken},success:function(result){eval(result);}});";
+	$js.="\",data:{csrf_token:window.csrfToken, csp_nonce: \"".$this->getCSPNonce()."\"},success:function(response){XUI.Script.run(response,\"".$this->getCSPNonce()."\");}});";
 	$this->setHtmlJsSource($js,"load");
 } else {
 	$js="";

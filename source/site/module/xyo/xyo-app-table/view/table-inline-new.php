@@ -37,7 +37,7 @@ $this->ecssEnd();
 $this->ejsBegin();
 echo "window.".$this->instanceV."doCommandInlineForm=function(action){".
 	"var loader=\"<div class=\\\"xui xyo-app-table -x-inline-new-1\\\"><div class=\\\"xui center-xy xyo-app-table -x-inline-new-2\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
-	"\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", data:{csrf_token:window.csrfToken}, success: function(response){".
+	"\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", data:{csrf_token:window.csrfToken, csp_nonce: \"".$this->getCSPNonce()."\"}, success: function(response){".
 		"setTimeout(function(){".			
 			"XUI.Html.update(\"xyo-app-table-inline_content\",response,null,\"".$this->getCSPNonce()."\");".
 		"},100)".

@@ -159,9 +159,9 @@ if($index1<$dsListIndex){
 		));
 
 		  ?>",
-		data: {csrf_token:window.csrfToken},
-		success:function(result){
-			eval(result);
+		data: {csrf_token:window.csrfToken, csp_nonce: "<?php echo $this->getCSPNonce();?>" },
+		success:function(response){
+			XUI.Script.run(response,"<?php echo $this->getCSPNonce();?>");
 		}
 	});
 
