@@ -31,10 +31,12 @@ echo ".xyo-app-table.-x-15{position:relative;width:100%;min-height:240px;}";
 echo ".xyo-app-table.-x-16{height:240px !important;}";
 echo ".xyo-app-table.-x-inline-toolbar-1{position:relative;width:100%;min-height:240px;}";
 echo ".xyo-app-table.-x-inline-toolbar-2{height:240px !important;}";
+echo ".xyo-app-table.-z-1{cursor:pointer !important;}";
+echo ".xyo-app-table.-z-2{cursor:default !important;}";
+echo ".xyo-app-table.-z-3{color:#FFF !important;}";
+echo ".xyo-app-table.-z-4{min-width: 130px !important;}";
+echo ".xyo-app-table.-z-5{display:none !important;}";
 $this->ecssEnd();
-
-$this->ecssEnd();
-
 
 if(!$this->isInline){
 	if($this->isAjax()){

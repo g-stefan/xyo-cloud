@@ -53,7 +53,7 @@ $this->ecssEnd();
 		$this->generateComponent("xui.panel2-footer");
 
 		?>
-		<span class="xui -right <?php echo $uid."-3"; ?>"><?php echo $this->getFromLanguage("copyright"); ?> &copy; 2020-2021 <a href="http://www.xyo.ro" class="<?php echo $uid."-5"; ?>""><span class="xui -fg-science-blue-3">Grigore Stefan</span></a></span>
+		<span class="xui -right <?php echo $uid."-3"; ?>"><?php echo $this->getFromLanguage("copyright"); ?> &copy; 2020-2022 <a href="http://www.xyo.ro" class="<?php echo $uid."-5"; ?>""><span class="xui -fg-science-blue-3">Grigore Stefan</span></a></span>
 
 		<?php
 

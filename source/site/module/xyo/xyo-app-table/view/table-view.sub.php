@@ -13,6 +13,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 	<tr>
 <?php
 
+$script="";
 foreach ($this->tableHead as $key => $value) {
 	$hasSort=false;
 
@@ -57,32 +58,20 @@ foreach ($this->tableHead as $key => $value) {
 	if ($key === "#") {
 		echo "<div class=\"xui form-checkbox -box\">";
 			echo "<input type=\"checkbox\" id=\"".$this->instanceV."id_0\" name=\"".$this->instanceV."id_0\" value=\"0\">";
-			$this->ejsBegin();
-			echo "document.getElementById(\"".$this->instanceV."id_0\").onchange=function(){XYO.Table.setCheckboxState('".$this->instance."',this);};";
-			echo "document.getElementById(\"".$this->instanceV."id_0\").onclick=function(){XYO.Table.setCheckboxState('".$this->instance."',this);};";
-			$this->ejsEnd();
 			echo "<label for=\"".$this->instanceV."id_0\"></label>";
 		echo "</div>";
 		echo "</th>";
+		$script.="document.getElementById(\"".$this->instanceV."id_0\").onchange=function(){XYO.Table.setCheckboxState('".$this->instance."',this);};";
+		$script.="document.getElementById(\"".$this->instanceV."id_0\").onclick=function(){XYO.Table.setCheckboxState('".$this->instance."',this);};";
 		continue;
 	};
 
-$this->ecssBegin();
-echo ".xyo-app-table.-z-1{cursor:pointer;}";
-echo ".xyo-app-table.-z-2{cursor:default;}";
-echo ".xyo-app-table.-z-3{color:#FFF;}";
-echo ".xyo-app-table.-z-4{min-width: 130px;}";
-echo ".xyo-app-table.-z-5{display:none;}";
-$this->ecssEnd();
-
 	if (array_key_exists($key, $this->tableSort)){
 		$uid=$this->getUID();
-		echo "<span id=\"".$uid."\" class=\"xyo-app-table -z-1\">";		
+		echo "<span id=\"".$uid."\" class=\"xyo-app-table -z-1\">";
 		$this->eLanguage($value);
 		echo "</span>";
-		$this->ejsBegin();
-		echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doSort(\"".$this->instance."\",\"".$key."\",\"".$sortNextState[$sortState[$key]]."\");return false;};";
-		$this->ejsEnd();
+		$script.="document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doSort(\"".$this->instance."\",\"".$key."\",\"".$sortNextState[$sortState[$key]]."\");return false;};";
 	}else{
 		$this->eLanguage($value);
 	};
@@ -93,9 +82,7 @@ $this->ecssEnd();
 			echo "<div id=\"".$uid."\" class=\"xui button -transparent -effect-ripple -primary -icon -small -size-xy28\">";
 				echo "<i class=\"material-icons\">save</i>";
 			echo "</div>";
-			$this->ejsBegin();
-			echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doOrderSave(\"".$this->instance."\",\"" . $key . "\");return false;};";
-			$this->ejsEnd();
+			$script.="document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doOrderSave(\"".$this->instance."\",\"" . $key . "\");return false;};";
 		};
 	};
 				 
@@ -105,17 +92,13 @@ $this->ecssEnd();
 			echo "<div id=\"".$uid."\" class=\"xui button -transparent -effect-ripple -".$sort_img[$sortState[$key]][1]." -icon -small -size-xy28 -circle\">";
 				echo $sort_img[$sortState[$key]][0];	
 			echo "</div>";
-			$this->ejsBegin();
-			echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doSort(\"".$this->instance."\",\"".$key."\",\"".$sortNextState[$sortState[$key]]."\");return false;};";
-			$this->ejsEnd();
+			$script.="document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doSort(\"".$this->instance."\",\"".$key."\",\"".$sortNextState[$sortState[$key]]."\");return false;};";
 		}else{
 			$uid=$this->getUID();
 			echo "<div id=\"".$uid."\" class=\"xui button -transparent -effect-ripple -secondary -icon -small -size-xy28 -circle\">";
 				echo $sort_img[$sortState[$key]];	
 			echo "</div>";
-			$this->ejsBegin();
-			echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doSort(\"".$this->instance."\",\"".$key."\",\"".$sortNextState[$sortState[$key]]."\");return false;};";
-			$this->ejsEnd();
+			$script.="document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doSort(\"".$this->instance."\",\"".$key."\",\"".$sortNextState[$sortState[$key]]."\");return false;};";
 		};
 	};
         
@@ -228,17 +211,13 @@ foreach ($this->viewData as $key => $value) {
 						echo "<div id=\"".$uid."\" class=\"xui button -".$toggle_img_[$img][1]." -transparent -effect-ripple -icon -small -size-xy24-22 -left\">";
 						echo $toggle_img_[$img][0];
 						echo "</div>";
-						$this->ejsBegin();
-						echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doToggle(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\",".$forceCommand.");return false;};";
-						$this->ejsEnd();
+						$script.="document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doToggle(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\",".$forceCommand.");return false;};";
 					} else {
 						$uid=$this->getUID();
 						echo "<div id=\"".$uid."\" class=\"xui button -primary -transparent -effect-ripple -icon -small -size-xy24-22 -left\">";
 						echo $toggle_img_[$img];
 						echo "</div>";
-						$this->ejsBegin();
-						echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doToggle(v".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\",".$forceCommand.");return false;};";
-						$this->ejsEnd();
+						$script.="document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doToggle(v".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\",".$forceCommand.");return false;};";
 					};
 
 				}else{
@@ -337,17 +316,13 @@ foreach ($this->viewData as $key => $value) {
 						echo "<div id=\"".$uid."\" class=\"xui button -".$toggle_img_[$img][1]." -transparent -effect-ripple -icon -small -size-xy24-22 -left\">";
 						echo $toggle_img_[$img][0];
 						echo "</div>";
-						$this->ejsBegin();
-						echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doRadio(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\");return false;};";
-						$this->ejsEnd();
+						$script.="document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doRadio(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\");return false;};";
 					} else {
 						$uid=$this->getUID();
 						echo "<div id=\"".$uid."\" class=\"xui button -primary -transparent -effect-ripple -icon -small -size-xy24-22 -left\">";
 						echo $toggle_img_[$img];
 						echo "</div>";
-						$this->ejsBegin();
-						echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doRadio(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\");return false;};";
-						$this->ejsEnd();
+						$script.="document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doRadio(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\");return false;};";
 					};
 
 				}else{
@@ -373,14 +348,10 @@ foreach ($this->viewData as $key => $value) {
 						echo " size=\"4\"></input>";
 					$uid=$this->getUID();
 					echo "<button id=\"".$uid."\" type=\"button\"><i class=\"material-icons\">expand_less</i></button>";
-					$this->ejsBegin();
-					echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doOrderUp(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\");return false;};";
-					$this->ejsEnd();
+					$script.="document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doOrderUp(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\");return false;};";
 					$uid=$this->getUID();
 					echo "<button id=\"".$uid."\" type=\"button\"><i class=\"material-icons\">expand_more</i></button>";
-					$this->ejsBegin();
-					echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doOrderDown(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\");return false;};";
-					$this->ejsEnd();
+					$script.="document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doOrderDown(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\");return false;};";
 				echo "</div>";
 			}else			
 			if($this->tableType[$key_][0]=="value"){
@@ -451,9 +422,7 @@ foreach ($this->viewData as $key => $value) {
 					$p .= "}";
 					$uid=$this->getUID();
 					echo "<a id=\"".$uid."\" class=\"xui link\" href=\"".$this->requestUriThis($parameters)."\">" . $valueX . "</a>";
-					$this->ejsBegin();
-					echo "document.getElementById(\"".$uid."\").onclick=function(){".$this->instanceV."callActionLink_".$key_."(".$p.");return false;};";
-					$this->ejsEnd();
+					$script.="document.getElementById(\"".$uid."\").onclick=function(){".$this->instanceV."callActionLink_".$key_."(".$p.");return false;};";
 				}else{
 					echo $valueX;
 				};
@@ -480,9 +449,7 @@ foreach ($this->viewData as $key => $value) {
 				if($value["@write"]){
 					$uid=$this->getUID();
 					echo "<a id=\"".$uid."\" class=\"xui link\" href=\"".$this->requestUriThis(array("action"=>"form-edit","primary_key_value"=>$value[$this->primaryKey]))."\">" . $valueX . "</a>";
-					$this->ejsBegin();
-					echo "document.getElementById(\"".$uid."\").onclick=function(){".$this->instanceV."cmdDialogEdit('".$value[$this->primaryKey]."');return false;};";
-					$this->ejsEnd();
+					$script.="document.getElementById(\"".$uid."\").onclick=function(){".$this->instanceV."cmdDialogEdit('".$value[$this->primaryKey]."');return false;};";
 				}else{
 					echo $valueX;
 				};
@@ -521,3 +488,9 @@ foreach ($this->viewData as $key => $value) {
 $this->generateView("table-view.row.last");
 ?>
 </tbody>
+<?php
+
+$this->ejsBegin();
+echo $script;
+$this->ejsEnd();
+
