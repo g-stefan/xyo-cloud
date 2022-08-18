@@ -1889,42 +1889,35 @@ class xyo_Module extends xyo_Config {
 	//
 
 	public function csrfReset() {
-		$csrf_=$this->cloud->getCSRFMitigationProvider();
-		return $csrf_->systemCsrfReset();
+		return ($this->cloud->getCSRFMitigationProvider())->systemCsrfReset();
 	}
 
 	public function csrfCheck() {
-		$csrf_=$this->cloud->getCSRFMitigationProvider();
-		return $csrf_->systemCsrfCheck();
+		return ($this->cloud->getCSRFMitigationProvider())->systemCsrfCheck();
 	}
 
 	public function eFormCsrfToken() {
-		$csrf_=$this->cloud->getCSRFMitigationProvider();
-		echo $csrf_->systemGetFormCsrfToken();
+		echo ($this->cloud->getCSRFMitigationProvider())->systemGetFormCsrfToken();
 	}
 
 	public function getFormCsrfToken() {
-		$csrf_=$this->cloud->getCSRFMitigationProvider();
-		return $csrf_->systemGetFormCsrfToken();
+		return ($this->cloud->getCSRFMitigationProvider())->systemGetFormCsrfToken();
 	}
 
 	public function setHtmlJsSourceOrAjaxCsrfToken() {
-		$this->setHtmlJsSourceOrAjax($csrf_->systemGetCsrfTokenJsSource(),"load");
+		$this->setHtmlJsSourceOrAjax(($this->cloud->getCSRFMitigationProvider())->systemGetCsrfTokenJsSource(),"load");
 	}
 
 	public function getCsrfToken() {
-		$csrf_=$this->cloud->getCSRFMitigationProvider();
-		return $csrf_->systemGetCsrfToken();
+		return ($this->cloud->getCSRFMitigationProvider())->systemGetCsrfToken();
 	}
 
 	public function getCsrfTokenJsSource() {
-		$csrf_=$this->cloud->getCSRFMitigationProvider();
-		return $csrf_->systemGetCsrfTokenJsSource();
+		return ($this->cloud->getCSRFMitigationProvider())->systemGetCsrfTokenJsSource();
 	}
 
 	public function setCsrfReferenceCount($count) {
-		$csrf_=$this->cloud->getCSRFMitigationProvider();
-		$csrf_->systemSetCsrfReferenceCount($count);
+		($this->cloud->getCSRFMitigationProvider())->systemSetCsrfReferenceCount($count);
 	}
 
 	//
