@@ -62,6 +62,10 @@ class xyo_app_Table extends xyo_app_Application {
 	protected $tableInView;
 	protected $tableUseApplicationSearch;
 
+//
+	protected $tableIsEmbeddedDialog;
+	protected $embeddedDialogStep;
+
 	public function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
 
@@ -115,6 +119,9 @@ class xyo_app_Table extends xyo_app_Application {
 			$this->tableUseApplicationSearch=true;
 			$this->hasFilterToolbar(true);
 		};
+
+		$this->tableIsEmbeddedDialog=false;
+		$this->embeddedDialogStep=0;
 	}
 
 	public function applicationInit() {
@@ -292,4 +299,14 @@ class xyo_app_Table extends xyo_app_Application {
 		};
 		return $this->instanceV."callActionLink_".$key."({'action':'form-edit','primary_key_value':'".$this->viewData[$index][$this->primaryKey]."'});return false;";
 	}
+
+	public function isEmbeddedDialog($value){
+		$this->tableIsEmbeddedDialog=$value;
+		$this->embeddedDialogStep=$this->getParameterRequest("is_embedded_dialog", 2);
+		if($this->embeddedDialogStep>0){
+			--$this->embeddedDialogStep;
+		};
+		$this->setKeepRequest("is_embedded_dialog",$this->isEmbedded);
+	}
+
 }
