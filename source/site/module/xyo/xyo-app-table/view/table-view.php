@@ -88,7 +88,7 @@ if($this->tableUseApplicationSearch) {
 
 ?>
 
-<div class="xui component-table <?php echo $cssClass;?>">
+<div class="xui component-table <?php echo $cssClass;?>" id="<?php echo $this->instanceV; ?>component-table">
 	<div class="xui app-toolbar"></div>
 	<div class="xui app-toolbar -compact -wide">
 		<div class="xui _content">
@@ -576,6 +576,10 @@ if($this->isInlineForm){
 
 if($this->isEmbedded){
 	$this->setHtmlJsSourceOrAjax("XUI.EffectRipple.init();","load");
+
+	if($this->isAjax()){
+		$this->setHtmlJsSourceOrAjax("\$(\"#".$this->instanceV."component-table .xui.-overlay-scrollbars\").overlayScrollbars({ scrollbars: { clickScrolling: true } });","load");
+	};	
 };
 
 

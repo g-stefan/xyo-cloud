@@ -53,6 +53,7 @@ $this->setHtmlJsSourceOrAjax(
 $this->setHtmlJsSourceOrAjax("\$(\"body\").append(\$(\"#".$id."\").detach());","load");
 if($this->isAjax()){
 	$this->setHtmlJsSourceOrAjax(
+	"\$(\"#".$id." .xui.-overlay-scrollbars\").overlayScrollbars({ scrollbars: { clickScrolling: true } });".
 	"\$(\"#".$id." ._modal-close-button\").click(function(){XUI.Modal.deactivate();});"
 	,"load");
 };
