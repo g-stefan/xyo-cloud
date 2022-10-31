@@ -66,6 +66,9 @@ class xyo_app_Table extends xyo_app_Application {
 	protected $tableIsEmbeddedDialog;
 	protected $embeddedDialogStep;
 
+//
+	protected $dialogComponent;
+
 	public function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
 
@@ -122,6 +125,13 @@ class xyo_app_Table extends xyo_app_Application {
 
 		$this->tableIsEmbeddedDialog=false;
 		$this->embeddedDialogStep=0;
+
+		$this->dialogComponent=array(
+			"new"=>"xui.modal",
+			"delete"=>"xui.modal",
+			"edit"=>"xui.modal",
+			"filter"=>"xui.modal"
+		);
 	}
 
 	public function applicationInit() {
@@ -309,4 +319,8 @@ class xyo_app_Table extends xyo_app_Application {
 		$this->setKeepRequest("is_embedded_dialog",$this->isEmbedded);
 	}
 
+	public function setDialogComponent($type,$value){
+		$this->dialogComponent[$type]=$value;
+	}
+	
 }

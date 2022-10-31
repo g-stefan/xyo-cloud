@@ -235,8 +235,7 @@ if($this->tableUseApplicationSearch) {
 
 		<div class="xui form-input-group<?php echo $cssClass; ?>">
 		        <select name="<?php echo $this->instanceV; ?>count" id="<?php echo $this->instanceV; ?>count"
-                		size="1"
-		                onChange="XYO.Table.doUpdate('<?php echo $this->instance; ?>');"
+                		size="1"		                
                 		class="xui form-select -default<?php echo $cssClass; ?>"
 				data-xui-select-theme="-default<?php echo $cssClass; ?>"
 				data-width="auto" id="<?php echo $this->instanceV; ?>select_count" >
@@ -255,8 +254,9 @@ if($this->tableUseApplicationSearch) {
 				if($this->isAjax()) {
 					$this->ejsBegin();
 					echo "XUI.FormSelect.initById(\"".$this->instanceV."count\");";
-					$this->ejsEnd();					
+					$this->ejsEnd();
 				};
+				$this->setHtmlJsSourceOrAjax("$(\"#".$this->instanceV."count\").on(\"change\",function(){XYO.Table.doUpdate(\"".$this->instance."\");return false;});","load");
 			?>
 		</div>
 
@@ -336,7 +336,7 @@ if($this->isInlineForm){
 	),$this->inlineEditParameters_));
 }else
 if($this->dialogNew_){
-	$this->generateComponent("xui.modal", array_merge(array(
+	$this->generateComponent($this->dialogComponent["new"], array_merge(array(
 		"id" => $this->instanceV."xyo-app-table-modal-new",
 		"box" => "1x1",
 		"button" => "label.button_new",
@@ -365,7 +365,7 @@ if($this->isInlineForm){
 	),$this->inlineEditParameters_));
 }else
 if($this->dialogEdit_){
-	$this->generateComponent("xui.modal", array_merge(array(
+	$this->generateComponent($this->dialogComponent["edit"], array_merge(array(
 		"id" => $this->instanceV."xyo-app-table-modal-edit",
 		"box" => "1x1",
 		"button" => "label.button_edit",
@@ -436,7 +436,7 @@ if($this->dialogFilter_){
 	$scriptX.="XUI.Modal.deactivate();";
 	$scriptX.="XYO.Table.doUpdate(\"".$this->instance."\");";
 
-	$this->generateComponent("xui.modal", array_merge(array(
+	$this->generateComponent($this->dialogComponent["filter"], array_merge(array(
 		"id" => $this->instanceV."xyo-app-table-modal-filter",
 		"box" => "1x1",
 		"button" => "label.button_filter",
@@ -452,7 +452,7 @@ if($this->dialogFilter_){
 
 // #Delete
 
-$this->generateComponent("xui.modal", array(
+$this->generateComponent($this->dialogComponent["delete"], array(
 	"id" => $this->instanceV."xyo-app-table-modal-delete",
 	"title-text" => "<span class=\"xui -fg-danger-2 xyo-app-table -x-13\"><i class=\"material-icons-outlined xyo-app-table -x-14\">error_outline</i>&nbsp;".$this->getFromLanguage("form.title_delete")."</span>",
 	"box" => "1x1",
