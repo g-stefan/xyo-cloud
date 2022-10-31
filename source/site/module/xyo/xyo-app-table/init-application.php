@@ -16,7 +16,7 @@ $this->requireComponent("xui.form-select");
 $this->requireComponent("xui.form-select-multiple");
 
 if(!$this->isInline) {
-	if($this->isAjax()){
+	if($this->isAjax()&&($this->embeddedDialogStep==0)){
 		$this->setViewTemplate(null);
 	};
 };

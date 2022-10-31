@@ -39,7 +39,7 @@ echo ".xyo-app-table.-z-5{display:none !important;}";
 $this->ecssEnd();
 
 if(!$this->isInline){
-	if($this->isAjax()){
+	if($this->isAjax()&&($this->embeddedDialogStep==0)){
 		$this->setHtmlJsSourceOrAjaxCsrfToken();
 		require_once("table-view.sub.php");
 		include("table-view.instance.php");
