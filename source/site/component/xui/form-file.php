@@ -36,8 +36,8 @@ $this->ecssEnd();
 <div class="xui separator"></div>
 <?php
 
-$this->setHtmlJsSourceOrAjax("document.getElementById(\"".$uid."\").onclick=function(){"+
-	"document.getElementById(\"".$this->getElementId($element)."\").value=null;"+
-	"$(\"#".$this->getElementId($element)."\").trigger(\"change\");"+
+$this->setHtmlJsSourceOrAjax("document.getElementById(\"".$uid."\").onclick=function(){".
+	"document.getElementById(\"".$this->getElementId($element)."\").value=null;".
+	"$(\"#".$this->getElementId($element)."\").trigger(\"change\");".
 "};");
 $this->eJsSourceAjax("XUI.FormFile.initElementById(\"".$this->getElementId($element)."_super\");");
