@@ -1,10 +1,8 @@
 <?php
-//
-// Copyright (c) 2020-2022 Grigore Stefan <g_stefan@yahoo.com>
 // Created by Grigore Stefan <g_stefan@yahoo.com>
-//
-// MIT License (MIT) <http://opensource.org/licenses/MIT>
-//
+// Public domain (Unlicense) <http://unlicense.org>
+// SPDX-FileCopyrightText: 2020-2023 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-License-Identifier: Unlicense
 
 function getFileAndDirectoryList($superPath, $path="", $prefix="") {
 	$this_ = array();
@@ -185,7 +183,6 @@ if(count($removedList)){
 	$removeSource.="// !!! Automatically generated !!!\n";
 	$removeSource.="// Public domain\n";
 	$removeSource.="// http://unlicense.org/\n";
-	$removeSource.="// Created by Grigore Stefan <g_stefan@yahoo.com>\n\n";
 
 	foreach($removedList as $key=>$value) {
 		if(is_dir($pathLast."/".$value)){
@@ -200,4 +197,3 @@ if(count($removedList)){
 };
 
 echo "done.\n";
-

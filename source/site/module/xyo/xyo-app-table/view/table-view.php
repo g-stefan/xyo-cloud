@@ -1,10 +1,8 @@
 <?php
-//
-// Copyright (c) 2020-2022 Grigore Stefan <g_stefan@yahoo.com>
-// Created by Grigore Stefan <g_stefan@yahoo.com>
-//
+// Copyright (c) 2009-2023 Grigore Stefan <g_stefan@yahoo.com>
 // MIT License (MIT) <http://opensource.org/licenses/MIT>
-//
+// SPDX-FileCopyrightText: 2009-2023 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-License-Identifier: MIT
 
 defined("XYO_CLOUD") or die("Access is denied");
 
@@ -212,7 +210,7 @@ if($this->tableUseApplicationSearch) {
 		<div id="<?php echo $uid; ?>" class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7"><i class="material-icons">chevron_left</i></div>
 		<?php
 		$this->ejsBegin();
-		echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doUpdate(\"".$this->instance."\",\"&<".$this->instanceV."go_previous=1\");return false;};";
+		echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doUpdate(\"".$this->instance."\",\"&".$this->instanceV."go_previous=1\");return false;};";
 		$this->ejsEnd();
 		?>
 		<input class="xui form-text <?php echo $cssClass; ?> -left xyo-app-table -x-8 <?php echo ($this->isEmbedded)?" -x-x48":" -x-x64"; ?>" type="text" name="<?php echo $this->instanceV; ?>page" value="<?php echo $page; ?>" size="4" id="<?php echo $this->instanceV; ?>page"></input>
@@ -578,7 +576,7 @@ if($this->isEmbedded){
 	$this->setHtmlJsSourceOrAjax("XUI.EffectRipple.init();","load");
 
 	if($this->isAjax()){
-		$this->setHtmlJsSourceOrAjax("\$(\"#".$this->instanceV."component-table .xui.-overlay-scrollbars\").overlayScrollbars({ scrollbars: { clickScrolling: true } });","load");
+		$this->setHtmlJsSourceOrAjax("XUI.OverlayScrollbars.create(\$(\"#".$this->instanceV."component-table .xui.-overlay-scrollbars\"));","load");
 	};	
 };
 

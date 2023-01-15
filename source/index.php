@@ -1,10 +1,8 @@
 <?php
-//
-// Copyright (c) 2018 Grigore Stefan <g_stefan@yahoo.com>
-// Created by Grigore Stefan <g_stefan@yahoo.com>
-//
+// Copyright (c) 2009-2023 Grigore Stefan <g_stefan@yahoo.com>
 // MIT License (MIT) <http://opensource.org/licenses/MIT>
-//
+// SPDX-FileCopyrightText: 2009-2023 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-License-Identifier: MIT
 define("XYO_CLOUD_ROUTER_DEFAULT",1);
 define("XYO_CLOUD_ADMINISTRATOR",1);
 @chdir("site");

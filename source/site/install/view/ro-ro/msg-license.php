@@ -1,10 +1,8 @@
 <?php
-//
-// Copyright (c) 2020-2022 Grigore Stefan <g_stefan@yahoo.com>
-// Created by Grigore Stefan <g_stefan@yahoo.com>
-//
+// Copyright (c) 2009-2023 Grigore Stefan <g_stefan@yahoo.com>
 // MIT License (MIT) <http://opensource.org/licenses/MIT>
-//
+// SPDX-FileCopyrightText: 2009-2023 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-License-Identifier: MIT
 
 defined("XYO_CLOUD") or die("Access is denied");
 
@@ -13,7 +11,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 MIT License (MIT)
 </p>
 <p>
-Copyright (c) 2020-2022 Grigore Stefan &lt;g_stefan@yahoo.com&gt;
+Copyright (c) 2009-2023 Grigore Stefan &lt;g_stefan@yahoo.com&gt;
 </p>
 <p class="text-justify">
 Permission is hereby granted, free of charge, to any person obtaining a copy of
