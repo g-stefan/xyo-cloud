@@ -32,7 +32,8 @@ if(Shell.fileExists("release/"+updateRelease)){
 
 exitIf(Shell.system("7zr x \"release/"+previousRelease+"\" -otemp/"+Project.name + "-" + Project.previousVersion));
 exitIf(Shell.system("7zr x \"release/"+currentRelease+"\" -otemp/"+Project.name + "-" + version));
-runInPath("temp" + project, function() {
+
+runInPath("temp", function() {
 	exitIf(Shell.system("php ../fabricare/update.php \""+Project.name+"\" \""+Project.previousVersion+"\" \""+version+"\""));
 	exitIf(Shell.system("7zr a -mx9 -mmt4 -r- -sse -w. -y -t7z ../release/"+updateRelease+" "+Project.name+"-update-"+Project.previousVersion+"-to-"+version));
 });
