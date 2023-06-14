@@ -10,7 +10,6 @@
 			}
 		],
 		"releaseOutput" : true,
-		"hasGithub" : true,
 		"vendor" : {
 			"xui" : "3.5.1"
 		}
