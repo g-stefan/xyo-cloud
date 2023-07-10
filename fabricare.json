@@ -6,7 +6,7 @@
 			{
 				"name" : "xyo-cloud",
 				"SPDX-License-Identifier": "MIT",
-				"previousVersion" : "4.6.1"
+				"previousVersion" : "4.7.0"
 			}
 		],
 		"releaseOutput" : true,

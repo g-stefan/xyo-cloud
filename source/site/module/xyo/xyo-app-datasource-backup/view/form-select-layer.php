@@ -7,9 +7,10 @@
 defined("XYO_CLOUD") or die("Access is denied");
 
 $layer=$this->getElementValueString("layer","xyo");
+$this->setHtmlJsSourceOrAjax("document.getElementById(\"".$this->getElementId("layer")."\").onchange=function(){this.form.submit();};");
 
 ?>
-<select class="xui form-select" name="<?php $this->eElementName("layer"); ?>" id="<?php $this->eElementId("layer"); ?>" onChange="this.form.submit();">
+<select class="xui form-select" name="<?php $this->eElementName("layer"); ?>" id="<?php $this->eElementId("layer"); ?>">
 <?php
 	$list_layer=$this->getParameter("select.layer",array());
 	foreach ($list_layer as $value) {
