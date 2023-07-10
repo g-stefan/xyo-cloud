@@ -1860,8 +1860,8 @@ class xyo_Cloud extends xyo_Config {
 		$this->set("log_language",false);
 		$this->set("use_redirect",false);
 		//
-		$this->set("language", "en");
-		$this->set("locale", "en");
+		$this->set("language", "en-gb");
+		$this->set("locale", "en-gb");
 		$this->set("locale_date_format","Y-m-d");
 		$this->set("locale_datetime_format","Y-m-d H:i:s");
 		$this->set("locale_time_format","H:i:s");

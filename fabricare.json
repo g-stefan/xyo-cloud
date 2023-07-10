@@ -1,17 +1,17 @@
 {
 	"solution": {
 		"name" : "xyo-cloud",
-		"type" : "xyo-cpp",
+		"type" : "generic",
 		"projects": [
 			{
 				"name" : "xyo-cloud",
 				"SPDX-License-Identifier": "MIT",
-				"previousVersion" : "4.6.0"
+				"previousVersion" : "4.6.1"
 			}
 		],
 		"releaseOutput" : true,
 		"vendor" : {
-			"xui" : "3.5.1"
+			"xui" : "3.6.0"
 		}
 	}
 }

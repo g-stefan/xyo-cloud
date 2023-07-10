@@ -1429,7 +1429,6 @@ class xyo_Module extends xyo_Config {
 		}
 	}
 
-
 	public function setIsEmbedded($value) {
 		$this->isEmbedded=$value;
 	}
