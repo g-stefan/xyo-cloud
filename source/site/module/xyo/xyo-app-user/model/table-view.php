@@ -33,7 +33,7 @@ $this->tableType=array(
 	"enabled"=>array("toggle"),	
 	"invisible"=>array("toggle",array(
 		"on"=>array(
-			0=>array("<i class=\"material-icons\">add</i>","default"),
+			0=>array("<i class=\"material-icons\">add</i>","toolbar"),
 			1=>array("<i class=\"material-icons\">flag</i>","warning")
 		)
 	)),	

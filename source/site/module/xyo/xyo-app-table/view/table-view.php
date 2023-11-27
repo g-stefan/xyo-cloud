@@ -311,10 +311,11 @@ if(!$this->isEmbedded){
 	echo "</form>";
 	if($this->isInlineForm) {
 		echo "</div>";
-		echo "<div class=\"xui xyo-app-table -is-inline-form _form\">";
-		echo "<div id=\"".$this->instanceV."xyo-app-table-inline\" class=\"xui -overlay-scrollbars xyo-app-table -x-12\">";
+		echo "<div id=\"".$this->instanceV."xyo-app-table-inline-form\" class=\"xui xyo-app-table -is-inline-form _form\">";
+		echo "<div id=\"".$this->instanceV."xyo-app-table-inline\" class=\"xui xyo-app-table -x-12 -overlay-scrollbars\">";
 			echo "<div id=\"".$this->instanceV."xyo-app-table-inline_content\" class=\"xui\">";
-			$this->generateView("table-inline-empty");                         
+			$this->generateView("table-inline-empty");
+			$this->setHtmlJsSourceOrAjax("XUI.OverlayScrollbars.create(document.getElementById(\"".$this->instanceV."xyo-app-table-inline\"));","load");
 			$this->setHtmlJsSourceOrAjax("\$(\"#xyo-app-table-inline\").show();","load");
 			echo "</div>";
 		echo "</div>";
@@ -576,7 +577,7 @@ if($this->isEmbedded){
 	$this->setHtmlJsSourceOrAjax("XUI.EffectRipple.init();","load");
 
 	if($this->isAjax()){
-		$this->setHtmlJsSourceOrAjax("XUI.OverlayScrollbars.create(\$(\"#".$this->instanceV."component-table .xui.-overlay-scrollbars\"));","load");
+		$this->setHtmlJsSourceOrAjax("XUI.OverlayScrollbars.create(document.querySelector(\"#".$this->instanceV."component-table .xui.-overlay-scrollbars\"));","load");
 	};	
 };
 

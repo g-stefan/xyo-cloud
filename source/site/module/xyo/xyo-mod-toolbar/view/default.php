@@ -11,7 +11,7 @@ if (count($this->toolbar)) {
 	foreach ($this->toolbar as $item) {
 	
 		if($item["type"]=="item"){
-			echo "<a class=\"xui button -transparent -icon-left -".$item["mode"]." -effect-ripple ".$this->type."\" href=\"".$item["module"]."\">";
+			echo "<a class=\"xui button -transparent -icon-left -".$item["mode"]." -effect-ripple ".$this->type." -toolbar\" href=\"".$item["module"]."\">";
 				echo $item["img"];
 				echo "<span>";
 				echo $item["title"];
@@ -21,7 +21,7 @@ if (count($this->toolbar)) {
 		};
 
 		if($item["type"]=="item-target"){
-			echo "<a class=\"xui button -transparent -icon-left -".$item["mode"]." -effect-ripple ".$this->type."\" href=\"".$item["module"]."\" target=\"".$item["parameters"]."\">";
+			echo "<a class=\"xui button -transparent -icon-left -".$item["mode"]." -effect-ripple ".$this->type." -toolbar\" href=\"".$item["module"]."\" target=\"".$item["parameters"]."\">";
 				echo $item["img"];
 				echo "<span>";
 				echo $item["title"];
@@ -32,7 +32,7 @@ if (count($this->toolbar)) {
 
 		if($item["type"]=="item-js"){
 			$uid=$this->getUID();
-			echo "<a id=\"".$uid."\" class=\"xui button -transparent -icon-left -".$item["mode"]." -effect-ripple ".$this->type."\" href=\"#\">";
+			echo "<a id=\"".$uid."\" class=\"xui button -transparent -icon-left -".$item["mode"]." -effect-ripple ".$this->type." -toolbar\" href=\"#\">";
 				echo $item["img"];
 				echo "<span>";
 				echo $item["title"];
@@ -45,7 +45,7 @@ if (count($this->toolbar)) {
 		};
 
 		if($item["type"]=="item.important"){
-			echo "<a class=\"xui button -transparent -icon-left -".$item["mode"]." -important -effect-ripple ".$this->type."\" href=\"".$item["module"]."\">";
+			echo "<a class=\"xui button -transparent -icon-left -".$item["mode"]." -important -effect-ripple ".$this->type." -toolbar\" href=\"".$item["module"]."\">";
 				echo $item["img"];
 				echo "<span>";
 				echo $item["title"];
@@ -56,7 +56,7 @@ if (count($this->toolbar)) {
 
 		if($item["type"]=="item-js.important"){
 			$uid=$this->getUID();
-			echo "<a id=\"".$uid."\" class=\"xui button -transparent -icon-left -".$item["mode"]." -important -effect-ripple ".$this->type."\" href=\"#\">";
+			echo "<a id=\"".$uid."\" class=\"xui button -transparent -icon-left -".$item["mode"]." -important -effect-ripple ".$this->type." -toolbar\" href=\"#\">";
 				echo $item["img"];
 				echo "<span>";
 				echo $item["title"];
@@ -74,7 +74,7 @@ if (count($this->toolbar)) {
 		};
 
 		if($item["type"]=="application-menu") {
-			echo "<div class=\"xui button -transparent -icon -size-x32 -".$item["mode"]." -important -effect-ripple ".$this->type."\" id=\"popup-menu-application-action\">";
+			echo "<div class=\"xui button -transparent -icon -size-x32 -".$item["mode"]." -important -effect-ripple ".$this->type." -toolbar\" id=\"popup-menu-application-action\">";
 				echo $item["img"];
 			echo "</div>";
 			continue;

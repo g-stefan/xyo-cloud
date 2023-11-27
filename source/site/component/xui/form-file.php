@@ -19,7 +19,7 @@ $this->ecssEnd();
 <div class="xui form-file -form-file" id="<?php $this->eElementId($element); ?>_super">
 <input type="file" name="<?php $this->eElementName($element); ?>" id="<?php $this->eElementId($element); ?>" class="xui _file"></input>
 <label for="<?php $this->eElementId($element); ?>" class="xui button -icon-left -outline"><i class="material-icons">file_upload</i><span>Browse ...</span></label>
-<button type="button" class="xui button -icon -info" id="<?php echo $uid; ?>" ><i class="material-icons">delete</i></button>
+<button type="button" class="xui button -icon -outline -secondary" id="<?php echo $uid; ?>" ><i class="material-icons">close</i></button>
 </div>
 <input type="hidden"
 	name="<?php $this->eElementName($element); ?>_delete"

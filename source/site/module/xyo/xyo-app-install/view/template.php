@@ -12,8 +12,8 @@ $listGroup = array(
 	array("id"=>1,"key"=>"welcome","text"=>$this->getFromLanguage("panel.welcome"),"selected"=>false,"icon-left" => ""),
 	array("id"=>2,"key"=>"package","text"=>$this->getFromLanguage("panel.package"),"selected"=>false,"icon-left" => ""),
 	array("id"=>3,"key"=>"require","text"=>$this->getFromLanguage("panel.require"),"selected"=>false,"icon-left" => ""),
-	array("id"=>3,"key"=>"license","text"=>$this->getFromLanguage("panel.license"),"selected"=>false,"icon-left" => ""),
-	array("id"=>4,"key"=>"install","text"=>$this->getFromLanguage("panel.install"),"selected"=>false,"icon-left" => "")	
+	array("id"=>4,"key"=>"license","text"=>$this->getFromLanguage("panel.license"),"selected"=>false,"icon-left" => ""),
+	array("id"=>5,"key"=>"install","text"=>$this->getFromLanguage("panel.install"),"selected"=>false,"icon-left" => "")	
 );
 
 foreach ($listGroup as $key => &$value) {

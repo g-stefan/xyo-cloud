@@ -93,7 +93,7 @@ if(strlen($userImageThumbnail)>0) {
 			<div class="xui app-header">
 				<div class="xui app-bar">
 					<?php $uid=$this->getUID();?>
-					<div  id="<?php echo $uid; ?>" class="xui button -icon -transparent -left -effect-ripple">
+					<div  id="<?php echo $uid; ?>" class="xui button -icon -transparent -left -effect-ripple -toolbar">
 						<i class="material-icons">menu</i>
 					</div>
 					<?php
@@ -122,7 +122,7 @@ if(strlen($userImageThumbnail)>0) {
 						</div>
 					</div>
 					<?php if($userMenu->hasMenu()) { ?>
-						<div class="xui button -icon -size-x32 -circle -transparent -effect-ripple" id="popup-menu-user-action">
+						<div class="xui button -icon -size-x32 -circle -transparent -effect-ripple -toolbar" id="popup-menu-user-action">
 							<i class="material-icons">expand_more</i>
 						</div>
 						<ul class="xui menu -popup" id="popup-menu-user">

@@ -11,7 +11,7 @@
 		],
 		"releaseOutput" : true,
 		"vendor" : {
-			"xui" : "3.6.0"
+			"xui" : "4.0.0"
 		}
 	}
 }

@@ -30,14 +30,14 @@ if(($readonly == 1) ||  ($readonly == "true")){
 <label class="xui form-label<?php if($this->isElementError($element)){echo " xui -danger";}; ?>" for="<?php $this->eElementId($element); ?>"><?php $this->eLanguage("label." . $element); ?><?php if($this->isElementError($element)){echo " - "; $this->eElementError($element);}; ?></label>
 <br>
 <?php if($isRequired) { ?>
-<div class="xui form-text -required<?php if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>">
+<div class="xui form-textarea -required<?php if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>">
 	<textarea<?php echo $maxlength; ?>
 		rows="4"
 		name="<?php $this->eElementName($element); ?>"
 		id="<?php $this->eElementId($element); ?>" <?php echo $readonly; ?> ><?php echo $this->getElementValue($element); ?></textarea>
 </div>
 <?php } else { ?>
-<textarea<?php echo $maxlength; ?> class="xui form-text<?php if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>"
+<textarea<?php echo $maxlength; ?> class="xui form-textarea<?php if($this->isElementError($element)){echo " -danger";}; echo $classReadonly; ?>"
 	rows="4"
 	name="<?php $this->eElementName($element); ?>"
 	id="<?php $this->eElementId($element); ?>" <?php echo $readonly; ?> ><?php echo $this->getElementValue($element); ?></textarea>

@@ -23,11 +23,12 @@ $count = $this->getParameterInstance("count", 10);
 $page = $this->getParameterInstance("page", 1);
 $sortState = $this->getParameterInstance("sortState", array());
 
-if ($count > 0) {
-	$page_count = ceil($nr_items / $count);
-} else {
-	$page_count = 1;
-}
+$page_count = 1;
+if($count !== "all") {
+	if ($count > 0) {	
+		$page_count = ceil($nr_items / $count);
+	};
+};
 
 $sort_img = array(
 	"ascendent" => "<i class=\"material-icons\">expand_more</i>",

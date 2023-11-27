@@ -67,10 +67,10 @@
 	font-family: "Roboto",sans-serif;
 	box-sizing: border-box;
 	border-radius: 0px 0px 0px 0px;
-	border-top: 0px solid #d3d7cf;
-	border-left: 1px solid #d3d7cf;
-	border-right: 0px solid #d3d7cf;
-	border-bottom: 0px solid #d3d7cf;
+	border-top: 0px solid #acb7bb;
+	border-left: 1px solid #acb7bb;
+	border-right: 0px solid #acb7bb;
+	border-bottom: 0px solid #acb7bb;
 }
 
 .xui.component-table.-hide-secondary-top-toolbar.-is-inline-form .xyo-app-table.xui.table > thead > tr > th {
@@ -91,17 +91,17 @@
 		width: 100%;
 		height: auto;
 		float: none;
-		border-bottom: 1px solid #d3d7cf;
+		border-bottom: 1px solid #acb7bb;
 	}
 
 	.xyo-app-table.-is-inline-form._form {
 		float: none;
 		height: auto;
-		border-left: 0px solid #d3d7cf;
+		border-left: 0px solid #acb7bb;
 	}
 
 	.xyo-app-table.-is-inline-form .xui.component-table.-application > .xui.app-toolbar:last-child {
-		border-top: 0px solid #d3d7cf;
+		border-top: 0px solid #acb7bb;
 	}
 
 }
@@ -143,7 +143,7 @@
 }
 
 .xui.component-table.-application.-hide-top-toolbar.-use-application-search table.xyo-app-table > thead > tr:first-child > th {
-	border-top: 0px solid #d3d7cf;	
+	border-top: 0px solid #acb7bb;	
 }
 
 .xui.component-table.-application.-hide-top-toolbar.-use-application-search > .xui._table {
@@ -167,4 +167,20 @@
 		padding-left: 6px;
 		padding-right: 6px;
 	}
+}
+
+/* Overlay Scrollbars */
+.xui.component-table.-application > .xui._table.-overlay-scrollbars {
+	display: flex;
+	flex-direction: column;
+}
+
+.xui.xyo-app-table.-is-inline-form._form.-overlay-scrollbars {
+	display: flex;
+	flex-direction: column;
+}
+
+.xui.xyo-app-table.-x-12.-overlay-scrollbars {
+	display: flex;
+	flex-direction: column;
 }

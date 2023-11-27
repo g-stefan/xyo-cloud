@@ -207,7 +207,11 @@ foreach ($this->viewData as $key => $value) {
 
 		                       	if(is_array($toggle_img_[$img])){
 						$uid=$this->getUID();
-						echo "<div id=\"".$uid."\" class=\"xui button -".$toggle_img_[$img][1]." -transparent -effect-ripple -icon -small -size-xy24-22 -left\">";
+						$cssMod="";
+						if(strlen($toggle_img_[$img][1])){
+							$cssMod="-".$toggle_img_[$img][1];
+						};
+						echo "<div id=\"".$uid."\" class=\"xui button ".$cssMod." -transparent -effect-ripple -icon -small -size-xy24-22 -left\">";
 						echo $toggle_img_[$img][0];
 						echo "</div>";
 						$script.="document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doToggle(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\",".$forceCommand.");return false;};";
@@ -260,7 +264,11 @@ foreach ($this->viewData as $key => $value) {
 				if($value["@write"]){
 
 					if(is_array($toggle_img_[$img])){
-						echo "<div class=\"xui button -".$toggle_img_[$img][1]." -transparent -effect-ripple -icon -small -size-xy24-22 -left xyo-app-table -z-2\">";
+						$cssMod="";
+						if(strlen($toggle_img_[$img][1])){
+							$cssMod="-".$toggle_img_[$img][1];
+						};
+						echo "<div class=\"xui button ".$cssMod." -transparent -effect-ripple -icon -small -size-xy24-22 -left xyo-app-table -z-2\">";
 						echo $toggle_img_[$img][0];
 						echo "</div>";
 					} else {
@@ -312,7 +320,11 @@ foreach ($this->viewData as $key => $value) {
 
 					if(is_array($toggle_img_[$img])){
 						$uid=$this->getUID();
-						echo "<div id=\"".$uid."\" class=\"xui button -".$toggle_img_[$img][1]." -transparent -effect-ripple -icon -small -size-xy24-22 -left\">";
+						$cssMod="";
+						if(strlen($toggle_img_[$img][1])){
+							$cssMod="-".$toggle_img_[$img][1];
+						};
+						echo "<div id=\"".$uid."\" class=\"xui button ".$cssMod." -transparent -effect-ripple -icon -small -size-xy24-22 -left\">";
 						echo $toggle_img_[$img][0];
 						echo "</div>";
 						$script.="document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doRadio(\"".$this->instance."\",\"" . $value[$this->primaryKey] . "\",\"" . $key_ . "\");return false;};";

@@ -10,3 +10,4 @@ $this->setVersion($module, "1.0.0");
 //
 $this->setReferenceLink($module, "lib-normalize");
 $this->setReferenceLink($module, "lib-roboto-regular");
+$this->setReferenceLink($module, "lib-jquery");

@@ -14,7 +14,7 @@ class lib_OverlayScrollbars extends xyo_Module {
 		parent::__construct($object, $cloud);
 		if ($this->isBase("lib_OverlayScrollbars")) {
 			$this->setHtmlCss($this->site."lib/overlayscrollbars/overlayscrollbars.min.css");
-			$this->setHtmlJs($this->site."lib/overlayscrollbars/jquery.overlayscrollbars.min.js");
+			$this->setHtmlJs($this->site."lib/overlayscrollbars/overlayscrollbars.browser.es6.min.js");
         	}
 	}
 

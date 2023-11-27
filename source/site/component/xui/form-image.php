@@ -154,11 +154,11 @@ $this->ecssBegin();
 		<a href="<?php echo $this->site.$fileName; ?>" target="_blank" class="xui _link button -icon -success -size-x32 -circle -transparent -effect-ripple  -form-image -link"><i class="material-icons">photo</i></a>
 <?php	}; ?>
 <?php }; ?>
-<div class="xui _delete button -icon -danger -size-x32 -circle -transparent -effect-ripple  -form-image -link" id="<?php echo $uidDelete; ?>"><i class="material-icons">close</i></div>
+<div class="xui _delete button -icon -danger -size-x32 -circle -transparent -effect-ripple  -form-image -link" id="<?php echo $uidDelete; ?>"><i class="material-icons">delete</i></div>
 <div class="xui form-file">
 <input type="file" name="<?php $this->eElementName($element); ?>" id="<?php $this->eElementId($element); ?>" class="xui _file cropit-image-input" accept="image/*"></input>
 <label for="<?php $this->eElementId($element); ?>" class="xui button -icon-left -outline"><i class="material-icons">file_upload</i><span>Browse ...</span></label>
-<button type="button" class="xui button -icon -info" id="<?php echo $uidClear; ?>"><i class="material-icons">delete</i></button>
+<button type="button" class="xui button -icon -secondary -outline" id="<?php echo $uidClear; ?>"><i class="material-icons">close</i></button>
 </div>
 </div>
 <input type="hidden"

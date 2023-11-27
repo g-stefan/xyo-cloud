@@ -101,7 +101,7 @@ $this->setHtmlJsSourceOrAjax(
 $this->setHtmlJsSourceOrAjax("\$(\"body\").append(\$(\"#".$id."\").detach());","load");
 if($this->isAjax()){
 	$this->setHtmlJsSourceOrAjax(
-	"XUI.OverlayScrollbars.create(\$(\"#".$id." .xui.-overlay-scrollbars\"));".
+	"XUI.OverlayScrollbars.create(document.querySelector(\"#".$id." .xui.-overlay-scrollbars\"));".
 	"\$(\"#".$id." ._modal-close-button\").click(function(){XUI.Modal.deactivate();});"
 	,"load");
 };

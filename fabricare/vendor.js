@@ -13,8 +13,15 @@ if (Shell.fileExists("vendor/" + vendor + ".7z")) {
 	return;
 };
 
-var webLink = "https://github.com/g-stefan/xui/releases/download/v" + Solution.vendor.xui + "/" + vendor + ".7z";
+var vendorSourceGit = "https://github.com/g-stefan";
+if (Shell.hasEnv("VENDOR_SOURCE_GIT")) {
+	vendorSourceGit = Shell.getenv("VENDOR_SOURCE_GIT");
+};
+
+var webLink = vendorSourceGit + "/xui/releases/download/v" + Solution.vendor.xui + "/" + vendor + ".7z";
 exitIf(Shell.system("curl --insecure --location " + webLink + " --output vendor/" + vendor + ".7z"));
-if (Shell.getFileSize("vendor/" + Project.vendor + ".7z") > 16) {
+if (Shell.getFileSize("vendor/" + vendor + ".7z") < 16384) {
+	Shell.remove("vendor/" + vendor + ".7z");
+	messageError("not found - "+webLink);
 	return;
 };

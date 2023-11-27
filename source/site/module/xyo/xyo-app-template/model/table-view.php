@@ -25,7 +25,7 @@ $this->tableType=array(
 	"module_name"=>array("custom","template-info"),
 	"active"=>array("toggle",array(
 		"on"=>array(
-			0=>array("<i class=\"material-icons\">star_border</i>",""),
+			0=>array("<i class=\"material-icons\">star_border</i>","toolbar"),
 			1=>array("<i class=\"material-icons\">star</i>","warning")
 		),
 		"force-command"=>true

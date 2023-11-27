@@ -159,8 +159,8 @@ if ($this->ds) {
 	};
 
 	$page_count = 1;
-	if ($count > 0) {
-		$page_count = ceil($nr_items / $count);
+	if ($x_count > 0) {
+		$page_count = ceil($nr_items / $x_count);
 	};
 
 	if (1*$this->getRequestInstance("go_last")) {
