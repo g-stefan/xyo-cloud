@@ -1,7 +1,7 @@
 <?php
-// Copyright (c) 2009-2023 Grigore Stefan <g_stefan@yahoo.com>
+// Copyright (c) 2009-2024 Grigore Stefan <g_stefan@yahoo.com>
 // MIT License (MIT) <http://opensource.org/licenses/MIT>
-// SPDX-FileCopyrightText: 2009-2023 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-FileCopyrightText: 2009-2024 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: MIT
 define("XYO_CLOUD_ADMINISTRATOR",1);
 @chdir("../site");

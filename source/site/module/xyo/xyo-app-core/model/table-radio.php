@@ -1,7 +1,7 @@
 <?php
-// Copyright (c) 2009-2023 Grigore Stefan <g_stefan@yahoo.com>
+// Copyright (c) 2009-2024 Grigore Stefan <g_stefan@yahoo.com>
 // MIT License (MIT) <http://opensource.org/licenses/MIT>
-// SPDX-FileCopyrightText: 2009-2023 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-FileCopyrightText: 2009-2024 Grigore Stefan <g_stefan@yahoo.com>
 // SPDX-License-Identifier: MIT
 
 defined("XYO_CLOUD") or die("Access is denied");
@@ -15,9 +15,9 @@ if(!$this->ds->default){
 
 $routerContent="";
 $routerContent.="<"."?"."php\r\n";
-$routerContent.="// Copyright (c) 2009-2023 Grigore Stefan <g_stefan@yahoo.com>\r\n";
+$routerContent.="// Copyright (c) 2009-2024 Grigore Stefan <g_stefan@yahoo.com>\r\n";
 $routerContent.="// MIT License (MIT) <http://opensource.org/licenses/MIT>\r\n";
-$routerContent.="// SPDX-FileCopyrightText: 2009-2023 Grigore Stefan <g_stefan@yahoo.com>\r\n";
+$routerContent.="// SPDX-FileCopyrightText: 2009-2024 Grigore Stefan <g_stefan@yahoo.com>\r\n";
 $routerContent.="// SPDX-License-Identifier: MIT\r\n";
 $routerContent.="\r\n";
 $routerContent.="define(\"XYO_CLOUD_ROUTER_DEFAULT\",1);\r\n";

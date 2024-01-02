@@ -10,7 +10,7 @@ MVC Framework for PHP
 
 ## License
 
-Copyright (c) 2009-2023 Grigore Stefan <g_stefan@yahoo.com>
+Copyright (c) 2009-2024 Grigore Stefan <g_stefan@yahoo.com>
 Licensed under the [MIT](LICENSE) license.
 
 **This is a compilation of different works.**
