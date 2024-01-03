@@ -11,7 +11,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 MIT License (MIT)
 </p>
 <p>
-Copyright (c) 2009-2023 Grigore Stefan &lt;g_stefan@yahoo.com&gt;
+Copyright (c) 2009-2024 Grigore Stefan &lt;g_stefan@yahoo.com&gt;
 </p>
 <p class="text-justify">
 Permission is hereby granted, free of charge, to any person obtaining a copy of
