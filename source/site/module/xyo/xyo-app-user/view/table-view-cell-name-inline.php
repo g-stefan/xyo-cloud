@@ -62,9 +62,9 @@ echo "<td class=\"xui xyo-app-user -x-3\">";
 	echo "<br />";
 	echo "<span class=\"xui -fg-aluminium-4 xyo-app-user -x-4\">";
 	if($this->viewRow["logged_in"]) {
-		echo "<span class=\"material-icons xyo-app-user -x-5\">work</span>";
+		echo "<span class=\"lucide-user-check xyo-app-user -x-5\"></span>";
 	} else {
-		echo "<span class=\"material-icons xyo-app-user -x-6\">work_off</span>";
+		echo "<span class=\"lucide-user-x xyo-app-user -x-6\"></span>";
 	};
 	echo "&nbsp;&nbsp;";
 	echo $this->viewRow["logged_at"];

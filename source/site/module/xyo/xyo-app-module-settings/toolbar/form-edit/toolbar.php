@@ -8,7 +8,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 
 $this->setItem("apply",
 	"item-js.important",
-	"<i class=\"material-icons\">done</i>",
+	"<i class=\"lucide-check\"></i>",
 	"apply",
 	"warning",
 	"#",
@@ -17,7 +17,7 @@ $this->setItem("apply",
 
 $this->setItem("save",
 	"item-js.important",
-	"<i class=\"material-icons\">done_all</i>",
+	"<i class=\"lucide-check-check\"></i>",
 	"save",
 	"success",
 	"#",
@@ -30,7 +30,7 @@ if($this->isRequestCall()){
 	
 	$this->setItem("done",
 		"item-js",
-		"<i class=\"material-icons\">done</i>",
+		"<i class=\"lucide-check\"></i>",
 		"done",
 		"info",
 		"#",

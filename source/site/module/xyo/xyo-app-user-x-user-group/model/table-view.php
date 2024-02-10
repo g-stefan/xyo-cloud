@@ -28,8 +28,8 @@ $this->tableType=array(
 	"name" => array("cmd-edit"),
 	"principal"=>array("toggle",array(
 		"on"=>array(
-			0=>array("<i class=\"material-icons\">star_border</i>",""),
-			1=>array("<i class=\"material-icons\">star</i>","warning")
+			0=>array("<i class=\"lucide-circle\"></i>",""),
+			1=>array("<i class=\"lucide-check-circle\"></i>","primary")
 		)
 	)),
 	"enabled"=>array("toggle")		

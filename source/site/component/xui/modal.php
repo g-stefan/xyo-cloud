@@ -61,7 +61,7 @@ $this->ecssEnd();
 ?>
 <div id="<?php echo $id; ?>" class="xui modal">
 	<div class="xui panel _modal-content -overlay-scrollbars os-host-flexbox">
-		<div class="xui _modal-close-button button -icon -size-x32 -circle -danger -transparent -effect-ripple"><i class="material-icons">close</i></div>
+		<div class="xui _modal-close-button button -icon -size-x32 -circle -danger -transparent -effect-ripple"><i class="lucide-x"></i></div>
 		<?php if(!$noTitle){ ?>
 		<div class="xui panel_title">
 			<?php echo $title; ?>

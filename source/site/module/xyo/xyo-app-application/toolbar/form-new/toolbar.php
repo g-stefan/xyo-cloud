@@ -6,4 +6,4 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setItem("apply", "item-js", "<i class=\"material-icons\">done</i>", "apply", "success", "#", $this->instanceV."doCommand('form-new-apply');");
+$this->setItem("apply", "item-js", "<i class=\"lucide-check\"></i>", "apply", "success", "#", $this->instanceV."doCommand('form-new-apply');");

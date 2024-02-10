@@ -10,7 +10,7 @@ $this->toolbarPush();
 
 $this->setItem("logout",
         "item-js",
-        "<i class=\"material-icons\">lock</i>",
+        "<i class=\"lucide-log-out\"></i>",
         "logout",
         "warning",
         "#",
@@ -19,7 +19,7 @@ $this->setItem("logout",
 
 $this->setItem("user_group",
         "item-js",
-        "<i class=\"material-icons\">people</i>",
+        "<i class=\"lucide-users\"></i>",
         "user_group",
        	"primary",
         "#",

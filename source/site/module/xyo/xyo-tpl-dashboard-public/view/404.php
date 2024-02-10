@@ -28,7 +28,7 @@ header("HTTP/1.0 404 Not Found");
 	<body<?php $this->eHtmlBodyClass(); ?>>
 		<center>
 			<div class="xui alert -danger x404 -x-1">
-				<span class="material-icons x404 -x-2">error_outline</span>
+				<span class="lucide-info x404 -x-2"></span>
 				404 Not found
 			</div>
 		</center>

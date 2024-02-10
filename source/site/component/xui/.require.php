@@ -6,5 +6,5 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->requireModule("lib-material-icons");
+$this->requireModule("lib-lucide-icons-font");
 $this->requireModule("lib-xui");

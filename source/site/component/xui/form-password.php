@@ -37,6 +37,6 @@ if($isRequired){
 	name="<?php $this->eElementName($element); ?>"
 	value="<?php $this->eElementValue($element, ""); ?>"
 	id="<?php $this->eElementId($element); ?>" ></input>
-<i class="material-icons">lock</i>
+<i class="lucide-lock"></i>
 </div>
 <br>

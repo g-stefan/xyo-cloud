@@ -6,4 +6,4 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->addItem($menu,"item-js", "<i class=\"material-icons\">settings</i>","settings","callAppSettings();");
+$this->addItem($menu,"item-js", "<i class=\"lucide-settings-2\"></i>","settings","callAppSettings();");

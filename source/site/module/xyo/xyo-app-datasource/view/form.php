@@ -11,8 +11,8 @@ if(!$this->isDialog){
 	$this->generateComponent("xui.panel-begin");
 };
 
-$this->generateComponent("xui.form-text-icon-right", array("element" => "connection", "readonly" => true, "icon"=>"<i class=\"material-icons\">edit_off</i>"));
-$this->generateComponent("xui.form-text-icon-right", array("element" => "name", "readonly" => true, "icon"=>"<i class=\"material-icons\">edit_off</i>"));
+$this->generateComponent("xui.form-text-icon-right", array("element" => "connection", "readonly" => true, "icon"=>"<i class=\"lucide-shield\"></i>"));
+$this->generateComponent("xui.form-text-icon-right", array("element" => "name", "readonly" => true, "icon"=>"<i class=\"lucide-shield\"></i>"));
 $this->generateComponent("xui.form-select", array("element" => "option"));
 
 if(!$this->isDialog){

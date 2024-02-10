@@ -31,19 +31,19 @@ if($count !== "all") {
 };
 
 $sort_img = array(
-	"ascendent" => "<i class=\"material-icons\">expand_more</i>",
-	"descendent" => "<i class=\"material-icons\">expand_less</i>",
+	"ascendent" => "<i class=\"lucide-chevron-down\"></i>",
+	"descendent" => "<i class=\"lucide-chevron-up\"></i>",
 	"none" => ""
 );
 
 $toggle_img = array(
-	0 => array("<i class=\"material-icons\">clear</i>","danger"),
-	1 => array("<i class=\"material-icons\">done</i>","success")
+	0 => array("<i class=\"lucide-x\"></i>","danger"),
+	1 => array("<i class=\"lucide-check\"></i>","success")
 );
 
 $toggle_off_img = array(
-	0 => "<i class=\"material-icons\">clear</i>",
-	1 => "<i class=\"material-icons\">done</i>"
+	0 => "<i class=\"lucide-x\"></i>",
+	1 => "<i class=\"lucide-check\"></i>"
 );
 
 $sortNextState=array(

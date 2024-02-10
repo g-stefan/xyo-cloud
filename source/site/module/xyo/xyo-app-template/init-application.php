@@ -9,7 +9,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 $this->setApplicationDataSource("db.query.xyo_acl_module");
 $this->setPrimaryKey("id");
 
-$this->setApplicationIcon("<i class=\"material-icons\">dashboard</i>");
+$this->setApplicationIcon("<i class=\"lucide-layout-template\"></i>");
 
 $this->requireComponent(array(
 	"xui.form-select",

@@ -8,6 +8,6 @@ defined("XYO_CLOUD") or die("Access is denied");
 
 $this->setModuleAsApplication($module);
 $this->setReferenceLink($module, "xyo-mod-setup");
-$this->setReferenceLink($module, "lib-material-icons");
+$this->setReferenceLink($module, "lib-lucide-icons-font");
 $this->setReferenceBase($module, "xyo-mod-application");
 $this->setVersion($module, "1.0.0");

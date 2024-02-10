@@ -85,12 +85,12 @@ foreach ($listModule as $key => $value) {
 	if ($value) {
 		echo "<li class=\"xui\">";
 			echo "<span>".$key."</span>";
-			echo "<i class=\"material-icons\">done</i>";
+			echo "<i class=\"lucide-check\"></i>";
 		echo "</li>";				
 	} else {
 		echo "<li class=\"xui\">";
 			echo "<span>".$key."</span>";
-			echo "<i class=\"material-icons\">highlight_off</i>";
+			echo "<i class=\"lucide-alert-octagon\"></i>";
 		echo "</li>";
 		$error = true;
     	};

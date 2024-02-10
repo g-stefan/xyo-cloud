@@ -6,13 +6,13 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$className = "lib_MaterialIcons";
+$className = "lib_LucideIconsFont";
 
-class lib_MaterialIcons extends xyo_Module {
+class lib_LucideIconsFont extends xyo_Module {
 	public function __construct(&$object, &$cloud) {
 		parent::__construct($object, $cloud);
-		if ($this->isBase("lib_MaterialIcons")) {
-			$this->setHtmlCss($this->site."lib/material-icons/material-icons.css");
+		if ($this->isBase("lib_LucideIconsFont")) {
+			$this->setHtmlCss($this->site."lib/lucide-icons-font/lucide-icons.min.css");
         	}
 	}
 }

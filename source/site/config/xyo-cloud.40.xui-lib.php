@@ -15,7 +15,7 @@ $this->setModule("lib",null,"lib-jquery");
 $this->setModule("lib",null,"lib-jquery-autocompleter");
 $this->setModule("lib",null,"lib-jquery-form");
 $this->setModule("lib",null,"lib-js-cookie");
-$this->setModule("lib",null,"lib-material-icons");
+$this->setModule("lib",null,"lib-lucide-icons-font");
 $this->setModule("lib",null,"lib-maximize-select2-height");
 $this->setModule("lib",null,"lib-md5");
 $this->setModule("lib",null,"lib-normalize");

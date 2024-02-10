@@ -143,22 +143,22 @@ $this->ecssBegin();
 <div class="xui _image">
 		<div class="cropit-preview"></div>
 		<div class="-form-image -div-1">
-			<i class="material-icons -form-image -icon-1">photo</i><input type="range" class="cropit-image-zoom-input"></input><i class="material-icons -form-image -icon-2">photo</i>
+			<i class="lucide-image -form-image -icon-1"></i><input type="range" class="cropit-image-zoom-input"></input><i class="lucide-image -form-image -icon-2"></i>
 		</div>
 		<div class="xui separator"></div>
 </div>
 <?php if(strlen($fileName)){
 	if(substr($fileName, 0, strlen("http")) === "http"){ ?>
-		<a href="<?php echo $fileName; ?>" target="_blank" class="xui _link button -icon -success -size-x32 -circle -transparent -effect-ripple -form-image -link"><i class="material-icons">photo</i></a>
+		<a href="<?php echo $fileName; ?>" target="_blank" class="xui _link button -icon -success -size-x32 -circle -transparent -effect-ripple -form-image -link"><i class="lucide-image"></i></a>
 <?php	}else{ ?>
-		<a href="<?php echo $this->site.$fileName; ?>" target="_blank" class="xui _link button -icon -success -size-x32 -circle -transparent -effect-ripple  -form-image -link"><i class="material-icons">photo</i></a>
+		<a href="<?php echo $this->site.$fileName; ?>" target="_blank" class="xui _link button -icon -success -size-x32 -circle -transparent -effect-ripple  -form-image -link"><i class="lucide-image"></i></a>
 <?php	}; ?>
 <?php }; ?>
-<div class="xui _delete button -icon -danger -size-x32 -circle -transparent -effect-ripple  -form-image -link" id="<?php echo $uidDelete; ?>"><i class="material-icons">delete</i></div>
+<div class="xui _delete button -icon -danger -size-x32 -circle -transparent -effect-ripple  -form-image -link" id="<?php echo $uidDelete; ?>"><i class="lucide-trash"></i></div>
 <div class="xui form-file">
 <input type="file" name="<?php $this->eElementName($element); ?>" id="<?php $this->eElementId($element); ?>" class="xui _file cropit-image-input" accept="image/*"></input>
-<label for="<?php $this->eElementId($element); ?>" class="xui button -icon-left -outline"><i class="material-icons">file_upload</i><span>Browse ...</span></label>
-<button type="button" class="xui button -icon -secondary -outline" id="<?php echo $uidClear; ?>"><i class="material-icons">close</i></button>
+<label for="<?php $this->eElementId($element); ?>" class="xui button -icon-left -outline"><i class="lucide-upload"></i><span>Browse ...</span></label>
+<button type="button" class="xui button -icon -secondary -outline" id="<?php echo $uidClear; ?>"><i class="lucide-x"></i></button>
 </div>
 </div>
 <input type="hidden"

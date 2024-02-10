@@ -27,8 +27,8 @@ $this->tableType = array(
 	"name" => array("cmd-edit"),
 	"default"=>array("radio",array(
 		"on"=>array(
-			0=>array("<i class=\"material-icons\">star_border</i>","toolbar"),
-			1=>array("<i class=\"material-icons\">star</i>","warning")
+			0=>array("<i class=\"lucide-circle\"></i>","toolbar"),
+			1=>array("<i class=\"lucide-check-circle\"></i>","primary")
 		)
 	)),
 	"enabled"=>array("toggle")

@@ -6,7 +6,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setApplicationIcon("<i class=\"material-icons\">lock</i>");
+$this->setApplicationIcon("<i class=\"lucide-lock\"></i>");
 
 $this->setApplicationDataSource("db.query.xyo_acl_module");
 $this->setPrimaryKey("id");

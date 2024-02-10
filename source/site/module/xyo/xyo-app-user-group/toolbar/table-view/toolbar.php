@@ -10,7 +10,7 @@ $this->toolbarPush();
 
 $this->setItem("user_group",
         "item-js",
-        "<i class=\"material-icons\">people</i>",
+        "<i class=\"lucide-users\"></i>",
         "user_group",
         "primary",
         "#",

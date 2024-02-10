@@ -8,7 +8,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 
 $this->setItem("backup",
 	"item-js",
-	"<i class=\"material-icons\">save_alt</i>",
+	"<i class=\"lucide-database-backup\"></i>",
 	"backup",
 	"primary",
 	"#",
@@ -20,7 +20,7 @@ if($this->isRequestCall()){
 
 	$this->setItem("done",
 		"item-js",
-		"<i class=\"material-icons\">done</i>",
+		"<i class=\"lucide-check\"></i>",
 		"done",
 		"info",
 		"#",

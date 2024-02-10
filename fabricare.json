@@ -6,12 +6,12 @@
 			{
 				"name" : "xyo-cloud",
 				"SPDX-License-Identifier": "MIT",
-				"previousVersion" : "4.8.0"
+				"previousVersion" : "4.8.1"
 			}
 		],
 		"releaseOutput" : true,
 		"vendor" : {
-			"xui" : "4.0.1"
+			"xui" : "5.0.0"
 		}
 	}
 }

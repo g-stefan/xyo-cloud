@@ -30,7 +30,7 @@ $uid = $this->getUID();
 		value="<?php $this->eElementValue($element, ""); ?>"
 		name="<?php $this->eElementName($element); ?>"
 		id="<?php $this->eElementId($element); ?>" ></input>
-	<button type="button" id="<?php echo $uid; ?>"><i class="material-icons">sync</i></button>
+	<button type="button" id="<?php echo $uid; ?>"><i class="lucide-refresh-cw"></i></button>
 	</div>
 </div>
 <?php

@@ -9,7 +9,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 $element = $this->getArgument("element");
 $isRequired = $this->getArgument("required", false);
 $maxlength= 1*$this->getArgument("maxlength");
-$icon = $this->getArgument("icon","<i class=\"material-icons\">radio_button_unchecked</i>");
+$icon = $this->getArgument("icon","<i class=\"lucide-circle\"></i>");
 $readonly = $this->getArgument("readonly","");
 
 if($maxlength==0){

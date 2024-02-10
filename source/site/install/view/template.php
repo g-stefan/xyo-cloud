@@ -21,7 +21,7 @@ $listGroup = array(
 foreach ($listGroup as $key => &$value) {
 	if ($value["key"] === $view) {
 		$value["selected"] = true;
-		$value["icon-right"] = "<i class=\"material-icons\">chevron_right</i>";
+		$value["icon-right"] = "<i class=\"lucide-chevron-right\"></i>";
 	};
 };  
 

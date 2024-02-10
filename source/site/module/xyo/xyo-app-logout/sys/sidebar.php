@@ -6,4 +6,4 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->addItem($menu,"item", "<i class=\"material-icons\">lock</i>","application",$module,array("stamp"=>md5(time().rand())));
+$this->addItem($menu,"item", "<i class=\"lucide-log-out\"></i>","application",$module,array("stamp"=>md5(time().rand())));

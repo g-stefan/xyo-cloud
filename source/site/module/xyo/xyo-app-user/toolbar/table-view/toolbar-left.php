@@ -8,7 +8,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 
 $this->setItem("menu",
         "application-menu",
-        "<i class=\"material-icons\">more_vert</i>",
+        "<i class=\"lucide-more-vertical\"></i>",
         "menu",
         "",
 	"",

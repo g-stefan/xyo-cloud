@@ -72,7 +72,7 @@ echo "<a id=\"$uid\" class=\"xui action -effect-ripple".($active?" -selected":""
 	echo $icon;
 	echo "<span>".$text."</span>";
 	if($isPopup){
-		echo "<i class=\"material-icons\">chevron_right</i>";
+		echo "<i class=\"lucide-chevron-right\"></i>";
 	};
 echo "</a>";
 if(strlen($onclick)>0){

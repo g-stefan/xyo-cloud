@@ -92,9 +92,9 @@ Files: output/site/lib/js-cookie/*
 Copyright: Copyright (c) 2018 Copyright 2018 Klaus Hartl, Fagner Brack, GitHub Contributors
 License: MIT
 
-Files: output/site/lib/material-icons/*
-Copyright: Copyright (c) Google
-License: Apache-2.0
+Files: output/site/lib/lucide-icons-font/*
+Copyright: Copyright (c) 2022 Lucide Contributors
+License: ISC
 
 Files: output/site/lib/maximize-select2-height/*
 Copyright: (c) Panorama Education 2020

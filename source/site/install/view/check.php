@@ -53,7 +53,7 @@ if($allOk){
 		                        echo $key;
 				echo "</div>";			
 				echo "<div class=\"xui list-group_item_icon-right ".$uid."\">";
-					echo "<i class=\"material-icons\">highlight_off</i>";
+					echo "<i class=\"lucide-alert-octagon\"></i>";
 	                        echo "</div>";
                         echo "</div>";
 		};

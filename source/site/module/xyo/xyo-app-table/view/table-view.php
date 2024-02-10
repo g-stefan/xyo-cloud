@@ -94,14 +94,14 @@ if($this->tableUseApplicationSearch) {
 			<div class="xui form-input-group xyo-app-table -x-1 <?php if($this->tableUseApplicationSearch){echo " -x-2";}; ?>">
 				<input type="text" name="<?php echo $this->instanceV; ?>search" value="<?php echo $search_value; ?>" size="32" placeholder="<?php $this->eLanguage("search"); ?>" id="<?php echo $this->instanceV; ?>search" class="xyo-app-table_search -inline-form"></input>
 				<?php $uid=$this->getUID();?>
-				<button id="<?php echo $uid; ?>" type="submit" name="<?php echo $this->instanceV; ?>submit_search"><i class="material-icons">search</i></button>
+				<button id="<?php echo $uid; ?>" type="submit" name="<?php echo $this->instanceV; ?>submit_search"><i class="lucide-search"></i></button>
 				<?php
 				$this->ejsBegin();
 				echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doUpdate(\"".$this->instance."\",\"&".$this->instanceV."submit_search=1\");return false;};";
 				$this->ejsEnd();
 				?>
 				<?php $uid=$this->getUID();?>
-				<button id="<?php echo $uid; ?>" type="button" name="<?php echo $this->instanceV; ?>search_reset"><i class="material-icons">close</i></button>
+				<button id="<?php echo $uid; ?>" type="button" name="<?php echo $this->instanceV; ?>search_reset"><i class="lucide-x"></i></button>
 				<?php
 				$this->ejsBegin();
 				echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.resetSearch(\"".$this->instance."\",this,\"".$this->instanceV."search\");};";
@@ -116,14 +116,14 @@ if($this->tableUseApplicationSearch) {
 						<div class="xui form-input-group xyo-app-table <?php if($this->tableUseApplicationSearch){echo " -x-2";}; ?>">
 							<input type="text" name="<?php echo $this->instanceV; ?>search" value="<?php echo $search_value; ?>" size="32" placeholder="<?php $this->eLanguage("search"); ?>" id="<?php echo $this->instanceV; ?>search" class="xyo-app-table_search"></input>
 							<?php $uid=$this->getUID();?>
-							<button id="<?php echo $uid; ?>" type="submit" name="<?php echo $this->instanceV; ?>submit_search"><i class="material-icons">search</i></button>
+							<button id="<?php echo $uid; ?>" type="submit" name="<?php echo $this->instanceV; ?>submit_search"><i class="lucide-search"></i></button>
 							<?php
 							$this->ejsBegin();
 							echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doUpdate(\"".$this->instance."\",\"&".$this->instanceV."submit_search=1\");return false;};";
 							$this->ejsEnd();
 							?>
 							<?php $uid=$this->getUID();?>
-							<button id="<?php echo $uid; ?>" type="button" name="<?php echo $this->instanceV; ?>search_reset"><i class="material-icons">close</i></button>
+							<button id="<?php echo $uid; ?>" type="button" name="<?php echo $this->instanceV; ?>search_reset"><i class="lucide-x"></i></button>
 							<?php
 							$this->ejsBegin();
 							echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.resetSearch(\"".$this->instance."\",this,\"".$this->instanceV."search\");};";
@@ -137,7 +137,7 @@ if($this->tableUseApplicationSearch) {
 						<div class="xui -right">
 						<?php $uid=$this->getUID();?>
 						<div id="<?php echo $uid; ?>" class="xui button -small -transparent -effect-ripple -info -icon-left -toolbar">
-							<i class="material-icons">filter_list</i>				
+							<i class="lucide-list-filter"></i>				
 							<span><?php $this->eLanguage("label.filter"); ?></span>
 						</div>
 						<?php
@@ -200,14 +200,14 @@ if($this->tableUseApplicationSearch) {
 		?>
 
 		<?php $uid=$this->getUID();?>
-		<div id="<?php echo $uid; ?>" class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7"><i class="material-icons">first_page</i></div>
+		<div id="<?php echo $uid; ?>" class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7"><i class="lucide-chevron-first"></i></div>
 		<?php
 		$this->ejsBegin();
 		echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doUpdate(\"".$this->instance."\",\"&".$this->instanceV."go_first=1\");};";
 		$this->ejsEnd();
 		?>
 		<?php $uid=$this->getUID();?>
-		<div id="<?php echo $uid; ?>" class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7"><i class="material-icons">chevron_left</i></div>
+		<div id="<?php echo $uid; ?>" class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7"><i class="lucide-chevron-left"></i></div>
 		<?php
 		$this->ejsBegin();
 		echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doUpdate(\"".$this->instance."\",\"&".$this->instanceV."go_previous=1\");return false;};";
@@ -215,14 +215,14 @@ if($this->tableUseApplicationSearch) {
 		?>
 		<input class="xui form-text <?php echo $cssClass; ?> -left xyo-app-table -x-8 <?php echo ($this->isEmbedded)?" -x-x48":" -x-x64"; ?>" type="text" name="<?php echo $this->instanceV; ?>page" value="<?php echo $page; ?>" size="4" id="<?php echo $this->instanceV; ?>page"></input>
 		<?php $uid=$this->getUID();?>
-		<div id="<?php echo $uid; ?>" class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7"><i class="material-icons">chevron_right</i></div>
+		<div id="<?php echo $uid; ?>" class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7"><i class="lucide-chevron-right"></i></div>
 		<?php
 		$this->ejsBegin();
 		echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doUpdate(\"".$this->instance."\",\"&".$this->instanceV."go_next=1\");return false;};";
 		$this->ejsEnd();
 		?>
 		<?php $uid=$this->getUID();?>
-		<div id="<?php echo $uid; ?>" class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7"><i class="material-icons">last_page</i></div>
+		<div id="<?php echo $uid; ?>" class="xui button -transparent -effect-ripple -secondary -icon -size-xy30<?php echo $buttonClass; ?> -left xyo-app-table -x-7"><i class="lucide-chevron-last"></i></div>
 		<?php
 		$this->ejsBegin();
 		echo "document.getElementById(\"".$uid."\").onclick=function(){XYO.Table.doUpdate(\"".$this->instance."\",\"&".$this->instanceV."go_last=1\");return false;};";
@@ -453,7 +453,7 @@ if($this->dialogFilter_){
 
 $this->generateComponent($this->dialogComponent["delete"], array(
 	"id" => $this->instanceV."xyo-app-table-modal-delete",
-	"title-text" => "<span class=\"xui -fg-danger-2 xyo-app-table -x-13\"><i class=\"material-icons-outlined xyo-app-table -x-14\">error_outline</i>&nbsp;".$this->getFromLanguage("form.title_delete")."</span>",
+	"title-text" => "<span class=\"xui -fg-danger-2 xyo-app-table -x-13\"><i class=\"lucide-x xyo-app-table -x-14\"></i>&nbsp;".$this->getFromLanguage("form.title_delete")."</span>",
 	"box" => "1x1",
 	"button" => "label.button_delete",
 	"buttonType" => "danger",

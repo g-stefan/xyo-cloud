@@ -22,8 +22,8 @@ if($isAdministrator) {
 	$this->generateComponent("xui.form-text", array("element" => "name","required"=>true));
 	$this->generateComponent("xui.form-username", array("element" =>"username","autocomplete"=>"off","required"=>true));
 } else{ 
-	$this->generateComponent("xui.form-text-icon-right", array("element" => "name", "readonly" => true, "icon"=>"<i class=\"material-icons\">edit_off</i>"));
-	$this->generateComponent("xui.form-text-icon-right", array("element" => "username", "readonly" => true, "icon"=>"<i class=\"material-icons\">edit_off</i>"));
+	$this->generateComponent("xui.form-text-icon-right", array("element" => "name", "readonly" => true, "icon"=>"<i class=\"lucide-shield\"></i>"));
+	$this->generateComponent("xui.form-text-icon-right", array("element" => "username", "readonly" => true, "icon"=>"<i class=\"lucide-shield\"></i>"));
 };
 
 $this->generateComponent("xui.form-password", array("element" => "password1","autocomplete"=>"new-password"));

@@ -33,8 +33,8 @@ $this->tableType=array(
 	"enabled"=>array("toggle"),	
 	"invisible"=>array("toggle",array(
 		"on"=>array(
-			0=>array("<i class=\"material-icons\">add</i>","toolbar"),
-			1=>array("<i class=\"material-icons\">flag</i>","warning")
+			0=>array("<i class=\"lucide-eye\"></i>","toolbar"),
+			1=>array("<i class=\"lucide-eye-off\"></i>","warning")
 		)
 	)),	
 	"logged_in"=>array("toggle"),

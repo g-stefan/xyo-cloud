@@ -9,7 +9,7 @@ defined("XYO_CLOUD") or die("Access is denied");
 if($this->isRequestCall()){
 	$this->setItem("done",
         	"item-js",
-	        "<i class=\"material-icons\">done</i>",
+	        "<i class=\"lucide-check\"></i>",
         	"done",
 	        "info",
         	"#",
@@ -18,7 +18,7 @@ if($this->isRequestCall()){
 }else{
 	$this->setItem("done",
 	        "item-js",
-        	"<i class=\"material-icons\">done</i>",
+        	"<i class=\"lucide-check\"></i>",
 	        "done",
         	"info",
 	        "#",

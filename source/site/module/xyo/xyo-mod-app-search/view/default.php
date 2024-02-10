@@ -15,7 +15,7 @@ if($this->cloud->hasApplication()) {
 					$this->eFormCsrfToken();
 					echo "<div class=\"xui form-text -icon-right\">";
 					echo "<input type=\"text\" name=\"search\" value=\"\" size=\"32\" placeholder=\"Search\" id=\"application_search\"></input>";
-					echo "<i class=\"material-icons\">search</i>";
+					echo "<i class=\"lucide-search\"></i>";
 					echo "</div>";
 				echo "</form>";
 			echo "</div>";

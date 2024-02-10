@@ -6,7 +6,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setApplicationIcon("<i class=\"material-icons\">person</i>");
+$this->setApplicationIcon("<i class=\"lucide-user\"></i>");
 $this->setApplicationDataSource("db.table.xyo_user");
 $this->setPrimaryKey("id");
 

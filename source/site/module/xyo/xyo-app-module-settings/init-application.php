@@ -6,7 +6,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setApplicationIcon("<i class=\"material-icons\">list</i>");
+$this->setApplicationIcon("<i class=\"lucide-list\"></i>");
 $this->setApplicationDataSource("db.table.xyo_module_settings");
 
 $this->setDefaultAction($this->getRequest("action", "form-edit"));

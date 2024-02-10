@@ -14,7 +14,7 @@ $this->toolbarPush();
 
 $this->setItem("module_settings",
         "item-js",
-        "<i class=\"material-icons\">list</i>",
+        "<i class=\"lucide-list\"></i>",
         "module_settings",
         "primary",
         "#",
@@ -23,7 +23,7 @@ $this->setItem("module_settings",
 
 $this->setItem("module_acl",
         "item-js",
-        "<i class=\"material-icons\">lock</i>",
+        "<i class=\"lucide-lock\"></i>",
         "module_acl",
         "primary",
         "#",

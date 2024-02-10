@@ -24,6 +24,6 @@ if($maxlength==0){
 	name="<?php $this->eElementName($element); ?>"
 	value="<?php $this->eElementValue($element, ""); ?>"
 	id="<?php $this->eElementId($element); ?>" ></input>
-<i class="material-icons">email</i>
+<i class="lucide-mail"></i>
 </div>
 <br>

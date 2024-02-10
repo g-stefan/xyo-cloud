@@ -19,6 +19,6 @@ $this->setDefaultApplication("xyo-app-dashboard");
 //
 //
 //
-$this->setReferenceLink($module, "lib-material-icons");
+$this->setReferenceLink($module, "lib-lucide-icons-font");
 $this->setReferenceLink($module, "lib-overlayscrollbars");
 $this->setReferenceLink($module, "lib-xui");

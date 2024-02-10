@@ -101,7 +101,7 @@ if(strlen($userImageThumbnail)>0) {
 				<div class="xui app-bar">
 				<?php $uid=$this->getUID();?>
 					<div  id="<?php echo $uid; ?>" class="xui button -icon -transparent -left -effect-ripple -toolbar">
-						<i class="material-icons">menu</i>
+						<i class="lucide-menu"></i>
 					</div>
 					<?php
 					$this->ejsBegin();
@@ -129,7 +129,7 @@ if(strlen($userImageThumbnail)>0) {
 						</div>
 					</div>
 					<div class="xui button -icon -size-x32 -circle -transparent -effect-ripple -toolbar" id="popup-menu-user-action">
-						<i class="material-icons">expand_more</i>
+						<i class="lucide-chevron-down"></i>
 					</div>
 					<ul class="xui menu -popup" id="popup-menu-user">
 						<?php $xuiDashboard->generateUserMenu($userMenu->getMenu()); ?>

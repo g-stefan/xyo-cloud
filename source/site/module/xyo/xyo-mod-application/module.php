@@ -51,7 +51,7 @@ class xyo_mod_Application extends xyo_Module {
 			$this->primaryKey = "_unknown_";
 			$this->applicationDataSource=null;
 
-		        $this->applicationIcon = "<i class=\"material-icons\">extension</i>";
+		        $this->applicationIcon = "<i class=\"lucide-extension\"></i>";
 			$this->applicationTitle = null;
 			
 			$this->isDialog = false;

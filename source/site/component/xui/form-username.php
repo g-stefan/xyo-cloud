@@ -46,6 +46,6 @@ if(($readonly == 1) ||  ($readonly == "true")){
 	name="<?php $this->eElementName($element); ?>"
 	value="<?php $this->eElementValue($element, ""); ?>"
 	id="<?php $this->eElementId($element); ?>" ></input>
-<i class="material-icons">person</i>
+<i class="lucide-user"></i>
 </div>
 <br>

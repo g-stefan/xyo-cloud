@@ -6,7 +6,7 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setApplicationIcon("<i class=\"material-icons\">storage</i>");
+$this->setApplicationIcon("<i class=\"lucide-database\"></i>");
 $this->setDefaultAction($this->getRequest("action", "default"));
 
 $this->requireComponent(array(

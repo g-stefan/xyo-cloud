@@ -14,7 +14,7 @@ $this->toolbarPush();
 $this->setItem(
 	"backup",
 	"item-js",
-	"<i class=\"material-icons\">storage</i>",
+	"<i class=\"lucide-database\"></i>",
 	"backup",
 	"primary",
 	"#",

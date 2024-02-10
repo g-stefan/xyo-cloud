@@ -11,7 +11,7 @@ if($this->isRequestCall()){
 
 	$this->setItem("done",
 		"item-js",
-		"<i class=\"material-icons\">done</i>",
+		"<i class=\"lucide-check\"></i>",
 		"done",
 		"info",
 		"#",

@@ -6,5 +6,5 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->addItem($menu,"item", "<i class=\"material-icons\">people</i>","application",$module,null);
+$this->addItem($menu,"item", "<i class=\"lucide-users\"></i>","application",$module,null);
                              

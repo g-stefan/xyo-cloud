@@ -6,9 +6,9 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-$this->setItem("delete", "item-js.important", "<i class=\"material-icons\">delete</i>", "delete", "danger".($this->isEmbedded?" -only-icon":""), "#", $this->instanceV."cmdDialogDelete()");
-$this->setItem("edit", "item-js.important", "<i class=\"material-icons\">create</i>", "edit", "success".($this->isEmbedded?" -only-icon":""), "#", $this->instanceV."cmdDialogEdit()");
-$this->setItem("new", "item-js.important", "<i class=\"material-icons\">add</i>", "new", "primary", "#", $this->instanceV."cmdDialogNew()");
+$this->setItem("delete", "item-js.important", "<i class=\"lucide-x\"></i>", "delete", "danger".($this->isEmbedded?" -only-icon":""), "#", $this->instanceV."cmdDialogDelete()");
+$this->setItem("edit", "item-js.important", "<i class=\"lucide-pen\"></i>", "edit", "success".($this->isEmbedded?" -only-icon":""), "#", $this->instanceV."cmdDialogEdit()");
+$this->setItem("new", "item-js.important", "<i class=\"lucide-plus\"></i>", "new", "primary", "#", $this->instanceV."cmdDialogNew()");
 
 $filterToolbarButton=$this->getParameter("filter_toolbar_button",false);
 if($filterToolbarButton){
@@ -17,7 +17,7 @@ if($filterToolbarButton){
 
 	$this->setItem("filter",
 	        "item-js.important",
-	        "<i class=\"material-icons\">filter_list</i>",
+	        "<i class=\"lucide-list-filter\"></i>",
 	        "filter",
         	"info".($this->isEmbedded?" -only-icon":""),
 	        "#",

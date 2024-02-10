@@ -84,12 +84,12 @@ if ($modSetup && $dsModule) {
 					if ($modSetup->runModuleUpdate($ret["module"])) {
 						echo "<li>";
 							echo "<span>".$ret["module"]."</span>";
-							echo "<i class=\"material-icons\">done</i>";
+							echo "<i class=\"lucide-check\"></i>";
 						echo "</li>";
 					} else {
 						echo "<li>";
 							echo "<span>".$ret["module"]."</span>";
-							echo "<i class=\"material-icons\">highlight_off</i>";
+							echo "<i class=\"lucide-alert-octagon\"></i>";
 						echo "</li>";
 						$error = true;
 					};
@@ -97,12 +97,12 @@ if ($modSetup && $dsModule) {
 					if ($modSetup->runModuleInstall($ret["module"])) {
 						echo "<li>";
 							echo "<span>".$ret["module"]."</span>";
-							echo "<i class=\"material-icons\">done</i>";
+							echo "<i class=\"lucide-check\"></i>";
 						echo "</li>";
 					} else {
 						echo "<li>";
 							echo "<span>".$ret["module"]."</span>";
-							echo "<i class=\"material-icons\">highlight_off</i>";
+							echo "<i class=\"lucide-alert-octagon\"></i>";
 						echo "</li>";
 						$error = true;
 					};
@@ -111,7 +111,7 @@ if ($modSetup && $dsModule) {
 		} else {
 			echo "<li>";
 				echo "<span>".$ret["module"]."</span>";
-				echo "<i class=\"material-icons\">highlight_off</i>";
+				echo "<i class=\"lucide-alert-octagon\"></i>";
 			echo "</li>";
 			$error = true;
         	};
