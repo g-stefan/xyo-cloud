@@ -15,7 +15,7 @@ class xui_FormImage extends xyo_Module {
 	}
 
 	public function getImageInfo($value){
-		if(strlen($value)==0){
+		if(is_null($value) || (strlen($value)==0)){
 			return array();
 		};
 

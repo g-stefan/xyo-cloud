@@ -43,7 +43,7 @@ $this->setHtmlJsSourceOrAjax(
 		"XUI.Modal.activate(\"".$id."\");".
 		"\$.post(\"".$this->requestUriThis()."\", jsAction)".
   		".done(function(response){".
-			"XUI.Html.update(\"".$id."_content\",response,null,\"".$this->getCSPNonce()."\");".
+			"XUI.HTML.update(\"".$id."_content\",response,\"".$this->getCSPNonce()."\");".
 		"});".
 	"};".
 	"\r\n"

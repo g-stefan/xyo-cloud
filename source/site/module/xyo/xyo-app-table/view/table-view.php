@@ -545,7 +545,7 @@ if($this->isInlineForm){
 	$this->setHtmlJsSourceOrAjax("window.".$this->instanceV."doCommand=function(action){".
 	"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-form-command\", ajax: 1, csrf_token: window.csrfToken, csp_nonce: \"".$this->getCSPNonce()."\" })".
 	".done(function(response){".		
-		"XUI.Script.run(XUI.Html.extract(response).script,\"".$this->getCSPNonce()."\");".
+		"XUI.Script.run(XUI.HTML.extract(response).script,\"".$this->getCSPNonce()."\");".
 		"if(".
 		"action==\"form-new-apply\"||".
 		"action==\"form-edit-apply\"||".
@@ -560,7 +560,7 @@ if($this->isInlineForm){
 			"document.getElementById(\"xyo-application-title\").innerHTML=\"".$this->getApplicationTitle()."\";".
 			"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"table-inline-empty\", ajax: 1, csrf_token: window.csrfToken, csp_nonce: \"".$this->getCSPNonce()."\" })".
 	  		".done(function(response){".				
-				"XUI.Html.update(\"xyo-app-table-inline_content\",response,null,\"".$this->getCSPNonce()."\");".
+				"XUI.HTML.update(\"xyo-app-table-inline_content\",response,\"".$this->getCSPNonce()."\");".
 			"});".
 			"return false;".
 		"};".

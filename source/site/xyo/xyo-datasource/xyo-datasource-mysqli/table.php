@@ -951,7 +951,7 @@ class xyo_datasource_mysqli_Table extends xyo_Config {
 			};
 
 			if (array_key_exists($key_, $this->fieldDefaultValue_)) {
-				if (strcmp($this->fieldDefaultValue_[$key_], "DEFAULT") == 0) {
+				if (is_null($this->fieldDefaultValue_[$key_]) || (strcmp($this->fieldDefaultValue_[$key_], "DEFAULT") == 0)) {
 
 				} else if (is_int($this->fieldDefaultValue_[$key_])) {
 					$query.=" DEFAULT '" . $this->fieldDefaultValue_[$key_] . "'";

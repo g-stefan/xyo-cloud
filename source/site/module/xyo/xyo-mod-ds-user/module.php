@@ -400,7 +400,7 @@ class xyo_mod_ds_User extends xyo_Module {
 				// key is always system authorized => password = sha512[passwordHash]
 				$loginSalt = hash("sha512",$this->info->rnd.".".$this->cloud->get("user_login_salt", "unknown"),false);
 				$this->info->key = $this->x2combo(hash("sha512",strtolower($this->dsUser->username).".".$this->info->rnd.".".$loginSalt,false),$checkPassword2Y,$this->info->rnd);
-				if(strlen($this->dsUser->session)==0){
+				if(is_null($this->dsUser->session) || (strlen($this->dsUser->session)==0)){
 					$this->dsUser->session=hash("sha512",$this->info->key,false);
 				};
 				$this->info->session = $this->dsUser->session;
@@ -662,20 +662,20 @@ class xyo_mod_ds_User extends xyo_Module {
 
 	function makeCookie() {
 		if ($this->authorized) {
-			setcookie("user_id", $this->info->id, 0, $this->siteBase, null);
-			setcookie("user_session", $this->info->session, 0, $this->siteBase, null);
-			setcookie("user_rnd", $this->info->rnd, 0, $this->siteBase, null);
-			setcookie("user_key", $this->info->key, 0, $this->siteBase, null);
+			setcookie("user_id", $this->info->id, 0, $this->siteBase, "");
+			setcookie("user_session", $this->info->session, 0, $this->siteBase, "");
+			setcookie("user_rnd", $this->info->rnd, 0, $this->siteBase, "");
+			setcookie("user_key", $this->info->key, 0, $this->siteBase, "");
 			return true;
 		};
 		return false;
 	}
 
 	function makeResetCookie() {
-		setcookie("user_id", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);
-		setcookie("user_session", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);
-		setcookie("user_rnd", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);
-		setcookie("user_key", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, null);		
+		setcookie("user_id", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, "");
+		setcookie("user_session", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, "");
+		setcookie("user_rnd", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, "");
+		setcookie("user_key", "", mktime(0, 0, 1, 1, 1, 1970), $this->siteBase, "");		
 	}
 
 	function generateAutoCookie() {

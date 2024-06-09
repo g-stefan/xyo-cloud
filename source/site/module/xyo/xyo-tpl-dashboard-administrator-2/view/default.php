@@ -33,7 +33,7 @@ if($dsUser->load(0,1)){
 	$userImage=$dsUser->picture;
 	$userName=$modUser->info->name;
 	$userDescription=$dsUser->description;
-	if(strlen($userDescription)==0){
+	if(is_null($userDescription)||(strlen($userDescription)==0)){
 		$userDescription="User";
 	};
 };

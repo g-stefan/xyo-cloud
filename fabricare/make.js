@@ -31,7 +31,7 @@ Shell.copyFile("temp/xui/js/xui.complete.min.js","output/site/lib/xui/xui.comple
 Shell.copyFile("temp/xui/css/xui-animated-dna.min.css","output/site/lib/xui/xui-animated-dna.min.css");
 Shell.copyFile("temp/xui/css/xui-dashboard-theme-2.min.css","output/site/lib/xui/xui-dashboard-theme-2.min.css");
 Shell.copyFile("temp/xui/css/xui-dashboard-theme-3.min.css","output/site/lib/xui/xui-dashboard-theme-3.min.css");
-Shell.copyFile("temp/xui/xui-version-lib.txt output/site/xui-version-lib.txt");
+Shell.copyFile("temp/xui/xui.version.vendor.txt output/site/xui.version.vendor.txt");
 
 Shell.removeDirRecursivelyForce("temp/xui");
 

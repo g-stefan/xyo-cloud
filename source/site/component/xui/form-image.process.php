@@ -113,7 +113,7 @@ $this->setElementValue($element."_view_x",number_format(1*$this->getElementValue
 $this->setElementValue($element."_view_y",number_format(1*$this->getElementValue($element."_view_y",240),0,".",""));
 
 if(!$isDeleted){
-	if(strlen($fileName)>0){
+	if(!(is_null($fileName) || (strlen($fileName)==0))){
 		$value="\"".$fileName."\",";
 		$value.=$this->getElementValue($element."_offset_x").",";
 		$value.=$this->getElementValue($element."_offset_y").",";

@@ -60,7 +60,7 @@ echo "<td class=\"xui xyo-app-user -z-3\">";
 	$this->ejsEnd();
 	echo "<br />";
 	echo "<span class=\"xui -fg-aluminium-5 xyo-app-user -z-4\">";
-		if(strlen($this->viewRow["description"])==0){
+		if(is_null($this->viewRow["description"])||(strlen($this->viewRow["description"])==0)){
 			echo "User";
 		} else {
 			echo $this->viewRow["description"];

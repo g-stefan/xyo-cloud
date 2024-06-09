@@ -15,5 +15,5 @@ echo	"var loader=\"<div class=\\\"xui xyo-app-table -x-inline-toolbar-1\\\"><div
 	"\$(\"#".$toolbar_id."\").html(loader);".
 	"\$.post(\"".$this->requestUriThis()."\", { ".$this->instanceV."action: \"".$this->getArgument("action","table-inline-view-toolbar")."\", ajax: 1, csrf_token: window.csrfToken, csp_nonce: \"".$this->getCSPNonce()."\" })".
   	".done(function(response){".		
-		"XUI.Html.update(\"".$toolbar_id."\",response,null,\"".$this->getCSPNonce()."\");".
+		"XUI.HTML.update(\"".$toolbar_id."\",response,\"".$this->getCSPNonce()."\");".
 	"});";

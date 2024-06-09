@@ -273,9 +273,16 @@ class xyo_Cloud extends xyo_Config {
 			};
 		};
 
+		if(is_null($moduleParent)) {
+			$moduleParent = "";
+		};
+		if(is_null($path)) {
+			$path = "";
+		};
+
 		if (strlen($moduleParent) > 0) {
 			if (array_key_exists($moduleParent, $this->moduleList)) {
-
+			
 			} else {
 				$check = &$this->getModuleObject($moduleParent);
 				if (!$check) {
@@ -577,14 +584,14 @@ class xyo_Cloud extends xyo_Config {
 	}
 
 	public function getApplication() {
-		if(strlen($this->application)>0){
+		if($this->hasApplication()){
 			return $this->application;		
 		};
 		return $this->defaultApplication;
 	}
 
 	public function hasApplication() {
-		return strlen($this->application)>0;
+		return !(is_null($this->application) || strlen($this->application)==0);
 	}
 
 	public function hasApplicationOrDefault() {
@@ -897,6 +904,9 @@ class xyo_Cloud extends xyo_Config {
 					foreach ($parameters as $key => $value) {
 						if ($key === "run") {
 							continue;
+						};
+						if (is_null($value)) {
+							$value="";
 						};
 						if ($first) {
 							$retV.="&";
@@ -1550,7 +1560,7 @@ class xyo_Cloud extends xyo_Config {
 	}
 
 	public function setTemplate($module) {
-		if(strlen($this->template)==0){
+		if(!$this->hasTemplate()){
 			$this->template = $module;
 			$this->templatePath = $this->getModulePath($module);
 		};
@@ -1570,7 +1580,7 @@ class xyo_Cloud extends xyo_Config {
 	}
 
 	public function hasTemplate() {
-		return strlen($this->template)>0;
+		return !(is_null($this->template) || (strlen($this->template)==0));
 	}
 
 	//

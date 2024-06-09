@@ -46,7 +46,7 @@ if(strlen($jsButtonClick)==0){
 	$this->setFormName($originalFormName.$formSuffix);
 	$jsButtonClick="\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", data: {csrf_token:window.csrfToken, csp_nonce: \"".$this->getCSPNonce()."\"}, success: function(response){".
 				"setTimeout(function(){".				
-				"XUI.Html.update(\"".$id."_content\",response,null,\"".$this->getCSPNonce()."\");".
+				"XUI.HTML.update(\"".$id."_content\",response,\"".$this->getCSPNonce()."\");".
 				"},100)".
 			"}});".
 			"\$(\"#".$this->getFormName()."\").submit();".
@@ -93,7 +93,7 @@ $this->setHtmlJsSourceOrAjax(
 				$jsButtonClick.
 			"});".
 			(($hasCancel)?"\$(\"#".$id."_cancel\").off(\"click\").on(\"click\",function(){".$jsButtonCancel."});":"").
-			"XUI.Html.update(\"".$id."_content\",response,null,\"".$this->getCSPNonce()."\");".
+			"XUI.HTML.update(\"".$id."_content\",response,\"".$this->getCSPNonce()."\");".
 		"});".
 	"};".
 	"\r\n"

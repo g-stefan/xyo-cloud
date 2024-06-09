@@ -375,7 +375,11 @@ class xyo_Module extends xyo_Config {
 	}
 
 	public function eElementValue($name, $default=null) {
-		echo htmlspecialchars($this->getElementValue($name, $default));
+		$value=$this->getElementValue($name, $default);
+		if(is_null($value)) {
+			$value="";
+		};
+		echo htmlspecialchars($value);
 	}
 
 	public function setElementDefaultValue($name, $default) {
@@ -542,6 +546,9 @@ class xyo_Module extends xyo_Config {
 
 	public function eFormBuildRequest($requestDirect) {
 		foreach ($requestDirect as $key => $value) {
+			if(is_null($value)) {
+				$value = "";
+			};
 			echo "<input type=\"hidden\" name=\"" . htmlspecialchars($key) . "\" value=\"" . htmlspecialchars($value) . "\">";
 		}
 	}

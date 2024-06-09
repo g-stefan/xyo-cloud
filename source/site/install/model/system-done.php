@@ -46,7 +46,9 @@ if ($fileHandle) {
 		$keyDetails = openssl_pkey_get_details($key);
 		$keyPublic = $keyDetails["key"];
  
-		openssl_pkey_free($key);
+		if (PHP_VERSION_ID < 80000) {
+			openssl_pkey_free($key);
+		};
 
 		fwrite($fileHandle, "\$this->set(\"crypt_rpc_private_key\",\"" . $keyPrivate . "\");\r\n");
 		fwrite($fileHandle, "\$this->set(\"crypt_rpc_public_key\",\"" . $keyPublic . "\");\r\n");

@@ -38,7 +38,7 @@ if(strlen($jsButtonClick)==0){
 	$jsButtonClick=	"var loader=\"<div class=\\\"xui -com-inline -loader\\\"><div class=\\\"xui center-xy -com-inline -div-1\\\"><div class=\\\"xui animated -loader\\\"></div></div></div>\";".
 			"\$(\"#".$this->getFormName()."\").ajaxForm({url: \"".$this->cloud->requestUriModule($this->name)."\", type: \"post\", data: {csrf_token:window.csrfToke, csp_nonce: \"".$this->getCSPNonce()."\"}, success: function(response){".
 				"setTimeout(function(){".				
-				"XUI.Html.update(\"".$id."_content\",response,null,\"".$this->getCSPNonce()."\");".
+				"XUI.HTML.update(\"".$id."_content\",response,\"".$this->getCSPNonce()."\");".
 				"},100)".
 			"}});".
 			"\$(\"#".$this->getFormName()."\").submit();".
@@ -61,7 +61,7 @@ $this->setHtmlJsSourceOrAjax(
 		"\$(\"#".$id."\").show();".
 		"\$.post(\"".$this->requestUriThis()."\", jsAction)".
   		".done(function(response){".			
-			"XUI.Html.update(\"".$id."_content\",response,null,\"".$this->getCSPNonce()."\");".
+			"XUI.HTML.update(\"".$id."_content\",response,\"".$this->getCSPNonce()."\");".
 		"});".
 	"};".
 	"\r\n".

@@ -43,7 +43,11 @@ if(strlen($search_value)==0){
 $select_value = array();
 foreach ($this->tableSelect as $key => $value) {
 	if ($value) {
-		$select_value[$key] = trim($this->getRequestInstance("view_select_" . $key, null));
+		$selectValue = $this->getRequestInstance("view_select_" . $key, null);
+		if(!is_null($selectValue)) {
+			$selectValue=trim($selectValue);
+		};
+		$select_value[$key] = $selectValue;
 		$this->unsetKeepRequestInstance("view_select_" . $key);
 		$this->setKeepRequestInstance("edit_select_" . $key,$select_value[$key]);
 	}else{
@@ -130,7 +134,7 @@ if ($this->ds) {
 				};
 				continue;
 			}
-			if (strlen($select_value[$key])) {
+			if (!(is_null($select_value[$key]) || (strlen($select_value[$key])==0))) {
 				if (!($select_value[$key] === "*")) {
 					$this->ds->$key = $select_value[$key];
 				};

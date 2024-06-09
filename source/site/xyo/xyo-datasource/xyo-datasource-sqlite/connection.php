@@ -207,7 +207,7 @@ class xyo_datasource_sqlite_Connection {
 				return "NULL";
 			};
 			if ($value_ == "NOW") {
-				return "TIME('NOW','localtime')";
+				return "DATE('NOW','localtime')";
 			};
 			return "'" . $this->safeValue($value_) . "'";
 		} else if ($type_ == "time") {
@@ -215,7 +215,7 @@ class xyo_datasource_sqlite_Connection {
 				return "NULL";
 			};
 			if ($value_ == "NOW") {
-				return "DATE('NOW','localtime')";
+				return "TIME('NOW','localtime')";
 			};
 			return "'" . $this->safeValue($value_) . "'";
 		} else if ($type_ == "datetime") {

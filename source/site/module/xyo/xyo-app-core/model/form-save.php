@@ -33,6 +33,7 @@ if ($this->ds->save()) {
 		$this->ds->update(array("default"=>0));
 		$this->ds->clear();
 		$this->ds->id=$id;
+		$this->ds->load();
 		$this->ds->default=1;
 		$this->ds->save();
 
