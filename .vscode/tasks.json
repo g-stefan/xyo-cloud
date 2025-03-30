@@ -1,0 +1,81 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build",
+			"type": "shell",
+			"windows": {
+				"command": "cmd.exe /c build.cmd",
+			},
+			"problemMatcher": [
+				"$msCompile",
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Clean",
+			"type": "shell",
+			"windows": {
+				"command": "cmd.exe /c build.cmd clean",
+			},
+			"problemMatcher": [
+				"$msCompile",
+				"$gcc"
+			]
+		},
+		{
+			"label": "Release",
+			"type": "shell",
+			"windows": {
+				"command": "cmd.exe /c build.cmd release",
+			},
+			"problemMatcher": [
+				"$msCompile",
+				"$gcc"
+			]
+		},
+		{
+			"label": "Version",
+			"type": "shell",
+			"windows": {
+				"command": "cmd.exe /c build.cmd version",
+			},
+			"problemMatcher": [
+				"$msCompile",
+				"$gcc"
+			]
+		},
+		{
+			"label": "Build documentation",
+			"type": "shell",
+			"windows": {
+				"command": "cmd.exe /c mkdocs build",
+			},
+			"linux": {
+				"command": "/bin/sh -- mkdocs build",
+			}
+			"problemMatcher": [
+				"$msCompile", "$gcc"
+			]
+		},
+		{
+			"label": "Check license",
+			"type": "shell",
+			"windows": {
+				"command": "ubuntu2004.exe -c 'reuse lint'",
+			},
+			"linux": {
+				"command": "/bin/sh -- reuse lint",
+			}
+			"problemMatcher": [
+				"$msCompile", "$gcc"
+			]
+		}
+	]
+}

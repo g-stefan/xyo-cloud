@@ -1,0 +1,19 @@
+#
+# Apache MultiViews must be disabled
+<IfModule mod_negotiation.c>
+	Options -MultiViews
+</IfModule>
+#
+AddDefaultCharset utf-8
+#
+RewriteEngine on
+#
+# If the request is not for a valid directory
+RewriteCond %{REQUEST_FILENAME} !-d
+# If the request is not for a valid file
+RewriteCond %{REQUEST_FILENAME} !-f
+# If the request is not for a valid link
+RewriteCond %{REQUEST_FILENAME} !-l
+# Action
+RewriteRule "^(.*)" "index.php?__=$1" [L,NC,QSA]
+#

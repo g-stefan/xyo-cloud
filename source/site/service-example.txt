@@ -1,0 +1,60 @@
+
+Operator example
+
+To be able to run cron jobs or other actions offline/online
+
+1. Make a folder
+
+2. Inside folder you'l have an module/application
+
+	cloud.php
+	application.php
+	...
+
+3. Make index.php with following content:
+
+<?php
+//
+// for public app
+// $xyoCloudServiceSite="[path to public xyo-cloud]";
+//
+include("[realtive path to xyo-cloud]/xyo/xyo-cloud-service.php");
+
+4. Run it:
+
+	php index.php
+
+Module instance
+
+1. Make foo.php with following content:
+
+<?php
+//
+// for public app
+// $xyoCloudServiceSite="[path to public xyo-cloud]";
+//
+include("[realtive path to xyo-cloud]/xyo/xyo-cloud-run.php");
+
+[module code]
+
+2. Run it:
+
+	php foo.php
+
+xyoCloud instance
+
+1. Make foo.php with following content:
+
+<?php
+//
+// for public app
+// $xyoCloudServiceSite="[path to public xyo-cloud]";
+//
+include("[realtive path to xyo-cloud]/xyo/xyo-cloud-instance.php");
+
+[cloud code]
+
+2. Run it:
+
+	php foo.php
+

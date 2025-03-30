@@ -1,0 +1,160 @@
+/*
+// Copyright (c) 2009-2025 Grigore Stefan <g_stefan@yahoo.com>
+// MIT License (MIT) <http://opensource.org/licenses/MIT>
+// SPDX-FileCopyrightText: 2009-2025 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-License-Identifier: MIT
+
+*/
+
+.xyo.install-application{
+	position: relative;
+	display: block;
+
+	width: 100%;
+	height: auto;
+}
+
+.xyo.install-application-top-space{
+	display: block;
+	height: 48px;
+}
+
+.xyo.install-application_panel{
+	position: relative;
+	display: block;
+
+	float:left;
+	width: 240px;
+	height: auto;
+}
+
+.xyo.install-application_content{
+	position: relative;
+	display: block;
+
+	float:left;
+	width: calc(100% - 250px);
+	padding-left: 10px;
+}
+
+.xyo.install-application_image{
+	width:128px;
+	height:128px;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:0px;
+}
+
+.xyo.install-application_content p{
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: normal;
+	font-family: "Roboto", sans-serif;	
+}
+
+
+@media only screen and (max-width: 599px){
+
+	.xyo.install-application-top-space{
+		display: none;
+	}
+
+	.xui.panel_content{
+		padding: 0px !important;
+	}
+
+	.xyo.install-application_panel{
+		float: none;
+		display: block;
+		width: calc(100% - 16px);
+		padding: 8px;
+	}
+
+	.xyo.install-application .xui.list-group{
+		border-radius: 0px;
+		border: 0px solid #000;
+	}
+
+	.xyo.install-application .xui.list-group .xui.list-group_item{
+		display: none;
+		border-radius: 3px 3px 3px 3px;
+	}
+
+	.xyo.install-application .xui.list-group .xui.list-group_item_icon-right{
+		display: none;
+	}
+
+	.xyo.install-application .xui.list-group .xui.list-group_item.-active{
+		display: block;
+	}
+
+	.xyo.install-application .xui.list-group .xui.list-group_item.-active .xui.list-group_item_icon-left{
+		display: none;
+	}
+
+	.xyo.install-application_image{
+		display: none;
+	}
+		
+	.xyo.install-application_content{
+		float: none;
+		display: block;
+		width: 100%;
+		padding-left: 10px;
+		padding-right: 10px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		box-sizing: border-box;
+	}
+
+}
+
+
+@media only screen and (min-width: 600px) and (max-width: 760px){
+
+	.xyo.install-application_panel{
+		float:left;
+		width: 240px;
+		margin-top: 14px;
+	}
+
+	.xyo.install-application_content{
+		float: none;
+		display: block;
+		width: 100%;
+		padding-left: 10px;
+		padding-right: 10px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		box-sizing: border-box;
+	}
+
+	.xyo.install-application .xui.list-group{
+		border-radius: 0px;
+		border: 0px solid #000;
+	}
+
+	.xyo.install-application .xui.list-group .xui.list-group_item{
+		display: none;
+		border-radius: 3px 3px 3px 3px;
+	}
+
+	.xyo.install-application .xui.list-group .xui.list-group_item_icon-right{
+		display: none;
+	}
+
+	.xyo.install-application .xui.list-group .xui.list-group_item.-active{
+		display: block;
+	}
+
+	.xyo.install-application .xui.list-group .xui.list-group_item.-active .xui.list-group_item_icon-left{
+		display: none;
+	}
+
+	.xyo.install-application_image{
+		display: none;
+	}
+
+}
+

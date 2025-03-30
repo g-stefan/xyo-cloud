@@ -1,0 +1,195 @@
+/*
+// Copyright (c) 2009-2025 Grigore Stefan <g_stefan@yahoo.com>
+// MIT License (MIT) <http://opensource.org/licenses/MIT>
+// SPDX-FileCopyrightText: 2009-2025 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-License-Identifier: MIT
+
+*/
+
+.indicator-items-info {
+	display:none;
+}
+
+@media only screen and (min-width: 600px) {
+
+	.xyo-app-table > thead > tr > th.--field-id,
+	.xyo-app-table > thead > tr > th.--field-enabled,
+	.xyo-app-table > thead > tr > th.--field-default,
+	.xyo-app-table > thead > tr > th.--field-active,
+	.xyo-app-table > thead > tr > th.--field-principal {
+		width: 128px;
+	}
+
+	.xyo-app-table > thead > tr > th.--field-order {
+		width: 140px;
+	}
+
+	.indicator-items-info {
+		display: inline-block;
+	}
+}
+
+.xyo-app-table > tbody > tr > td.xui-component-table_action > div {
+	margin-left: calc(50% - 12px);
+}
+
+.xui-component-table.--hide-secondary-top-toolbar > .xui-application-toolbar:nth-child(2) {
+	display: none;
+}
+
+.xui-component-table.--hide-secondary-top-toolbar .xui-component-table_table .xui-table > thead > tr > th:first-child {
+	border-top-left-radius: 6px;	 
+}
+
+.xui-component-table.--hide-secondary-top-toolbar .xui-component-table_table .xui-table > thead > tr > th:last-child {
+	border-top-right-radius: 6px;	 
+}
+
+.xyo-app-table.--is-inline-form.xui-component-table_table {
+	position: relative;
+	display: block;
+	width: 320px;
+	height: 100%;
+	overflow: visible;
+	float: left;
+	left: 0;
+	right: auto;
+	font-family: "Roboto",sans-serif;
+	box-sizing: border-box;
+}
+
+.xyo-app-table.--is-inline-form.xui-component-table_form {
+	position: relative;
+	display: block;
+	width: auto;
+	height: 100%;
+	overflow: auto;
+	font-family: "Roboto",sans-serif;
+	box-sizing: border-box;
+	border-radius: 0px 0px 0px 0px;
+	border-top: 0px solid #acb7bb;
+	border-left: 1px solid #acb7bb;
+	border-right: 0px solid #acb7bb;
+	border-bottom: 0px solid #acb7bb;
+}
+
+.xui-component-table.--hide-secondary-top-toolbar.--is-inline-form .xyo-app-table.xui-table > thead > tr > th {
+	border-top: 0px;
+}
+
+.xui-component-table.--hide-secondary-top-toolbar.--is-inline-form .xui-component-table_table .xui-table > thead > tr > th:first-child {
+	border-top-left-radius: 6px;
+}
+
+.xui-component-table.--hide-secondary-top-toolbar.--is-inline-form .xui-component-table_table .xui-table > thead > tr > th:last-child {
+	border-top-right-radius: 6px;
+}
+
+@media screen and (max-width: 920px) {
+
+	.xyo-app-table.--is-inline-form.xui-component-table_table {
+		width: 100%;
+		height: auto;
+		float: none;
+		border-bottom: 1px solid #acb7bb;
+	}
+
+	.xyo-app-table.--is-inline-form.xui-component-table_form {
+		float: none;
+		height: auto;
+		border-left: 0px solid #acb7bb;
+	}
+
+	.xyo-app-table.--is-inline-form .xui-component-table.--application > .xui-application-toolbar:last-child {
+		border-top: 0px solid #acb7bb;
+	}
+
+}
+
+
+@media only screen and (max-width: 600px) {
+	.xui-component-table.--application .xui-application-toolbar:nth-child(2) .grid:nth-child(2) {
+		display: none !important;		
+	}
+
+	.xui-component-table.--application .xui-application-toolbar:nth-child(2) .grid:nth-child(1) {
+		flex: 1 1 0 !important;		
+	}
+
+	.xui-component-table.--application .xui-application-toolbar:nth-child(2) .grid:nth-child(1) .xui-form-input-group {
+		width: 100% !important;		
+	}
+	
+	.xui-component-table.--application .xui-application-toolbar:nth-child(2) .grid:nth-child(1) .xui-form-input-group input[type=text] {
+		width: calc(100% - 60px) !important;
+	}
+}
+
+.xyo-app-table_form {
+	width:100%;
+	height:100%;
+	position:relative;
+	margin:0px 0px 0px 0px;
+	padding:0px 0px 0px 0px;
+	overflow:hidden;
+}
+
+.xyo-app-table_search {
+	width: 196px;
+}
+
+.xyo-app-table_search.--inline-form {
+	width:calc(100% - 60px);
+}
+
+.xui-component-table.--application.--hide-top-toolbar.--use-application-search table.xyo-app-table > thead > tr:first-child > th {
+	border-top: 0px solid #acb7bb;	
+}
+
+.xui-component-table.--application.--hide-top-toolbar.--use-application-search > .xui-component-table_table {
+	height: calc(100% - 40px);
+}
+
+.xui-component-table.--application.--is-inline-form.--hide-top-toolbar.--use-application-search .xui-application-toolbar:nth-child(2) {
+	display: none;
+}
+
+.xui-application-main > .xui-application-main_content:before {
+	display: none;
+}
+
+.xui-application-main > .xui-application-main_content:after {
+	display: none;
+}
+
+@media only screen and (min-width: 600px) {
+	#xyo-app-table-inline_content {
+		padding-left: 6px;
+		padding-right: 6px;
+	}
+}
+
+/* Overlay Scrollbars */
+.xui-component-table.--application > .xui-component-table_table.xui-overlay-scrollbars {
+	display: flex;
+	flex-direction: column;
+}
+
+.xyo-app-table.--is-inline-form.xui-component-table_form.xui-overlay-scrollbars {
+	display: flex;
+	flex-direction: column;
+}
+
+.xyo-app-table.--x-12.xui-overlay-scrollbars {
+	display: flex;
+	flex-direction: column;
+}
+
+.xui-application-main > .xui-application-main_content {
+	display: flex;
+	flex-direction: column;
+}
+
+.xui-application-main.--has-toolbar.--embedded > .xui-application-main_content {
+	border-top: none;
+}

@@ -1,0 +1,37 @@
+/*
+// Copyright (c) 2009-2025 Grigore Stefan <g_stefan@yahoo.com>
+// MIT License (MIT) <http://opensource.org/licenses/MIT>
+// SPDX-FileCopyrightText: 2009-2025 Grigore Stefan <g_stefan@yahoo.com>
+// SPDX-License-Identifier: MIT
+
+*/
+
+#application_search_super {
+	display: inline-block;
+	padding-top: 5px;
+	height: 40px;
+	overflow: visible;
+	float: left;
+	margin-right: 3px;
+}
+
+#application_search_form > .xui-form-input-group {	
+	min-width: 122px;
+	display: none;
+}
+
+#application_search {
+	width: 120px;
+}
+
+@media only screen and (min-width: 700px) {
+	#application_search_form > .xui-form-input-group {
+		display: block;
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+	#application_search {		
+		width: 240px;
+	}
+}
