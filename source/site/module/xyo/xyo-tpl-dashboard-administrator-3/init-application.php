@@ -6,4 +6,4 @@
 
 defined("XYO_CLOUD") or die("Access is denied");
 
-//$this->setHtmlCss($this->site."lib/xui/xui-dashboard-theme-3.min.css");
+$this->setHtmlCss($this->site."lib/xui.dashboard.theme-3.min.css");

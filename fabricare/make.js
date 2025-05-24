@@ -26,6 +26,8 @@ exitIf(!Shell.copyDirRecursively("temp/xui/vendor", "output/site/lib"));
 
 Shell.copyFile("temp/xui/release/xui.bundle.css","temp/xui.bundle.css");
 Shell.copyFile("temp/xui/release/xui.bundle.min.js","output/site/lib/xui.bundle.min.js");
+Shell.copyFile("temp/xui/release/xui.dashboard.theme-2.min.css","output/site/lib/xui.dashboard.theme-2.min.css");
+Shell.copyFile("temp/xui/release/xui.dashboard.theme-3.min.css","output/site/lib/xui.dashboard.theme-3.min.css");
 
 Shell.removeDirRecursivelyForce("temp/xui");
 

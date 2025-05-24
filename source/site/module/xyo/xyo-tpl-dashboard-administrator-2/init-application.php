@@ -5,3 +5,5 @@
 // SPDX-License-Identifier: MIT
 
 defined("XYO_CLOUD") or die("Access is denied");
+
+$this->setHtmlCss($this->site."lib/xui.dashboard.theme-2.min.css");
